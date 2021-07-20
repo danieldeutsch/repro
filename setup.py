@@ -18,7 +18,7 @@ setuptools.setup(
     entry_points={"console_scripts": ["repro=repro.__main__:main"]},
     python_requires=">=3.6",
     install_requires=[
-        'black==21.7b0',
+        "black==21.7b0",
         "pytest==6.2.4",
     ],
 )
