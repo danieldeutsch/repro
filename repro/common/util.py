@@ -2,6 +2,7 @@ import json
 from typing import Any, Dict, List, T, Type, Union
 
 from repro.common import Registrable
+from repro.data.dataset_readers import DatasetReader
 from repro.models import Model
 
 
@@ -64,3 +65,26 @@ def load_model(name: str, args: Union[str, Dict[str, Any]] = None) -> Model:
         The model
     """
     return _load_type(Model, name, args)
+
+
+def load_dataset_reader(
+    name: str, args: Union[str, Dict[str, Any]] = None
+) -> DatasetReader:
+    """
+    Loads a `DatasetReader` given the registered `name` of the reader and any arguments
+    which will be passed to the constructor as kwargs. `args` should be a dictionary
+    or a json-serialized dictionary in which the keys correspond to constructor parameters.
+
+    Parameters
+    ----------
+    name : str
+        The name of the dataset reader to load
+    args : Union[str, Dict[str, Any]]
+        The kwargs to be passed to the dataset reader's constructor
+
+    Returns
+    -------
+    DatasetReader
+        The dataset reader
+    """
+    return _load_type(DatasetReader, name, args)
