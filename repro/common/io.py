@@ -16,9 +16,10 @@ def write_to_text_file(
     ----------
     items : List[Union[str, List[str]]]
         The items to write to a file.
-
     file_path : str
         The path to the file where the output should be written
+    separator : str, default=None
+        The separator to use to join the items
     """
     dirname = os.path.dirname(file_path)
     if dirname:
