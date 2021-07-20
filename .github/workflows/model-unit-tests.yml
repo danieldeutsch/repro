@@ -28,7 +28,7 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        repro setup ${{ github.event.inputs.name }}" ${{ github.event.inputs.args }}"
+        repro setup ${{ github.event.inputs.name }} ${{ github.event.inputs.args }}
 
     - name: Test with pytest
       run: |
