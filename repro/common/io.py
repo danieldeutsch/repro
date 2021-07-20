@@ -5,7 +5,9 @@ from typing import List, Union
 from repro.common import util
 
 
-def write_to_text_file(items: List[Union[str, List[str]]], file_path: str, separator: str = None) -> None:
+def write_to_text_file(
+    items: List[Union[str, List[str]]], file_path: str, separator: str = None
+) -> None:
     """
     Writes the items in `items` to a text file with one item per line. If an individual
     item is a list, it is first flattened with the `separator`.
@@ -29,7 +31,11 @@ def write_to_text_file(items: List[Union[str, List[str]]], file_path: str, separ
 
 
 def write_to_jsonl_file(
-    items: List[Union[str, List[str]]], key: str, file_path: str, flatten: bool = False, separator: str = None
+    items: List[Union[str, List[str]]],
+    key: str,
+    file_path: str,
+    flatten: bool = False,
+    separator: str = None,
 ) -> None:
     """
     Writes the items in `items` to a jsonl file at `file_path`. Each item will correspond to one line. The
