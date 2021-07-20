@@ -1,4 +1,8 @@
-from typing import List, Union
+import json
+from typing import Any, Dict, List, T, Type, Union
+
+from repro.common import Registrable
+from repro.models import Model
 
 
 def flatten(text: Union[str, List[str]], separator: str = None) -> str:
@@ -23,3 +27,40 @@ def flatten(text: Union[str, List[str]], separator: str = None) -> str:
     if isinstance(text, list):
         return separator.join(text)
     return text
+
+
+def _load_type(
+    base_type: Type[T], name: str, args: Union[str, Dict[str, Any]] = None
+) -> T:
+    args = args or {}
+    if isinstance(args, str):
+        args = json.loads(args)
+    if not isinstance(args, dict):
+        raise ValueError(
+            f"`args` is expected to be a dictionary or json-serialized dictionary: {args}"
+        )
+
+    type_, _ = Registrable._registry[base_type][name]
+    obj = type_(**args)
+    return obj
+
+
+def load_model(name: str, args: Union[str, Dict[str, Any]] = None) -> Model:
+    """
+    Loads a `Model` given the registered `name` of the model and any arguments
+    which will be passed to the constructor as kwargs. `args` should be a dictionary
+    or a json-serialized dictionary in which the keys correspond to constructor parameters.
+
+    Parameters
+    ----------
+    name : str
+        The name of the model to load
+    args : Union[str, Dict[str, Any]]
+        The kwargs to be passed to the model's constructor
+
+    Returns
+    -------
+    Model
+        The model
+    """
+    return _load_type(Model, name, args)
