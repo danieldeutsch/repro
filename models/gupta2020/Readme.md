@@ -35,12 +35,12 @@ pytest models/gupta2020/tests
 ```
 
 ## Status
-- [x] Regression unit tests pass
-- [x] Correctness unit tests pass
-  The unit tests check to make sure the model returns the same answers for a few examples in their demo.
-- [ ] Model runs on full test dataset
-  Not tested
-- [ ] Predictions approximately replicate results reported in the paper
-  Not tested
-- [ ] Predictions exactly replicate results reported in the paper
-  Not tested
+- [x] Regression unit tests pass  
+- [x] Correctness unit tests pass  
+The unit tests check to make sure the model returns the same answers for a few examples in their demo.
+- [ ] Model runs on full test dataset  
+Not tested
+- [ ] Predictions approximately replicate results reported in the paper  
+Not tested
+- [ ] Predictions exactly replicate results reported in the paper  
+Not tested
