@@ -19,6 +19,9 @@ setuptools.setup(
     python_requires=">=3.6",
     install_requires=[
         "black==21.7b0",
+        "docker==5.0.0",
+        "overrides==6.1.0",
         "pytest==6.2.4",
+        "six==1.16.0",
     ],
 )

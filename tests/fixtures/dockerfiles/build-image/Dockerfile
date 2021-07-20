@@ -1,0 +1,9 @@
+FROM python:3.8
+
+ARG ENV1
+ARG ENV2
+
+ENV ENV1=$ENV1
+ENV ENV2=$ENV2
+
+COPY run.py run.py
