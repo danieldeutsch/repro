@@ -67,7 +67,7 @@ def write_to_jsonl_file(
             out.write(json.dumps({key: item}) + "\n")
 
 
-def read_jsonl_file(file_path: str) -> List:
+def read_jsonl_file(file_path: str, single_line: bool = False) -> List:
     """
     Loads a jsonl file and returns a list corresponding to each line in the file.
 
@@ -75,6 +75,9 @@ def read_jsonl_file(file_path: str) -> List:
     ----------
     file_path : str
         The file to load the data from
+    single_line : bool, default=False
+        Indicates all of the json objects are on a single line (i.e., not separated
+        by a newline character, but separated by "")
 
     Returns
     -------
@@ -82,7 +85,16 @@ def read_jsonl_file(file_path: str) -> List:
         The items, where each item corresponds to one line
     """
     items = []
-    with open(file_path, "r") as f:
-        for line in f:
-            items.append(json.loads(line))
+    if single_line:
+        decoder = json.JSONDecoder()
+        contents = open(file_path, "r").read()
+        offset = 0
+        while offset < len(contents):
+            item, length = decoder.raw_decode(contents[offset:])
+            items.append(item)
+            offset += length
+    else:
+        with open(file_path, "r") as f:
+            for line in f:
+                items.append(json.loads(line))
     return items

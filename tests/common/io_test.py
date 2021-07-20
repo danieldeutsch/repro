@@ -56,3 +56,16 @@ class TestIO(unittest.TestCase):
                 {"item": "2"},
                 {"item": "3"},
             ]
+
+    def test_read_jsonl_single_line(self):
+        with TemporaryDirectory() as temp:
+            file_path = f"{temp}/file.txt"
+
+            with open(file_path, "w") as out:
+                out.write('{"item": "1"}{"item": "2"}{"item": "3"}')
+
+            assert read_jsonl_file(file_path, single_line=True) == [
+                {"item": "1"},
+                {"item": "2"},
+                {"item": "3"},
+            ]
