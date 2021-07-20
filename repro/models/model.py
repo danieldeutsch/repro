@@ -21,3 +21,11 @@ class Model(Registrable):
         Then each item in `inputs` should be a dictionary with keys `"input1"` and `"input2"`.
         """
         raise NotImplementedError
+
+
+class QuestionAnsweringModel(Model):
+    def predict(self, context: str, question: str, *args, **kwargs) -> str:
+        return self.predict_batch([{"context": context, "question": question}])[0]
+
+    def predict_batch(self, inputs: List[Dict[str, str]], *args, **kwargs) -> List[str]:
+        raise NotImplementedError
