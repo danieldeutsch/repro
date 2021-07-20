@@ -19,6 +19,7 @@ setuptools.setup(
     python_requires=">=3.6",
     install_requires=[
         "black==21.7b0",
+        "datasets==1.9.0",
         "docker==5.0.0",
         "overrides==3.1.0",
         "pytest==6.2.4",
