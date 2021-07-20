@@ -1,6 +1,7 @@
 import unittest
 
 from repro.common import util
+from repro.data.dataset_readers import DatasetReader
 from repro.models import Model
 
 
@@ -47,3 +48,40 @@ class TestUtil(unittest.TestCase):
         assert isinstance(model, _Model)
         assert model.a == 4
         assert model.b == 3
+
+    def test_load_dataset_reader_no_required_args(self):
+        @DatasetReader.register("test-dataset-reader", exist_ok=True)
+        class _DatasetReader(DatasetReader):
+            def __init__(self, a: int = 2, b: int = 3):
+                self.a = a
+                self.b = b
+
+        dataset_reader = util.load_dataset_reader("test-dataset-reader")
+        assert isinstance(dataset_reader, _DatasetReader)
+        assert dataset_reader.a == 2
+        assert dataset_reader.b == 3
+
+        dataset_reader = util.load_dataset_reader("test-dataset-reader", '{"a": 4}')
+        assert isinstance(dataset_reader, _DatasetReader)
+        assert dataset_reader.a == 4
+        assert dataset_reader.b == 3
+
+        dataset_reader = util.load_dataset_reader("test-dataset-reader", {"a": 8})
+        assert isinstance(dataset_reader, _DatasetReader)
+        assert dataset_reader.a == 8
+        assert dataset_reader.b == 3
+
+    def test_load_dataset_reader_required_args(self):
+        @DatasetReader.register("test-dataset-reader", exist_ok=True)
+        class _DatasetReader(DatasetReader):
+            def __init__(self, a: int, b: int = 3):
+                self.a = a
+                self.b = b
+
+        with self.assertRaises(Exception):
+            util.load_dataset_reader("test-dataset-reader")
+
+        dataset_reader = util.load_dataset_reader("test-dataset-reader", '{"a": 4}')
+        assert isinstance(dataset_reader, _DatasetReader)
+        assert dataset_reader.a == 4
+        assert dataset_reader.b == 3
