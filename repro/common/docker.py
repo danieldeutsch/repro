@@ -7,6 +7,7 @@ from typing import Dict, Optional
 from overrides import overrides
 
 from repro.commands.subcommand import SetupSubcommand
+from repro.common import REPRO_CONFIG
 from repro.common.logging import prepare_global_logging
 
 logger = logging.getLogger(__name__)
@@ -121,7 +122,8 @@ def build_image(
     root: str, image: str, build_args: Dict[str, str] = None, silent: bool = False
 ) -> None:
     logger.info(f"Building image {image} with Dockerfile in directory {root}")
-    client = docker.APIClient(base_url="unix:///run/user/50868/docker.sock")
+    docker_server = REPRO_CONFIG["docker_server"]
+    client = docker.APIClient(base_url=docker_server)
     generator = client.build(path=root, tag=image, buildargs=build_args, rm=True)
     try:
         for response in generator:
