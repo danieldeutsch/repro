@@ -22,6 +22,7 @@ setuptools.setup(
         "datasets==1.9.0",
         "docker==5.0.0",
         "overrides==3.1.0",
+        "parameterized==0.8.1",
         "pytest==6.2.4",
         "six==1.16.0",
     ],

@@ -1,1 +1,1 @@
-from repro.models.model import Model
+from repro.models.model import Model, QuestionAnsweringModel
