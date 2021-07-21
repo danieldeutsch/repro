@@ -1,6 +1,7 @@
 from typing import Any, Dict, List
 
 from repro.common import Registrable
+from repro.data.types import DocumentType, SummaryType
 
 
 class Model(Registrable):
@@ -28,4 +29,14 @@ class QuestionAnsweringModel(Model):
         return self.predict_batch([{"context": context, "question": question}])[0]
 
     def predict_batch(self, inputs: List[Dict[str, str]], *args, **kwargs) -> List[str]:
+        raise NotImplementedError
+
+
+class SingleDocumentSummarizationModel(Model):
+    def predict(self, document: DocumentType, *args, **kwargs) -> SummaryType:
+        return self.predict_batch([{"document": document}])[0]
+
+    def predict_batch(
+        self, inputs: List[Dict[str, DocumentType]], *args, **kwargs
+    ) -> List[SummaryType]:
         raise NotImplementedError
