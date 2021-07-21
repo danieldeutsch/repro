@@ -5,10 +5,7 @@ from typing import List
 from repro.data.dataset_readers import DatasetReader
 from repro.data.types import InstanceDict
 
-DEFAULT_VERSIONS = {
-    "cnn_dailymail": "3.0.0",
-    "xsum": "1.2.0"
-}
+DEFAULT_VERSIONS = {"cnn_dailymail": "3.0.0", "xsum": "1.2.0"}
 
 
 @DatasetReader.register("huggingface-datasets")
