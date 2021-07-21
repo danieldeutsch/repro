@@ -5,6 +5,7 @@ set -e
 #  --model-name lewis2020-bart \
 #  --dataset-name cnn_dailymail \
 #  --split test \
+#  --output-writer sacrerouge \
 #  --output-file ${DIR}/output/cnn_dailymail/predictions.jsonl
 
 repro predict \
@@ -12,4 +13,5 @@ repro predict \
   --model-args '{"pretrained_model": "bart.large.xsum"}' \
   --dataset-name xsum \
   --split test \
+  --output-writer sacrerouge \
   --output-file ${DIR}/output/xsum/predictions.jsonl
