@@ -18,9 +18,9 @@ class BART(SingleDocumentSummarizationModel):
     def __init__(
         self,
         pretrained_model: str = "bart.large.cnn",
-        batch_size: int = 4,
+        batch_size: int = None,
         image: str = "lewis2020",
-        device: int = 1,
+        device: int = 0,
     ) -> None:
         if pretrained_model not in ["bart.large.cnn", "bart.large.xsum"]:
             raise Exception(f"Unknown pretrained model: {pretrained_model}")
@@ -60,8 +60,11 @@ class BART(SingleDocumentSummarizationModel):
                 f"  --model-file model.pt"
                 f"  --src {container_input_file}"
                 f"  --out {container_output_file}"
-                f"  --bsz {self.batch_size}"
             )
+
+            if self.batch_size is not None:
+                command += f" --bsz {self.batch_size}"
+
             if self.pretrained_model == "bart.large.xsum":
                 command += " --xsum-kwargs"
 
