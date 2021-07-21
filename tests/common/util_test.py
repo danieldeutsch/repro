@@ -2,6 +2,7 @@ import unittest
 
 from repro.common import util
 from repro.data.dataset_readers import DatasetReader
+from repro.data.output_writers import OutputWriter
 from repro.models import Model
 
 
@@ -85,3 +86,40 @@ class TestUtil(unittest.TestCase):
         assert isinstance(dataset_reader, _DatasetReader)
         assert dataset_reader.a == 4
         assert dataset_reader.b == 3
+
+    def test_load_output_writer_no_required_args(self):
+        @OutputWriter.register("test-output-writer", exist_ok=True)
+        class _OutputWriter(OutputWriter):
+            def __init__(self, a: int = 2, b: int = 3):
+                self.a = a
+                self.b = b
+
+        writer = util.load_output_writer("test-output-writer")
+        assert isinstance(writer, _OutputWriter)
+        assert writer.a == 2
+        assert writer.b == 3
+
+        writer = util.load_output_writer("test-output-writer", '{"a": 4}')
+        assert isinstance(writer, _OutputWriter)
+        assert writer.a == 4
+        assert writer.b == 3
+
+        writer = util.load_output_writer("test-output-writer", {"a": 8})
+        assert isinstance(writer, _OutputWriter)
+        assert writer.a == 8
+        assert writer.b == 3
+
+    def test_load_output_writer_required_args(self):
+        @OutputWriter.register("test-output-writer", exist_ok=True)
+        class _OutputWriter(OutputWriter):
+            def __init__(self, a: int, b: int = 3):
+                self.a = a
+                self.b = b
+
+        with self.assertRaises(Exception):
+            util.load_output_writer("test-output-writer")
+
+        writer = util.load_output_writer("test-output-writer", '{"a": 4}')
+        assert isinstance(writer, _OutputWriter)
+        assert writer.a == 4
+        assert writer.b == 3
