@@ -156,4 +156,6 @@ class PredictSubcommand(RootSubcommand):
         predictions = predict_with_model(model, instances)
 
         output_writer = load_output_writer(args.output_writer, args.output_writer_args)
-        output_writer.write(instances, predictions, args.output_file, model_name=args.model_name)
+        output_writer.write(
+            instances, predictions, args.output_file, model_name=args.model_name
+        )
