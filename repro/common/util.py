@@ -3,6 +3,7 @@ from typing import Any, Dict, List, T, Type, Union
 
 from repro.common import Registrable
 from repro.data.dataset_readers import DatasetReader
+from repro.data.output_writers import OutputWriter
 from repro.models import Model
 
 
@@ -88,3 +89,26 @@ def load_dataset_reader(
         The dataset reader
     """
     return _load_type(DatasetReader, name, args)
+
+
+def load_output_writer(
+    name: str, args: Union[str, Dict[str, Any]] = None
+) -> DatasetReader:
+    """
+    Loads an `OutputWriter` given the registered `name` of the reader and any arguments
+    which will be passed to the constructor as kwargs. `args` should be a dictionary
+    or a json-serialized dictionary in which the keys correspond to constructor parameters.
+
+    Parameters
+    ----------
+    name : str
+        The name of the output writer to load
+    args : Union[str, Dict[str, Any]]
+        The kwargs to be passed to the output writer's constructor
+
+    Returns
+    -------
+    OutputWriter
+        The output writer
+    """
+    return _load_type(OutputWriter, name, args)
