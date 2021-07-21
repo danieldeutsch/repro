@@ -30,4 +30,5 @@ XSum
 |-|-|-|-|
 |Reported|45.14|22.27|37.25|
 |Ours|44.56|20.93|35.34|
+
 The differences for XSum seems to be [a known issue](https://github.com/pytorch/fairseq/issues/1971). 
