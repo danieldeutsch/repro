@@ -47,7 +47,9 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
             # Get either arxiv or pubmed from the name, e.g. "scientific_papers/arxiv"
             specific_dataset = self.dataset_name.split("/")[1]
 
-            dataset_splits = datasets.load_dataset("scientific_papers", specific_dataset)
+            dataset_splits = datasets.load_dataset(
+                "scientific_papers", specific_dataset
+            )
             split = dataset_splits[self.split]
             for i, instance in enumerate(split):
                 # There is no instance_id in `datasets`, so we make one up
