@@ -83,6 +83,18 @@ class PredictSubcommand(RootSubcommand):
             help="The name of the output jsonl file that the model predictions will be written to",
         )
         self.parser.add_argument(
+            "--output-writer",
+            required=False,
+            default="default",
+            help="The name of the class to use to write the predictions to the output file",
+        )
+        self.parser.add_argument(
+            "--output-writer-args",
+            required=False,
+            help="A serialized json object which will be deserialized and passed as "
+            "**kwargs to the output writer constructor",
+        )
+        self.parser.add_argument(
             "--log-file",
             required=False,
             help="The file where the log should be written",
@@ -145,19 +157,5 @@ class PredictSubcommand(RootSubcommand):
 
         predictions = predict_with_model(model, instances)
 
-        dirname = os.path.dirname(args.output_file)
-        if dirname:
-            os.makedirs(dirname, exist_ok=True)
-
-        with open(args.output_file, "w") as out:
-            for instance, prediction in zip(instances, predictions):
-                out.write(
-                    json.dumps(
-                        {
-                            "instance_id": instance["instance_id"],
-                            "model_id": args.model_name,
-                            "prediction": prediction,
-                        }
-                    )
-                    + "\n"
-                )
+        output_writer = load_output_writer(args.output_writer, args.output_writer_args)
+        output_writer.write(instances, predictions, model_name=args.model_name)
