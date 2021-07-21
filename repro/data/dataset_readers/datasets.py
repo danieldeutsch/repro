@@ -43,6 +43,33 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
                         "reference": instance["summary"],
                     }
                 )
+        elif self.dataset_name.startswith("scientific_papers"):
+            # Get either arxiv or pubmed from the name, e.g. "scientific_papers/arxiv"
+            specific_dataset = self.dataset_name.split("/")[1]
+
+            dataset_splits = datasets.load_dataset(
+                "scientific_papers", specific_dataset
+            )
+            split = dataset_splits[self.split]
+            for i, instance in enumerate(split):
+                # There is no instance_id in `datasets`, so we make one up
+                instance_id = f"{specific_dataset}-{split}-{i}"
+
+                # The articles and abstracts have paragraphs split by \n
+                document = instance["article"].split("\n")
+                summary = instance["abstract"].split("\n")
+
+                # The section names are split by \n
+                section_names = instance["section_names"].split("\n")
+
+                instances.append(
+                    {
+                        "instance_id": instance_id,
+                        "document": document,
+                        "reference": summary,
+                        "section_names": section_names,
+                    }
+                )
         else:
             raise Exception(f"Unsupported dataset: {self.dataset_name}")
 
