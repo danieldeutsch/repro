@@ -1,13 +1,11 @@
 import argparse
-import json
 import inspect
-import os
 from overrides import overrides
 from typing import List
 
 from repro.commands.subcommand import RootSubcommand
 from repro.common.logging import prepare_global_logging
-from repro.common.util import load_dataset_reader, load_model
+from repro.common.util import load_dataset_reader, load_model, load_output_writer
 from repro.data.dataset_readers import HuggingfaceDatasetsDatasetReader
 from repro.data.types import InstanceDict
 from repro.models import Model
@@ -158,4 +156,4 @@ class PredictSubcommand(RootSubcommand):
         predictions = predict_with_model(model, instances)
 
         output_writer = load_output_writer(args.output_writer, args.output_writer_args)
-        output_writer.write(instances, predictions, model_name=args.model_name)
+        output_writer.write(instances, predictions, args.output_file, model_name=args.model_name)
