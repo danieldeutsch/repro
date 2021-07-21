@@ -1,1 +1,5 @@
-from repro.models.model import Model, QuestionAnsweringModel
+from repro.models.model import (
+    Model,
+    QuestionAnsweringModel,
+    SingleDocumentSummarizationModel,
+)
