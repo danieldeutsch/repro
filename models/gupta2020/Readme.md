@@ -38,6 +38,7 @@ pytest models/gupta2020/tests
 - [x] Regression unit tests pass  
 - [x] Correctness unit tests pass  
 The unit tests check to make sure the model returns the same answers for a few examples in their demo.
+[Latest successful test on Github.](https://github.com/danieldeutsch/repro/actions/runs/1050729637)
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  
