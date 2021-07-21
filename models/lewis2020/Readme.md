@@ -67,16 +67,16 @@ The CNN/DailyMail results are very close to those in the paper:
   |Reported|44.16|21.28|40.90|
   |Ours|44.31|21.12|41.23|
 
-This seems to be a faithful implementation for `bart.large.cnn`.
+  This seems to be a faithful implementation for `bart.large.cnn`.
 
-For XSum, the results are not as close
+  For XSum, the results are not as close
 
   ||R1|R2|RL|
   |-|-|-|-|
   |Reported|45.14|22.27|37.25|
   |Ours|44.56|20.93|35.34|
 
-However, this seems to be [a known issue](https://github.com/pytorch/fairseq/issues/1971).
+  However, this seems to be [a known issue](https://github.com/pytorch/fairseq/issues/1971).
 
 - [ ] Predictions exactly replicate results reported in the paper  
 No, see above.
