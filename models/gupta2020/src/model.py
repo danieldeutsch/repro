@@ -9,8 +9,8 @@ from repro.common.io import read_jsonl_file
 from repro.models import Model, QuestionAnsweringModel
 
 
-@Model.register("gupta2020")
-class Gupta2020(QuestionAnsweringModel):
+@Model.register("gupta2020-nmn")
+class NeuralModuleNetwork(QuestionAnsweringModel):
     def __init__(self, image: str = "gupta2020", device: int = 0) -> None:
         self.image = image
         self.device = device

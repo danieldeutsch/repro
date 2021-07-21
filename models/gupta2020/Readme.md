@@ -9,11 +9,11 @@ https://github.com/nitishgupta/nmn-drop
 ## Available Models
 - [Model trained on DROP](https://drive.google.com/drive/folders/1N1gCOJPndF2BHOMU-igV3X_SCdizGFbf)
   - Description: A model which uses neural module networks to answer questions on the DROP dataset 
-  - Name: `gupta2020`
+  - Name: `gupta2020-nmn`
   - Usage:
     ```python
-    from repro.models.gupta2020 import Gupta2020
-    model = Gupta2020()
+    from repro.models.gupta2020 import NeuralModuleNetwork
+    model = NeuralModuleNetwork()
     answer = model.predict("context paragraph", "question")
     ```
     
