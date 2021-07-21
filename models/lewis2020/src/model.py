@@ -15,16 +15,33 @@ logger = logging.getLogger(__name__)
 
 @Model.register("lewis2020-bart")
 class BART(SingleDocumentSummarizationModel):
+    """
+    A wrapper around the BART model from `Lewis et al. (2020) <https://arxiv.org/abs/1910.13461>`.
+    Currently, only the models trained on the CNN/DailyMail and XSum datasets are supported.
+    """
+
     def __init__(
         self,
-        pretrained_model: str = "bart.large.cnn",
+        model: str = "bart.large.cnn",
         batch_size: int = None,
         image: str = "lewis2020",
         device: int = 0,
     ) -> None:
-        if pretrained_model not in ["bart.large.cnn", "bart.large.xsum"]:
-            raise Exception(f"Unknown pretrained model: {pretrained_model}")
-        self.pretrained_model = pretrained_model
+        """
+        Parameters
+        ----------
+        model : str, default="bart.large.cnn"
+            The name of the pretrained model, either "bart.large.cnn" or "bart.large.xsum"
+        batch_size : int, default=None
+            The batch size for prediction. If `None`, defaults to the BART code's default.
+        image : str, default="lewis2020"
+            The name of the Docker image to run prediction in
+        device : int, default=0
+            The ID of the GPU to use, -1 if CPU
+        """
+        if model not in ["bart.large.cnn", "bart.large.xsum"]:
+            raise Exception(f"Unknown pretrained model: {model}")
+        self.model = model
         self.batch_size = batch_size
         self.image = image
         self.device = device
@@ -56,7 +73,7 @@ class BART(SingleDocumentSummarizationModel):
                 f"cd fairseq && "
                 f"CUDA_VISIBLE_DEVICES={self.device} "
                 f"python examples/bart/summarize.py"
-                f"  --model-dir ../{self.pretrained_model}"
+                f"  --model-dir ../{self.model}"
                 f"  --model-file model.pt"
                 f"  --src {container_input_file}"
                 f"  --out {container_output_file}"
@@ -65,7 +82,7 @@ class BART(SingleDocumentSummarizationModel):
             if self.batch_size is not None:
                 command += f" --bsz {self.batch_size}"
 
-            if self.pretrained_model == "bart.large.xsum":
+            if self.model == "bart.large.xsum":
                 command += " --xsum-kwargs"
 
             cuda = self.device != -1
