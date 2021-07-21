@@ -12,7 +12,7 @@ repro predict \
 
 repro predict \
   --model-name lewis2020-bart \
-  --model-args '{"device": '${DEVICE}', "pretrained_model": "bart.large.xsum"}' \
+  --model-args '{"device": '${DEVICE}', "model": "bart.large.xsum"}' \
   --dataset-name xsum \
   --split test \
   --output-writer sacrerouge \
