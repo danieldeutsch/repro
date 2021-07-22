@@ -5,6 +5,8 @@ from typing import List
 from repro.data.dataset_readers import DatasetReader
 from repro.data.types import InstanceDict
 
+DEFAULT_VERSIONS = {"cnn_dailymail": "3.0.0", "xsum": "1.2.0"}
+
 
 @DatasetReader.register("huggingface-datasets")
 class HuggingfaceDatasetsDatasetReader(DatasetReader):
@@ -14,10 +16,26 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
 
     @overrides
     def _read(self) -> List[InstanceDict]:
+        # Split the version if it exists, taking the default if not
+        parts = self.dataset_name.split("/")
+        if len(parts) == 1:
+            name = self.dataset_name
+            if name not in DEFAULT_VERSIONS:
+                raise Exception(f"Unknown default dataset version for dataset: {name}")
+            version = DEFAULT_VERSIONS[name]
+        elif len(parts) == 2:
+            name = parts[0]
+            version = parts[1]
+        else:
+            raise Exception(
+                f"Unknown dataset format. Expected 0 or 1 '/': {self.dataset_name}"
+            )
+
+        dataset_splits = datasets.load_dataset(name, version)
+        split = dataset_splits[self.split]
+
         instances = []
-        if self.dataset_name == "cnn_dailymail":
-            dataset_splits = datasets.load_dataset(self.dataset_name, "3.0.0")
-            split = dataset_splits[self.split]
+        if name == "cnn_dailymail":
             for instance in split:
                 # The reference sentences are separated by \n, but the document
                 # is not sentence split already
@@ -29,9 +47,7 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
                         "reference": reference,
                     }
                 )
-        elif self.dataset_name == "xsum":
-            dataset_splits = datasets.load_dataset(self.dataset_name, "1.2.0")
-            split = dataset_splits[self.split]
+        elif name == "xsum":
             for instance in split:
                 # The documents include \n characters to separate sentences. The
                 # summaries are only one sentence, so it does not matter for them
@@ -43,17 +59,10 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
                         "reference": instance["summary"],
                     }
                 )
-        elif self.dataset_name.startswith("scientific_papers"):
-            # Get either arxiv or pubmed from the name, e.g. "scientific_papers/arxiv"
-            specific_dataset = self.dataset_name.split("/")[1]
-
-            dataset_splits = datasets.load_dataset(
-                "scientific_papers", specific_dataset
-            )
-            split = dataset_splits[self.split]
+        elif name == "scientific_papers":
             for i, instance in enumerate(split):
                 # There is no instance_id in `datasets`, so we make one up
-                instance_id = f"{specific_dataset}-{split}-{i}"
+                instance_id = f"{version}-{split}-{i}"
 
                 # The articles and abstracts have paragraphs split by \n
                 document = instance["article"].split("\n")
