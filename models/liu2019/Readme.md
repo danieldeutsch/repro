@@ -33,21 +33,21 @@ The original GitHub repository provides 4 pretrained models:
   - Description: A BERT-based abstractive model trained on the CNN/DailyMail dataset
   - Name: `liu2019-bertsumextabs`
   - Usage:
-  ```python
-  from repro.models.liu2019 import BertSumExtAbs
-  model = BertSumExtAbs()  # or BertSumExtAbs("bertsumextabs_cnndm.pt")
-  summary = model.predict("document")
-  ```
+    ```python
+    from repro.models.liu2019 import BertSumExtAbs
+    model = BertSumExtAbs()  # or BertSumExtAbs("bertsumextabs_cnndm.pt")
+    summary = model.predict("document")
+    ```
 
 - [XSum BertSumExtAbs](https://drive.google.com/file/d/1H50fClyTkNprWJNh10HWdGEdDdQIkzsI/view)
   - Description: A BERT-based abstractive model trained on the XSum dataset
   - Name: `liu2019-bertsumextabs`
   - Usage:
-  ```python
-  from repro.models.liu2019 import BertSumExtAbs
-  model = BertSumExtAbs("bertsumextabs_xsum.pt")
-  summary = model.predict("document")
-  ```
+    ```python
+    from repro.models.liu2019 import BertSumExtAbs
+    model = BertSumExtAbs("bertsumextabs_xsum.pt")
+    summary = model.predict("document")
+    ```
   
 ## Implementation Notes
 - The input to the pretrained models is expected to be already preprocessed.
@@ -82,8 +82,6 @@ pytest -s models/liu2019/tests
 ```
 
 ## Status
-Mark the current status of this implementation, providing details as necessary (e.g., pointers to relevant shell scripts)
-
 - [x] Regression unit tests pass  
 - [ ] Correctness unit tests pass  
 The authors provide their model outputs and instructions for processing the data from scratch.
