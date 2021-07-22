@@ -21,12 +21,6 @@ class TestLiu2019Models(unittest.TestCase):
 
         # Test when the document is pre-sentence split
         document = self.expected_output["BertSumExt"]["document"]
-        expected_summary = self.expected_output["BertSumExt"]["pre_seg_summary"]
-        summary = model.predict(document)
-        assert summary == expected_summary
-
-        # Test when the document is not pre-sentence split
-        document = " ".join(document)
         expected_summary = self.expected_output["BertSumExt"]["summary"]
         summary = model.predict(document)
         assert summary == expected_summary
@@ -41,7 +35,7 @@ class TestLiu2019Models(unittest.TestCase):
 
     @parameterized.expand(get_testing_device_parameters())
     def test_bert_sum_ext_abs_xsum_regression(self, device: int):
-        model = BertSumExtAbs(pretrained_model="bertsumextabs_xsum.pt", device=device)
+        model = BertSumExtAbs(model="bertsumextabs_xsum.pt", device=device)
         document = self.expected_output["BertSumExtAbs_XSum"]["document"]
         expected_summary = self.expected_output["BertSumExtAbs_XSum"]["summary"]
         summary = model.predict(document)
