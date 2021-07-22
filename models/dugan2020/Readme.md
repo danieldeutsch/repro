@@ -51,7 +51,8 @@ pytest models/dugan2020/tests
 ```
 
 ## Status
-- [x] Regression unit tests pass   
+- [x] Regression unit tests pass  
+The model takes up too much memory to run on Github. See [here](https://github.com/danieldeutsch/repro/actions/runs/1057564558)
 - [ ] Correctness unit tests pass  
 No expected outputs provided by the original code
 - [ ] Model runs on full test dataset  
