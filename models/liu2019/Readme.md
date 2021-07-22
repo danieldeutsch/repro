@@ -85,44 +85,41 @@ pytest -s models/liu2019/tests
 Mark the current status of this implementation, providing details as necessary (e.g., pointers to relevant shell scripts)
 
 - [x] Regression unit tests pass  
-- [ ] Correctness unit tests pass
+- [ ] Correctness unit tests pass  
 The authors provide their model outputs and instructions for processing the data from scratch.
 We did not attempt to perfectly reproduce their summaries.   
 - [x] Model runs on full test dataset  
-- [ ] Predictions approximately replicate results reported in the paper
+- [ ] Predictions approximately replicate results reported in the paper  
 The results for the abstractive models approximately replicate the reported in the paper, but the extractive model does not.
 See [this experiment](experiments/reproduce-results/Readme.md) for details.
 The ROUGE scores are calculated against reference summaries which have been preprocessed in the same way that the input documents are, not the original references.
 
-`TransformerAbs` on CNN/DailyMail
-||R1|R2|RL|
-|-|-|-|-|
-|Reported|40.21|17.76|37.09|
-|Ours|40.38|17.81|37.10|
+  `TransformerAbs` on CNN/DailyMail
+  ||R1|R2|RL|
+  |-|-|-|-|
+  |Reported|40.21|17.76|37.09|
+  |Ours|40.38|17.81|37.10|
 
-`BertSumExt` on CNN/DailyMail
-||R1|R2|RL|
-|-|-|-|-|
-|Reported|43.23|20.24|39.63|
-|Ours|41.93|18.98|38.07|
+  `BertSumExt` on CNN/DailyMail
+  ||R1|R2|RL|
+  |-|-|-|-|
+  |Reported|43.23|20.24|39.63|
+  |Ours|41.93|18.98|38.07|
 
-`BertSumExtAbs` on CNN/DailyMail
-||R1|R2|RL|
-|-|-|-|-|
-|Reported|42.13|19.60|39.18|
-|Ours|42.08|19.43|38.95|
+  `BertSumExtAbs` on CNN/DailyMail
+  ||R1|R2|RL|
+  |-|-|-|-|
+  |Reported|42.13|19.60|39.18|
+  |Ours|42.08|19.43|38.95|
 
-`BertSumExtAbs` on XSum
-||R1|R2|RL|
-|-|-|-|-|
-|Reported|38.81|16.50|31.27|
-|Ours|38.88|16.41|31.31|
+  `BertSumExtAbs` on XSum
+  ||R1|R2|RL|
+  |-|-|-|-|
+  |Reported|38.81|16.50|31.27|
+  |Ours|38.88|16.41|31.31|
 
-The abstractive models seem to be faithful reproductions of the original results, whereas the extractive model is not.
-It is not clear why.
+  The abstractive models seem to be faithful reproductions of the original results, whereas the extractive model is not.
+  It is not clear why.
   
 - [ ] Predictions exactly replicate results reported in the paper  
 See above
-
-## Todo
- add comments to constructor

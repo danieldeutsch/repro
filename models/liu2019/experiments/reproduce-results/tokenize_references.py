@@ -1,5 +1,5 @@
 """
-Tokenizes the reference summaries using the instructions from Liu et al. (2019)
+Tokenizes the reference summaries using the instructions from Liu & Lapata (2019)
 """
 import argparse
 import json
