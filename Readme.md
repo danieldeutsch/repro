@@ -8,7 +8,7 @@ Some models require specific versions of dependencies, have their own input and 
 Repro addresses these problems by packaging each of the pre-trained models in its own Docker container, which includes the pre-trained models themselves as well as all of the code and dependencies required to run them.
 Then, repro provides lightweight Python code to read the input data, pass the data to a Docker container with a model-specific input format, run prediction in the container, and return the output to the user.
 Each common NLP task (e.g., question-answering or summarization) has a standard interface, so running prediction with multiple models requires almost no extra work for the user. 
-As long as you have a working Docker installation, you do not need to spend time trying to set up the pre-trained models or any of their dependencies.
+As long as you have a working Docker installation, you do not need to spend time trying to set up the pre-trained models or any of their dependencies because all of this is taken care of by the Docker container.
 It should "just work" (at least that is the goal).
 
 ## Installation Instructions
