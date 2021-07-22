@@ -33,7 +33,9 @@ def push_python_path(path: PathType) -> ContextManagerFunctionReturnType[None]:
 
 
 # Borrowed from AllenNLP
-def import_module_and_submodules(package_name: str, exclude: Optional[Set[str]] = None) -> None:
+def import_module_and_submodules(
+    package_name: str, exclude: Optional[Set[str]] = None
+) -> None:
     """
     Import all submodules under the given package.
     Primarily useful so that people using AllenNLP as a library
