@@ -1,4 +1,5 @@
 include LICENSE
+include Readme.md
 recursive-include repro *
 global-exclude .DS_Store *.py[cod]
 prune **/__pycache__
