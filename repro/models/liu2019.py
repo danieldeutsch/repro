@@ -1,2 +1,2 @@
-from models.liu2019.src.models import BertSumExt, BertSumExtAbs, TransformerAbs
-from models.liu2019.src.setup import Liu2019SetupSubcommand
+from ._models.liu2019.src.models import BertSumExt, BertSumExtAbs, TransformerAbs
+from ._models.liu2019.src.setup import Liu2019SetupSubcommand

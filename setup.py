@@ -14,9 +14,10 @@ setuptools.setup(
     author="Daniel Deutsch",
     description="An open-source library for reproducing results from research papers",
     url="https://github.com/danieldeutsch/repro",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     entry_points={"console_scripts": ["repro=repro.__main__:main"]},
     python_requires=">=3.6",
+    include_package_data=True,
     install_requires=[
         "black==21.7b0",
         "datasets==1.9.0",

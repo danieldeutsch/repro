@@ -5,7 +5,7 @@ import pkgutil
 import sys
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Generator, T, Union
+from typing import Generator, List, T, Union
 
 from repro.commands.subcommand import RootSubcommand
 from repro.common import Registrable
@@ -33,13 +33,19 @@ def push_python_path(path: PathType) -> ContextManagerFunctionReturnType[None]:
 
 
 # Borrowed from AllenNLP
-def import_module_and_submodules(package_name: str) -> None:
+def import_module_and_submodules(package_name: str, exclude: Union[str, List[str]] = None) -> None:
     """
     Import all submodules under the given package.
     Primarily useful so that people using AllenNLP as a library
     can specify their own custom packages and have their custom
     classes get loaded and registered.
     """
+    exclude = exclude or []
+    if isinstance(exclude, str):
+        exclude = [exclude]
+    if package_name in exclude:
+        return
+
     importlib.invalidate_caches()
 
     # For some reason, python doesn't always add this by default to your path, but you pretty much
@@ -58,12 +64,12 @@ def import_module_and_submodules(package_name: str) -> None:
             if path_string and module_finder.path != path_string:
                 continue
             subpackage = f"{package_name}.{name}"
-            import_module_and_submodules(subpackage)
+            import_module_and_submodules(subpackage, exclude=exclude)
 
 
 def build_argument_parser():
     # Ensure all of the subcommands have been loaded
-    import_module_and_submodules("repro")
+    import_module_and_submodules("repro", exclude="repro.models._models")
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
