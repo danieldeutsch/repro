@@ -83,10 +83,12 @@ pytest -s models/liu2019/tests
 
 ## Status
 - [x] Regression unit tests pass  
+See the latest successful tests on Github [here](https://github.com/danieldeutsch/repro/actions/runs/1054803359)
 - [ ] Correctness unit tests pass  
 The authors provide their model outputs and instructions for processing the data from scratch.
 We did not attempt to perfectly reproduce their summaries.   
 - [x] Model runs on full test dataset  
+See [here](experiments/reproduce-results/Readme.md)
 - [ ] Predictions approximately replicate results reported in the paper  
 The results for the abstractive models approximately replicate the reported in the paper, but the extractive model does not.
 See [this experiment](experiments/reproduce-results/Readme.md) for details.
