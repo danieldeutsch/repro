@@ -44,6 +44,10 @@ class OracleGSumModel(Model):
         self.device = device
 
     @staticmethod
+    def _get_sentence_tokenize_command(input_file: str, output_file: str) -> str:
+        return f"python sentence_tokenize.py {input_file} {output_file}"
+
+    @staticmethod
     def _get_sentence_oracle_command(
         document_file: str, reference_file: str, output_file: str
     ) -> str:
@@ -79,21 +83,56 @@ class OracleGSumModel(Model):
             container_input_dir = volume_map[host_input_dir]
             container_output_dir = volume_map[host_output_dir]
 
+            commands = []
+
             # Write the input documents and references. For extracting the guidance signal,
             # the input documents and references are expected to be sentence-split by "<q>",
             # but the original document is used for inference (the reference is not used).
-            # Therefore we write two versions of the input documents
+            # Therefore we write two versions of the input documents. If either the documents
+            # or references aren't already sentence-split, we have to do that as well
             host_document_file = f"{host_input_dir}/input.source"
             host_document_tok_file = f"{host_input_dir}/input.tokenized.source"
-            host_reference_file = f"{host_input_dir}/input.ref"
             container_document_file = f"{container_input_dir}/input.source"
-            container_document_tok_file = (
-                f"{container_input_dir}/input.tokenized.source"
-            )
-            container_reference_file = f"{container_input_dir}/input.ref"
             write_to_text_file(documents, host_document_file)
-            write_to_text_file(documents, host_document_tok_file, separator="<q>")
-            write_to_text_file(references, host_reference_file, separator="<q>")
+
+            if any(isinstance(document, str) for document in documents):
+                # Sentence splitting needs to be run
+                if any(isinstance(document, list) for document in documents):
+                    logger.warning(
+                        "`documents` contains both sentence-split and un-sentence-split documents. "
+                        "The sentence-split boundaries will be ignored and sentence splitting will "
+                        "be run again."
+                    )
+
+                container_document_tok_file = (
+                    f"{container_output_dir}/input.tokenized.source"
+                )
+                commands.append(self._get_sentence_tokenize_command(container_document_file, container_document_tok_file))
+            else:
+                container_document_tok_file = (
+                    f"{container_input_dir}/input.tokenized.source"
+                )
+                write_to_text_file(documents, host_document_tok_file, separator="<q>")
+
+            if any(isinstance(reference, str) for reference in references):
+                # Sentence splitting needs to be run
+                if any(isinstance(reference, list) for reference in references):
+                    logger.warning(
+                        "`references` contains both sentence-split and un-sentence-split references. "
+                        "The sentence-split boundaries will be ignored and sentence splitting will "
+                        "be run again."
+                    )
+
+                host_reference_file = f"{host_input_dir}/input.ref"
+                container_reference_file = f"{container_input_dir}/input.ref"
+                write_to_text_file(references, host_reference_file)
+
+                container_reference_tok_file = f"{container_output_dir}/input.tokenized.ref"
+                commands.append(self._get_sentence_tokenize_command(container_reference_file, container_reference_tok_file))
+            else:
+                host_reference_tok_file = f"{host_input_dir}/input.tokenized.ref"
+                container_reference_tok_file = f"{container_input_dir}/input.tokenized.ref"
+                write_to_text_file(references, host_reference_tok_file, separator="<q>")
 
             # Run inference. The host output directory must already exist
             os.makedirs(host_output_dir)
@@ -101,34 +140,33 @@ class OracleGSumModel(Model):
             # Get the command to run extracting the oracle guidance. This uses
             # the sentence tokenized documents.
             container_guidance_tok_file = f"{container_output_dir}/input.tokenized.z"
-            guidance_command = self._get_sentence_oracle_command(
+            commands.append(self._get_sentence_oracle_command(
                 container_document_tok_file,
-                container_reference_file,
+                container_reference_tok_file,
                 container_guidance_tok_file,
-            )
+            ))
 
             # The guidance file is sentence tokenized, but inference requires
             # the untokenized version. This command removes "<q>" from the text
             container_guidance_file = f"{container_output_dir}/input.z"
-            detokenization_command = self._get_de_sentence_tokenize_command(
+            commands.append(self._get_de_sentence_tokenize_command(
                 container_guidance_tok_file, container_guidance_file
-            )
+            ))
 
             # Run inference with the original documents and de-tokenized guidance
             host_output_file = f"{host_output_dir}/input.output"
             container_output_file = f"{container_output_dir}/input.output"
-            prediction_command = _get_prediction_command(
+            commands.append(_get_prediction_command(
                 self.model,
                 container_document_file,
                 container_guidance_file,
                 container_output_file,
                 self.device,
-            )
+            ))
 
-            command = " && ".join(
-                [guidance_command, detokenization_command, prediction_command]
-            )
-            run_command(self.image, command, volume_map=volume_map, cuda=True)
+            command = " && ".join(commands)
+            cuda = self.device != -1
+            run_command(self.image, command, volume_map=volume_map, cuda=cuda)
 
             summaries = open(host_output_file, "r").read().splitlines()
             return summaries

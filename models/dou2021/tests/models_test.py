@@ -10,12 +10,32 @@ from . import FIXTURES_ROOT
 
 class TestDou2021Models(unittest.TestCase):
     def setUp(self) -> None:
-        self.expected_output = json.load(open(f"{FIXTURES_ROOT}/expected-output.json"))
+        self.examples = json.load(open(f"{FIXTURES_ROOT}/examples.json"))
 
     @parameterized.expand(get_testing_device_parameters())
     def test_oracle_sentence_guided(self, device: int):
         model = OracleGSumModel(device=device)
-        expected_output = self.expected_output["OracleSentenceGuided"]
-        expected_summaries = [inp["summary"] for inp in expected_output]
-        summaries = model.predict_batch(expected_output)
+
+        examples = self.examples["OracleSentenceGuided"]
+        inputs = [
+            {
+                "document": example["document"],
+                "reference": example["reference"]
+            }
+            for example in examples
+        ]
+        expected_summaries = [data["summary"] for data in examples]
+        summaries = model.predict_batch(inputs)
+        assert summaries == expected_summaries
+
+        # Rerun but without pre-tokenized documents and references
+        inputs = [
+            {
+                "document": " ".join(example["document"]),
+                "reference": " ".join(example["reference"])
+            }
+            for example in examples
+        ]
+        expected_summaries = [data["untok_summary"] for data in examples]
+        summaries = model.predict_batch(inputs)
         assert summaries == expected_summaries

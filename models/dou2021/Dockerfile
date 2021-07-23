@@ -29,6 +29,12 @@ RUN pip install --no-cache-dir \
     torch==1.4.0 \
     tqdm
 
+# Install spacy and en_core_web_sm, required for our sentence tokenization and
+# extracting the oracle keywords
+RUN pip install --no-cache-dir \
+    spacy==3.1.1 \
+    https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.1.0/en_core_web_sm-3.1.0.tar.gz
+
 # Move the models into the "guided_summarization" directory
 RUN mv bart_sentence guided_summarization/bart_sentence
 
@@ -38,5 +44,6 @@ RUN cd guided_summarization/bart && \
     wget -N 'https://dl.fbaipublicfiles.com/fairseq/gpt2_bpe/vocab.bpe' && \
     wget -N 'https://dl.fbaipublicfiles.com/fairseq/gpt2_bpe/dict.txt'
 
-# Copy over the code to run prediction
+# Copy over the code to run prediction and tokenization
 COPY src/summarize.py guided_summarization/bart/summarize.py
+COPY src/sentence_tokenize.py sentence_tokenize.py
