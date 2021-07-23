@@ -29,7 +29,6 @@ The authors have released their BART-based model that uses sentence guidance, do
   ```shell script
   repro setup dou2021 [--silent]
   ```
-  Provide an explanation for the arguments
 - Requires network: Yes.
 `fairseq` sends a request to retrieve an etag even if the file is present.
 This also happens with [Lewis et al. (2020)](../lewis2020/Readme.md).
