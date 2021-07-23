@@ -3,4 +3,5 @@ from repro.models.model import (
     QuestionAnsweringModel,
     RecipeGenerationModel,
     SingleDocumentSummarizationModel,
+    TruecasingModel,
 )
