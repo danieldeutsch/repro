@@ -35,8 +35,8 @@ def _get_prediction_command(
     return " && ".join(commands)
 
 
-@Model.register("dou2021-oracle-gsum")
-class OracleGSumModel(Model):
+@Model.register("dou2021-oracle-sentence-gsum")
+class OracleSentenceGSumModel(Model):
     def __init__(self, image: str = "dou2021", device: int = 0) -> None:
         # The sentence-guided model is the only one available
         self.model = "bart_sentence"
@@ -54,7 +54,7 @@ class OracleGSumModel(Model):
         commands = [
             "cd guided_summarization/scripts",
             f"python sents.py {document_file} {reference_file} {output_file}",
-            "cd ../.."
+            "cd ../..",
         ]
         return " && ".join(commands)
 
@@ -107,7 +107,11 @@ class OracleGSumModel(Model):
                 container_document_tok_file = (
                     f"{container_output_dir}/input.tokenized.source"
                 )
-                commands.append(self._get_sentence_tokenize_command(container_document_file, container_document_tok_file))
+                commands.append(
+                    self._get_sentence_tokenize_command(
+                        container_document_file, container_document_tok_file
+                    )
+                )
             else:
                 container_document_tok_file = (
                     f"{container_input_dir}/input.tokenized.source"
@@ -127,11 +131,19 @@ class OracleGSumModel(Model):
                 container_reference_file = f"{container_input_dir}/input.ref"
                 write_to_text_file(references, host_reference_file)
 
-                container_reference_tok_file = f"{container_output_dir}/input.tokenized.ref"
-                commands.append(self._get_sentence_tokenize_command(container_reference_file, container_reference_tok_file))
+                container_reference_tok_file = (
+                    f"{container_output_dir}/input.tokenized.ref"
+                )
+                commands.append(
+                    self._get_sentence_tokenize_command(
+                        container_reference_file, container_reference_tok_file
+                    )
+                )
             else:
                 host_reference_tok_file = f"{host_input_dir}/input.tokenized.ref"
-                container_reference_tok_file = f"{container_input_dir}/input.tokenized.ref"
+                container_reference_tok_file = (
+                    f"{container_input_dir}/input.tokenized.ref"
+                )
                 write_to_text_file(references, host_reference_tok_file, separator="<q>")
 
             # Run inference. The host output directory must already exist
@@ -140,29 +152,35 @@ class OracleGSumModel(Model):
             # Get the command to run extracting the oracle guidance. This uses
             # the sentence tokenized documents.
             container_guidance_tok_file = f"{container_output_dir}/input.tokenized.z"
-            commands.append(self._get_sentence_oracle_command(
-                container_document_tok_file,
-                container_reference_tok_file,
-                container_guidance_tok_file,
-            ))
+            commands.append(
+                self._get_sentence_oracle_command(
+                    container_document_tok_file,
+                    container_reference_tok_file,
+                    container_guidance_tok_file,
+                )
+            )
 
             # The guidance file is sentence tokenized, but inference requires
             # the untokenized version. This command removes "<q>" from the text
             container_guidance_file = f"{container_output_dir}/input.z"
-            commands.append(self._get_de_sentence_tokenize_command(
-                container_guidance_tok_file, container_guidance_file
-            ))
+            commands.append(
+                self._get_de_sentence_tokenize_command(
+                    container_guidance_tok_file, container_guidance_file
+                )
+            )
 
             # Run inference with the original documents and de-tokenized guidance
             host_output_file = f"{host_output_dir}/input.output"
             container_output_file = f"{container_output_dir}/input.output"
-            commands.append(_get_prediction_command(
-                self.model,
-                container_document_file,
-                container_guidance_file,
-                container_output_file,
-                self.device,
-            ))
+            commands.append(
+                _get_prediction_command(
+                    self.model,
+                    container_document_file,
+                    container_guidance_file,
+                    container_output_file,
+                    self.device,
+                )
+            )
 
             command = " && ".join(commands)
             cuda = self.device != -1
