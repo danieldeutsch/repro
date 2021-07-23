@@ -1,6 +1,7 @@
 import argparse
 import os
 import spacy
+from tqdm import tqdm
 
 
 def main(args):
@@ -12,7 +13,7 @@ def main(args):
 
     with open(args.output_file, "w") as out:
         with open(args.input_file, "r") as f:
-            for line in f:
+            for line in tqdm(f, desc="Running sentence splitting"):
                 line = line.strip()
                 sentences = [str(sentence) for sentence in nlp(line).sents]
                 out.write("<q>".join(sentences) + "\n")

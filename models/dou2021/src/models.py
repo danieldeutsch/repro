@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 def _get_prediction_command(
-    model: str, document_file: str, guidance_file: str, output_file: str, device: int
+    model: str, document_file: str, guidance_file: str, output_file: str, device: int, batch_size: int
 ) -> str:
     train_command = (
         f"python summarize.py"
@@ -22,6 +22,7 @@ def _get_prediction_command(
         f"  ../{model}"
         f"  model.pt"
         f"  ../{model}"
+        f"  {batch_size}"
     )
     cuda = device != -1
     if cuda:
@@ -37,11 +38,12 @@ def _get_prediction_command(
 
 @Model.register("dou2021-oracle-sentence-gsum")
 class OracleSentenceGSumModel(Model):
-    def __init__(self, image: str = "dou2021", device: int = 0) -> None:
+    def __init__(self, image: str = "dou2021", device: int = 0, batch_size: int = 16) -> None:
         # The sentence-guided model is the only one available
         self.model = "bart_sentence"
         self.image = image
         self.device = device
+        self.batch_size = batch_size
 
     @staticmethod
     def _get_sentence_tokenize_command(input_file: str, output_file: str) -> str:
@@ -146,9 +148,6 @@ class OracleSentenceGSumModel(Model):
                 )
                 write_to_text_file(references, host_reference_tok_file, separator="<q>")
 
-            # Run inference. The host output directory must already exist
-            os.makedirs(host_output_dir)
-
             # Get the command to run extracting the oracle guidance. This uses
             # the sentence tokenized documents.
             container_guidance_tok_file = f"{container_output_dir}/input.tokenized.z"
@@ -179,11 +178,13 @@ class OracleSentenceGSumModel(Model):
                     container_guidance_file,
                     container_output_file,
                     self.device,
+                    self.batch_size
                 )
             )
 
             command = " && ".join(commands)
             cuda = self.device != -1
+            os.makedirs(host_output_dir)
             run_command(self.image, command, volume_map=volume_map, cuda=cuda)
 
             summaries = open(host_output_file, "r").read().splitlines()
