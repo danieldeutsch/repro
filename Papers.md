@@ -7,3 +7,4 @@ This file contains a list of the papers with models wrapped by this library.
 |[Text Summarization with Pretrained Encoders](https://arxiv.org/abs/1908.08345)|Yang Liu and Mirella Lapata|[Link](models/liu2019/Readme.md)|
 |[RoFT: A Tool for Evaluating Human Detection of Machine-Generated Text](https://arxiv.org/abs/2010.03070)|Liam Dugan, Daphne Ippolito, Arun Kirubarajan, and Chris Callison-Burch|[Link](models/dugan2020/Readme.md)|
 |[Learning to Capitalize with Character-Level Recurrent Neural Networks: An Empirical Study](https://aclanthology.org/D16-1225/)|Raymond Hendy Susanto, Hai Leong Chieu, and Wei Lu|[Link](models/susanto2016/Readme.md)|
+|[GSum: A General Framework for Guided Neural Abstractive Summarization](https://arxiv.org/abs/2010.08014)|Zi-Yi Dou, Pengfei Liu, Hiroaki Hayashi, Zhengbao Jiang, and Graham Neubig|[Link](models/dou2021/Readme.md)|
