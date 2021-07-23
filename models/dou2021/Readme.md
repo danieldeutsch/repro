@@ -21,6 +21,18 @@ The authors have released their BART-based model that uses sentence guidance, do
     summary = model.predict("document", "reference")
     ```
     
+- Sentence-Guided
+  - Description: A BART-based model trained with sentence supervision.
+  This is the same pre-trained model as the oracle sentence-guided supervision, but it instead uses [`BertSumExt`](../liu2019/Readme.md) to extract the sentence guidance.
+  Running this model also requires having the `BertSumExt` model setup with the model pre-trained on CNN/DailyMail.
+  - Name: `dou2021-sentence-gsum`
+  - Usage:
+    ```python
+    from repro.models.dou2021 import SentenceGSumModel
+    model = SentenceGSumModel()
+    summary = model.predict("document")
+    ```
+    
 ## Implementation Notes
     
 ## Docker Information

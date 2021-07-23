@@ -5,14 +5,20 @@ from typing import Dict, List, Union
 from repro.common import TemporaryDirectory
 from repro.common.docker import make_volume_map, run_command
 from repro.common.io import write_to_text_file
-from repro.models import Model
-from repro.models.model import DocumentType, SummaryType
+from repro.data.types import DocumentType, SummaryType
+from repro.models import Model, SingleDocumentSummarizationModel
+from repro.models.liu2019 import BertSumExt
 
 logger = logging.getLogger(__name__)
 
 
 def _get_prediction_command(
-    model: str, document_file: str, guidance_file: str, output_file: str, device: int, batch_size: int
+    model: str,
+    document_file: str,
+    guidance_file: str,
+    output_file: str,
+    device: int,
+    batch_size: int,
 ) -> str:
     train_command = (
         f"python summarize.py"
@@ -38,8 +44,9 @@ def _get_prediction_command(
 
 @Model.register("dou2021-oracle-sentence-gsum")
 class OracleSentenceGSumModel(Model):
-    def __init__(self, image: str = "dou2021", device: int = 0, batch_size: int = 16) -> None:
-        # The sentence-guided model is the only one available
+    def __init__(
+        self, image: str = "dou2021", device: int = 0, batch_size: int = 16
+    ) -> None:
         self.model = "bart_sentence"
         self.image = image
         self.device = device
@@ -178,11 +185,70 @@ class OracleSentenceGSumModel(Model):
                     container_guidance_file,
                     container_output_file,
                     self.device,
-                    self.batch_size
+                    self.batch_size,
                 )
             )
 
             command = " && ".join(commands)
+            cuda = self.device != -1
+            os.makedirs(host_output_dir)
+            run_command(self.image, command, volume_map=volume_map, cuda=cuda)
+
+            summaries = open(host_output_file, "r").read().splitlines()
+            return summaries
+
+
+@Model.register("dou2021-sentence-gsum")
+class SentenceGSumModel(SingleDocumentSummarizationModel):
+    def __init__(
+        self, image: str = "dou2021", device: int = 0, batch_size: int = 16
+    ) -> None:
+        self.model = "bart_sentence"
+        self.image = image
+        self.device = device
+        self.batch_size = batch_size
+        self.extractive_model = BertSumExt(device=device)
+
+    def predict_batch(
+        self, inputs: List[Dict[str, Union[DocumentType, SummaryType]]], *args, **kwargs
+    ) -> List[SummaryType]:
+        logger.info(
+            f"Generating summaries for {len(inputs)} inputs and image {self.image}."
+        )
+        documents = [inp["document"] for inp in inputs]
+
+        # The sentence supervision is done using the `self.extractive_model`, which
+        # is in its own Docker container, so we retrieve those summaries first
+        logger.info(f"Extracting guidance signal")
+        guidance = self.extractive_model.predict_batch(inputs)
+
+        with TemporaryDirectory() as temp:
+            host_input_dir = f"{temp}/input"
+            host_output_dir = f"{temp}/output"
+            volume_map = make_volume_map(host_input_dir, host_output_dir)
+            container_input_dir = volume_map[host_input_dir]
+            container_output_dir = volume_map[host_output_dir]
+
+            # Write the input documents and guidance signal
+            host_document_file = f"{host_input_dir}/input.source"
+            host_guidance_file = f"{host_input_dir}/input.z"
+            container_document_file = f"{container_input_dir}/input.source"
+            container_guidance_file = f"{container_input_dir}/input.z"
+            write_to_text_file(documents, host_document_file)
+            write_to_text_file(guidance, host_guidance_file)
+
+            host_output_file = f"{host_output_dir}/input.output"
+            container_output_file = f"{container_output_dir}/input.output"
+
+            command = _get_prediction_command(
+                self.model,
+                container_document_file,
+                container_guidance_file,
+                container_output_file,
+                self.device,
+                self.batch_size,
+            )
+
             cuda = self.device != -1
             os.makedirs(host_output_dir)
             run_command(self.image, command, volume_map=volume_map, cuda=cuda)
