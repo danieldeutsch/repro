@@ -50,3 +50,13 @@ class SingleDocumentSummarizationModel(Model):
         self, inputs: List[Dict[str, DocumentType]], *args, **kwargs
     ) -> List[SummaryType]:
         raise NotImplementedError
+
+
+class TruecasingModel(Model):
+    def predict(self, text: str, *args, **kwargs) -> str:
+        return self.predict_batch([{"text": text}])[0]
+
+    def predict_batch(
+        self, inputs: List[Dict[str, DocumentType]], *args, **kwargs
+    ) -> List[str]:
+        raise NotImplementedError
