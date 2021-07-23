@@ -55,8 +55,7 @@ The repository provides truecasing models for four different languages:
 - Image name: `susanto2016`
 - Build command:
   ```shell script
-  repro setup susanto2016 \
-    [--silent]
+  repro setup susanto2016 [--silent]
   ```
 - Requires network: No
   
@@ -68,6 +67,7 @@ pytest models/susanto2016/tests
 
 ## Status
 - [x] Regression unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1058166921)
 - [ ] Correctness unit tests pass  
 No expected output provided
 - [ ] Model runs on full test dataset    
