@@ -1,7 +1,5 @@
 FROM pure/python:3.7-cuda10.0-base
 
-ARG SENTENCE_GUIDED
-
 WORKDIR /app
 
 # Download the pretrained models
