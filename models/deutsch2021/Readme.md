@@ -64,7 +64,7 @@ pytest models/deutsch2021/tests
 ## Status
 - [x] Regression unit tests pass   
 - [x] Correctness unit tests pass  
-The tests were taken from the `qaeval` repository.
+The tests were taken from the `qaeval` repository. See [here](https://github.com/danieldeutsch/repro/actions/runs/1063451340).
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  
