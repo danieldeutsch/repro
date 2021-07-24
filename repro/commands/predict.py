@@ -12,18 +12,19 @@ from repro.models import Model
 
 
 def predict_with_model(model: Model, instances: List[InstanceDict]) -> List:
-    # Find the required arguments for the model's `predict` function, then
-    # select all of those fields from the `instances` and pass them through
-    # the `predict_batch` function
+    # Find the required arguments for the model's `predict` function
     args = inspect.getfullargspec(model.predict)
-    required_args = args.args
+    required_args = set(args.args)
     required_args.remove("self")
 
-    inputs = []
-    for instance in instances:
-        inputs.append({arg: instance[arg] for arg in required_args})
+    # Ensure all of the instances have at least those arguments
+    for i, instance in enumerate(instances):
+        for arg in required_args:
+            if arg not in instance:
+                raise Exception(f"Instance {i} missing required argument {arg}")
 
-    predictions = model.predict_batch(inputs)
+    # Pass all of the instances, including with other, non-required arguments
+    predictions = model.predict_batch(instances)
     if len(predictions) != len(instances):
         raise Exception(
             f"Model returned {len(predictions)} predictions for {len(instances)} instances"
