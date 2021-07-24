@@ -60,3 +60,8 @@ pytest models/dou2021/tests
 
 ## Misc
 See these [notes](Notes.md) if this code is extended to include training.
+
+## Todo
+- Remove Java/CoreNLP dependencies
+- Try to repeat but with sentence breaks
+- Extend evaluation to include (1) Original dataset with both models, (2) Oracle guidance, (3) MatchSum guidance
