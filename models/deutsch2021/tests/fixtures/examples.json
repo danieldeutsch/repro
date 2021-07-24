@@ -1,0 +1,36 @@
+{
+  "generation": [
+    {
+      "context": "The superjumbo Airbus A380 , the world 's largest commercial airliner , took off Wednesday into cloudy skies over southwestern France for its second test flight .",
+      "start": 0,
+      "end": 26,
+      "question": "What world's largest commercial airliner took off Wednesday into cloudy skies over southwestern France for its second test flight?"
+    },
+    {
+      "context": "The superjumbo Airbus A380 , the world 's largest commercial airliner , took off Wednesday into cloudy skies over southwestern France for its second test flight .",
+      "start": 29,
+      "end": 69,
+      "question": "What superjumbo Airbus A380 took off Wednesday into cloudy skies over southwestern France for its second test flight?"
+    }
+  ],
+  "answering": [
+    {
+      "context": "The superjumbo Airbus A380 , the world 's largest commercial airliner , took off Wednesday into cloudy skies over southwestern France for its second test flight . The European aircraft maker , based in the French city of Toulouse , said the second flight -- which came exactly a week after the A380 's highly anticipated maiden voyage -- would last about four hours . As opposed to the international media hype that surrounded last week 's flight , with hundreds of journalists on site to capture the historic moment , Airbus chose to conduct Wednesday 's test more discreetly .",
+      "question": "Who does the A380 super - jumbo passenger jet surpass and break their monopoly?",
+      "answer": "the world 's largest",
+      "probability": 0.00428164186632745,
+      "null_probability": 0.9895479613676263,
+      "start": 29,
+      "end": 49
+    },
+    {
+      "context": "My name is Dan!",
+      "question": "What is my name?",
+      "answer": "Dan",
+      "probability": 0.9833746306903306,
+      "null_probability": 3.8691610903653164e-05,
+      "start": 11,
+      "end": 14
+    }
+  ]
+}
