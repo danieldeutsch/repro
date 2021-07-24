@@ -1,12 +1,10 @@
 import argparse
 import os
-import spacy
+from nltk.tokenize import sent_tokenize
 from tqdm import tqdm
 
 
 def main(args):
-    nlp = spacy.load("en_core_web_sm")
-
     dirname = os.path.dirname(args.output_file)
     if dirname:
         os.makedirs(dirname, exist_ok=True)
@@ -15,7 +13,7 @@ def main(args):
         with open(args.input_file, "r") as f:
             for line in tqdm(f, desc="Running sentence splitting"):
                 line = line.strip()
-                sentences = [str(sentence) for sentence in nlp(line).sents]
+                sentences = [sentence for sentence in sent_tokenize(line)]
                 out.write("<q>".join(sentences) + "\n")
 
 

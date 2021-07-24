@@ -13,8 +13,9 @@ class TestDou2021Models(unittest.TestCase):
     def setUp(self) -> None:
         self.image = "dou2021"
         # The documents and references were taken from https://github.com/icml-2020-nlp/semsim/tree/master/datasets.
-        # The other fields are regression outputs (i.e., we ran the code on those documents and references
-        # and saved the outputs).
+        # The guidance field was taken from the provided outputs of the authors (except for the second example
+        # in which the sentences were in a different order). The other fields are regression outputs
+        # (i.e., we ran the code on those documents and references and saved the outputs).
         self.examples = json.load(open(f"{FIXTURES_ROOT}/examples.json", "r"))
 
     def test_sentence_split_regression(self):
@@ -59,8 +60,8 @@ class TestDou2021Models(unittest.TestCase):
             for example in self.examples
         ]
         expected_summaries = [data["oracle_guided_summary"] for data in self.examples]
-        # summaries = model.predict_batch(inputs)
-        # assert summaries == expected_summaries
+        summaries = model.predict_batch(inputs)
+        assert summaries == expected_summaries
 
         # Now with pre-tokenized documents and references
         inputs = [

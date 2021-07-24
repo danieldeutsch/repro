@@ -41,11 +41,9 @@ RUN pip install --no-cache-dir \
     torch==1.4.0 \
     tqdm
 
-# Install spacy and en_core_web_sm, required for our sentence tokenization and
-# extracting the oracle keywords
-RUN pip install --no-cache-dir \
-    spacy==3.1.1 \
-    https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.1.0/en_core_web_sm-3.1.0.tar.gz
+# Install nltk, required for sentence splitting
+RUN pip install --no-cache-dir nltk==3.6.2
+RUN python -c 'import nltk; nltk.download("punkt")'
 
 # Move the models into the "guided_summarization" directory
 RUN mv bart_sentence guided_summarization/bart_sentence
