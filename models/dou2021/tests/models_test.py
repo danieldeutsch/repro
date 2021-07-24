@@ -78,6 +78,33 @@ class TestDou2021Models(unittest.TestCase):
         assert summaries == expected_summaries
 
     @parameterized.expand(get_testing_device_parameters())
+    def test_oracle_sentence_guided_with_guidance(self, device: int):
+        model = OracleSentenceGSumModel(device=device)
+
+        # First without pre-sentence-split documents and references
+        inputs = [
+            {"document": example["document"], "guidance": " ".join(example["guidance"])}
+            for example in self.examples
+        ]
+        expected_summaries = [data["oracle_guided_summary"] for data in self.examples]
+        summaries = model.predict_batch(inputs)
+        assert summaries == expected_summaries
+
+        # Now with pre-tokenized documents and guidance
+        inputs = [
+            {
+                "document": example["document_sentences"],
+                "guidance": example["guidance"],
+            }
+            for example in self.examples
+        ]
+        expected_summaries = [
+            data["oracle_guided_summary_presplit"] for data in self.examples
+        ]
+        summaries = model.predict_batch(inputs)
+        assert summaries == expected_summaries
+
+    @parameterized.expand(get_testing_device_parameters())
     def test_sentence_guided(self, device: int):
         model = SentenceGSumModel(device=device)
 
