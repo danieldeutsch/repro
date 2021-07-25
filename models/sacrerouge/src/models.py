@@ -67,7 +67,9 @@ class ROUGE(Model):
         else:
             return summaries
 
-    def _maybe_sentence_split_references(self, references_list: List[List[SummaryType]]) -> List[List[List[str]]]:
+    def _maybe_sentence_split_references(
+        self, references_list: List[List[SummaryType]]
+    ) -> List[List[List[str]]]:
         # Flatten the references into a single list so we can call `_maybe_sentence_split`, then
         # rearrange the output to be parallel to `references_list`
         flat_references = []
