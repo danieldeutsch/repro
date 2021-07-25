@@ -71,7 +71,7 @@ class OracleSentenceGSumModel(Model):
             tokenized_documents = documents
 
         if compute_guidance:
-            references = [inp["references"] for inp in inputs]
+            references = [inp["reference"] for inp in inputs]
             if any(isinstance(reference, str) for reference in references):
                 # Sentence splitting needs to be run
                 if any(isinstance(reference, list) for reference in references):
