@@ -67,6 +67,23 @@ class ROUGE(Model):
         else:
             return summaries
 
+    def _maybe_sentence_split_references(self, references_list: List[List[SummaryType]]) -> List[List[List[str]]]:
+        # Flatten the references into a single list so we can call `_maybe_sentence_split`, then
+        # rearrange the output to be parallel to `references_list`
+        flat_references = []
+        for references in references_list:
+            flat_references.extend(references)
+
+        split_references = self._maybe_sentence_split(flat_references)
+        split_references_list = []
+        index = 0
+        for references in references_list:
+            split_references_list.append([])
+            for _ in references:
+                split_references_list[-1].append(split_references[index])
+                index += 1
+        return split_references_list
+
     def predict(
         self, summary: SummaryType, references: List[SummaryType], **kwargs
     ) -> Dict[str, Dict[str, float]]:
@@ -83,9 +100,7 @@ class ROUGE(Model):
         references_list = [inp["references"] for inp in inputs]
 
         summaries = self._maybe_sentence_split(summaries)
-        references_list = [
-            self._maybe_sentence_split(references) for references in references_list
-        ]
+        references_list = self._maybe_sentence_split_references(references_list)
 
         with TemporaryDirectory() as temp:
             host_input_dir = f"{temp}/input"
