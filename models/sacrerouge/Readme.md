@@ -27,8 +27,7 @@ Thus far, we have added wrappers around ROUGE.
 - Image name: `sacrerouge`
 - Build command:
   ```shell script
-  repro setup sacrerouge
-    [--silent]
+  repro setup sacrerouge [--silent]
   ```
 - Requires network: No
   
