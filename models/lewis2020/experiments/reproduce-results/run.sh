@@ -17,3 +17,11 @@ repro predict \
   --split test \
   --output-writer sacrerouge \
   --output-file ${DIR}/output/xsum/predictions.jsonl
+
+for dataset in "cnn_dailymail" "xsum"; do
+  if [ -f ${DIR}/output/${dataset}/predictions.jsonl ]; then
+    python models/sacrerouge/scripts/calculate_rouge.py \
+      --input-file ${DIR}/output/${dataset}/predictions.jsonl \
+      --output-file ${DIR}/output/${dataset}/rouge.json
+  fi
+done

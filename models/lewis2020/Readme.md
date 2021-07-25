@@ -65,7 +65,7 @@ The CNN/DailyMail results are very close to those in the paper:
   ||R1|R2|RL|
   |-|-|-|-|
   |Reported|44.16|21.28|40.90|
-  |Ours|44.31|21.12|41.23|
+  |Ours|44.31|21.12|41.18|
 
   This seems to be a faithful implementation for `bart.large.cnn`.
 

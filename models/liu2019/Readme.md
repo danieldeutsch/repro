@@ -92,31 +92,31 @@ See [here](experiments/reproduce-results/Readme.md)
 - [ ] Predictions approximately replicate results reported in the paper  
 The results for the abstractive models approximately replicate the reported in the paper, but the extractive model does not.
 See [this experiment](experiments/reproduce-results/Readme.md) for details.
-The ROUGE scores are calculated against reference summaries which have been preprocessed in the same way that the input documents are, not the original references.
+Calculating the ROUGE scores against the original references compared to the references which were preprocessed in the same way as in training did not seem to make a significant difference.
 
   `TransformerAbs` on CNN/DailyMail
   ||R1|R2|RL|
   |-|-|-|-|
   |Reported|40.21|17.76|37.09|
-  |Ours|40.38|17.81|37.10|
+  |Ours|40.32|17.73|37.18|
 
   `BertSumExt` on CNN/DailyMail
   ||R1|R2|RL|
   |-|-|-|-|
   |Reported|43.23|20.24|39.63|
-  |Ours|41.93|18.98|38.07|
+  |Ours|41.88|18.89|38.17|
 
   `BertSumExtAbs` on CNN/DailyMail
   ||R1|R2|RL|
   |-|-|-|-|
   |Reported|42.13|19.60|39.18|
-  |Ours|42.08|19.43|38.95|
+  |Ours|42.02|19.34|39.01|
 
   `BertSumExtAbs` on XSum
   ||R1|R2|RL|
   |-|-|-|-|
   |Reported|38.81|16.50|31.27|
-  |Ours|38.88|16.41|31.31|
+  |Ours|38.87|16.40|31.30|
 
   The abstractive models seem to be faithful reproductions of the original results, whereas the extractive model is not.
   It is not clear why.
