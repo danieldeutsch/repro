@@ -38,6 +38,7 @@ pytest models/<model-name>/tests
 ## Status
 - [x] Regression unit tests pass  
 - [ ] Correctness unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1063555327).
 We did not check for the correctness of the ROUGE computation.
 - [ ] Model runs on full test dataset  
 n/a
