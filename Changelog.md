@@ -10,7 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a [recipe generation model](models/dugan2020/Readme.md) from [Dugan et al. (2020)](https://arxiv.org/abs/2010.03070)
 - Added a `TruecasingModel` class
 - Added an RNN-based truecaser from [Susanto et al. (2016)](https://aclanthology.org/D16-1225/) based on an implementation [here](https://github.com/mayhewsw/pytorch-truecaser).
-- Added the [oracle sentence-guided model](models/dou2021/Readme.md) from [Dou et al. (2021)](https://arxiv.org/abs/2010.08014).
+- Added the question-generation and question-answering models used in the [QAEval metric](https://arxiv.org/abs/2010.00490).
+See [here](models/deutsch2021/Readme.md).
+- Added [ROUGE](models/sacrerouge/Readme.md)
+- Added the [sentence-guided models](models/dou2021/Readme.md) from [Dou et al. (2021)](https://arxiv.org/abs/2010.08014).
 
 ## [v0.0.1](https://github.com/danieldeutsch/repro/repro/tag/0.0.1) - 2021-07-22
 ### Added

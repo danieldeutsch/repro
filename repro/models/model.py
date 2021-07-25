@@ -26,9 +26,19 @@ class Model(Registrable):
 
 class QuestionAnsweringModel(Model):
     def predict(self, context: str, question: str, *args, **kwargs) -> str:
-        return self.predict_batch([{"context": context, "question": question}])[0]
+        return self.predict_batch(
+            [{"context": context, "question": question}], **kwargs
+        )[0]
 
     def predict_batch(self, inputs: List[Dict[str, str]], *args, **kwargs) -> List[str]:
+        raise NotImplementedError
+
+
+class QuestionGenerationModel(Model):
+    def predict(self, context: str, start: int, end: int, **kwargs) -> str:
+        return self.predict_batch([{"context": context, "start": start, "end": end}])[0]
+
+    def predict_batch(self, inputs: List[Dict[str, str]], **kwargs) -> List[str]:
         raise NotImplementedError
 
 
