@@ -34,18 +34,12 @@ repro predict \
   --output-writer sacrerouge \
   --output-file ${DIR}/output/xsum/bertsumextabs/predictions.jsonl
 
-python ${DIR}/tokenize_references.py \
-  --input-jsonl ${DIR}/output/cnn_dailymail/transformerabs/predictions.jsonl \
-  --output-jsonl ${DIR}/output/cnn_dailymail/transformerabs/predictions-tokenized.jsonl
-
-python ${DIR}/tokenize_references.py \
-  --input-jsonl ${DIR}/output/cnn_dailymail/bertsumext/predictions.jsonl \
-  --output-jsonl ${DIR}/output/cnn_dailymail/bertsumext/predictions-tokenized.jsonl
-
-python ${DIR}/tokenize_references.py \
-  --input-jsonl ${DIR}/output/cnn_dailymail/bertsumextabs/predictions.jsonl \
-  --output-jsonl ${DIR}/output/cnn_dailymail/bertsumextabs/predictions-tokenized.jsonl
-
-python ${DIR}/tokenize_references.py \
-  --input-jsonl ${DIR}/output/xsum/bertsumextabs/predictions.jsonl \
-  --output-jsonl ${DIR}/output/xsum/bertsumextabs/predictions-tokenized.jsonl
+for model in "transformerabs" "bertsumext" "bertsumextabs"; do
+  for dataset in "cnn_dailymail" "xsum"; do
+    if [ -f ${DIR}/output/${dataset}/${model}/predictions.jsonl ]; then
+      python models/sacrerouge/scripts/calculate_rouge.py \
+        --input-file ${DIR}/output/${dataset}/${model}/predictions.jsonl \
+        --output-file ${DIR}/output/${dataset}/${model}/rouge.json
+    fi
+  done
+done
