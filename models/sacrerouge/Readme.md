@@ -1,4 +1,4 @@
-# Deutsch & Roth (2020)
+# SacreROUGE
 
 ## Publication
 https://danieldeutsch.github.io/papers/nlp-oss2020/sacrerouge.pdf
