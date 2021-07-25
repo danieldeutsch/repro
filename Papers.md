@@ -8,3 +8,4 @@ This file contains a list of the papers with models wrapped by this library.
 |[RoFT: A Tool for Evaluating Human Detection of Machine-Generated Text](https://arxiv.org/abs/2010.03070)|Liam Dugan, Daphne Ippolito, Arun Kirubarajan, and Chris Callison-Burch|[Link](models/dugan2020/Readme.md)|
 |[Learning to Capitalize with Character-Level Recurrent Neural Networks: An Empirical Study](https://aclanthology.org/D16-1225/)|Raymond Hendy Susanto, Hai Leong Chieu, and Wei Lu|[Link](models/susanto2016/Readme.md)|
 |[Towards Question-Answering as an Automatic Metric for Evaluating the Content Quality of a Summary](https://arxiv.org/abs/2010.00490)|Daniel Deutsch, Tania Bedrax-Weiss, and Dan Roth|[Link](models/deutsch2021/Readme.md)|
+|[ROUGE: A Package for Automatic Evaluation of Summaries](https://aclanthology.org/W04-1013/)|Chin-Yew Lin|[Link](models/sacrerouge/Readme.md)|

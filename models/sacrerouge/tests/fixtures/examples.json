@@ -1,0 +1,41 @@
+{
+  "rouge": {
+    "input": [
+      {
+        "summary": "James Best, who played sheriff Rosco P. Coltrane on \"The Dukes of Hazzard,\" died Monday. He was 88. The popular TV show ran from 1979 to 1985 and spawned TV movies, an animated series and video games. Best's \"Hazzard\" co-stars paid tribute on social media.",
+        "reference": "James Best, who played the sheriff on \"The Dukes of Hazzard,\" died Monday at 88 . \"Hazzard\" ran from 1979 to 1985 and was among the most popular shows on TV ."
+      },
+      {
+        "summary": "Dr. Anthony Moschetto faces criminal solicitation, conspiracy, burglary, arson, criminal prescription sale and weapons charges. Two other men -- identified as accomplices -- have pleaded not guilty in Nassau County, New York, court. Authorities say they were involved in a plot to take out a rival doctor on Long Island. It's unclear whether James Chmela and James Kalamaras have retained an attorney.",
+        "reference": "A lawyer for Dr. Anthony Moschetto says the charges against him are baseless . Moschetto, 54, was arrested for selling drugs and weapons, prosecutors say . Authorities allege Moschetto hired accomplices to burn down the practice of former associate ."
+      }
+    ],
+    "output": {
+      "rouge-1": {
+        "recall": 58.19800000000001,
+        "precision": 36.675999999999995,
+        "f1": 44.991
+      },
+      "rouge-2": {
+        "recall": 28.305000000000003,
+        "precision": 17.718,
+        "f1": 21.792
+      },
+      "rouge-3": {
+        "recall": 21.072,
+        "precision": 13.07,
+        "f1": 16.133
+      },
+      "rouge-4": {
+        "recall": 14.815000000000001,
+        "precision": 9.091000000000001,
+        "f1": 11.268
+      },
+      "rouge-l": {
+        "recall": 54.864999999999995,
+        "precision": 34.549,
+        "f1": 42.393
+      }
+    }
+  }
+}

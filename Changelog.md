@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added an RNN-based truecaser from [Susanto et al. (2016)](https://aclanthology.org/D16-1225/) based on an implementation [here](https://github.com/mayhewsw/pytorch-truecaser).
 - Added the question-generation and question-answering models used in the [QAEval metric](https://arxiv.org/abs/2010.00490).
 See [here](models/deutsch2021/Readme.md).
+- Added [ROUGE](models/sacrerouge/Readme.md)
 
 ## [v0.0.1](https://github.com/danieldeutsch/repro/repro/tag/0.0.1) - 2021-07-22
 ### Added
