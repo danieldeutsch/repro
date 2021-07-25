@@ -40,7 +40,9 @@ def sentence_split(image: str, inputs: List[str]) -> List[List[str]]:
         container_output_file = f"{container_output_dir}/output.txt"
         write_to_jsonl_file(inputs, "text", host_input_file)
 
-        command = f"python sentence_split.py {container_input_file} {container_output_file}"
+        command = (
+            f"python sentence_split.py {container_input_file} {container_output_file}"
+        )
         os.makedirs(host_output_dir)
         run_command(image, command, volume_map=volume_map)
 
@@ -65,8 +67,12 @@ class ROUGE(Model):
         else:
             return summaries
 
-    def predict(self, summary: SummaryType, references: List[SummaryType], **kwargs) -> Dict[str, Dict[str, float]]:
-        return self.predict_batch([{"summary": summary, "references": references}], **kwargs)
+    def predict(
+        self, summary: SummaryType, references: List[SummaryType], **kwargs
+    ) -> Dict[str, Dict[str, float]]:
+        return self.predict_batch(
+            [{"summary": summary, "references": references}], **kwargs
+        )
 
     def predict_batch(
         self, inputs: List[Dict[str, Union[str, List[str]]]], **kwargs
@@ -77,7 +83,9 @@ class ROUGE(Model):
         references_list = [inp["references"] for inp in inputs]
 
         summaries = self._maybe_sentence_split(summaries)
-        references_list = [self._maybe_sentence_split(references) for references in references_list]
+        references_list = [
+            self._maybe_sentence_split(references) for references in references_list
+        ]
 
         with TemporaryDirectory() as temp:
             host_input_dir = f"{temp}/input"
@@ -91,16 +99,23 @@ class ROUGE(Model):
 
             os.makedirs(host_input_dir)
             with open(host_input_file, "w") as out:
-                for i, (summary, references) in enumerate(zip(summaries, references_list)):
+                for i, (summary, references) in enumerate(
+                    zip(summaries, references_list)
+                ):
                     summary = {"text": summary}
                     references = [{"text": reference} for reference in references]
-                    out.write(json.dumps({
-                        "instance_id": str(i),
-                        "summarizer_id": "repro",
-                        "summarizer_type": "peer",
-                        "summary": summary,
-                        "references": references
-                    }) + "\n")
+                    out.write(
+                        json.dumps(
+                            {
+                                "instance_id": str(i),
+                                "summarizer_id": "repro",
+                                "summarizer_type": "peer",
+                                "summary": summary,
+                                "references": references,
+                            }
+                        )
+                        + "\n"
+                    )
 
             host_output_file = f"{host_output_dir}/macro.json"
             container_output_file = f"{container_output_dir}/macro.json"
@@ -113,7 +128,9 @@ class ROUGE(Model):
                 f"  --micro-output-jsonl {container_output_dir}/micro.jsonl"
             )
             os.makedirs(host_output_dir)
-            run_command(self.image, command, volume_map=volume_map, network_disabled=True)
+            run_command(
+                self.image, command, volume_map=volume_map, network_disabled=True
+            )
 
             scores = json.load(open(host_output_file, "r"))
             return scores["metrics"]

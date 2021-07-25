@@ -15,12 +15,10 @@ def main(args):
                 data = json.loads(line)
                 text = data["text"]
                 sentences = [sentence for sentence in sent_tokenize(text)]
-                out.write(json.dumps({
-                    "sentences": sentences
-                }) + "\n")
+                out.write(json.dumps({"sentences": sentences}) + "\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     argp = argparse.ArgumentParser()
     argp.add_argument("input_file")
     argp.add_argument("output_file")

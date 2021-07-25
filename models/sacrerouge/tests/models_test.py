@@ -15,10 +15,7 @@ class TestSacreROUGE(unittest.TestCase):
         metric = ROUGE()
         examples = self.examples["rouge"]
         inputs = [
-            {
-                "summary": example["summary"],
-                "references": [example["reference"]]
-            }
+            {"summary": example["summary"], "references": [example["reference"]]}
             for example in examples["input"]
         ]
         expected = examples["output"]
