@@ -13,9 +13,11 @@ from repro.models import Model
 
 def predict_with_model(model: Model, instances: List[InstanceDict]) -> List:
     # Find the required arguments for the model's `predict` function
-    args = inspect.getfullargspec(model.predict)
-    required_args = set(args.args)
-    required_args.remove("self")
+    parameters = inspect.signature(model.predict).parameters
+    required_args = set()
+    for key, value in parameters.items():
+        if value.kind == inspect.Parameter.POSITIONAL_ONLY:
+            required_args.add(key)
 
     # Ensure all of the instances have at least those arguments
     for i, instance in enumerate(instances):
