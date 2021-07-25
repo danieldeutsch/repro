@@ -7,6 +7,9 @@ https://danieldeutsch.github.io/papers/nlp-oss2020/sacrerouge.pdf
 https://github.com/danieldeutsch/sacrerouge
 
 ## Available Models
+SacreROUGE contains implementations of various summarization evaluation metrics.
+Thus far, we have added wrappers around ROUGE.
+
 - ROUGE
   - Description: A wrapper around the original Perl implementation of ROUGE in the SacreROUGE library
   - Name: `sacrerouge-rouge`
