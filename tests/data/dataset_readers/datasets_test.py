@@ -58,3 +58,17 @@ class TestHuggingfaceDatasetsDatasetReader(unittest.TestCase):
         reader = HuggingfaceDatasetsDatasetReader("scientific_papers/pubmed", "test")
         instances = reader.read()
         assert len(instances) == 6658
+
+    @pytest.mark.skipif(
+        not hf_dataset_exists_locally("squad_v2", "squad_v2"),
+        reason="squad_v2 dataset does not exist",
+    )
+    def test_squad_v2(self):
+        # squad_v2 only has validation, not test
+        reader = HuggingfaceDatasetsDatasetReader("squad_v2", "validation")
+        instances = reader.read()
+        assert len(instances) == 11873
+
+        expected_instances = self.expected_output["squad_v2"]
+        for actual, expected in zip(instances, expected_instances):
+            assert actual == expected

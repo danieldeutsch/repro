@@ -26,6 +26,35 @@
       ]
     }
   ],
+  "squad_v2": [
+    {
+      "instance_id": "56ddde6b9a695914005b9628",
+      "context": "The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse (\"Norman\" comes from \"Norseman\") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.",
+      "question": "In what country is Normandy located?",
+      "answers": {
+        "text": ["France", "France", "France", "France"],
+        "answer_start": [159, 159, 159, 159]
+      }
+    },
+    {
+      "instance_id": "56ddde6b9a695914005b9629",
+      "context": "The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse (\"Norman\" comes from \"Norseman\") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.",
+      "question": "When were the Normans in Normandy?",
+      "answers": {
+        "text": ["10th and 11th centuries", "in the 10th and 11th centuries", "10th and 11th centuries", "10th and 11th centuries"],
+        "answer_start": [94, 87, 94, 94]
+      }
+    },
+    {
+      "instance_id": "56ddde6b9a695914005b962a",
+      "context": "The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse (\"Norman\" comes from \"Norseman\") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.",
+      "question": "From which countries did the Norse originate?",
+      "answers": {
+        "text": ["Denmark, Iceland and Norway", "Denmark, Iceland and Norway", "Denmark, Iceland and Norway", "Denmark, Iceland and Norway"],
+        "answer_start": [256, 256, 256, 256]
+      }
+    }
+  ],
   "xsum": [
     {
       "instance_id": "40453444",
