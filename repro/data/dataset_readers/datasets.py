@@ -51,7 +51,9 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
         if len(parts) == 1:
             name = self.dataset_name
             if name not in DEFAULT_VERSIONS:
-                logger.warning(f"Unknown default dataset version for dataset: {name}. Using `None`")
+                logger.warning(
+                    f"Unknown default dataset version for dataset: {name}. Using `None`"
+                )
                 version = None
             else:
                 version = DEFAULT_VERSIONS[name]
@@ -100,12 +102,14 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
                 )
         elif name == "squad_v2":
             for instance in dataset:
-                instances.append({
-                    "instance_id": instance["id"],
-                    "context": instance["context"],
-                    "question": instance["question"],
-                    "answers": instance["answers"]
-                })
+                instances.append(
+                    {
+                        "instance_id": instance["id"],
+                        "context": instance["context"],
+                        "question": instance["question"],
+                        "answers": instance["answers"],
+                    }
+                )
         elif name == "xsum":
             for instance in dataset:
                 # The documents include \n characters to separate sentences. The
