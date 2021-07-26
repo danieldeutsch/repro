@@ -5,8 +5,8 @@ from overrides import overrides
 from typing import Any, Dict, List, Union
 
 from repro.commands.subcommand import RootSubcommand
+from repro.commands.util import load_dataset_reader, load_model, load_output_writer
 from repro.common.logging import prepare_global_logging
-from repro.common.util import load_dataset_reader, load_model, load_output_writer
 from repro.data.dataset_readers import HuggingfaceDatasetsDatasetReader
 from repro.data.types import InstanceDict
 from repro.models import Model
