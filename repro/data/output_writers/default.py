@@ -21,11 +21,12 @@ class DefaultOutputWriter(OutputWriter):
         self,
         instances: List[InstanceDict],
         predictions: Any,
-        output_file: str,
+        output_file_or_dir: str,
         model_name: str,
         *args,
         **kwargs
     ) -> None:
+        output_file = output_file_or_dir
         dirname = os.path.dirname(output_file)
         if dirname:
             os.makedirs(dirname, exist_ok=True)

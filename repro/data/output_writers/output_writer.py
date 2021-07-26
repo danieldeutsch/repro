@@ -19,7 +19,7 @@ class OutputWriter(Registrable):
         self,
         instances: List[InstanceDict],
         predictions: Any,
-        output_file: str,
+        output_file_or_dir: str,
         *args,
         **kwargs,
     ) -> None:
@@ -33,18 +33,18 @@ class OutputWriter(Registrable):
                     f"Number of instances {len(instances)} is not equal to the number "
                     f"of predictions {len(predictions)}"
                 )
-        self._write(instances, predictions, output_file, *args, **kwargs)
+        self._write(instances, predictions, output_file_or_dir, *args, **kwargs)
 
     def _write(
         self,
         instances: List[InstanceDict],
         predictions: Any,
-        output_file: str,
+        output_file_or_dir: str,
         *args,
         **kwargs,
     ) -> None:
         """
-        Writes the results of the prediction to the `output_file`. The `instances` and `predictions`
+        Writes the results of the prediction to the `output_file_or_dir`. The `instances` and `predictions`
         are parallel lists such that `predictions[i]` is the prediction for `instances[i]`.
 
         Parameters
@@ -53,7 +53,7 @@ class OutputWriter(Registrable):
             The instances that were used to get the predictions
         predictions : Any
             The predictions to save
-        output_file : str
-            The output file
+        output_file_or_dir : str
+            The output file or directory
         """
         raise NotImplementedError
