@@ -42,7 +42,7 @@ class PredictSubcommand(RootSubcommand):
             "--model-name", required=True, help="The name of the model to predict with"
         )
         self.parser.add_argument(
-            "--model-args",
+            "--model-kwargs",
             required=False,
             help="A serialized json object which will be deserialized and passed as "
             "**kwargs to the model constructor",
@@ -69,7 +69,7 @@ class PredictSubcommand(RootSubcommand):
             help="The name of the dataset reader to use",
         )
         self.parser.add_argument(
-            "--dataset-reader-args",
+            "--dataset-reader-kwargs",
             required=False,
             help="A serialized json object which will be deserialized and passed as "
             "**kwargs to the dataset reader constructor",
@@ -86,7 +86,7 @@ class PredictSubcommand(RootSubcommand):
             help="The name of the class to use to write the predictions to the output file",
         )
         self.parser.add_argument(
-            "--output-writer-args",
+            "--output-writer-kwargs",
             required=False,
             help="A serialized json object which will be deserialized and passed as "
             "**kwargs to the output writer constructor",
@@ -126,11 +126,11 @@ class PredictSubcommand(RootSubcommand):
                 "or neither be set"
             )
 
-        # If --dataset-reader-args is passed, --dataset-reader must also be used
+        # If --dataset-reader-kwargs is passed, --dataset-reader must also be used
         if args.dataset_reader_args is not None:
             if args.dataset_reader is None:
                 raise ValueError(
-                    "Parameter --dataset-reader must be used if --dataset-reader-args "
+                    "Parameter --dataset-reader must be used if --dataset-reader-kwargs "
                     "is also used"
                 )
 
@@ -139,7 +139,7 @@ class PredictSubcommand(RootSubcommand):
         self._check_args(args)
         prepare_global_logging(args.log_file, args.silent)
 
-        model = load_model(args.model_name, args.model_args)
+        model = load_model(args.model_name, args.model_kwargs)
 
         if args.dataset_name is not None:
             dataset_reader = HuggingfaceDatasetsDatasetReader(
@@ -148,13 +148,13 @@ class PredictSubcommand(RootSubcommand):
             instances = dataset_reader.read()
         else:
             dataset_reader = load_dataset_reader(
-                args.dataset_reader, args.dataset_reader_args
+                args.dataset_reader, args.dataset_reader_kwargs
             )
             instances = dataset_reader.read(*args.input_files)
 
         predictions = predict_with_model(model, instances)
 
-        output_writer = load_output_writer(args.output_writer, args.output_writer_args)
+        output_writer = load_output_writer(args.output_writer, args.output_writer_kwargs)
         output_writer.write(
             instances, predictions, args.output_file, model_name=args.model_name
         )

@@ -4,7 +4,7 @@ DEVICE=1
 
 repro predict \
   --model-name lewis2020-bart \
-  --model-args '{"device": '${DEVICE}'}' \
+  --model-kwargs '{"device": '${DEVICE}'}' \
   --dataset-name cnn_dailymail/3.0.0 \
   --split test \
   --output-writer sacrerouge \
@@ -12,7 +12,7 @@ repro predict \
 
 repro predict \
   --model-name lewis2020-bart \
-  --model-args '{"device": '${DEVICE}', "model": "bart.large.xsum"}' \
+  --model-kwargs '{"device": '${DEVICE}', "model": "bart.large.xsum"}' \
   --dataset-name xsum/1.2.0 \
   --split test \
   --output-writer sacrerouge \
