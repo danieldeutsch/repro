@@ -17,7 +17,7 @@ class _Model(Model):
     def predict(self, input1: str, input2: int, **kwargs):
         return self.predict_batch([{"input1": input1, "input2": input2}], **kwargs)[0]
 
-    def predict_batch(self, inputs: List, mode : str = "reverse", **kwargs):
+    def predict_batch(self, inputs: List, mode: str = "reverse", **kwargs):
         if mode == "reverse":
             return [inp["input1"][::-1] + str(inp["input2"]) for inp in inputs]
         elif mode == "concatenate":
@@ -58,8 +58,12 @@ class TestPredict(unittest.TestCase):
             {"input1": "ghi", "input2": 3, "input3": "extra"},
         ]
 
-        predictions = predict_with_model(model, instances, kwargs={"mode": "concatenate"})
+        predictions = predict_with_model(
+            model, instances, kwargs={"mode": "concatenate"}
+        )
         assert predictions == ["abc1", "def2", "ghi3"]
 
-        predictions = predict_with_model(model, instances, kwargs='{"mode": "concatenate"}')
+        predictions = predict_with_model(
+            model, instances, kwargs='{"mode": "concatenate"}'
+        )
         assert predictions == ["abc1", "def2", "ghi3"]

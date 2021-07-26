@@ -12,7 +12,11 @@ from repro.data.types import InstanceDict
 from repro.models import Model
 
 
-def predict_with_model(model: Model, instances: List[InstanceDict], kwargs: Union[str, Dict[str, Any]] = None) -> Any:
+def predict_with_model(
+    model: Model,
+    instances: List[InstanceDict],
+    kwargs: Union[str, Dict[str, Any]] = None,
+) -> Any:
     # Deserialize kwargs if necessary
     kwargs = kwargs or {}
     if isinstance(kwargs, str):
@@ -61,7 +65,7 @@ class PredictSubcommand(RootSubcommand):
             "--predict-kwargs",
             required=False,
             help="A serialized json object which will be deserialized and passed as "
-            "**kwargs to the `Model.predict_batch` function"
+            "**kwargs to the `Model.predict_batch` function",
         )
         self.parser.add_argument(
             "--dataset-name",
