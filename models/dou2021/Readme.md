@@ -25,6 +25,7 @@ The authors have released their BART-based model that uses sentence guidance, do
   - Description: A BART-based model trained with sentence supervision.
   This is the same pre-trained model as the oracle sentence-guided supervision, but it instead uses [`BertSumExt`](../liu2019/Readme.md) to extract the sentence guidance.
   Running this model also requires having the `BertSumExt` model setup with the model pre-trained on CNN/DailyMail.
+  We caution that the [`BertSumExt`](../liu2019/Readme.md) currently does not reproduce the results in the respective paper.
   - Name: `dou2021-sentence-gsum`
   - Usage:
     ```python
@@ -56,15 +57,15 @@ pytest models/dou2021/tests
 - [ ] Correctness unit tests pass  
 - [x] Model runs on full test dataset  
 See [here](experiments/reproduce-results/Readme.md)
-- [ ] Predictions approximately replicate results reported in the paper  
+- [x] Predictions approximately replicate results reported in the paper  
 The MatchSum-guided BART-based model was the only BART-based result reported in the paper, and it does come sufficiently close.
 
-||R1|R2|RL|
-|-|-|-|-|
-|Reported|45.94|22.32|42.48|
-|Ours|45.80|22.18|42.44|
+  ||R1|R2|RL|
+  |-|-|-|-|
+  |Reported|45.94|22.32|42.48|
+  |Ours|45.80|22.18|42.44|
 
-See [here](experiments/reproduce-results/Readme.md) for more details about the different model variants.
+  See [here](experiments/reproduce-results/Readme.md) for more details about the different model variants.
   
 - [ ] Predictions exactly replicate results reported in the paper
 
