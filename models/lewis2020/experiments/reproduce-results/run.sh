@@ -8,7 +8,7 @@ repro predict \
   --dataset-name cnn_dailymail/3.0.0 \
   --split test \
   --output-writer sacrerouge \
-  --output-file ${DIR}/output/cnn_dailymail/predictions.jsonl
+  --output ${DIR}/output/cnn_dailymail/predictions.jsonl
 
 repro predict \
   --model-name lewis2020-bart \
@@ -16,7 +16,7 @@ repro predict \
   --dataset-name xsum/1.2.0 \
   --split test \
   --output-writer sacrerouge \
-  --output-file ${DIR}/output/xsum/predictions.jsonl
+  --output ${DIR}/output/xsum/predictions.jsonl
 
 for dataset in "cnn_dailymail" "xsum"; do
   if [ -f ${DIR}/output/${dataset}/predictions.jsonl ]; then
@@ -25,6 +25,6 @@ for dataset in "cnn_dailymail" "xsum"; do
       --input-files ${DIR}/output/${dataset}/predictions.jsonl \
       --dataset-reader sacrerouge \
       --output-writer metrics \
-      --output-file ${DIR}/output/${dataset}/rouge.json
+      --output ${DIR}/output/${dataset}/rouge.json
   fi
 done

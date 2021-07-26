@@ -95,9 +95,9 @@ class PredictSubcommand(RootSubcommand):
             "**kwargs to the dataset reader constructor",
         )
         self.parser.add_argument(
-            "--output-file",
+            "--output",
             required=True,
-            help="The name of the output jsonl file that the model predictions will be written to",
+            help="The name of the output file or directory that the model predictions will be written to",
         )
         self.parser.add_argument(
             "--output-writer",
@@ -178,5 +178,5 @@ class PredictSubcommand(RootSubcommand):
             args.output_writer, args.output_writer_kwargs
         )
         output_writer.write(
-            instances, predictions, args.output_file, model_name=args.model_name
+            instances, predictions, args.output, model_name=args.model_name
         )
