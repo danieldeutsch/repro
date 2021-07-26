@@ -5,13 +5,39 @@ from repro.data.types import InstanceDict
 
 
 class OutputWriter(Registrable):
+    def __init__(self, prediction_per_instance: bool) -> None:
+        """
+        Parameters
+        ----------
+        prediction_per_instance : bool
+            If `True`, indicates there should be exactly one prediction per instances, and
+            the `write()` method will verify this is the case. If `False`, no checking is done.
+        """
+        self.prediction_per_instance = prediction_per_instance
+
     def write(
         self,
         instances: List[InstanceDict],
         predictions: List[Any],
         output_file: str,
         *args,
-        **kwargs
+        **kwargs,
+    ) -> None:
+        if self.prediction_per_instance:
+            if len(instances) != len(predictions):
+                raise Exception(
+                    f"Number of instances {len(instances)} is not equal to the number "
+                    f"of predictions {len(predictions)}"
+                )
+        self._write(instances, predictions, output_file, *args, **kwargs)
+
+    def _write(
+        self,
+        instances: List[InstanceDict],
+        predictions: List[Any],
+        output_file: str,
+        *args,
+        **kwargs,
     ) -> None:
         """
         Writes the results of the prediction to the `output_file`. The `instances` and `predictions`
