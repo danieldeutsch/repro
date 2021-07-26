@@ -54,14 +54,19 @@ pytest models/dou2021/tests
 ## Status
 - [x] Regression unit tests pass  
 - [ ] Correctness unit tests pass  
-- [ ] Model runs on full test dataset  
+- [x] Model runs on full test dataset  
+See [here](experiments/reproduce-results/Readme.md)
 - [ ] Predictions approximately replicate results reported in the paper  
-- [ ] Predictions exactly replicate results reported in the paper  
+The MatchSum-guided BART-based model was the only BART-based result reported in the paper, and it does come sufficiently close.
+
+||R1|R2|RL|
+|-|-|-|-|
+|Reported|45.94|22.32|42.48|
+|Ours|45.80|22.18|42.44|
+
+See [here](experiments/reproduce-results/Readme.md) for more details about the different model variants.
+  
+- [ ] Predictions exactly replicate results reported in the paper
 
 ## Misc
 See these [notes](Notes.md) if this code is extended to include training.
-
-## Todo
-- Remove Java/CoreNLP dependencies
-- Try to repeat but with sentence breaks
-- Extend evaluation to include (1) Original dataset with both models, (2) Oracle guidance, (3) MatchSum guidance

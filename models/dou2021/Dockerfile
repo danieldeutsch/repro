@@ -2,20 +2,6 @@ FROM pure/python:3.7-cuda10.0-base
 
 WORKDIR /app
 
-# Install OpenJDK-8, with a workaround via https://linuxize.com/post/install-java-on-debian-10/
-RUN apt-get update && \
-    apt-get install -y apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common && \
-    wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - && \
-    add-apt-repository -y https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ && \
-    apt update && \
-    apt install -y adoptopenjdk-8-hotspot
-
-# Download CoreNLP, required for preprocessing
-RUN wget http://nlp.stanford.edu/software/stanford-corenlp-full-2016-10-31.zip
-RUN unzip stanford-corenlp-full-2016-10-31.zip
-RUN rm stanford-corenlp-full-2016-10-31.zip
-ENV CLASSPATH=stanford-corenlp-full-2016-10-31/stanford-corenlp-3.7.0.jar
-
 # Download the pretrained models
 RUN pip install --no-cache-dir gdown
 COPY scripts/download-models.sh download-models.sh
