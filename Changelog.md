@@ -22,7 +22,6 @@ See [here](models/deutsch2021/Readme.md).
 ### Changed
 - Renamed the `--model-args`, `--dataset-reader-args`, and `--output-write-args` `predict` arguments to `--model-kwargs`, `--dataset-reader-kwargs`, and `--output-write-kwargs`.
 - Renamed the `--output-file` argument in `predict` to `--output` to allow for output files or directories.
->>>>>>> master
 
 ## [v0.0.1](https://github.com/danieldeutsch/repro/repro/tag/0.0.1) - 2021-07-22
 ### Added
