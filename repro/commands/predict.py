@@ -1,7 +1,8 @@
 import argparse
 import inspect
+import json
 from overrides import overrides
-from typing import Any, List
+from typing import Any, Dict, List, Union
 
 from repro.commands.subcommand import RootSubcommand
 from repro.common.logging import prepare_global_logging
@@ -11,7 +12,16 @@ from repro.data.types import InstanceDict
 from repro.models import Model
 
 
-def predict_with_model(model: Model, instances: List[InstanceDict]) -> Any:
+def predict_with_model(model: Model, instances: List[InstanceDict], kwargs: Union[str, Dict[str, Any]] = None) -> Any:
+    # Deserialize kwargs if necessary
+    kwargs = kwargs or {}
+    if isinstance(kwargs, str):
+        kwargs = json.loads(kwargs)
+    if not isinstance(kwargs, dict):
+        raise ValueError(
+            f"`kwargs` is expected to be a dictionary or json-serialized dictionary: {kwargs}"
+        )
+
     # Find the required arguments for the model's `predict` function
     parameters = inspect.signature(model.predict).parameters
     required_args = set()
@@ -26,7 +36,7 @@ def predict_with_model(model: Model, instances: List[InstanceDict]) -> Any:
                 raise Exception(f"Instance {i} missing required argument {arg}")
 
     # Pass all of the instances, including with other, non-required arguments
-    predictions = model.predict_batch(instances)
+    predictions = model.predict_batch(instances, **kwargs)
     return predictions
 
 
@@ -46,6 +56,12 @@ class PredictSubcommand(RootSubcommand):
             required=False,
             help="A serialized json object which will be deserialized and passed as "
             "**kwargs to the model constructor",
+        )
+        self.parser.add_argument(
+            "--predict-kwargs",
+            required=False,
+            help="A serialized json object which will be deserialized and passed as "
+            "**kwargs to the `Model.predict_batch` function"
         )
         self.parser.add_argument(
             "--dataset-name",
@@ -152,7 +168,7 @@ class PredictSubcommand(RootSubcommand):
             )
             instances = dataset_reader.read(*args.input_files)
 
-        predictions = predict_with_model(model, instances)
+        predictions = predict_with_model(model, instances, args.predict_kwargs)
 
         output_writer = load_output_writer(
             args.output_writer, args.output_writer_kwargs
