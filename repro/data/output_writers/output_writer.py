@@ -21,7 +21,7 @@ class OutputWriter(Registrable):
         predictions: List[Any],
         output_file: str,
         *args,
-        **kwargs
+        **kwargs,
     ) -> None:
         if self.prediction_per_instance:
             if len(instances) != len(predictions):
@@ -37,7 +37,7 @@ class OutputWriter(Registrable):
         predictions: List[Any],
         output_file: str,
         *args,
-        **kwargs
+        **kwargs,
     ) -> None:
         """
         Writes the results of the prediction to the `output_file`. The `instances` and `predictions`
