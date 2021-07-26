@@ -67,7 +67,8 @@ pytest models/deutsch2021/tests
 The tests were taken from the `qaeval` repository. See [here](https://github.com/danieldeutsch/repro/actions/runs/1063451340).
 - [ ] Model runs on full test dataset  
 Not tested
-- [ ] Predictions approximately replicate results reported in the paper  
-Not tested
+- [x] Predictions approximately replicate results reported in the paper  
+The question-answering model replicates the expected results (see [here](experiments/reproduce-results/Readme.md)).
+The question-generation model was not quantitatively evaluated in the paper.
 - [ ] Predictions exactly replicate results reported in the paper  
 Not tested

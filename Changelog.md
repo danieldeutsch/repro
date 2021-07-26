@@ -16,6 +16,7 @@ See [here](models/deutsch2021/Readme.md).
 - Added `--predict-kwargs` arguments to the `predict` command
 - Added support for running and writing evaluation metrics, for instance, ROUGE.
 - Added a jsonl dataset reader (`JSONLinesDatasetReader`)
+- Added the `SQuADv2Evaluation` metric
 
 ### Changed
 - Renamed the `--model-args`, `--dataset-reader-args`, and `--output-write-args` `predict` arguments to `--model-kwargs`, `--dataset-reader-kwargs`, and `--output-write-kwargs`.
