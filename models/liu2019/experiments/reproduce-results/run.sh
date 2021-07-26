@@ -37,8 +37,11 @@ repro predict \
 for model in "transformerabs" "bertsumext" "bertsumextabs"; do
   for dataset in "cnn_dailymail" "xsum"; do
     if [ -f ${DIR}/output/${dataset}/${model}/predictions.jsonl ]; then
-      python models/sacrerouge/scripts/calculate_rouge.py \
-        --input-file ${DIR}/output/${dataset}/${model}/predictions.jsonl \
+      repro predict \
+        --model-name sacrerouge-rouge \
+        --input-files ${DIR}/output/${dataset}/${model}/predictions.jsonl \
+        --dataset-reader sacrerouge \
+        --output-writer metrics \
         --output-file ${DIR}/output/${dataset}/${model}/rouge.json
     fi
   done

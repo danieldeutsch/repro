@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 See [here](models/deutsch2021/Readme.md).
 - Added [ROUGE](models/sacrerouge/Readme.md)
 - Added `--predict-kwargs` arguments to the `predict` command
+- Added support for running and writing evaluation metrics, for instance, ROUGE.
 
 ### Changed
 - Renamed the `--model-args`, `--dataset-reader-args`, and `--output-write-args` `predict` arguments to `--model-kwargs`, `--dataset-reader-kwargs`, and `--output-write-kwargs`.

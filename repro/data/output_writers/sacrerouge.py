@@ -23,7 +23,7 @@ class SacreROUGEOutputWriter(OutputWriter):
     def _write(
         self,
         instances: List[InstanceDict],
-        predictions: List[Any],
+        predictions: Any,
         output_file: str,
         model_name: str,
         *args,
