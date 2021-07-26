@@ -22,39 +22,39 @@ for model in "dou2021-oracle-sentence-gsum" "dou2021-sentence-gsum"; do
   # Run on the standard version of the dataset
   repro predict \
     --model-name ${model} \
-    --model-args '{"device": '${DEVICE}'}' \
+    --model-kwargs '{"device": '${DEVICE}'}' \
     --dataset-name cnn_dailymail/3.0.0 \
     --split test \
     --output-writer sacrerouge \
-    --output-file ${DIR}/output/original/${model}/predictions.jsonl
+    --output ${DIR}/output/original/${model}/predictions.jsonl
 
   # Run on their preprocessed version
   repro predict \
     --model-name ${model} \
-    --model-args '{"device": '${DEVICE}'}' \
+    --model-kwargs '{"device": '${DEVICE}'}' \
     --dataset-reader dou2021 \
     --input-files ${DIR}/output/data/input/test.source ${DIR}/output/data/input/test.target \
     --output-writer sacrerouge \
-    --output-file ${DIR}/output/preprocessed/${model}/predictions.jsonl
+    --output ${DIR}/output/preprocessed/${model}/predictions.jsonl
 
   if [ "${model}" = "dou2021-oracle-sentence-gsum" ]; then
     # Run with their oracle guidance
     repro predict \
       --model-name ${model} \
-      --model-args '{"device": '${DEVICE}'}' \
+      --model-kwargs '{"device": '${DEVICE}'}' \
       --dataset-reader dou2021 \
       --input-files ${DIR}/output/data/input/test.source ${DIR}/output/data/input/test.target ${DIR}/output/data/oracle/test.oracle \
       --output-writer sacrerouge \
-      --output-file ${DIR}/output/oracle/${model}/predictions.jsonl
+      --output ${DIR}/output/oracle/${model}/predictions.jsonl
 
     # Run with their MatchSum guidance
     repro predict \
       --model-name ${model} \
-      --model-args '{"device": '${DEVICE}'}' \
+      --model-kwargs '{"device": '${DEVICE}'}' \
       --dataset-reader dou2021 \
       --input-files ${DIR}/output/data/input/test.source ${DIR}/output/data/input/test.target ${DIR}/output/data/oracle/test.matchsum \
       --output-writer sacrerouge \
-      --output-file ${DIR}/output/matchsum/${model}/predictions.jsonl
+      --output ${DIR}/output/matchsum/${model}/predictions.jsonl
   fi
 
   # Evaluate with ROUGE
@@ -62,7 +62,7 @@ for model in "dou2021-oracle-sentence-gsum" "dou2021-sentence-gsum"; do
     if [ -f ${DIR}/output/${version}/${model}/predictions.jsonl ]; then
       python models/sacrerouge/scripts/calculate_rouge.py \
         --input-file ${DIR}/output/${version}/${model}/predictions.jsonl \
-        --output-file ${DIR}/output/${version}/${model}/rouge.json
+        --output ${DIR}/output/${version}/${model}/rouge.json
     fi
   done
 done
