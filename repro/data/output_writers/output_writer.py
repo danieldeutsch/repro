@@ -18,12 +18,16 @@ class OutputWriter(Registrable):
     def write(
         self,
         instances: List[InstanceDict],
-        predictions: List[Any],
+        predictions: Any,
         output_file: str,
         *args,
         **kwargs,
     ) -> None:
         if self.prediction_per_instance:
+            if not isinstance(predictions, list):
+                raise Exception(
+                    f"`predictions` is expected to be a list if `self.prediction_per_instance` is `True`"
+                )
             if len(instances) != len(predictions):
                 raise Exception(
                     f"Number of instances {len(instances)} is not equal to the number "
@@ -34,7 +38,7 @@ class OutputWriter(Registrable):
     def _write(
         self,
         instances: List[InstanceDict],
-        predictions: List[Any],
+        predictions: Any,
         output_file: str,
         *args,
         **kwargs,
@@ -47,7 +51,7 @@ class OutputWriter(Registrable):
         ----------
         instances : List[InstanceDict]
             The instances that were used to get the predictions
-        predictions : List[Any]
+        predictions : Any
             The predictions to save
         output_file : str
             The output file

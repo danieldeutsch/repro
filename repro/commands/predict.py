@@ -147,7 +147,7 @@ class PredictSubcommand(RootSubcommand):
             )
 
         # If --dataset-reader-kwargs is passed, --dataset-reader must also be used
-        if args.dataset_reader_args is not None:
+        if args.dataset_reader_kwargs is not None:
             if args.dataset_reader is None:
                 raise ValueError(
                     "Parameter --dataset-reader must be used if --dataset-reader-kwargs "
