@@ -4,7 +4,7 @@ DEVICE=1
 
 repro predict \
   --model-name liu2019-transformerabs \
-  --model-args '{"device": '${DEVICE}'}' \
+  --model-kwargs '{"device": '${DEVICE}'}' \
   --dataset-name cnn_dailymail/3.0.0 \
   --split test \
   --output-writer sacrerouge \
@@ -12,7 +12,7 @@ repro predict \
 
 repro predict \
   --model-name liu2019-bertsumext \
-  --model-args '{"device": '${DEVICE}'}' \
+  --model-kwargs '{"device": '${DEVICE}'}' \
   --dataset-name cnn_dailymail/3.0.0 \
   --split test \
   --output-writer sacrerouge \
@@ -20,7 +20,7 @@ repro predict \
 
 repro predict \
   --model-name liu2019-bertsumextabs \
-  --model-args '{"device": '${DEVICE}'}' \
+  --model-kwargs '{"device": '${DEVICE}'}' \
   --dataset-name cnn_dailymail/3.0.0 \
   --split test \
   --output-writer sacrerouge \
@@ -28,7 +28,7 @@ repro predict \
 
 repro predict \
   --model-name liu2019-bertsumextabs \
-  --model-args '{"device": '${DEVICE}', "model": "bertsumextabs_xsum.pt"}' \
+  --model-kwargs '{"device": '${DEVICE}', "model": "bertsumextabs_xsum.pt"}' \
   --dataset-name xsum/1.2.0 \
   --split test \
   --output-writer sacrerouge \

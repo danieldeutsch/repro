@@ -32,22 +32,22 @@ def flatten(text: Union[str, List[str]], separator: str = None) -> str:
 
 
 def _load_type(
-    base_type: Type[T], name: str, args: Union[str, Dict[str, Any]] = None
+    base_type: Type[T], name: str, kwargs: Union[str, Dict[str, Any]] = None
 ) -> T:
-    args = args or {}
-    if isinstance(args, str):
-        args = json.loads(args)
-    if not isinstance(args, dict):
+    kwargs = kwargs or {}
+    if isinstance(kwargs, str):
+        kwargs = json.loads(kwargs)
+    if not isinstance(kwargs, dict):
         raise ValueError(
-            f"`args` is expected to be a dictionary or json-serialized dictionary: {args}"
+            f"`kwargs` is expected to be a dictionary or json-serialized dictionary: {kwargs}"
         )
 
     type_, _ = Registrable._registry[base_type][name]
-    obj = type_(**args)
+    obj = type_(**kwargs)
     return obj
 
 
-def load_model(name: str, args: Union[str, Dict[str, Any]] = None) -> Model:
+def load_model(name: str, kwargs: Union[str, Dict[str, Any]] = None) -> Model:
     """
     Loads a `Model` given the registered `name` of the model and any arguments
     which will be passed to the constructor as kwargs. `args` should be a dictionary
@@ -57,7 +57,7 @@ def load_model(name: str, args: Union[str, Dict[str, Any]] = None) -> Model:
     ----------
     name : str
         The name of the model to load
-    args : Union[str, Dict[str, Any]]
+    kwargs : Union[str, Dict[str, Any]]
         The kwargs to be passed to the model's constructor
 
     Returns
@@ -65,11 +65,11 @@ def load_model(name: str, args: Union[str, Dict[str, Any]] = None) -> Model:
     Model
         The model
     """
-    return _load_type(Model, name, args)
+    return _load_type(Model, name, kwargs)
 
 
 def load_dataset_reader(
-    name: str, args: Union[str, Dict[str, Any]] = None
+    name: str, kwargs: Union[str, Dict[str, Any]] = None
 ) -> DatasetReader:
     """
     Loads a `DatasetReader` given the registered `name` of the reader and any arguments
@@ -80,7 +80,7 @@ def load_dataset_reader(
     ----------
     name : str
         The name of the dataset reader to load
-    args : Union[str, Dict[str, Any]]
+    kwargs : Union[str, Dict[str, Any]]
         The kwargs to be passed to the dataset reader's constructor
 
     Returns
@@ -88,11 +88,11 @@ def load_dataset_reader(
     DatasetReader
         The dataset reader
     """
-    return _load_type(DatasetReader, name, args)
+    return _load_type(DatasetReader, name, kwargs)
 
 
 def load_output_writer(
-    name: str, args: Union[str, Dict[str, Any]] = None
+    name: str, kwargs: Union[str, Dict[str, Any]] = None
 ) -> DatasetReader:
     """
     Loads an `OutputWriter` given the registered `name` of the reader and any arguments
@@ -103,7 +103,7 @@ def load_output_writer(
     ----------
     name : str
         The name of the output writer to load
-    args : Union[str, Dict[str, Any]]
+    kwargs : Union[str, Dict[str, Any]]
         The kwargs to be passed to the output writer's constructor
 
     Returns
@@ -111,4 +111,4 @@ def load_output_writer(
     OutputWriter
         The output writer
     """
-    return _load_type(OutputWriter, name, args)
+    return _load_type(OutputWriter, name, kwargs)
