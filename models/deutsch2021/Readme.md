@@ -68,6 +68,7 @@ The tests were taken from the `qaeval` repository. See [here](https://github.com
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  
-Not tested
+The question-answering model replicates the expected results (see [here](experiments/reproduce-results/Readme.md)).
+The question-generation model was not quantitatively evaluated in the paper.
 - [ ] Predictions exactly replicate results reported in the paper  
 Not tested
