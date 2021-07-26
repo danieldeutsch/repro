@@ -16,8 +16,11 @@ class SacreROUGEOutputWriter(OutputWriter):
     be included as well
     """
 
+    def __init__(self):
+        super().__init__(True)
+
     @overrides
-    def write(
+    def _write(
         self,
         instances: List[InstanceDict],
         predictions: List[Any],

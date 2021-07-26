@@ -1,7 +1,7 @@
 import argparse
 import inspect
 from overrides import overrides
-from typing import List
+from typing import Any, List
 
 from repro.commands.subcommand import RootSubcommand
 from repro.common.logging import prepare_global_logging
@@ -11,7 +11,7 @@ from repro.data.types import InstanceDict
 from repro.models import Model
 
 
-def predict_with_model(model: Model, instances: List[InstanceDict]) -> List:
+def predict_with_model(model: Model, instances: List[InstanceDict]) -> Any:
     # Find the required arguments for the model's `predict` function
     parameters = inspect.signature(model.predict).parameters
     required_args = set()
@@ -27,10 +27,6 @@ def predict_with_model(model: Model, instances: List[InstanceDict]) -> List:
 
     # Pass all of the instances, including with other, non-required arguments
     predictions = model.predict_batch(instances)
-    if len(predictions) != len(instances):
-        raise Exception(
-            f"Model returned {len(predictions)} predictions for {len(instances)} instances"
-        )
     return predictions
 
 

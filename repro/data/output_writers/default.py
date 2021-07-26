@@ -13,8 +13,11 @@ class DefaultOutputWriter(OutputWriter):
     Writes a jsonl file with keys for the `instance_id`, `model_id`, and `prediction`.
     """
 
+    def __init__(self):
+        super().__init__(True)
+
     @overrides
-    def write(
+    def _write(
         self,
         instances: List[InstanceDict],
         predictions: List[Any],
