@@ -7,14 +7,15 @@ from repro.data.output_writers import OutputWriter
 from repro.data.types import InstanceDict
 
 
-@OutputWriter.register("default")
-class DefaultOutputWriter(OutputWriter):
+@OutputWriter.register("metrics")
+class MetricsOutputWriter(OutputWriter):
     """
-    Writes a jsonl file with keys for the `instance_id`, `model_id`, and `prediction`.
+    Writes the json-serialized `predictions`, which are expected to be
+    evaluation metrics.
     """
 
     def __init__(self):
-        super().__init__(True)
+        super().__init__(False)
 
     @overrides
     def _write(
@@ -32,14 +33,4 @@ class DefaultOutputWriter(OutputWriter):
             os.makedirs(dirname, exist_ok=True)
 
         with open(output_file, "w") as out:
-            for instance, prediction in zip(instances, predictions):
-                out.write(
-                    json.dumps(
-                        {
-                            "instance_id": instance["instance_id"],
-                            "model_id": model_name,
-                            "prediction": prediction,
-                        }
-                    )
-                    + "\n"
-                )
+            out.write(json.dumps(predictions, indent=2))

@@ -1,7 +1,8 @@
 import argparse
 import inspect
+import json
 from overrides import overrides
-from typing import List
+from typing import Any, Dict, List, Union
 
 from repro.commands.subcommand import RootSubcommand
 from repro.common.logging import prepare_global_logging
@@ -11,7 +12,20 @@ from repro.data.types import InstanceDict
 from repro.models import Model
 
 
-def predict_with_model(model: Model, instances: List[InstanceDict]) -> List:
+def predict_with_model(
+    model: Model,
+    instances: List[InstanceDict],
+    kwargs: Union[str, Dict[str, Any]] = None,
+) -> Any:
+    # Deserialize kwargs if necessary
+    kwargs = kwargs or {}
+    if isinstance(kwargs, str):
+        kwargs = json.loads(kwargs)
+    if not isinstance(kwargs, dict):
+        raise ValueError(
+            f"`kwargs` is expected to be a dictionary or json-serialized dictionary: {kwargs}"
+        )
+
     # Find the required arguments for the model's `predict` function
     parameters = inspect.signature(model.predict).parameters
     required_args = set()
@@ -26,11 +40,7 @@ def predict_with_model(model: Model, instances: List[InstanceDict]) -> List:
                 raise Exception(f"Instance {i} missing required argument {arg}")
 
     # Pass all of the instances, including with other, non-required arguments
-    predictions = model.predict_batch(instances)
-    if len(predictions) != len(instances):
-        raise Exception(
-            f"Model returned {len(predictions)} predictions for {len(instances)} instances"
-        )
+    predictions = model.predict_batch(instances, **kwargs)
     return predictions
 
 
@@ -46,10 +56,16 @@ class PredictSubcommand(RootSubcommand):
             "--model-name", required=True, help="The name of the model to predict with"
         )
         self.parser.add_argument(
-            "--model-args",
+            "--model-kwargs",
             required=False,
             help="A serialized json object which will be deserialized and passed as "
             "**kwargs to the model constructor",
+        )
+        self.parser.add_argument(
+            "--predict-kwargs",
+            required=False,
+            help="A serialized json object which will be deserialized and passed as "
+            "**kwargs to the `Model.predict_batch` function",
         )
         self.parser.add_argument(
             "--dataset-name",
@@ -73,15 +89,15 @@ class PredictSubcommand(RootSubcommand):
             help="The name of the dataset reader to use",
         )
         self.parser.add_argument(
-            "--dataset-reader-args",
+            "--dataset-reader-kwargs",
             required=False,
             help="A serialized json object which will be deserialized and passed as "
             "**kwargs to the dataset reader constructor",
         )
         self.parser.add_argument(
-            "--output-file",
+            "--output",
             required=True,
-            help="The name of the output jsonl file that the model predictions will be written to",
+            help="The name of the output file or directory that the model predictions will be written to",
         )
         self.parser.add_argument(
             "--output-writer",
@@ -90,7 +106,7 @@ class PredictSubcommand(RootSubcommand):
             help="The name of the class to use to write the predictions to the output file",
         )
         self.parser.add_argument(
-            "--output-writer-args",
+            "--output-writer-kwargs",
             required=False,
             help="A serialized json object which will be deserialized and passed as "
             "**kwargs to the output writer constructor",
@@ -130,11 +146,11 @@ class PredictSubcommand(RootSubcommand):
                 "or neither be set"
             )
 
-        # If --dataset-reader-args is passed, --dataset-reader must also be used
-        if args.dataset_reader_args is not None:
+        # If --dataset-reader-kwargs is passed, --dataset-reader must also be used
+        if args.dataset_reader_kwargs is not None:
             if args.dataset_reader is None:
                 raise ValueError(
-                    "Parameter --dataset-reader must be used if --dataset-reader-args "
+                    "Parameter --dataset-reader must be used if --dataset-reader-kwargs "
                     "is also used"
                 )
 
@@ -143,7 +159,7 @@ class PredictSubcommand(RootSubcommand):
         self._check_args(args)
         prepare_global_logging(args.log_file, args.silent)
 
-        model = load_model(args.model_name, args.model_args)
+        model = load_model(args.model_name, args.model_kwargs)
 
         if args.dataset_name is not None:
             dataset_reader = HuggingfaceDatasetsDatasetReader(
@@ -152,13 +168,15 @@ class PredictSubcommand(RootSubcommand):
             instances = dataset_reader.read()
         else:
             dataset_reader = load_dataset_reader(
-                args.dataset_reader, args.dataset_reader_args
+                args.dataset_reader, args.dataset_reader_kwargs
             )
             instances = dataset_reader.read(*args.input_files)
 
-        predictions = predict_with_model(model, instances)
+        predictions = predict_with_model(model, instances, args.predict_kwargs)
 
-        output_writer = load_output_writer(args.output_writer, args.output_writer_args)
+        output_writer = load_output_writer(
+            args.output_writer, args.output_writer_kwargs
+        )
         output_writer.write(
-            instances, predictions, args.output_file, model_name=args.model_name
+            instances, predictions, args.output, model_name=args.model_name
         )

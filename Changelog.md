@@ -13,7 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the question-generation and question-answering models used in the [QAEval metric](https://arxiv.org/abs/2010.00490).
 See [here](models/deutsch2021/Readme.md).
 - Added [ROUGE](models/sacrerouge/Readme.md)
+- Added `--predict-kwargs` arguments to the `predict` command
+- Added support for running and writing evaluation metrics, for instance, ROUGE.
+- Added a jsonl dataset reader (`JSONLinesDatasetReader`)
+- Added the `SQuADv2Evaluation` metric
 - Added the [sentence-guided models](models/dou2021/Readme.md) from [Dou et al. (2021)](https://arxiv.org/abs/2010.08014).
+
+### Changed
+- Renamed the `--model-args`, `--dataset-reader-args`, and `--output-write-args` `predict` arguments to `--model-kwargs`, `--dataset-reader-kwargs`, and `--output-write-kwargs`.
+- Renamed the `--output-file` argument in `predict` to `--output` to allow for output files or directories.
+>>>>>>> master
 
 ## [v0.0.1](https://github.com/danieldeutsch/repro/repro/tag/0.0.1) - 2021-07-22
 ### Added
