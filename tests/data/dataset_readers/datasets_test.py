@@ -61,7 +61,7 @@ class TestHuggingfaceDatasetsDatasetReader(unittest.TestCase):
 
     @pytest.mark.skipif(
         not hf_dataset_exists_locally("squad_v2", "squad_v2"),
-        reason="squad_v2 dataset does not exist"
+        reason="squad_v2 dataset does not exist",
     )
     def test_squad_v2(self):
         # squad_v2 only has validation, not test
