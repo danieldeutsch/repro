@@ -13,8 +13,9 @@ class DefaultOutputWriter(OutputWriter):
     Writes a jsonl file with keys for the `instance_id`, `model_id`, and `prediction`.
     """
 
-    def __init__(self):
+    def __init__(self, include_input: bool = False):
         super().__init__(True)
+        self.include_input = include_input
 
     @overrides
     def _write(
@@ -33,13 +34,12 @@ class DefaultOutputWriter(OutputWriter):
 
         with open(output_file, "w") as out:
             for instance, prediction in zip(instances, predictions):
-                out.write(
-                    json.dumps(
-                        {
-                            "instance_id": instance["instance_id"],
-                            "model_id": model_name,
-                            "prediction": prediction,
-                        }
-                    )
-                    + "\n"
-                )
+                data = {
+                    "instance_id": instance["instance_id"],
+                    "model_id": model_name,
+                }
+                if self.include_input:
+                    data["input"] = instance
+                data["prediction"] = prediction
+
+                out.write(json.dumps(data) + "\n")

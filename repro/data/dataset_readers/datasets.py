@@ -80,6 +80,20 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
                         "reference": reference,
                     }
                 )
+        elif name == "mocha":
+            for instance in dataset:
+                instances.append(
+                    {
+                        "instance_id": instance["id"],
+                        "constituent_dataset": instance["constituent_dataset"],
+                        "context": instance["context"],
+                        "question": instance["question"],
+                        "reference": instance["reference"],
+                        "candidate": instance["candidate"],
+                        "score": instance["score"],
+                        "metadata": instance["metadata"],
+                    }
+                )
         elif name == "scientific_papers":
             for i, instance in enumerate(dataset):
                 # There is no instance_id in `datasets`, so we make one up
