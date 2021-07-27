@@ -1,5 +1,5 @@
 # Repro
-https://github.com/danieldeutsch/repro/workflows/Master/badge.svg?branch=master&event=push
+![Master](https://github.com/danieldeutsch/repro/workflows/Master/badge.svg?branch=master&event=push)
 
 Repro is a library for reproducing results from research papers.
 For now, it is focused on making predictions with pre-trained models as easy as possible.
@@ -14,7 +14,8 @@ As long as you have a working Docker installation, then you can run every model 
 It should "just work" (at least that is the goal).
 
 ## Installation Instructions
-First, you need to have a working Docker installation (instructions coming soon).
+First, you need to have a working Docker installation.
+See [here](tutorials/docker.md) for installation instructions as well as scripts to verify your setup is working.
 
 Then, we recommend creating a conda environment specific to repro before installing the library:
 ```shell script
