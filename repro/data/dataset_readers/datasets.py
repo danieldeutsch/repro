@@ -1,4 +1,5 @@
 import datasets
+import logging
 import os
 from datasets.config import HF_DATASETS_CACHE
 from overrides import overrides
@@ -8,6 +9,8 @@ from repro.data.dataset_readers import DatasetReader
 from repro.data.types import InstanceDict
 
 DEFAULT_VERSIONS = {"cnn_dailymail": "3.0.0", "xsum": "1.2.0"}
+
+logger = logging.getLogger(__name__)
 
 
 def hf_dataset_exists_locally(name: str, version: str = None) -> bool:
@@ -22,7 +25,7 @@ def hf_dataset_exists_locally(name: str, version: str = None) -> bool:
         The name of the dataset, like "cnn_dailymail"
     version : str, default=None
         The version of the dataset, like "3.0.0". If `None`, then the
-        default version is used.
+        default version is used if one exists.
 
     Returns
     -------
@@ -48,8 +51,12 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
         if len(parts) == 1:
             name = self.dataset_name
             if name not in DEFAULT_VERSIONS:
-                raise Exception(f"Unknown default dataset version for dataset: {name}")
-            version = DEFAULT_VERSIONS[name]
+                logger.warning(
+                    f"Unknown default dataset version for dataset: {name}. Using `None`"
+                )
+                version = None
+            else:
+                version = DEFAULT_VERSIONS[name]
         elif len(parts) == 2:
             name = parts[0]
             version = parts[1]
@@ -73,16 +80,18 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
                         "reference": reference,
                     }
                 )
-        elif name == "xsum":
+        elif name == "mocha":
             for instance in dataset:
-                # The documents include \n characters to separate sentences. The
-                # summaries are only one sentence, so it does not matter for them
-                document = instance["document"].split("\n")
                 instances.append(
                     {
                         "instance_id": instance["id"],
-                        "document": document,
-                        "reference": instance["summary"],
+                        "constituent_dataset": instance["constituent_dataset"],
+                        "context": instance["context"],
+                        "question": instance["question"],
+                        "reference": instance["reference"],
+                        "candidate": instance["candidate"],
+                        "score": instance["score"],
+                        "metadata": instance["metadata"],
                     }
                 )
         elif name == "scientific_papers":
@@ -103,6 +112,28 @@ class HuggingfaceDatasetsDatasetReader(DatasetReader):
                         "document": document,
                         "reference": summary,
                         "section_names": section_names,
+                    }
+                )
+        elif name == "squad_v2":
+            for instance in dataset:
+                instances.append(
+                    {
+                        "instance_id": instance["id"],
+                        "context": instance["context"],
+                        "question": instance["question"],
+                        "answers": instance["answers"],
+                    }
+                )
+        elif name == "xsum":
+            for instance in dataset:
+                # The documents include \n characters to separate sentences. The
+                # summaries are only one sentence, so it does not matter for them
+                document = instance["document"].split("\n")
+                instances.append(
+                    {
+                        "instance_id": instance["id"],
+                        "document": document,
+                        "reference": instance["summary"],
                     }
                 )
         else:

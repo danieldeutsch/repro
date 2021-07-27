@@ -16,16 +16,20 @@ class SacreROUGEOutputWriter(OutputWriter):
     be included as well
     """
 
+    def __init__(self):
+        super().__init__(True)
+
     @overrides
-    def write(
+    def _write(
         self,
         instances: List[InstanceDict],
-        predictions: List[Any],
-        output_file: str,
+        predictions: Any,
+        output_file_or_dir: str,
         model_name: str,
         *args,
         **kwargs
     ) -> None:
+        output_file = output_file_or_dir
         dirname = os.path.dirname(output_file)
         if dirname:
             os.makedirs(dirname, exist_ok=True)
