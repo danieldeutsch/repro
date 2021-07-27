@@ -49,6 +49,7 @@ The MOCHA results are:
 In comparison to those values reported in the paper, they are close:
 
 |Dataset|Reported|Ours|
+|-|-|-|
 |NarrativeQA|.805|.794|
 |MCScript|.816|.812|
 |CosmosQA|.864|.860|
