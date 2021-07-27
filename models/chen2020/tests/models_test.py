@@ -1,4 +1,5 @@
 import json
+import pytest
 import unittest
 from parameterized import parameterized
 
@@ -28,7 +29,7 @@ class TestChen2020Models(unittest.TestCase):
         ]
         expected = [example["score"] for example in examples]
         actual = model.predict_batch(inputs)
-        assert actual == expected
+        assert pytest.approx(actual, expected, abs=1e-7)
 
     def test_mocha_eval_regression(self):
         metric = MOCHAEvaluationMetric()
