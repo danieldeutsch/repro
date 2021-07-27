@@ -9,3 +9,4 @@ This file contains a list of the papers with models wrapped by this library.
 |[Learning to Capitalize with Character-Level Recurrent Neural Networks: An Empirical Study](https://aclanthology.org/D16-1225/)|Raymond Hendy Susanto, Hai Leong Chieu, and Wei Lu|[Link](models/susanto2016/Readme.md)|
 |[Towards Question-Answering as an Automatic Metric for Evaluating the Content Quality of a Summary](https://arxiv.org/abs/2010.00490)|Daniel Deutsch, Tania Bedrax-Weiss, and Dan Roth|[Link](models/deutsch2021/Readme.md)|
 |[ROUGE: A Package for Automatic Evaluation of Summaries](https://aclanthology.org/W04-1013/)|Chin-Yew Lin|[Link](models/sacrerouge/Readme.md)|
+|[GSum: A General Framework for Guided Neural Abstractive Summarization](https://arxiv.org/abs/2010.08014)|Zi-Yi Dou, Pengfei Liu, Hiroaki Hayashi, Zhengbao Jiang, and Graham Neubig|[Link](models/dou2021/Readme.md)|
