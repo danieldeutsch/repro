@@ -54,6 +54,8 @@ pytest models/dou2021/tests
 
 ## Status
 - [x] Regression unit tests pass  
+Only the tests which require models from Liu & Lapata (2019) fail on Github.
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1071401161).
 - [ ] Correctness unit tests pass  
 - [x] Model runs on full test dataset  
 See [here](experiments/reproduce-results/Readme.md)
