@@ -1,0 +1,89 @@
+{
+  "lerc": [
+    {
+      "context": "There is one area I want to work on . Breast - feeding . Right now , Luke's addicted to the bottle . We were so eager to wean him off his nose tube that when he started taking a bottle , we made it our only goal to re - enforce that .",
+      "question": "What may be your reason for wanting to work on Breast - feeding ?",
+      "reference": "It could help my son .",
+      "candidate": "I want to help Luke feed.",
+      "score": 1.7853180170059204
+    },
+    {
+      "context": "The strangest thing that has happened was when they were singing the Chinese National Anthem she was standing in front of the TV swaying and singing ... the words weren't really the words but it was kind of freaky ! I asked her is she knew the song and she said yes : ) She also is screamed fireworks a lot ! ! ! She did enjoy naming everyone she knows who is Chinese too ( that took a while LOL ) and she was so cute as the parade of countries happened .",
+      "question": "What is probably true about this story ?",
+      "reference": "They are watching the Olympics",
+      "candidate": "the Olympics are watching",
+      "score": 4.948861122131348
+    },
+    {
+      "context": "They routinely save lives , and I think that experience draws them together into a tight community . My mom sent me this email about a cardiologist , a mechanic , and a car engine . Enjoy reading it , and have a nice weekend .",
+      "question": "What's a likely reason why the people routinely save lives ?",
+      "reference": "Because it is their job to do so .",
+      "candidate": "that's where it's their job .",
+      "score": 2.44577956199646
+    }
+  ],
+  "evaluation": {
+    "inputs": [
+      {
+        "dataset": "dataset1",
+        "source": "source1",
+        "score": 2.5,
+        "prediction": 3.6
+      },
+      {
+        "dataset": "dataset1",
+        "source": "source2",
+        "score": 1.4,
+        "prediction": 1.1
+      },
+      {
+        "dataset": "dataset1",
+        "source": "source1",
+        "score": 4.2,
+        "prediction": 3.1
+      },
+      {
+        "dataset": "dataset1",
+        "source": "source2",
+        "score": 4.5,
+        "prediction": 3.5
+      },
+      {
+        "dataset": "dataset2",
+        "source": "source1",
+        "score": 3.8,
+        "prediction": 1.2
+      },
+      {
+        "dataset": "dataset2",
+        "source": "source2",
+        "score": 2.4,
+        "prediction": 5.0
+      },
+      {
+        "dataset": "dataset2",
+        "source": "source1",
+        "score": 4.1,
+        "prediction": 4.1
+      },
+      {
+        "dataset": "dataset2",
+        "source": "source2",
+        "score": 1.2,
+        "prediction": 3.2
+      }
+    ],
+    "metrics": {
+      "dataset1": {
+        "overall": 0.7240040861482234,
+        "source2": 1.0,
+        "source1": -1.0
+      },
+      "dataset2": {
+        "overall": -0.24520892380019285,
+        "source2": 1.0,
+        "source1": 1.0
+      }
+    }
+  }
+}
