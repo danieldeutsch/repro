@@ -54,6 +54,7 @@ pytest models/chen2020/tests
 
 ## Status
 - [x] Regression unit tests pass   
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1071762824)
 - [ ] Correctness unit tests pass  
 No expected outputs provided in the original repo
 - [x] Model runs on full test dataset  
