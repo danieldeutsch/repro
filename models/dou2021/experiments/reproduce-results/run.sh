@@ -60,8 +60,11 @@ for model in "dou2021-oracle-sentence-gsum" "dou2021-sentence-gsum"; do
   # Evaluate with ROUGE
   for version in "original" "preprocessed" "oracle" "matchsum"; do
     if [ -f ${DIR}/output/${version}/${model}/predictions.jsonl ]; then
-      python models/sacrerouge/scripts/calculate_rouge.py \
-        --input-file ${DIR}/output/${version}/${model}/predictions.jsonl \
+      repro predict \
+        --model-name sacrerouge-rouge \
+        --input-files ${DIR}/output/${version}/${model}/predictions.jsonl \
+        --dataset-reader sacrerouge \
+        --output-writer metrics \
         --output ${DIR}/output/${version}/${model}/rouge.json
     fi
   done
