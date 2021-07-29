@@ -19,6 +19,7 @@ See [here](models/deutsch2021/Readme.md).
 - Added the `SQuADv2Evaluation` metric
 - Added the [BART-based sentence-guided models](models/dou2021/Readme.md) from [Dou et al. (2021)](https://arxiv.org/abs/2010.08014).
 - Added the [LERC model](models/chen2020/Readme.md) from [Chen et al. (2020)](https://arxiv.org/abs/2010.03636)
+- Added the [QAEval metric](models/deutsch2021/Readme.md)
 
 ### Changed
 - Renamed the `--model-args`, `--dataset-reader-args`, and `--output-write-args` `predict` arguments to `--model-kwargs`, `--dataset-reader-kwargs`, and `--output-write-kwargs`.
