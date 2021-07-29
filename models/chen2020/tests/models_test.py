@@ -29,7 +29,7 @@ class TestChen2020Models(unittest.TestCase):
         ]
         expected = [example["score"] for example in examples]
         actual = model.predict_batch(inputs)
-        assert pytest.approx(actual, expected, abs=1e-7)
+        assert expected == pytest.approx(actual, abs=1e-4)
 
     def test_mocha_eval_regression(self):
         metric = MOCHAEvaluationMetric()
