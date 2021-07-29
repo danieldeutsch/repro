@@ -4,6 +4,7 @@ import unittest
 from parameterized import parameterized
 
 from repro.models.deutsch2021 import (
+    QAEval,
     QAEvalQuestionAnsweringModel,
     QAEvalQuestionGenerationModel,
 )
@@ -68,7 +69,21 @@ class TestDeutsch2021Models(unittest.TestCase):
         actual = model.predict_batch(inputs, return_dicts=True)
         for a, e in zip(actual, expected_dicts):
             assert a["prediction"] == e["prediction"]
-            assert pytest.approx(a["null_probability"], e["null_probability"], abs=1e-8)
-            assert pytest.approx(a["probability"], e["probability"], abs=1e-8)
+            assert e["null_probability"] == pytest.approx(
+                a["null_probability"], abs=1e-4
+            )
+            assert e["probability"] == pytest.approx(a["probability"], abs=1e-4)
             assert a["start"] == e["start"]
             assert a["end"] == e["end"]
+
+    @parameterized.expand(
+        get_testing_device_parameters(gpu_only=True), skip_on_empty=True
+    )
+    def test_qaeval(self, device: int):
+        model = QAEval(device=device)
+        inputs = self.examples["metric"]["input"]
+        expected = self.examples["metric"]["output"]
+        actual = model.predict_batch(inputs)
+        assert len(expected) == len(actual)
+        for metric in expected.keys():
+            assert expected[metric] == pytest.approx(actual[metric], abs=1e-4)
