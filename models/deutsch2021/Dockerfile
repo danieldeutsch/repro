@@ -1,19 +1,16 @@
 FROM pure/python:3.7-cuda10.0-base
 
-ARG QG
-ARG QA
-ARG BERTSUMEXTABS_CNNDM
-ARG BERTSUMEXTABS_XSUM
-
 WORKDIR /app
 
-# Download the pretrained models
-RUN pip3 install --no-cache-dir gdown
-COPY scripts/download-models.sh download-models.sh
-RUN sh download-models.sh
+# Install the SacreROUGE and QAEval libraries
+RUN pip install --no-cache-dir \
+    sacrerouge==0.2.3 \
+    qaeval==0.0.9 \
+    click==7.1.2 \
+    https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.5/en_core_web_sm-2.2.5.tar.gz#egg=en_core_web_sm
 
-# Install the QAEval library
-RUN pip install --no-cache-dir qaeval
+# Setup the QAEval metric
+RUN sacrerouge setup-metric qa-eval
 
 # Copy over files for running prediction
 COPY src/generate_questions.py generate_questions.py

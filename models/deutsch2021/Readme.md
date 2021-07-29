@@ -7,7 +7,17 @@
 https://github.com/danieldeutsch/qaeval
 
 ## Available Models
-We have implemented the question-generation and question-answering models from the QAEval metric.
+We have implemented the QAEval metric as well as its question-generation and question-answering models.
+
+- QAEval:
+  - Description: A question-answering reference-based summarization evaluation metric.
+  - Name: `deutsch2021-qaeval`
+  - Usage:
+    ```python
+    from repro.models.deutsch2021 import QAEval
+    metric = QAEval()
+    scores = metric.predict("summary", ["reference1", "reference2"])
+    ```
 
 - [Question Generation](https://drive.google.com/file/d/1vVhRgLtsQDAOmxYhY5PMPnxxHUyCOdQU/view)
   - Description: A question-generation model
@@ -44,10 +54,7 @@ We have implemented the question-generation and question-answering models from t
 - Image name: `deutsch2021`
 - Build command:
   ```shell script
-  repro setup deutsch2021 \
-    [--question-generation] \
-    [--question-answering] \
-    [--silent]
+  repro setup deutsch2021 [--silent]
   ```
   The arguments specify which pretrained models should be downloaded
 - Requires network: No
@@ -55,20 +62,20 @@ We have implemented the question-generation and question-answering models from t
 ## Testing
 Explain how to run the unittests for this model
 ```shell script
-repro setup deutsch2021 \
-    --question-generation \
-    --question-answering
+repro setup deutsch2021
 pytest models/deutsch2021/tests
 ```
 
 ## Status
 - [x] Regression unit tests pass   
 - [x] Correctness unit tests pass  
-The tests were taken from the `qaeval` repository. See [here](https://github.com/danieldeutsch/repro/actions/runs/1063451340).
+The tests were taken from the `qaeval` repository.
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1063451340) (these tests don't include the QAEval metric test, which likely takes too long on the CPU).
 - [ ] Model runs on full test dataset  
 Not tested
 - [x] Predictions approximately replicate results reported in the paper  
 The question-answering model replicates the expected results (see [here](experiments/reproduce-results/Readme.md)).
 The question-generation model was not quantitatively evaluated in the paper.
+We did not test QAEval on the full dataset, but the scores match an example from the `qaeval` repo.
 - [ ] Predictions exactly replicate results reported in the paper  
 Not tested

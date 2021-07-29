@@ -1,23 +1,14 @@
 mkdir -p models
 
-if [ "$QG" = "true" ]; then
-  echo '{"context": "My name is Dan.", "start": 11, "end": 14}' > input.jsonl
-  python generate_questions.py \
-    --input-file input.jsonl \
-    --model-file models/question-generation.model.tar.gz \
-    --cuda-device -1 \
-    --batch-size 2 \
-    --output-file output.jsonl
-  rm input.jsonl output.jsonl
-fi
-
-if [ "$QA" = "true" ]; then
-  echo '{"context": "My name is Dan.", "question": "What is my name?"}' > input.jsonl
-  python answer_questions.py \
-    --input-file input.jsonl \
-    --model-dir models/question-answering \
-    --cuda-device -1 \
-    --batch-size 2 \
-    --output-file output.jsonl
-  rm input.jsonl output.jsonl
-fi
+echo '{"instance_id": "1", "summarizer_id": "warmup", "summarizer_type": "peer", "summary": {"text": "This is the summary"}, "references": [{"text": "This is the reference summary"}]}' > input.jsonl
+sacrerouge qa-eval evaluate \
+  --input-files input.jsonl \
+  --dataset-reader reference-based \
+  --use_lerc true \
+  --generation_batch_size 1 \
+  --answering_batch_size 1 \
+  --lerc_batch_size 1 \
+  --cuda_device -1 \
+  --macro-output-json macro.json \
+  --micro-output-jsonl micro.jsonl
+rm input.jsonl macro.json micro.jsonl
