@@ -1,0 +1,47 @@
+{
+  "inputs": [
+    {
+      "candidate": "Bud Powell was a legendary pianist.",
+      "references": [
+        "Bud Powell was a legendary pianist."
+      ]
+    },
+    {
+      "candidate": "Bud Powell was a historical piano player.",
+      "references": [
+        "Bud Powell was a legendary pianist."
+      ]
+    },
+    {
+      "candidate": "Bud Powell was a new yorker.",
+      "references": [
+        "Bud Powell was a legendary pianist."
+      ]
+    },
+    {
+      "candidate": "Bud a day keeps the doctor away.",
+      "references": [
+        "Bud Powell was a legendary pianist."
+      ]
+    }
+  ],
+  "output": {
+    "micro": [
+      {
+        "bleurt": 0.926138
+      },
+      {
+        "bleurt": 0.247466
+      },
+      {
+        "bleurt": -0.935921
+      },
+      {
+        "bleurt": -1.053069
+      }
+    ],
+    "macro": {
+      "bleurt": -0.20384682714939117
+    }
+  }
+}
