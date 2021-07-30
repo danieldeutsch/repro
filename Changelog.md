@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Added
+- Added [BLEURT](models/sellam2020/Readme.md)
 
 ## [v0.0.2](https://github.com/danieldeutsch/repro/repro/tag/0.0.2) - 2021-07-30
 ### Added

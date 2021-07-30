@@ -14,6 +14,11 @@ This file contains a list of the papers with models wrapped by this library.
 |[ROUGE: A Package for Automatic Evaluation of Summaries](https://aclanthology.org/W04-1013/)|Chin-Yew Lin|[Link](models/sacrerouge/Readme.md)|
 |[Towards Question-Answering as an Automatic Metric for Evaluating the Content Quality of a Summary](https://arxiv.org/abs/2010.00490)|Daniel Deutsch, Tania Bedrax-Weiss, and Dan Roth|[Link](models/deutsch2021/Readme.md)|
 
+### Natural Language Generation Evaluation
+|Paper|Authors|Link|
+|-|-|-|
+|[BLEURT: Learning Robust Metrics for Text Generation](https://arxiv.org/abs/2004.04696)|Thibault Sellam, Dipanjan Das, and Ankur P. Parikh|[Link](models/sellam2020/Readme.md)|
+
 ### Question Answering
 |Paper|Authors|Link|
 |-|-|-|
