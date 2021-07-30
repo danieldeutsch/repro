@@ -136,3 +136,71 @@ class TestUtil(unittest.TestCase):
 
         mapping = [(1, 0), (0, 0), (0, 1), (2, 1), (2, 0)]
         assert util.ungroup_values(values_list, mapping) == [3, 1, 2, 5, 4]
+
+    def test_flatten_nested_dict(self):
+        flattened = util.flatten_nested_dict({})
+        assert flattened == {}
+
+        flattened = util.flatten_nested_dict({"A": 1})
+        assert flattened == {("A",): 1}
+
+        flattened = util.flatten_nested_dict(
+            {"A": 1, "B": {"C": 2, "D": 3, "E": {"F": 4}}}
+        )
+        assert flattened == {
+            ("A",): 1,
+            ("B", "C"): 2,
+            ("B", "D"): 3,
+            ("B", "E", "F"): 4,
+        }
+
+    def test_unflatten_dict(self):
+        unflattened = util.unflatten_dict({})
+        assert unflattened == {}
+
+        unflattened = util.unflatten_dict({("A",): 1})
+        assert unflattened == {"A": 1}
+
+        unflattened = util.unflatten_dict(
+            {("A",): 1, ("B", "C"): 2, ("B", "D"): 3, ("B", "E", "F"): 4}
+        )
+        assert unflattened == {"A": 1, "B": {"C": 2, "D": 3, "E": {"F": 4}}}
+
+    def test_average_dicts(self):
+        assert util.average_dicts([]) == {}
+
+        dicts = [{"A": 1, "B": {"C": 2, "D": 3, "E": {"F": 4}}}]
+        assert util.average_dicts(dicts) == dicts[0]
+
+        dicts = [
+            {"A": 1, "B": {"C": 2, "D": 3, "E": {"F": 4}}},
+            {"A": 5, "B": {"C": 6, "D": 7, "E": {"F": 8}}},
+        ]
+        assert util.average_dicts(dicts) == {
+            "A": 3,
+            "B": {"C": 4, "D": 5, "E": {"F": 6}},
+        }
+
+        with self.assertRaises(Exception):
+            # They don't have the same keys
+            dicts = [
+                {"A": 1, "B": {"C": 2, "D": 3, "E": 4}},
+                {"A": 5, "B": {"C": 6, "D": 7, "E": {"F": 8}}},
+            ]
+            util.average_dicts(dicts)
+
+        with self.assertRaises(Exception):
+            # They don't have the same keys
+            dicts = [
+                {"B": {"C": 2, "D": 3, "E": {"F": 4}}},
+                {"A": 5, "B": {"C": 6, "D": 7, "E": {"F": 8}}},
+            ]
+            util.average_dicts(dicts)
+
+        with self.assertRaises(Exception):
+            # They don't have the same keys
+            dicts = [
+                {"A": 1, "B": {"C": 2, "E": {"F": 4}}},
+                {"A": 5, "B": {"C": 6, "D": 7, "E": {"F": 8}}},
+            ]
+            util.average_dicts(dicts)
