@@ -52,7 +52,7 @@ def sentence_split(image: str, inputs: List[str]) -> List[List[str]]:
 
 
 @Model.register("sacrerouge-rouge")
-class ROUGE(Model):
+class SRROUGE(Model):
     def __init__(self, image: str = "sacrerouge"):
         self.image = image
 

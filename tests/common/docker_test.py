@@ -1,9 +1,8 @@
 import json
 import unittest
-from subprocess import Popen
 
 from repro.common import TemporaryDirectory, docker
-from tests import FIXTURES_ROOT
+from repro.testing import FIXTURES_ROOT
 
 
 class TestDocker(unittest.TestCase):

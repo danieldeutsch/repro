@@ -15,8 +15,8 @@ Thus far, we have added wrappers around ROUGE.
   - Name: `sacrerouge-rouge`
   - Usage:
     ```python
-    from repro.models.sacrerouge import ROUGE
-    model = ROUGE()
+    from repro.models.sacrerouge import SRROUGE
+    model = SRROUGE()
     scores = model.predict("summary", ["reference1", "reference2"])
     ```
     
