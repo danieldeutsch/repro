@@ -40,6 +40,7 @@ pytest models/lin2004/tests
 
 ## Status
 - [x] Regression unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1083114293)
 - [ ] Correctness unit tests pass  
 - [ ] Model runs on full test dataset  
 - [ ] Predictions approximately replicate results reported in the paper  
