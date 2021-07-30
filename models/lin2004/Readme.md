@@ -33,7 +33,6 @@ n/a
 - Requires network: No
   
 ## Testing
-Explain how to run the unittests for this model
 ```shell script
 repro setup lin2004
 pytest models/lin2004/tests
