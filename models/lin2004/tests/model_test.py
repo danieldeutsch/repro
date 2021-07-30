@@ -10,14 +10,15 @@ from . import FIXTURES_ROOT
 
 class TestLin2004Models(unittest.TestCase):
     def setUp(self) -> None:
-        self.examples = json.load(open(f"{REPRO_FIXTURES_ROOT}/multiling2011/data.json", "r"))
+        self.examples = json.load(
+            open(f"{REPRO_FIXTURES_ROOT}/multiling2011/data.json", "r")
+        )
         self.expected = json.load(open(f"{FIXTURES_ROOT}/expected.json", "r"))
 
     def test_rouge(self):
         model = ROUGE()
         inputs = [
-            {"candidate": inp["candidate"],
-             "references": inp["references"]}
+            {"candidate": inp["candidate"], "references": inp["references"]}
             for inp in self.examples
         ]
         expected_macro = self.expected["macro"]

@@ -20,7 +20,9 @@ def get_testing_device_parameters(gpu_only: bool = False) -> List[Tuple[int]]:
     return [(int(device),) for device in devices]
 
 
-def assert_dicts_approx_equal(d1: NestedDict, d2: NestedDict, rel: float = None, abs: float = None):
+def assert_dicts_approx_equal(
+    d1: NestedDict, d2: NestedDict, rel: float = None, abs: float = None
+):
     d1 = flatten_nested_dict(d1)
     d2 = flatten_nested_dict(d2)
     assert d1.keys() == d2.keys()
