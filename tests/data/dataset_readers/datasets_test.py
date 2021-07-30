@@ -4,7 +4,7 @@ import unittest
 
 from repro.data.dataset_readers import HuggingfaceDatasetsDatasetReader
 from repro.data.dataset_readers.datasets import hf_dataset_exists_locally
-from tests import FIXTURES_ROOT
+from repro.testing import FIXTURES_ROOT
 
 
 class TestHuggingfaceDatasetsDatasetReader(unittest.TestCase):

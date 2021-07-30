@@ -1,6 +1,8 @@
 import os
 from typing import List, Tuple
 
+FIXTURES_ROOT = f"{os.path.dirname(os.path.abspath(__file__))}/../tests/fixtures"
+
 
 def get_testing_device_parameters(gpu_only: bool = False) -> List[Tuple[int]]:
     """
