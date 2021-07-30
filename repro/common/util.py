@@ -2,6 +2,7 @@ from typing import Dict, List, T, Tuple, Union
 
 from repro.data.types import TextType
 
+# `Indexable` is something which maps from an int to a value.
 Indexable = Union[List[T], Dict[int, T]]
 
 
