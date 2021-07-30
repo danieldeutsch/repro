@@ -130,18 +130,9 @@ class TestUtil(unittest.TestCase):
         assert mapping == [(0, 0), (1, 0), (2, 0), (1, 1)]
 
     def test_ungroup_values(self):
-        values_list = [
-            [1, 2],
-            [3],
-            [4, 5]
-        ]
-        mapping = [
-            (0, 0), (0, 1), (1, 0), (2, 0), (2, 1)
-        ]
+        values_list = [[1, 2], [3], [4, 5]]
+        mapping = [(0, 0), (0, 1), (1, 0), (2, 0), (2, 1)]
         assert util.ungroup_values(values_list, mapping) == [1, 2, 3, 4, 5]
 
-        mapping = [
-            (1, 0), (0, 0), (0, 1), (2, 1), (2, 0)
-        ]
+        mapping = [(1, 0), (0, 0), (0, 1), (2, 1), (2, 0)]
         assert util.ungroup_values(values_list, mapping) == [3, 1, 2, 5, 4]
-        

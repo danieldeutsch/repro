@@ -1,6 +1,8 @@
-from typing import List, T, Tuple, Union
+from typing import Dict, List, T, Tuple, Union
 
 from repro.data.types import TextType
+
+Indexable = Union[List[T], Dict[int, T]]
 
 
 def flatten(text: Union[str, List[str]], separator: str = None) -> str:
@@ -86,7 +88,7 @@ def group_by_references(
 
 
 def ungroup_values(
-    values_list: List[List[T]], mapping: List[Tuple[int, int]]
+    values: Indexable[Indexable[T]], mapping: List[Tuple[int, int]]
 ) -> List[T]:
     """
     Ungroups the values in `values_list` based on the group `mapping`. `mapping[i]` specifies
@@ -95,7 +97,7 @@ def ungroup_values(
 
     Parameters
     ----------
-    values_list : List[List[T]]
+    values : Indexable[Indexable[T]]
         The grouped values
     mapping : List[Tuple[int, int]]
         The mapping which specifies where in the grouped values each
@@ -108,5 +110,5 @@ def ungroup_values(
     """
     ungrouped_values = []
     for i, j in mapping:
-        ungrouped_values.append(values_list[i][j])
+        ungrouped_values.append(values[i][j])
     return ungrouped_values
