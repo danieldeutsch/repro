@@ -24,6 +24,8 @@ class TestLin2004Models(unittest.TestCase):
         expected_micro = self.expected["micro"]
         actual_macro, actual_micro = model.predict_batch(inputs)
 
+        print(json.dumps(actual_micro, indent=2))
+
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
         for expected, actual in zip(expected_micro, actual_micro):
             assert_dicts_approx_equal(expected, actual, abs=1e-4)

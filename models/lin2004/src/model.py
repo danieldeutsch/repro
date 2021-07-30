@@ -22,12 +22,14 @@ class ROUGE(Model):
         porter_stemmer: bool = True,
         remove_stopwords: bool = False,
         sentence_split: bool = True,
+        calculate_su4: bool = True,
     ):
         self.image = image
         self.ngram_order = ngram_order
         self.porter_stemmer = porter_stemmer
         self.remove_stopwords = remove_stopwords
         self.sentence_split = sentence_split
+        self.calculate_su4 = calculate_su4
 
     def _maybe_sentence_split(self, texts: List[TextType]) -> List[List[str]]:
         if any(isinstance(text, str) for text in texts):
@@ -233,6 +235,8 @@ class ROUGE(Model):
                 command += " -m"
             if self.remove_stopwords:
                 command += " -s"
+            if self.calculate_su4:
+                command += " -2 4 -u"
             command += f" {container_config_file}"
 
             stdout = run_command(
