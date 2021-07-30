@@ -142,7 +142,7 @@ class ROUGE(Model):
     def predict(
         self,
         candidate: TextType,
-        references: List[TextType] = None,
+        references: List[TextType],
         **kwargs,
     ) -> Dict[str, Any]:
         return self.predict_batch(
