@@ -1,0 +1,45 @@
+{
+  "inputs": [
+    {
+      "candidate": "28-year-old chef found dead in San Francisco mall",
+      "references": [
+        "28-Year-Old Chef Found Dead at San Francisco Mall"
+      ]
+    },
+    {
+      "candidate": "A 28-year-old chef who recently moved to San Francisco was found dead in the staircase of a local shopping center.",
+      "references": [
+        "A 28-year-old chef who had recently moved to San Francisco was found dead in the stairwell of a local mall this week."
+      ]
+    },
+    {
+      "candidate": "The victim's brother said he cannot imagine anyone who would want to harm him,\"Finally, it went uphill again at him.\"",
+      "references": [
+        "But the victim's brother says he can't think of anyone who would want to hurt him, saying, \"Things were finally going well for him.\""
+      ]
+    }
+  ],
+  "micro": [
+    {
+      "bertscore": {
+        "precision": 0.9843302369117737,
+        "recall": 0.9823839068412781,
+        "f1": 0.9833561182022095
+      }
+    },
+    {
+      "bertscore": {
+        "precision": 0.9832239747047424,
+        "recall": 0.9732863903045654,
+        "f1": 0.9782299995422363
+      }
+    },
+    {
+      "bertscore": {
+        "precision": 0.9120386242866516,
+        "recall": 0.920428991317749,
+        "f1": 0.916214644908905
+      }
+    }
+  ]
+}
