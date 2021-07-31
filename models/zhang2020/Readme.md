@@ -53,6 +53,7 @@ pytest models/zhang2020/tests
 ## Status
 - [x] Regression unit tests pass  
 - [x] Correctness unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1084053109).
 The tests check for the same scores as in the original repo's unit tests.
 - [ ] Model runs on full test dataset  
 Not tested
