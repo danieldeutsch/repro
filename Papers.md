@@ -8,16 +8,13 @@ This file contains a list of the papers with models wrapped by this library.
 |[Text Summarization with Pretrained Encoders](https://arxiv.org/abs/1908.08345)|Yang Liu and Mirella Lapata|[Link](models/liu2019/Readme.md)|
 |[GSum: A General Framework for Guided Neural Abstractive Summarization](https://arxiv.org/abs/2010.08014)|Zi-Yi Dou, Pengfei Liu, Hiroaki Hayashi, Zhengbao Jiang, and Graham Neubig|[Link](models/dou2021/Readme.md)|
 
-### Summarization Evaluation
+### Text Generation Evaluation
 |Paper|Authors|Link|
 |-|-|-|
 |[ROUGE: A Package for Automatic Evaluation of Summaries](https://aclanthology.org/W04-1013/)|Chin-Yew Lin|[Link](models/sacrerouge/Readme.md)|
 |[Towards Question-Answering as an Automatic Metric for Evaluating the Content Quality of a Summary](https://arxiv.org/abs/2010.00490)|Daniel Deutsch, Tania Bedrax-Weiss, and Dan Roth|[Link](models/deutsch2021/Readme.md)|
-
-### Natural Language Generation Evaluation
-|Paper|Authors|Link|
-|-|-|-|
 |[BLEURT: Learning Robust Metrics for Text Generation](https://arxiv.org/abs/2004.04696)|Thibault Sellam, Dipanjan Das, and Ankur P. Parikh|[Link](models/sellam2020/Readme.md)|
+|[BERTScore: Evaluating Text Generation with BERT](https://arxiv.org/abs/1904.09675)|Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q. Weinberger, and Yoav Artzi|[Link](models/zhang2020/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|
