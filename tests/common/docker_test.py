@@ -2,7 +2,7 @@ import json
 import unittest
 
 from repro.common import TemporaryDirectory, docker
-from repro.testing import FIXTURES_ROOT
+from repro.testing import FIXTURES_ROOT, DockerTestContextManager
 
 
 class TestDocker(unittest.TestCase):
@@ -39,7 +39,7 @@ class TestDocker(unittest.TestCase):
         image = "build-image"
 
         # None are set
-        with docker.DockerContextManager(image):
+        with DockerTestContextManager(image):
             with TemporaryDirectory() as temp:
                 assert not docker.image_exists(image)
                 docker.build_image(
@@ -61,7 +61,7 @@ class TestDocker(unittest.TestCase):
                 assert results["ENV2"] == ""
 
         # One is set
-        with docker.DockerContextManager(image):
+        with DockerTestContextManager(image):
             with TemporaryDirectory() as temp:
                 assert not docker.image_exists(image)
                 docker.build_image(
@@ -86,7 +86,7 @@ class TestDocker(unittest.TestCase):
                 assert results["ENV2"] == ""
 
         # Both are set
-        with docker.DockerContextManager(image):
+        with DockerTestContextManager(image):
             with TemporaryDirectory() as temp:
                 assert not docker.image_exists(image)
                 docker.build_image(
@@ -118,7 +118,7 @@ class TestDocker(unittest.TestCase):
         """
         image = "build-image"
 
-        with docker.DockerContextManager(image):
+        with DockerTestContextManager(image):
             with TemporaryDirectory() as temp:
                 assert not docker.image_exists(image)
                 docker.build_image(
@@ -183,7 +183,7 @@ class TestDocker(unittest.TestCase):
         an output file.
         """
         image = "network-disabled"
-        with docker.DockerContextManager(image):
+        with DockerTestContextManager(image):
             with TemporaryDirectory() as temp:
                 volume_map = docker.make_volume_map(temp)
 
@@ -199,7 +199,7 @@ class TestDocker(unittest.TestCase):
                 assert open(f"{temp}/results.txt").read().strip() == "Offline"
 
 
-class TestDockerContextManager(unittest.TestCase):
+class TestDockerTestContextManager(unittest.TestCase):
     def test_docker_context_manager(self):
         # Create an image, ensure the context manager deletes it,
         # recreate it, then make sure it gets deleted on the context manager exit
@@ -210,7 +210,7 @@ class TestDockerContextManager(unittest.TestCase):
             )
 
         assert docker.image_exists(image)
-        with docker.DockerContextManager(image):
+        with DockerTestContextManager(image):
             assert not docker.image_exists(image)
             docker.build_image(
                 f"{FIXTURES_ROOT}/dockerfiles/python-3.8", image, silent=True

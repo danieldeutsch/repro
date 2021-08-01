@@ -142,21 +142,6 @@ def build_image(
     logger.info("Finished building image")
 
 
-class DockerContextManager(object):
-    def __init__(self, image: str):
-        self.image = image
-
-    def __enter__(self):
-        # Make sure the image doesn't exist. If it does, delete it
-        if image_exists(self.image):
-            remove_image(self.image, force=True)
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        # Make sure the image gets deleted
-        if image_exists(self.image):
-            remove_image(self.image, force=True)
-
-
 class BuildDockerImageSubcommand(SetupSubcommand):
     def __init__(
         self,
