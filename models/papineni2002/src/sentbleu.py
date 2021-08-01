@@ -16,12 +16,10 @@ def main(args):
                 candidate = data["candidate"]
                 references = data["references"]
                 result = sentence_bleu(candidate, references)
-                out.write(json.dumps({
-                    "sentbleu": result.score
-                }) + "\n")
+                out.write(json.dumps({"sentbleu": result.score}) + "\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     argp = argparse.ArgumentParser()
     argp.add_argument("--input-file", required=True)
     argp.add_argument("--output-file", required=True)
