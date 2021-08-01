@@ -15,6 +15,7 @@ This file contains a list of the papers with models wrapped by this library.
 |[Towards Question-Answering as an Automatic Metric for Evaluating the Content Quality of a Summary](https://arxiv.org/abs/2010.00490)|Daniel Deutsch, Tania Bedrax-Weiss, and Dan Roth|[Link](models/deutsch2021/Readme.md)|
 |[BLEURT: Learning Robust Metrics for Text Generation](https://arxiv.org/abs/2004.04696)|Thibault Sellam, Dipanjan Das, and Ankur P. Parikh|[Link](models/sellam2020/Readme.md)|
 |[BERTScore: Evaluating Text Generation with BERT](https://arxiv.org/abs/1904.09675)|Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q. Weinberger, and Yoav Artzi|[Link](models/zhang2020/Readme.md)|
+|[BLEU: A Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/)|Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu|[Link](models/papineni2002/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|

@@ -60,7 +60,9 @@ pytest models/papineni2002/tests
 ## Status
 - [x] Regression unit tests pass   
 - [x] Correctness unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1087885929).
 We check a corpus-level example from the SacreBLEU unit tests.
+We did not test for SentBLEU's correctness or BLEU with a different number of references per hypothesis.
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  
