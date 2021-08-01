@@ -64,3 +64,29 @@ class TestPapineni2002Models(unittest.TestCase):
         actual_macro, actual_micro = model.predict_batch(inputs)
         assert actual_macro["bleu"] == pytest.approx(expected, abs=1e-4)
         assert len(actual_micro) == 0
+
+    def test_bleu_unequal_references_regression(self):
+        # Tests an example when the candidates have an unequal number of references
+        model = BLEU()
+        inputs = [
+            {
+                "candidate": "The dog bit the man.",
+                "references": ["The dog bit the man.", "The dog had bit the man."],
+            },
+            {
+                "candidate": "It wasn't surprising.",
+                "references": ["No one was surprised."],
+            },
+            {
+                "candidate": "The man had just bitten him.",
+                "references": [
+                    "The man bit him first.",
+                    "The man had bitten the dog.",
+                    "The man bit the dog before.",
+                ],
+            },
+        ]
+        expected = 47.63997460581784
+        actual_macro, actual_micro = model.predict_batch(inputs)
+        assert actual_macro["bleu"] == pytest.approx(expected, abs=1e-4)
+        assert len(actual_micro) == 0
