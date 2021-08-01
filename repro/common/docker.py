@@ -2,6 +2,8 @@ import argparse
 import docker
 import json
 import logging
+import shutil
+import tempfile
 from typing import Dict, Optional
 
 from overrides import overrides
@@ -142,21 +144,6 @@ def build_image(
     logger.info("Finished building image")
 
 
-class DockerContextManager(object):
-    def __init__(self, image: str):
-        self.image = image
-
-    def __enter__(self):
-        # Make sure the image doesn't exist. If it does, delete it
-        if image_exists(self.image):
-            remove_image(self.image, force=True)
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        # Make sure the image gets deleted
-        if image_exists(self.image):
-            remove_image(self.image, force=True)
-
-
 class BuildDockerImageSubcommand(SetupSubcommand):
     def __init__(
         self,
@@ -183,3 +170,26 @@ class BuildDockerImageSubcommand(SetupSubcommand):
     def run(self, args):
         prepare_global_logging(silent=args.silent)
         build_image(self.root, self.image, silent=args.silent)
+
+
+class DockerContainer(object):
+    def __init__(self, image: str):
+        self.image = image
+
+    def __enter__(self):
+        self.host_dir = tempfile.mkdtemp()
+        self.volume_map = make_volume_map(self.host_dir)
+        self.container_dir = self.volume_map[self.host_dir]
+        return self
+
+    def __exit__(self, *args):
+        shutil.rmtree(self.host_dir)
+
+    def run_command(self, **kwargs) -> str:
+        for arg in ["image", "volume_map"]:
+            if arg in kwargs:
+                raise Exception(
+                    f"`{arg}` parameter cannot be passed to the `DockerContainer`"
+                    f"`run_command` function."
+                )
+        return run_command(self.image, volume_map=self.volume_map, **kwargs)
