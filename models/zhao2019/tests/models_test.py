@@ -51,7 +51,9 @@ class TestZhao2019Models(unittest.TestCase):
     def test_moverscore_for_summarization_invalid_kwargs(self):
         model = MoverScoreForSummarization()
         with self.assertRaises(Exception):
-            model.predict(candidate="Candidate", references=["References"], use_stopwords=False)
+            model.predict(
+                candidate="Candidate", references=["References"], use_stopwords=False
+            )
 
         with self.assertRaises(Exception):
             model.predict_batch([], use_stopwords=False)
