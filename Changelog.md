@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added [BERTScore](models/zhang2020/Readme.md)
 - Added [BLEU and SentBLEU](models/papineni2002/Readme.md)
 - Added [QuestEval](models/scialom2021/Readme.md)
+- Added [MoverScore](models/zhao2019/Readme.md)
 
 ## [v0.0.2](https://github.com/danieldeutsch/repro/repro/tag/0.0.2) - 2021-07-30
 ### Added
