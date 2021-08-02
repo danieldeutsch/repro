@@ -76,10 +76,6 @@ def run_command(
         There appears to be a bug in the `docker` package related to collecting the full stdout and stderr streams, so
         we do not recommend relying on these streams.
     """
-    if "'" in command:
-        raise ValueError(
-            f'The command contains the character "\'", which is currently not supported: {command}'
-        )
     if not stdout and not stderr:
         raise ValueError(
             f"The `docker` package requires either `stdout` or `stderr` is `True`"
@@ -92,6 +88,9 @@ def run_command(
     }
 
     runtime = "nvidia" if cuda else None
+
+    # Escape any single quotes from the command
+    command = command.replace("'", "'\\''")
 
     docker_command = f"/bin/sh -c '{command}'"
     logger.info(f'Running command in Docker image {image}: "{docker_command}"')
