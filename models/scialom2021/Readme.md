@@ -43,7 +43,7 @@ This implementation wraps the `QuestEval` metric.
     macro, micro = model.predict_batch(inputs)
     ```
     
-- QuestEvalForSummarization
+- QuestEvalForSimplification
   - Description: A wrapper around `QuestEval` which passes the arguments specific to simplification to the original code's QuestEval constructor by default.
   - Name: `scialom2021-questeval-simplification`
   - Usage: 
