@@ -8,6 +8,8 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import TextType
 from repro.models import Model
 
+MetricsType = Dict[str, Dict[str, float]]
+
 logger = logging.getLogger(__name__)
 
 
@@ -37,7 +39,7 @@ class QuestEval(Model):
         sources: List[TextType] = None,
         references: List[TextType] = None,
         **kwargs,
-    ) -> Dict[str, float]:
+    ) -> MetricsType:
         return self.predict_batch(
             [{"candidate": candidate, "sources": sources, "references": references}],
             **kwargs,
@@ -45,7 +47,7 @@ class QuestEval(Model):
 
     def predict_batch(
         self, inputs: List[Dict[str, Union[TextType, List[TextType]]]], **kwargs
-    ) -> Tuple[Dict[str, float], List[Dict[str, float]]]:
+    ) -> Tuple[MetricsType, List[MetricsType]]:
         logger.info(f"Calculating QuestEval for {len(inputs)} inputs")
 
         candidates = [inp["candidate"] for inp in inputs]
@@ -135,17 +137,11 @@ class QuestEvalForSummarization(QuestEval):
         else:
             kwargs["do_weighter"] = True
 
-    def predict(
-        self,
-        *args,
-        **kwargs,
-    ) -> Dict[str, float]:
+    def predict(self, *args, **kwargs) -> MetricsType:
         self._check_and_update_kwargs(kwargs)
         return super().predict(*args, **kwargs)
 
-    def predict_batch(
-        self, *args, **kwargs
-    ) -> Tuple[Dict[str, float], List[Dict[str, float]]]:
+    def predict_batch(self, *args, **kwargs) -> Tuple[MetricsType, List[MetricsType]]:
         self._check_and_update_kwargs(kwargs)
         return super().predict_batch(*args, **kwargs)
 
@@ -166,16 +162,10 @@ class QuestEvalForSimplification(QuestEval):
         else:
             kwargs["do_BERTScore"] = True
 
-    def predict(
-        self,
-        *args,
-        **kwargs,
-    ) -> Dict[str, float]:
+    def predict(self, *args, **kwargs) -> MetricsType:
         self._check_and_update_kwargs(kwargs)
         return super().predict(*args, **kwargs)
 
-    def predict_batch(
-        self, *args, **kwargs
-    ) -> Tuple[Dict[str, float], List[Dict[str, float]]]:
+    def predict_batch(self, *args, **kwargs) -> Tuple[MetricsType, List[MetricsType]]:
         self._check_and_update_kwargs(kwargs)
         return super().predict_batch(*args, **kwargs)
