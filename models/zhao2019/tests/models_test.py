@@ -47,3 +47,11 @@ class TestZhao2019Models(unittest.TestCase):
         assert len(expected_micro) == len(actual_micro)
         for expected, actual in zip(expected_micro, actual_micro):
             assert_dicts_approx_equal(expected, actual, abs=1e-4)
+
+    def test_moverscore_for_summarization_invalid_kwargs(self):
+        model = MoverScoreForSummarization()
+        with self.assertRaises(Exception):
+            model.predict(candidate="Candidate", references=["References"], use_stopwords=False)
+
+        with self.assertRaises(Exception):
+            model.predict_batch([], use_stopwords=False)
