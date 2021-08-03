@@ -56,6 +56,7 @@ pytest models/durmus2020/tests
 We were unable to run tests on the MultiLing2011 data that we have used to regression testing other metrics because the process runs out of memory on the GPU (ours is 12gb) and the CPU version is too slow.
 However, we do run a test on some toy examples. 
 - [x] Correctness unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1095392445).
 The [example](https://github.com/esdurmus/feqa/blob/master/run_feqa.ipynb) input and output ran successfully when we used `en_core_web_sm==2.1.0`, but after we changed to `en_core_web_sm==2.3.1`, one of the examples changed its score slightly.
 However, it is close enough that we consider it to be ok especially since it was correct with the original Spacy model.
 - [ ] Model runs on full test dataset  

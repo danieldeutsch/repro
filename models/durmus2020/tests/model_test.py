@@ -29,4 +29,6 @@ class TestDurmus2020Models(unittest.TestCase):
         _, actual_micro = model.predict_batch(inputs)
         assert len(actual_micro) == 2
         assert actual_micro[0]["feqa"] == pytest.approx(0.674074074074074, abs=1e-4)
+        # This example is slightly off from the expected version value (https://github.com/esdurmus/feqa/blob/master/run_feqa.ipynb)
+        # due to the different en_core_web_sm model. The original expected value was 0.8875
         assert actual_micro[1]["feqa"] == pytest.approx(0.85, abs=1e-4)
