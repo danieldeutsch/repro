@@ -23,7 +23,12 @@ def make_volume_map(*volumes: str) -> Dict[str, str]:
 
 
 def image_exists(image: str) -> bool:
-    client = docker.from_env()
+    try:
+        client = docker.from_env()
+    except docker.errors.DockerException as e:
+        logger.error("Could not connect to the Docker client. Is the Daemon running?")
+        logger.exception(e)
+        return False
     try:
         client.images.get(image)
     except docker.errors.ImageNotFound:
