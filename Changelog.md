@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added [BLEU and SentBLEU](models/papineni2002/Readme.md)
 - Added [QuestEval](models/scialom2021/Readme.md)
 - Added [MoverScore](models/zhao2019/Readme.md)
+- Added [FEQA](models/durmus2020/Readme.md)
 
 ### Changed
 - Changed the QAEval interface to match other text generation metrics.

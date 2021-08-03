@@ -18,6 +18,7 @@ This file contains a list of the papers with models wrapped by this library.
 |[BLEU: A Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/)|Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu|[Link](models/papineni2002/Readme.md)|
 |[QuestEval: Summarization Asks for Fact-based Evaluation](https://arxiv.org/abs/2103.12693)|Thomas Scialom, Paul-Alexis Dray, Patrick Gallinari, Sylvain Lamprier, Benjamin Piwowarski, Jacopo Staiano, and Alex Wang|[Link](models/scialom2021/Readme.md)|
 |[MoverScore: Text Generation Evaluating with Contextualized Embeddings and Earth Mover Distance](https://aclanthology.org/D19-1053/)|Wei Zhao, Maxime Peyrard, Fei Liu, Yang Gao, Christian M. Meyer, and Steffen Eger|[Link](models/zhao2019/Readme.md)|
+|[FEQA: A Question Answering Evaluation Framework for Faithfulness Assessment in Abstractive Summarization](https://aclanthology.org/2020.acl-main.454/)|Esin Durmus, He He, and Mona Diab|[Link](models/durmus2020/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|
