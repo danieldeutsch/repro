@@ -1,10 +1,10 @@
 import json
 import logging
-import os
-from typing import Dict, List, Union
+from typing import Dict, List, Tuple, Union
 
 from overrides import overrides
 
+from repro.common import util
 from repro.common.docker import DockerContainer
 from repro.common.io import read_jsonl_file
 from repro.data.types import SummaryType
@@ -30,44 +30,40 @@ class QAEval(Model):
         self.lerc_batch_size = lerc_batch_size
 
     def predict(
-        self, summary: SummaryType, references: List[SummaryType], **kwargs
+        self, candidate: SummaryType, references: List[SummaryType], **kwargs
     ) -> Dict[str, float]:
         return self.predict_batch(
-            [{"summary": summary, "references": references}], **kwargs
-        )
+            [{"candidate": candidate, "references": references}], **kwargs
+        )[0]
 
     def predict_batch(
-        self, inputs: List[Dict[str, Union[str, List[str]]]], **kwargs
-    ) -> Dict[str, float]:
+        self,
+        inputs: List[Dict[str, Union[str, List[str]]]],
+        return_qa_pairs=False,
+        **kwargs,
+    ) -> Tuple[Dict[str, float], List[Dict[str, float]]]:
         logger.info(f"Calculating QAEval for {len(inputs)} inputs")
 
-        summaries = [inp["summary"] for inp in inputs]
+        candidates = [inp["candidate"] for inp in inputs]
         references_list = [inp["references"] for inp in inputs]
 
         with DockerContainer(self.image) as backend:
             host_input_file = f"{backend.host_dir}/input.jsonl"
             container_input_file = f"{backend.container_dir}/input.jsonl"
             with open(host_input_file, "w") as out:
-                for i, (summary, references) in enumerate(
-                    zip(summaries, references_list)
-                ):
-                    summary = {"text": summary}
-                    references = [{"text": reference} for reference in references]
+                for candidate, references in zip(candidates, references_list):
                     out.write(
                         json.dumps(
                             {
-                                "instance_id": str(i),
-                                "summarizer_id": "repro",
-                                "summarizer_type": "peer",
-                                "summary": summary,
+                                "candidate": candidate,
                                 "references": references,
                             }
                         )
                         + "\n"
                     )
 
-            host_output_file = f"{backend.host_dir}/macro.json"
-            container_output_file = f"{backend.container_dir}/macro.json"
+            host_output_file = f"{backend.host_dir}/output.jsonl"
+            container_output_file = f"{backend.container_dir}/output.jsonl"
 
             commands = []
             cuda = self.device != -1
@@ -77,17 +73,19 @@ class QAEval(Model):
             else:
                 predict_device = -1
 
+            kwargs = {
+                "cuda_device": predict_device,
+                "generation_batch_size": self.generation_batch_size,
+                "answering_batch_size": self.answering_batch_size,
+                "use_lerc": True,
+                "lerc_batch_size": self.lerc_batch_size,
+            }
+            kwargs_str = json.dumps(kwargs)
             commands.append(
-                f"sacrerouge qa-eval evaluate"
-                f"  --input-files {container_input_file}"
-                f"  --dataset-reader reference-based"
-                f"  --use_lerc true"
-                f"  --generation_batch_size {self.generation_batch_size}"
-                f"  --answering_batch_size {self.answering_batch_size}"
-                f"  --lerc_batch_size {self.lerc_batch_size}"
-                f"  --cuda_device {predict_device}"
-                f"  --macro-output-json {container_output_file}"
-                f"  --micro-output-jsonl {backend.container_dir}/micro.jsonl"
+                f"python score.py"
+                f"  --input-file {container_input_file}"
+                f"  --kwargs '{kwargs_str}'"
+                f"  --output-file {container_output_file}"
             )
 
             command = " && ".join(commands)
@@ -97,8 +95,15 @@ class QAEval(Model):
                 network_disabled=True,
             )
 
-            scores = json.load(open(host_output_file, "r"))
-            return scores["metrics"]
+            results = read_jsonl_file(host_output_file)
+            micro_metrics = [result["metrics"] for result in results]
+            macro_metrics = util.average_dicts(micro_metrics)
+
+            if return_qa_pairs:
+                qa_pairs = [result["qa_pairs"] for result in results]
+                return macro_metrics, micro_metrics, qa_pairs
+            else:
+                return macro_metrics, micro_metrics
 
 
 @Model.register("deutsch2021-question-generation")
@@ -137,7 +142,7 @@ class QAEvalQuestionGenerationModel(QuestionGenerationModel):
             command = (
                 f"python generate_questions.py"
                 f"  --input-file {container_input_file}"
-                f"  --model-file /root/.sacrerouge/metrics/qaeval/models/generation/model.tar.gz"
+                f"  --model-file models/generation/model.tar.gz"
                 f"  --cuda-device {predict_device}"
                 f"  --batch-size {self.batch_size}"
                 f"  --output-file {container_output_file}"
@@ -194,7 +199,7 @@ class QAEvalQuestionAnsweringModel(QuestionAnsweringModel):
             command = (
                 f"python answer_questions.py"
                 f"  --input-file {container_input_file}"
-                f"  --model-dir /root/.sacrerouge/metrics/qaeval/models/answering/model"
+                f"  --model-dir models/answering"
                 f"  --cuda-device {predict_device}"
                 f"  --batch-size {self.batch_size}"
                 f"  --output-file {container_output_file}"

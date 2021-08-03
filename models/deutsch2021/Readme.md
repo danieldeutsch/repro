@@ -15,8 +15,18 @@ We have implemented the QAEval metric as well as its question-generation and que
   - Usage:
     ```python
     from repro.models.deutsch2021 import QAEval
-    metric = QAEval()
-    scores = metric.predict("summary", ["reference1", "reference2"])
+    model = QAEval()
+    inputs = [
+        {"candidate": "The candidate summary", "references": ["The first reference", "The second"]}
+    ]
+    macro, micro = model.predict_batch(inputs)
+    ```
+    The `macro` results are the QAEval scores averaged over the `inputs`.
+    The `micro` results are the QAEval results for each item in `inputs`.
+    
+    You can also return the QA pairs for each input with the `return_qa_pairs=True` flag:
+    ```python
+    macro, micro, qa_pairs = model.predict_batch(inputs, return_qa_pairs=True)
     ```
 
 - [Question Generation](https://drive.google.com/file/d/1vVhRgLtsQDAOmxYhY5PMPnxxHUyCOdQU/view)
