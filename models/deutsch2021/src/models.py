@@ -10,7 +10,7 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model, QuestionAnsweringModel, QuestionGenerationModel
 
-QAPairsType = List[List[Dict, Any]]
+QAPairsType = List[List[Dict[str, Any]]]
 
 logger = logging.getLogger(__name__)
 
