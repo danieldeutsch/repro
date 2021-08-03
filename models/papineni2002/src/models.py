@@ -1,12 +1,12 @@
 import json
 import logging
 import os
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 from repro.common import TemporaryDirectory, util
 from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file
-from repro.data.types import TextType
+from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
 logger = logging.getLogger(__name__)
@@ -25,14 +25,14 @@ class SentBLEU(Model):
         candidate: TextType,
         references: List[TextType],
         **kwargs,
-    ) -> Dict[str, Any]:
+    ) -> MetricsType:
         return self.predict_batch(
             [{"candidate": candidate, "references": references}], **kwargs
         )[0]
 
     def predict_batch(
         self, inputs: List[Dict[str, Union[TextType, List[TextType]]]], **kwargs
-    ) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+    ) -> Tuple[MetricsType, List[MetricsType]]:
         logger.info(f"Calculating SentBLEU for {len(inputs)} inputs")
 
         candidates = [inp["candidate"] for inp in inputs]
@@ -94,14 +94,14 @@ class BLEU(Model):
         candidate: TextType,
         references: List[TextType],
         **kwargs,
-    ) -> Dict[str, Any]:
+    ) -> MetricsType:
         return self.predict_batch(
             [{"candidate": candidate, "references": references}], **kwargs
         )[0]
 
     def predict_batch(
         self, inputs: List[Dict[str, Union[TextType, List[TextType]]]], **kwargs
-    ) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+    ) -> Tuple[MetricsType, List[MetricsType]]:
         logger.info(f"Calculating BLEU for {len(inputs)} inputs")
 
         candidates = [inp["candidate"] for inp in inputs]

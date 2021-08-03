@@ -5,7 +5,7 @@ from typing import Dict, List, Optional, Tuple, Union
 from repro.common import util
 from repro.common.docker import DockerContainer
 from repro.common.io import read_jsonl_file
-from repro.data.types import TextType
+from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
 logger = logging.getLogger(__name__)
@@ -22,7 +22,7 @@ class MoverScore(Model):
         candidate: TextType,
         references: List[TextType],
         **kwargs,
-    ) -> Dict[str, float]:
+    ) -> MetricsType:
         return self.predict_batch(
             [{"candidate": candidate, "references": references}], **kwargs
         )[0]
@@ -33,7 +33,7 @@ class MoverScore(Model):
         batch_size: Optional[int] = None,
         use_stopwords: bool = False,
         **kwargs,
-    ) -> Tuple[Dict[str, float], List[Dict[str, float]]]:
+    ) -> Tuple[MetricsType, List[MetricsType]]:
         logger.info(
             f"Calculating MoverScore with image {self.image} on {len(inputs)} inputs."
         )
@@ -91,9 +91,7 @@ class MoverScore(Model):
 
 @Model.register("zhao2019-moverscore-summarization")
 class MoverScoreForSummarization(MoverScore):
-    def predict_batch(
-        self, *args, **kwargs
-    ) -> Tuple[Dict[str, float], List[Dict[str, float]]]:
+    def predict_batch(self, *args, **kwargs) -> Tuple[MetricsType, List[MetricsType]]:
         if "use_stopwords" in kwargs:
             if kwargs["use_stopwords"] != True:
                 raise Exception(

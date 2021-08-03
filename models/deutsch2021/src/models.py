@@ -1,14 +1,16 @@
 import json
 import logging
-from typing import Dict, List, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 from overrides import overrides
 
 from repro.common import util
 from repro.common.docker import DockerContainer
 from repro.common.io import read_jsonl_file
-from repro.data.types import SummaryType
+from repro.data.types import MetricsType, TextType
 from repro.models import Model, QuestionAnsweringModel, QuestionGenerationModel
+
+QAPairsType = List[List[Dict, Any]]
 
 logger = logging.getLogger(__name__)
 
@@ -30,8 +32,8 @@ class QAEval(Model):
         self.lerc_batch_size = lerc_batch_size
 
     def predict(
-        self, candidate: SummaryType, references: List[SummaryType], **kwargs
-    ) -> Dict[str, float]:
+        self, candidate: TextType, references: List[TextType], **kwargs
+    ) -> MetricsType:
         return self.predict_batch(
             [{"candidate": candidate, "references": references}], **kwargs
         )[0]
@@ -41,7 +43,10 @@ class QAEval(Model):
         inputs: List[Dict[str, Union[str, List[str]]]],
         return_qa_pairs=False,
         **kwargs,
-    ) -> Tuple[Dict[str, float], List[Dict[str, float]]]:
+    ) -> Union[
+        Tuple[MetricsType, List[MetricsType]],
+        Tuple[MetricsType, List[MetricsType], List[QAPairsType]],
+    ]:
         logger.info(f"Calculating QAEval for {len(inputs)} inputs")
 
         candidates = [inp["candidate"] for inp in inputs]

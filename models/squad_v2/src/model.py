@@ -5,6 +5,7 @@ from typing import Dict, List, Union
 
 from repro.common import TemporaryDirectory
 from repro.common.docker import make_volume_map, run_command
+from repro.data.types import MetricsType
 from repro.models import Model
 
 logger = logging.getLogger(__name__)
@@ -17,13 +18,13 @@ class SQuADv2Evaluation(Model):
 
     def predict(
         self, instance_id: str, prediction: str, null_probability: float, **kwargs
-    ) -> Dict[str, float]:
+    ) -> MetricsType:
         # We cannot evaluate just one instance
         raise NotImplementedError
 
     def predict_batch(
         self, inputs: List[Dict[str, Union[str, float]]], *args, **kwargs
-    ) -> Dict[str, float]:
+    ) -> MetricsType:
         with TemporaryDirectory() as temp:
             host_input_dir = f"{temp}/input"
             host_output_dir = f"{temp}/output"

@@ -6,7 +6,7 @@ from typing import Dict, List, Union
 from repro.common import TemporaryDirectory
 from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file, write_to_jsonl_file
-from repro.data.types import SummaryType
+from repro.data.types import MetricsType, SummaryType
 from repro.models import Model
 
 logger = logging.getLogger(__name__)
@@ -88,14 +88,14 @@ class SRROUGE(Model):
 
     def predict(
         self, summary: SummaryType, references: List[SummaryType], **kwargs
-    ) -> Dict[str, Dict[str, float]]:
+    ) -> MetricsType:
         return self.predict_batch(
             [{"summary": summary, "references": references}], **kwargs
         )
 
     def predict_batch(
         self, inputs: List[Dict[str, Union[str, List[str]]]], **kwargs
-    ) -> Dict[str, Dict[str, float]]:
+    ) -> MetricsType:
         logger.info(f"Calculating ROUGE for {len(inputs)} inputs")
 
         summaries = [inp["summary"] for inp in inputs]

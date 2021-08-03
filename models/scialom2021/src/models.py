@@ -5,10 +5,8 @@ from typing import Dict, List, Tuple, Union
 from repro.common import util
 from repro.common.docker import DockerContainer
 from repro.common.io import read_jsonl_file
-from repro.data.types import TextType
+from repro.data.types import MetricsType, TextType
 from repro.models import Model
-
-MetricsType = Dict[str, Dict[str, float]]
 
 logger = logging.getLogger(__name__)
 
