@@ -39,7 +39,10 @@ class FEQA(Model):
         )[0]
 
     def predict_batch(
-        self, inputs: List[Dict[str, Union[TextType, List[TextType]]]], batch_size: int = 16, **kwargs
+        self,
+        inputs: List[Dict[str, Union[TextType, List[TextType]]]],
+        batch_size: int = 16,
+        **kwargs,
     ) -> Tuple[MetricsType, List[MetricsType]]:
         logger.info(f"Calculating FEQA for {len(inputs)} inputs")
 
