@@ -15,8 +15,18 @@ We have implemented the QAEval metric as well as its question-generation and que
   - Usage:
     ```python
     from repro.models.deutsch2021 import QAEval
-    metric = QAEval()
-    scores = metric.predict("summary", ["reference1", "reference2"])
+    model = QAEval()
+    inputs = [
+        {"candidate": "The candidate summary", "references": ["The first reference", "The second"]}
+    ]
+    macro, micro = model.predict_batch(inputs)
+    ```
+    The `macro` results are the QAEval scores averaged over the `inputs`.
+    The `micro` results are the QAEval results for each item in `inputs`.
+    
+    You can also return the QA pairs for each input with the `return_qa_pairs=True` flag:
+    ```python
+    macro, micro, qa_pairs = model.predict_batch(inputs, return_qa_pairs=True)
     ```
 
 - [Question Generation](https://drive.google.com/file/d/1vVhRgLtsQDAOmxYhY5PMPnxxHUyCOdQU/view)
@@ -56,11 +66,9 @@ We have implemented the QAEval metric as well as its question-generation and que
   ```shell script
   repro setup deutsch2021 [--silent]
   ```
-  The arguments specify which pretrained models should be downloaded
 - Requires network: No
   
 ## Testing
-Explain how to run the unittests for this model
 ```shell script
 repro setup deutsch2021
 pytest models/deutsch2021/tests
@@ -69,13 +77,13 @@ pytest models/deutsch2021/tests
 ## Status
 - [x] Regression unit tests pass   
 - [x] Correctness unit tests pass  
-The tests were taken from the `qaeval` repository.
+The tests were taken from the `qaeval` and `sacrerouge` repositories.
 See [here](https://github.com/danieldeutsch/repro/actions/runs/1063451340) (these tests don't include the QAEval metric test, which likely takes too long on the CPU).
 - [ ] Model runs on full test dataset  
 Not tested
 - [x] Predictions approximately replicate results reported in the paper  
 The question-answering model replicates the expected results (see [here](experiments/reproduce-results/Readme.md)).
 The question-generation model was not quantitatively evaluated in the paper.
-We did not test QAEval on the full dataset, but the scores match an example from the `qaeval` repo.
+We did not test QAEval on the full dataset, but the scores match the examples from the `qaeval` and `sacrerouge` repos.
 - [ ] Predictions exactly replicate results reported in the paper  
 Not tested

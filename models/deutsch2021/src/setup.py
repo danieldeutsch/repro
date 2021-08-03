@@ -1,6 +1,6 @@
 from repro import MODELS_ROOT
 from repro.commands.subcommand import SetupSubcommand
-from repro.common.docker import BuildDockerImageSubcommand, build_image
+from repro.common.docker import BuildDockerImageSubcommand
 
 
 @SetupSubcommand.register("deutsch2021")
