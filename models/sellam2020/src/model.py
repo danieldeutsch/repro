@@ -5,7 +5,7 @@ from typing import Dict, List, Tuple, Union
 
 from repro.common import util
 from repro.common.docker import DockerContainer
-from repro.data.types import TextType
+from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
 logger = logging.getLogger(__name__)
@@ -41,14 +41,14 @@ class BLEURT(Model):
         candidate: TextType,
         references: List[TextType],
         **kwargs,
-    ) -> Dict[str, float]:
+    ) -> MetricsType:
         return self.predict_batch(
             [{"candidate": candidate, "references": references}], **kwargs
         )[0]
 
     def predict_batch(
         self, inputs: List[Dict[str, Union[TextType, List[TextType]]]], **kwargs
-    ) -> Tuple[Dict[str, float], List[Dict[str, float]]]:
+    ) -> Tuple[MetricsType, List[MetricsType]]:
         logger.info(
             f"Calculating BLEURT with model {self.model} and "
             f"image {self.image} on {len(inputs)} inputs."
