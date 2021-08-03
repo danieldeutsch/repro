@@ -157,7 +157,7 @@ However, if you need to interact directly with Docker, here are some useful comm
   docker run -it <name> /bin/bash
   
   # With GPU access
-  docker run -it --runtime nvidia /bin/bash
+  docker run -it --runtime nvidia <name> /bin/bash
   ```
   
 - See the list of images:
