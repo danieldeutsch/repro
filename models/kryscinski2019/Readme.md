@@ -59,6 +59,7 @@ pytest models/kryscinski2019/tests
 
 ## Status
 - [x] Regression unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1099154015)
 - [ ] Correctness unit tests pass  
 No examples provided in the original repo
 - [ ] Model runs on full test dataset  

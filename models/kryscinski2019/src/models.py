@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import  Dict, List, Tuple, Union
+from typing import Dict, List, Tuple, Union
 
 from repro.common import util
 from repro.common.docker import DockerContainer
@@ -12,7 +12,13 @@ logger = logging.getLogger(__name__)
 
 
 class _Kryscinski2019Model(Model):
-    def __init__(self, is_factccx: bool, image: str = "kryscinski2019", device: int = 0, batch_size: int = 8):
+    def __init__(
+        self,
+        is_factccx: bool,
+        image: str = "kryscinski2019",
+        device: int = 0,
+        batch_size: int = 8,
+    ):
         self.is_factccx = is_factccx
         if is_factccx:
             self.name = "FactCCX"
@@ -70,7 +76,7 @@ class _Kryscinski2019Model(Model):
                                 "id": str(i),
                                 "claim": candidate,
                                 "text": source,
-                                "label": "CORRECT"  # dummy label
+                                "label": "CORRECT",  # dummy label
                             }
                         )
                         + "\n"
