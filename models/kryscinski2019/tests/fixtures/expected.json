@@ -1,0 +1,10 @@
+{
+  "factcc": {
+    "micro": [{"factcc": {"score": 0.9965291619300842, "label": 1}}, {"factcc": {"score": 0.9598500728607178, "label": 1}}, {"factcc": {"score": 0.9862318634986877, "label": 1}}, {"factcc": {"score": 0.9894359111785889, "label": 1}}, {"factcc": {"score": 0.938258945941925, "label": 1}}, {"factcc": {"score": 0.9879480004310608, "label": 1}}, {"factcc": {"score": 0.9762234687805176, "label": 1}}, {"factcc": {"score": 0.9979596138000488, "label": 1}}, {"factcc": {"score": 0.9924687743186951, "label": 1}}, {"factcc": {"score": 0.9694750905036926, "label": 1}}, {"factcc": {"score": 0.9860625863075256, "label": 1}}, {"factcc": {"score": 0.9991734623908997, "label": 1}}],
+    "macro": {"factcc": {"score": 0.9816347459952036, "label": 1.0}}
+  },
+  "factccx": {
+    "micro": [{"factccx": {"score": 0.9979903697967529, "label": 1}}, {"factccx": {"score": 0.996292233467102, "label": 1}}, {"factccx": {"score": 0.906960666179657, "label": 1}}, {"factccx": {"score": 0.9764774441719055, "label": 1}}, {"factccx": {"score": 0.011242960579693317, "label": 0}}, {"factccx": {"score": 8.413183240918443e-05, "label": 0}}, {"factccx": {"score": 0.9848517775535583, "label": 1}}, {"factccx": {"score": 0.9989101886749268, "label": 1}}, {"factccx": {"score": 0.00506774103268981, "label": 0}}, {"factccx": {"score": 1.3301668332132977e-05, "label": 0}}, {"factccx": {"score": 0.9947732090950012, "label": 1}}, {"factccx": {"score": 0.003323308890685439, "label": 0}}],
+    "macro": {"factccx": {"score": 0.5729989444118928, "label": 0.5833333333333334}}
+  }
+}
