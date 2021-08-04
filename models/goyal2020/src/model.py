@@ -71,7 +71,7 @@ class DAE(Model):
         sources = self._check_sources(sources_list)
 
         # Make sure all are type `str`
-        candidate = [util.flatten(candidate) for candidate in candidates]
+        candidates = [util.flatten(candidate) for candidate in candidates]
         sources = [util.flatten(source) for source in sources]
 
         with DockerContainer(self.image) as backend:
