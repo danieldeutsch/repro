@@ -46,3 +46,28 @@ class TestZhang2020Models(unittest.TestCase):
         assert len(expected_micro) == len(actual_micro)
         for expected, actual in zip(expected_micro, actual_micro):
             assert_dicts_approx_equal(expected, actual, abs=1e-4)
+
+    @parameterized.expand(get_testing_device_parameters())
+    def test_empty_input(self, device: int):
+        # Tests to make sure there's a dict with 0s returned. Without
+        # directly handling the empty inputs, this test does not pass. Also
+        # ensures the non-empty inputs values didn't change
+        model = BERTScore(device=device)
+
+        input1 = {"candidate": "The first", "references": ["The first reference"]}
+        input2 = {"candidate": "", "references": ["The first reference"]}
+        input3 = {"candidate": "The third", "references": ["The first reference"]}
+
+        inputs_with_empty = [input1, input2, input3]
+        inputs_without_empty = [input1, input3]
+
+        _, micro_with_empty = model.predict_batch(inputs_with_empty)
+        _, micro_without_empty = model.predict_batch(inputs_without_empty)
+
+        # Make sure non-empty didn't change
+        assert_dicts_approx_equal(micro_with_empty[0], micro_without_empty[0])
+        assert_dicts_approx_equal(micro_with_empty[2], micro_without_empty[1])
+
+        # Make sure empty has 0s
+        for value in micro_with_empty[1]["bertscore"].values():
+            assert value == 0.0
