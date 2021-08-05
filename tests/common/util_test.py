@@ -250,6 +250,25 @@ class TestUtil(unittest.TestCase):
         assert non_empty_context1 == expected_non_empty_context1
         assert non_empty_context2 == expected_non_empty_context2
 
+        # Test for with no empty inputs
+        inputs = ["A", "B", "C"]
+        context1 = ["D1", "D2", "D3"]
+        context2 = ["E1", "E2", "E3"]
+        expected_empty_indices = set()
+        expected_non_empty_inputs = ["A", "B", "C"]
+        expected_non_empty_context1 = ["D1", "D2", "D3"]
+        expected_non_empty_context2 = ["E1", "E2", "E3"]
+        (
+            empty_indices,
+            non_empty_inputs,
+            non_empty_context1,
+            non_empty_context2,
+        ) = util.remove_empty_inputs(inputs, context1, context2)
+        assert empty_indices == expected_empty_indices
+        assert non_empty_inputs == expected_non_empty_inputs
+        assert non_empty_context1 == expected_non_empty_context1
+        assert non_empty_context2 == expected_non_empty_context2
+
         # Test for different length contexts
         with self.assertRaises(Exception):
             util.remove_empty_inputs(["A"], [])
@@ -267,6 +286,19 @@ class TestUtil(unittest.TestCase):
             util.insert_empty_values(inputs, empty_indices, empty_value)
             == expected_output
         )
+
+        # No empty indices
+        empty_indices = set()
+        assert util.insert_empty_values(inputs, empty_indices, empty_value) == inputs
+
+        # Only empty indices
+        inputs = []
+        empty_indices = {0, 1, 2}
+        assert util.insert_empty_values(inputs, empty_indices, empty_value) == [
+            empty_value,
+            empty_value,
+            empty_value,
+        ]
 
     def test_get_default_dict(self):
         d = {"A": 1, "B": {"C": 2}}

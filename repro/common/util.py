@@ -224,11 +224,12 @@ def insert_empty_values(
     with_empty = []
     num = len(inputs) + len(empty_indices)
 
-    max_empty_index = max(empty_indices)
-    if max_empty_index >= num:
-        raise Exception(
-            f"Found invalid empty index. Found {max_empty_index} for length {num}"
-        )
+    if len(empty_indices) > 0:
+        max_empty_index = max(empty_indices)
+        if max_empty_index >= num:
+            raise Exception(
+                f"Found invalid empty index. Found {max_empty_index} for length {num}"
+            )
 
     index = 0
     for i in range(num):
