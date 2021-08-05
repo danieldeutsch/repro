@@ -52,13 +52,12 @@ def main(args):
                     if filepath.startswith("cnn"):
                         content = cnn_tar.extractfile(f"./{filepath}").read().decode()
                     else:
-                        content = dailymail_tar.extractfile(f"./{filepath}").read().decode()
+                        content = (
+                            dailymail_tar.extractfile(f"./{filepath}").read().decode()
+                        )
                     source = parse_story_file(content)
 
-                    inputs.append({
-                        "candidate": candidate,
-                        "sources": [source]
-                    })
+                    inputs.append({"candidate": candidate, "sources": [source]})
 
                 _, factcc_results = factcc.predict_batch(inputs)
                 predictions = [results["factcc"]["label"] for results in factcc_results]
@@ -66,23 +65,25 @@ def main(args):
                 results_dict["factcc"][split] = {
                     "bacc": acc,
                     "micro_f1": micro_f1,
-                    "f1": f1
+                    "f1": f1,
                 }
 
                 _, factccx_results = factccx.predict_batch(inputs)
-                predictions = [results["factccx"]["label"] for results in factccx_results]
+                predictions = [
+                    results["factccx"]["label"] for results in factccx_results
+                ]
                 acc, micro_f1, f1 = evaluate(labels, predictions)
                 results_dict["factccx"][split] = {
                     "bacc": acc,
                     "micro_f1": micro_f1,
-                    "f1": f1
+                    "f1": f1,
                 }
 
     with open(args.output_file, "w") as out:
         out.write(json.dumps(results_dict, indent=2))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     argp = argparse.ArgumentParser()
     argp.add_argument("--cnn-tar", required=True)
     argp.add_argument("--dailymail-tar", required=True)
