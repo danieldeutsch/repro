@@ -257,3 +257,13 @@ class TestUtil(unittest.TestCase):
             util.remove_empty_inputs(["A"], ["B", "C"])
         with self.assertRaises(Exception):
             util.remove_empty_inputs(["A"], ["B"], [])
+
+    def test_insert_empty_values(self):
+        inputs = [1, 2, 3]
+        empty_indices = {0, 3, 5}
+        empty_value = "Empty"
+        expected_output = [empty_value, 1, 2, empty_value, 3, empty_value]
+        assert (
+            util.insert_empty_values(inputs, empty_indices, empty_value)
+            == expected_output
+        )

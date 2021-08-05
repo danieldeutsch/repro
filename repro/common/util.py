@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, T, Tuple, Union
+from typing import Any, Dict, List, Set, T, Tuple, Union
 
 from repro.data.types import TextType
 
@@ -216,3 +216,25 @@ def remove_empty_inputs(inputs: List[TextType], *contexts: List[T]) -> Tuple[Any
     non_empty_inputs = list(non_empty_inputs)
     non_empty_contexts = [list(context) for context in non_empty_contexts]
     return (empty_indices, non_empty_inputs, *non_empty_contexts)
+
+
+def insert_empty_values(
+    inputs: List[T], empty_indices: Set[int], empty_value: T
+) -> List[T]:
+    with_empty = []
+    num = len(inputs) + len(empty_indices)
+
+    max_empty_index = max(empty_indices)
+    if max_empty_index >= num:
+        raise Exception(
+            f"Found invalid empty index. Found {max_empty_index} for length {num}"
+        )
+
+    index = 0
+    for i in range(num):
+        if i in empty_indices:
+            with_empty.append(empty_value)
+        else:
+            with_empty.append(inputs[index])
+            index += 1
+    return with_empty
