@@ -62,9 +62,9 @@ pytest models/kryscinski2019/tests
 See [here](https://github.com/danieldeutsch/repro/actions/runs/1099154015)
 - [ ] Correctness unit tests pass  
 No examples provided in the original repo
-- [ ] Model runs on full test dataset  
-Not tested
-- [ ] Predictions approximately replicate results reported in the paper  
-Not tested
+- [x] Model runs on full test dataset  
+See our reproducibility experiment [here](experiments/reproduce-results/Readme.md)
+- [x] Predictions approximately replicate results reported in the paper  
+See our reproducibility experiment [here](experiments/reproduce-results/Readme.md)
 - [ ] Predictions exactly replicate results reported in the paper  
 Not tested
