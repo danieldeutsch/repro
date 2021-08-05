@@ -25,17 +25,6 @@ class BLEURT(Model):
         self.device = device
         self.batch_size = batch_size
 
-    @staticmethod
-    def _check_references(references_list: List[List[TextType]]) -> List[TextType]:
-        single_references = []
-        for references in references_list:
-            if len(references) != 1:
-                raise Exception(
-                    f"BLEURT only supports single references. Found: {len(references)}"
-                )
-            single_references.append(references[0])
-        return single_references
-
     def predict(
         self,
         candidate: TextType,
@@ -57,28 +46,29 @@ class BLEURT(Model):
         candidates = [inp["candidate"] for inp in inputs]
         references_list = [inp["references"] for inp in inputs]
 
-        # BLEURT only supports a single reference. Check to make sure only
-        # one has been passed in
-        references = self._check_references(references_list)
-
         # The each candidate and reference must be `str`, not `List[str]`
         candidates = [util.flatten(candidate) for candidate in candidates]
-        references = [util.flatten(reference) for reference in references]
+        references_list = [[util.flatten(reference) for reference in references] for references in references_list]
 
         with DockerContainer(self.image) as backend:
             host_input_file = f"{backend.host_dir}/input.jsonl"
             container_input_file = f"{backend.container_dir}/input.jsonl"
+
+            # BLEURT only runs with a single reference, so we write
+            # the candidate with each of its references on its own. Later
+            # the scores will be aggregated.
             with open(host_input_file, "w") as out:
-                for candidate, reference in zip(candidates, references):
-                    out.write(
-                        json.dumps(
-                            {
-                                "candidate": candidate,
-                                "reference": reference,
-                            }
+                for candidate, references in zip(candidates, references_list):
+                    for reference in references:
+                        out.write(
+                            json.dumps(
+                                {
+                                    "candidate": candidate,
+                                    "reference": reference,
+                                }
+                            )
+                            + "\n"
                         )
-                        + "\n"
-                    )
 
             host_output_file = f"{backend.host_dir}/output.jsonl"
             container_output_file = f"{backend.container_dir}/output.jsonl"
@@ -103,10 +93,21 @@ class BLEURT(Model):
                 network_disabled=True,
             )
 
-            micro = open(host_output_file, "r").read().splitlines()
-            micro = list(map(float, micro))
-            macro = np.mean(micro)
+            results = open(host_output_file, "r").read().splitlines()
+            results = list(map(float, results))
 
-            macro = {"bleurt": macro}
-            micro = [{"bleurt": score} for score in micro]
-            return macro, micro
+            # Regroup by reference
+            micro_metrics = []
+            index = 0
+            for references in references_list:
+                scores = results[index:index + len(references)]
+                index += len(references)
+                micro_metrics.append({
+                    "bleurt": {
+                        "mean": np.mean(scores),
+                        "max": np.max(scores)
+                    }
+                })
+
+            macro_metrics = util.average_dicts(micro_metrics)
+            return macro_metrics, micro_metrics

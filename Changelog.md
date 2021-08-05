@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - BERTScore now returns 0 for its metrics if the input is empty. 
+- BLEURT now returns the mean and max scores over the references.
 
 ## [v0.0.3](https://github.com/danieldeutsch/repro/releases/tag/v0.0.3) - 2021-08-04
 ### Added
