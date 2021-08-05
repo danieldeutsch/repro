@@ -238,3 +238,10 @@ def insert_empty_values(
             with_empty.append(inputs[index])
             index += 1
     return with_empty
+
+
+def get_default_dict(d: NestedDict, default: float) -> NestedDict:
+    flat_dict = flatten_nested_dict(d)
+    flat_default_dict = {key: default for key in flat_dict.keys()}
+    default_dict = unflatten_dict(flat_default_dict)
+    return default_dict

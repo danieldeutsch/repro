@@ -267,3 +267,9 @@ class TestUtil(unittest.TestCase):
             util.insert_empty_values(inputs, empty_indices, empty_value)
             == expected_output
         )
+
+    def test_get_default_dict(self):
+        d = {"A": 1, "B": {"C": 2}}
+        default = 0
+        default_dict = util.get_default_dict(d, default)
+        assert default_dict == {"A": 0, "B": {"C": 0}}
