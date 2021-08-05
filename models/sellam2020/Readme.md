@@ -19,13 +19,14 @@ The corresponding model names are `"bleurt-{tiny,base,large}-{128,512}"` and sho
     from repro.models.sellam2020 import BLEURT
     model = BLEURT(model="bleurt-base-128")
     inputs = [
-        {"candidate": "The candidate text", "references": ["The reference"]}
+        {"candidate": "The candidate text", "references": ["The reference", "The other reference"]}
     ]
     scores = model.predict_batch(inputs)
     ```
     
 ## Implementation Notes
-- `BLEURT` only supports single references (the argument to `references` should be a list of length 1).
+- The original BLEURT code only supports single references.
+Our implementation return both the mean and the max BLEURT score over the references (they will be equal if there is only 1 reference).
     
 ## Docker Information
 - Image name: `sellam2020`
@@ -55,7 +56,7 @@ pytest models/sellam2020/tests
 - [x] Regression unit tests pass  
 - [x] Correctness unit tests pass  
 The unit tests are based on examples in the official repository.
-See [here](https://github.com/danieldeutsch/repro/actions/runs/1083580370).
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1102526377).
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  
