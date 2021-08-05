@@ -23,8 +23,7 @@ class TestSellam2020Models(unittest.TestCase):
     def test_bleurt_regression(self, device: int):
         model = BLEURT(device=device)
         inputs = [
-            {"candidate": example["candidate"],
-             "references": example["references"]}
+            {"candidate": example["candidate"], "references": example["references"]}
             for example in self.multiling2011_examples
         ]
         expected_macro = self.expected["macro"]

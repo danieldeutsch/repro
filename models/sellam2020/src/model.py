@@ -48,7 +48,10 @@ class BLEURT(Model):
 
         # The each candidate and reference must be `str`, not `List[str]`
         candidates = [util.flatten(candidate) for candidate in candidates]
-        references_list = [[util.flatten(reference) for reference in references] for references in references_list]
+        references_list = [
+            [util.flatten(reference) for reference in references]
+            for references in references_list
+        ]
 
         with DockerContainer(self.image) as backend:
             host_input_file = f"{backend.host_dir}/input.jsonl"
@@ -100,14 +103,11 @@ class BLEURT(Model):
             micro_metrics = []
             index = 0
             for references in references_list:
-                scores = results[index:index + len(references)]
+                scores = results[index : index + len(references)]
                 index += len(references)
-                micro_metrics.append({
-                    "bleurt": {
-                        "mean": np.mean(scores),
-                        "max": np.max(scores)
-                    }
-                })
+                micro_metrics.append(
+                    {"bleurt": {"mean": np.mean(scores), "max": np.max(scores)}}
+                )
 
             macro_metrics = util.average_dicts(micro_metrics)
             return macro_metrics, micro_metrics
