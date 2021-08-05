@@ -30,6 +30,9 @@ By default, the default English model is used unless otherwise specified.
 ## Implementation Notes
 - If you are going to repeatedly use a model, it is better to run the `setup` command and pass that model's name.
 Otherwise, every time you run the metric, the model will be downloaded again.
+
+- This implementation will return a score of 0 for precision, recall, and F1 if the input is empty.
+This is not true of the original code, which returns a non-zero recall when this is true.
     
 ## Docker Information
 - Image name: `zhang2020`
@@ -53,7 +56,7 @@ pytest models/zhang2020/tests
 ## Status
 - [x] Regression unit tests pass  
 - [x] Correctness unit tests pass  
-See [here](https://github.com/danieldeutsch/repro/actions/runs/1084053109).
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1102240656).
 The tests check for the same scores as in the original repo's unit tests.
 - [ ] Model runs on full test dataset  
 Not tested

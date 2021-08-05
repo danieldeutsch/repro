@@ -55,6 +55,13 @@ class BERTScore(Model):
             for references in references_list
         ]
 
+        # The metric code will run if we provide it an empty input, but we want to
+        # assign a value of 0 to that candidate. Remove the empty inputs here, then
+        # add 0 values at the end
+        empty_indices, candidates, references_list = util.remove_empty_inputs(
+            candidates, references_list
+        )
+
         with TemporaryDirectory() as temp:
             host_input_dir = f"{temp}/input"
             host_output_dir = f"{temp}/output"
@@ -112,5 +119,14 @@ class BERTScore(Model):
 
             micro_metrics = read_jsonl_file(host_output_file)
             micro_metrics = [{"bertscore": scores} for scores in micro_metrics]
+
+            # Insert default metric values for inputs which were empty. All of the
+            # scored inputs should have the same keys, so we can get a default set
+            # of metrics from just the first set of metrics
+            empty_value = util.get_default_dict(micro_metrics[0], default=0.0)
+            micro_metrics = util.insert_empty_values(
+                micro_metrics, empty_indices, empty_value
+            )
+
             macro_metrics = util.average_dicts(micro_metrics)
             return macro_metrics, micro_metrics
