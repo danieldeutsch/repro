@@ -204,3 +204,56 @@ class TestUtil(unittest.TestCase):
                 {"A": 5, "B": {"C": 6, "D": 7, "E": {"F": 8}}},
             ]
             util.average_dicts(dicts)
+
+    def test_is_empty_text(self):
+        assert util.is_empty_text("") is True
+        assert util.is_empty_text("  ") is True
+        assert util.is_empty_text(" \n ") is True
+
+        assert util.is_empty_text([]) is True
+        assert util.is_empty_text([""]) is True
+        assert util.is_empty_text(["", ""]) is True
+        assert util.is_empty_text(["", "  "]) is True
+
+        assert util.is_empty_text("A") is False
+        assert util.is_empty_text(["A"]) is False
+        assert util.is_empty_text(["", "A"]) is False
+
+    def test_remove_empty_inputs(self):
+        inputs = ["A", "", "B", "", "C"]
+        context1 = ["D1", "D2", "D3", "D4", "D5"]
+        context2 = ["E1", "E2", "E3", "E4", "E5"]
+        expected_empty_indices = {1, 3}
+        expected_non_empty_inputs = ["A", "B", "C"]
+        expected_non_empty_context1 = ["D1", "D3", "D5"]
+        expected_non_empty_context2 = ["E1", "E3", "E5"]
+
+        empty_indices, non_empty_inputs = util.remove_empty_inputs(inputs)
+        assert empty_indices == expected_empty_indices
+        assert non_empty_inputs == expected_non_empty_inputs
+
+        empty_indices, non_empty_inputs, non_empty_context1 = util.remove_empty_inputs(
+            inputs, context1
+        )
+        assert empty_indices == expected_empty_indices
+        assert non_empty_inputs == expected_non_empty_inputs
+        assert non_empty_context1 == expected_non_empty_context1
+
+        (
+            empty_indices,
+            non_empty_inputs,
+            non_empty_context1,
+            non_empty_context2,
+        ) = util.remove_empty_inputs(inputs, context1, context2)
+        assert empty_indices == expected_empty_indices
+        assert non_empty_inputs == expected_non_empty_inputs
+        assert non_empty_context1 == expected_non_empty_context1
+        assert non_empty_context2 == expected_non_empty_context2
+
+        # Test for different length contexts
+        with self.assertRaises(Exception):
+            util.remove_empty_inputs(["A"], [])
+        with self.assertRaises(Exception):
+            util.remove_empty_inputs(["A"], ["B", "C"])
+        with self.assertRaises(Exception):
+            util.remove_empty_inputs(["A"], ["B"], [])

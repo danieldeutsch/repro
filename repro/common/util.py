@@ -1,4 +1,4 @@
-from typing import Dict, List, T, Tuple, Union
+from typing import Any, Dict, List, T, Tuple, Union
 
 from repro.data.types import TextType
 
@@ -181,3 +181,38 @@ def average_dicts(dicts: List[NestedDict]) -> NestedDict:
 
     # Unflatten the average to match the input dicts
     return unflatten_dict(average)
+
+
+def is_empty_text(text: TextType) -> bool:
+    if isinstance(text, str):
+        return len(text.strip()) == 0
+    else:
+        if len(text) == 0:
+            return True
+        for sentence in text:
+            if len(sentence.strip()) > 0:
+                return False
+        return True
+
+
+def remove_empty_inputs(inputs: List[TextType], *contexts: List[T]) -> Tuple[Any, ...]:
+    for context in contexts:
+        if len(inputs) != len(context):
+            raise Exception(
+                f"Each context must have the same length as the input. "
+                f"Found {len(context)}, expected {len(inputs)}"
+            )
+
+    empty_indices = set()
+    non_empty = []
+    for i, (inp, *ctxs) in enumerate(zip(inputs, *contexts)):
+        is_empty = is_empty_text(inp)
+        if is_empty:
+            empty_indices.add(i)
+        else:
+            non_empty.append((inp, *ctxs))
+
+    non_empty_inputs, *non_empty_contexts = zip(*non_empty)
+    non_empty_inputs = list(non_empty_inputs)
+    non_empty_contexts = [list(context) for context in non_empty_contexts]
+    return (empty_indices, non_empty_inputs, *non_empty_contexts)
