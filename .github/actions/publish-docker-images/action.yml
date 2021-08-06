@@ -1,12 +1,5 @@
 name: "Publish Docker Images"
 description: "Publish updated Docker images to DockerHub"
-inputs:
-  dry_run:
-    description: |
-      Indicates the images should not actually be built and published, but prints what commands
-      would be run if they were.
-    required: false
-    default: "true"
 runs:
   using: "composite"
   steps:
