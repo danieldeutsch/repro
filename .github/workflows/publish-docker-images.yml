@@ -1,10 +1,6 @@
 name: Publish Docker Images
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: push
 
 jobs:
   build:
@@ -23,4 +19,4 @@ jobs:
         pip install --editable .
 
     - name: Publish Docker Images
-      uses: .github/actions/publish-docker-images
+      uses: ./.github/actions/publish-docker-images
