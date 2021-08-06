@@ -18,7 +18,7 @@ class DAE(Model):
     def __init__(
         self,
         image: str = "goyal2020",
-        model: str = "dae_w_syn_hallu",
+        model: str = "dae_w_syn",
         device: int = 0,
         sleep: int = 1,
     ):
@@ -27,7 +27,7 @@ class DAE(Model):
         ----------
         image : str, default="goyal2020"
             The name of the Docker image
-        model : str, default="dae_w_syn_w_hallu"
+        model : str, default="dae_w_syn"
             The name of the pre-trained DAE model to use
         device : int, default=0
             The ID of the GPU to use, -1 if CPU

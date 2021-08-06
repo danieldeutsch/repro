@@ -31,10 +31,10 @@ class TestGoyal2020Models(unittest.TestCase):
     @parameterized.expand(_get_testing_parameters())
     def test_dae_regression(self, device: int, model_name: str):
         if model_name is None:
-            # Use the default model, which is "dae_w_syn_hallu" and
+            # Use the default model, which is "dae_w_syn" and
             # set the model name for usage later on
             model = DAE(device=device)
-            model_name = "dae_w_syn_hallu"
+            model_name = "dae_w_syn"
         else:
             model = DAE(model=model_name, device=device)
 

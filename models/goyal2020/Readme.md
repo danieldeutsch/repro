@@ -16,7 +16,7 @@ There are three versions available, `dae_basic`, `dae_w_syn` and `dae_w_syn_hall
   - Usage:
     ```python
     from repro.models.goyal2020 import DAE
-    # "dae_w_syn_hallu" is the default model
+    # "dae_w_syn" is the default model
     model = DAE()
     inputs = [
         {"candidate": "The candidate sentence", "sources": ["The source sentence"]}
@@ -44,13 +44,12 @@ pytest models/goyal2020/tests
 
 ## Status
 - [x] Regression unit tests pass  
-See [here](https://github.com/danieldeutsch/repro/actions/runs/1098509347).
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1105599382).
 The regression tests for "dae_basic" and "dae_w_syn" are not very strong since the scores are all around 0.9999.
 - [ ] Correctness unit tests pass  
 No example outputs provided by the original repo.
-- [ ] Model runs on full test dataset  
-Not tested
-- [ ] Predictions approximately replicate results reported in the paper  
-Not tested
-- [ ] Predictions exactly replicate results reported in the paper  
-Not tested
+- [X] Model runs on full test dataset  
+See [here](experiments/reproduce-results/Readme.md)
+- [x] Predictions approximately replicate results reported in the paper  
+- [x] Predictions exactly replicate results reported in the paper  
+See [here](experiments/reproduce-results/Readme.md)
