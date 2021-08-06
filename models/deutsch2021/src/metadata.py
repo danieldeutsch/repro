@@ -1,6 +1,7 @@
 VERSION = "1.0"
 MODEL_NAME = "deutsch2021"
-DEFAULT_IMAGE = f"danieldeutsch/{MODEL_NAME}:{VERSION}"
+DOCKERHUB_REPRO = f"danieldeutsch/{MODEL_NAME}"
+DEFAULT_IMAGE = f"{DOCKERHUB_REPRO}:{VERSION}"
 CITATION = """
 @misc{deutsch2021questionanswering,
       title={{Towards Question-Answering as an Automatic Metric for Evaluating the Content Quality of a Summary}}, 
