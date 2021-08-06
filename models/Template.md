@@ -25,6 +25,7 @@ Dicuss anything relevant to someone who wants to use this model.
     
 ## Docker Information
 - Image name: List the name of the corresponding docker image
+- Docker Hub: Add the link to the image on Docker Hub if it exists
 - Build command: Provide documentation on how to build the image
   ```shell script
   repro setup <model-name> \
@@ -57,3 +58,6 @@ This means the model can successfully make predictions on the entire test datase
 This means that even if the predictions don't get the exact scores reported in the paper or original repository, they are close enough to consider this a successful reimplementation
 - [ ] Predictions exactly replicate results reported in the paper  
 This means that the predictions and results are exactly what is reported in the paper or original repository.
+
+## Changelog
+List the changes for each new version
