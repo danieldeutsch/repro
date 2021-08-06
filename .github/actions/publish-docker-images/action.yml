@@ -24,7 +24,6 @@ runs:
           else
             echo "Image ${repository}:${version} does not exist. Building and publishing."
             repro setup ${model}
-
           fi
         done < versions.txt
       shell: bash
