@@ -11,6 +11,13 @@ runs:
   using: "composite"
   steps:
     - run: |
-        python ${{ github.action_path }}/get_image_versions.py --output-file versions.txt
-        cat versions.txt
+        function docker_tag_exists() {
+            curl --silent -f -lSL https://index.docker.io/v1/repositories/$1/tags/$2 > /dev/null
+        }
+
+        python ${{ github.action_path }}/get_image_versions.py --output-file versions.tsv
+
+        while IFS='\t' read -r repository version; do
+          echo docker_tag_exists ${repository} ${version}
+        done < versions.tsv
       shell: bash
