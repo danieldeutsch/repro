@@ -6,18 +6,18 @@ import pkgutil
 def main(args):
     versions = []
     for module_info in pkgutil.iter_modules(["repro/models"]):
-        module_name = f"repro.models.{module_info.name}"
+        name = module_info.name
+        module_name = f"repro.models.{name}"
         module = importlib.import_module(module_name)
         try:
-            version = module.VERSION
             repository = module.DOCKERHUB_REPRO
-            versions.append((repository, version))
+            versions.append((name, repository, version))
         except AttributeError:
             print(f"{module_name} does not have a version and/or DockerHub repository")
 
     with open(args.output_file, "w") as out:
-        for repository, version in versions:
-            out.write(f"{repository} {version}\n")
+        for name, repository, version in versions:
+            out.write(f"{name} {repository} {version}\n")
 
 
 if __name__ == "__main__":

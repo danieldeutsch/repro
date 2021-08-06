@@ -19,7 +19,7 @@ runs:
         python ${{ github.action_path }}/get_image_versions.py --output-file versions.txt
 
         while IFS=" " read -r repository version; do
-          if docker_tag_exists ${repository} ${version}; then
+          if docker_tag_exists model repository version; then
             echo ${repository} ${version} "exists"
           else
             echo ${repository} ${version} "does not exist"
