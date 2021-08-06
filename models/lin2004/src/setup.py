@@ -6,4 +6,4 @@ from repro.common.docker import BuildDockerImageSubcommand
 @SetupSubcommand.register("lin2004")
 class Lin2004SetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
-        super().__init__("lin2004", f"{MODELS_ROOT}/lin2004")
+        super().__init__("lin2004", "lin2004", f"{MODELS_ROOT}/lin2004")

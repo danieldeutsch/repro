@@ -10,7 +10,7 @@ from repro.common.docker import BuildDockerImageSubcommand, build_image
 @SetupSubcommand.register("liu2019")
 class Liu2019SetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
-        super().__init__("liu2019", f"{MODELS_ROOT}/liu2019")
+        super().__init__("liu2019", "liu2019", f"{MODELS_ROOT}/liu2019")
 
     @overrides
     def add_subparser(self, parser: argparse._SubParsersAction):

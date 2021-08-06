@@ -10,16 +10,18 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model, QuestionAnsweringModel, QuestionGenerationModel
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 QAPairsType = List[List[Dict[str, Any]]]
 
 logger = logging.getLogger(__name__)
 
 
-@Model.register("deutsch2021-qaeval")
+@Model.register(f"{MODEL_NAME}-qaeval")
 class QAEval(Model):
     def __init__(
         self,
-        image: str = "deutsch2021",
+        image: str = DEFAULT_IMAGE,
         device: int = 0,
         generation_batch_size: int = 8,
         answering_batch_size: int = 8,
@@ -111,10 +113,10 @@ class QAEval(Model):
                 return macro_metrics, micro_metrics
 
 
-@Model.register("deutsch2021-question-generation")
+@Model.register(f"{MODEL_NAME}-question-generation")
 class QAEvalQuestionGenerationModel(QuestionGenerationModel):
     def __init__(
-        self, image: str = "deutsch2021", device: int = 0, batch_size: int = 8
+        self, image: str = DEFAULT_IMAGE, device: int = 0, batch_size: int = 8
     ) -> None:
         self.image = image
         self.device = device
@@ -167,10 +169,10 @@ class QAEvalQuestionGenerationModel(QuestionGenerationModel):
             return questions
 
 
-@Model.register("deutsch2021-question-answering")
+@Model.register(f"{MODEL_NAME}-question-answering")
 class QAEvalQuestionAnsweringModel(QuestionAnsweringModel):
     def __init__(
-        self, image: str = "deutsch2021", device: int = 0, batch_size: int = 8
+        self, image: str = DEFAULT_IMAGE, device: int = 0, batch_size: int = 8
     ) -> None:
         self.image = image
         self.device = device
