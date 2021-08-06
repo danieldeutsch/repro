@@ -13,7 +13,7 @@ runs:
     - run: |
         # https://stackoverflow.com/questions/32113330/check-if-imagetag-combination-already-exists-on-docker-hub
         function docker_tag_exists() {
-            curl --silent -f -lSL https://index.docker.io/v1/repositories/$1/tags/$2 > /dev/null
+            curl --silent -f -lSL https://index.docker.io/v1/repositories/$1/tags/$2 > /dev/null 2> /dev/null
         }
 
         python ${{ github.action_path }}/get_image_versions.py --output-file versions.txt
@@ -23,7 +23,15 @@ runs:
             echo "Image ${repository}:${version} exists. Skipping."
           else
             echo "Image ${repository}:${version} does not exist. Building and publishing."
+
+            # Build the image
             repro setup ${model}
+
+            # Push the image to Docker Hub
+            #docker push ${repository}:${version}
+
+            # Delete all images to save disk space in case we're publishing several
+            docker image rm -f *
           fi
         done < versions.txt
       shell: bash
