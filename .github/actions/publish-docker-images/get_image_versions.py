@@ -14,19 +14,25 @@ def main(args):
             version = module.VERSION
             repository = module.DOCKERHUB_REPRO
         except AttributeError:
-            print(f"{module_name} does not have `VERSION` and/or `DOCKERHUB_REPRO` attributes. Will not publish")
+            print(
+                f"{module_name} does not have `VERSION` and/or `DOCKERHUB_REPRO` attributes. Will not publish"
+            )
             continue
 
         try:
             automatically_publish = module.AUTOMATICALLY_PUBLISH
         except AttributeError:
-            print(f"{module_name} does not have an `AUTOMATICALLY_PUBLISH` attribute. Will not publish")
+            print(
+                f"{module_name} does not have an `AUTOMATICALLY_PUBLISH` attribute. Will not publish"
+            )
             continue
 
         if automatically_publish:
             versions.append((name, repository, version))
         else:
-            print(f"{module_name} is set to not be automatically published. Will not publish")
+            print(
+                f"{module_name} is set to not be automatically published. Will not publish"
+            )
 
     with open(args.output_file, "w") as out:
         for model, repository, version in versions:
