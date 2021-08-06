@@ -10,14 +10,15 @@ def main(args):
         module_name = f"repro.models.{name}"
         module = importlib.import_module(module_name)
         try:
+            version = module.VERSION
             repository = module.DOCKERHUB_REPRO
             versions.append((name, repository, version))
         except AttributeError:
             print(f"{module_name} does not have a version and/or DockerHub repository")
 
     with open(args.output_file, "w") as out:
-        for name, repository, version in versions:
-            out.write(f"{name} {repository} {version}\n")
+        for model, repository, version in versions:
+            out.write(f"{model} {repository} {version}\n")
 
 
 if __name__ == "__main__":
