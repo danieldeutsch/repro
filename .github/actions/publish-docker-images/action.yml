@@ -31,7 +31,7 @@ runs:
             #docker push ${repository}:${version}
 
             # Delete all images to save disk space in case we're publishing several
-            docker image rm -f *
+            docker image prune
           fi
         done < versions.txt
       shell: bash
