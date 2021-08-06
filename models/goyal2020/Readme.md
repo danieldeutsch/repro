@@ -44,7 +44,7 @@ pytest models/goyal2020/tests
 
 ## Status
 - [x] Regression unit tests pass  
-See [here](https://github.com/danieldeutsch/repro/actions/runs/1098509347).
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1105599382).
 The regression tests for "dae_basic" and "dae_w_syn" are not very strong since the scores are all around 0.9999.
 - [ ] Correctness unit tests pass  
 No example outputs provided by the original repo.
