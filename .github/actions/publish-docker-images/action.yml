@@ -11,6 +11,7 @@ runs:
   using: "composite"
   steps:
     - run: |
+        git remote set-url origin "https://${{ github.token }}@github.com/${{ github.repository }}"
         BASE_SHA=$(git rev-parse HEAD^1 2>&1) && exit_status=$? || exit_status=$?
         echo $BASE_SHA
       shell: bash
