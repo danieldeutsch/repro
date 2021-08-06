@@ -9,14 +9,18 @@ def main(args):
     correct_inputs = []
     incorrect_inputs = []
     for instance in data:
-        correct_inputs.append({
-            "candidate": instance["correct_sent"],
-            "sources": [instance["article_sent"]]
-        })
-        incorrect_inputs.append({
-            "candidate": instance["incorrect_sent"],
-            "sources": [instance["article_sent"]]
-        })
+        correct_inputs.append(
+            {
+                "candidate": instance["correct_sent"],
+                "sources": [instance["article_sent"]],
+            }
+        )
+        incorrect_inputs.append(
+            {
+                "candidate": instance["incorrect_sent"],
+                "sources": [instance["article_sent"]],
+            }
+        )
 
     results = {}
     for name in ["dae_basic", "dae_w_syn", "dae_w_syn_hallu"]:
@@ -35,7 +39,7 @@ def main(args):
         out.write(json.dumps(results, indent=2))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     argp = argparse.ArgumentParser()
     argp.add_argument("--input-file", required=True)
     argp.add_argument("--device", required=True, type=int)
