@@ -18,6 +18,10 @@ runs:
         python ${{ github.action_path }}/get_image_versions.py --output-file versions.tsv
 
         while IFS='\t' read -r repository version; do
-          echo docker_tag_exists ${repository} ${version}
+          if docker_tag_exists ${repository} ${version}; then
+            echo ${repository} ${version} "exists"
+          else
+            echo ${repository} ${version} "does not exist"
+          fi
         done < versions.tsv
       shell: bash
