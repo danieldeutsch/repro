@@ -20,9 +20,11 @@ runs:
 
         while IFS=" " read -r model repository version; do
           if docker_tag_exists ${repository} ${version}; then
-            echo ${repository} ${version} "exists"
+            echo "Image ${repository}:${version} exists. Skipping."
           else
-            echo ${repository} ${version} "does not exist"
+            echo "Image ${repository}:${version} does not exist. Building and publishing."
+            repro setup ${model}
+
           fi
         done < versions.txt
       shell: bash
