@@ -151,17 +151,19 @@ def build_image(
 class BuildDockerImageSubcommand(SetupSubcommand):
     def __init__(
         self,
+        model: str,
         image: str,
         root: str,
     ) -> None:
+        self.model = model
         self.image = image
         self.root = root
 
     @overrides
     def add_subparser(self, parser: argparse._SubParsersAction):
-        description = f'Build the docker image "{self.image}"'
+        description = f'Build the docker image "{self.image}" for model {self.model}'
         self.parser = parser.add_parser(
-            self.image, description=description, help=description
+            self.model, description=description, help=description
         )
         self.parser.add_argument(
             "--silent",

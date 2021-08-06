@@ -22,6 +22,7 @@ The implementation here was based on the instructions in the [original repositor
     
 ## Docker Information
 - Image name: `gupta2020`
+- Docker Hub: https://hub.docker.com/repository/docker/danieldeutsch/gupta2020
 - Build command:
   ```
   repro setup gupta2020 [--silent]

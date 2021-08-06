@@ -26,6 +26,7 @@ n/a
     
 ## Docker Information
 - Image name: `lin2004`
+- Docker Hub: https://hub.docker.com/repository/docker/danieldeutsch/lin2004
 - Build command:
   ```shell script
   repro setup lin2004 [--silent]

@@ -8,10 +8,12 @@ from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file
 from repro.models import Model, QuestionAnsweringModel
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
 
-@Model.register("gupta2020-nmn")
+
+@Model.register(f"{MODEL_NAME}-nmn")
 class NeuralModuleNetwork(QuestionAnsweringModel):
-    def __init__(self, image: str = "gupta2020", device: int = 0) -> None:
+    def __init__(self, image: str = DEFAULT_IMAGE, device: int = 0) -> None:
         self.image = image
         self.device = device
 

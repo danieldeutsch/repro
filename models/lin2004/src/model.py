@@ -9,15 +9,16 @@ from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
 from .commands import sentence_split
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
 
 logger = logging.getLogger(__name__)
 
 
-@Model.register("lin2004-rouge")
+@Model.register(f"{MODEL_NAME}-rouge")
 class ROUGE(Model):
     def __init__(
         self,
-        image: str = "lin2004",
+        image: str = DEFAULT_IMAGE,
         ngram_order: int = 4,
         porter_stemmer: bool = True,
         remove_stopwords: bool = False,
