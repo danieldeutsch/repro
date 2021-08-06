@@ -62,6 +62,7 @@ We have implemented the QAEval metric as well as its question-generation and que
     
 ## Docker Information
 - Image name: `deutsch2021`
+- Docker Hub: https://hub.docker.com/repository/docker/danieldeutsch/deutsch2021
 - Build command:
   ```shell script
   repro setup deutsch2021 [--silent]
