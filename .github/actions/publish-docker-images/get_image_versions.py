@@ -17,7 +17,7 @@ def main(args):
 
     with open(args.output_file, "w") as out:
         for repository, version in versions:
-            out.write(f"{repository}\t{version}\n")
+            out.write(f"{repository} {version}\n")
 
 
 if __name__ == "__main__":
