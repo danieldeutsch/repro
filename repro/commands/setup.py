@@ -17,7 +17,7 @@ class SetupModelSubcommand(RootSubcommand):
 
         # Add all of the setup commands using the registry
         for name, (cls_, _) in sorted(Registrable._registry[SetupSubcommand].items()):
-            cls_().add_subparser(subparsers)
+            cls_().add_subparser(name, subparsers)
 
         self.parser.set_defaults(func=self.run)
 

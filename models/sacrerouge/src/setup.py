@@ -6,4 +6,4 @@ from repro.common.docker import BuildDockerImageSubcommand
 @SetupSubcommand.register("sacrerouge")
 class SacreROUGESetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
-        super().__init__("sacrerouge", "sacrerouge", f"{MODELS_ROOT}/sacrerouge")
+        super().__init__(f"{MODELS_ROOT}/sacrerouge", "sacrerouge")
