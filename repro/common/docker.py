@@ -164,21 +164,20 @@ def pull_image(image: str) -> None:
 
 
 class BuildDockerImageSubcommand(SetupSubcommand):
-    def __init__(
-        self,
-        model: str,
-        image: str,
-        root: str,
-    ) -> None:
-        self.model = model
-        self.image = image
+    def __init__(self, root: str, default_image: str) -> None:
         self.root = root
+        self.default_image = default_image
 
     @overrides
-    def add_subparser(self, parser: argparse._SubParsersAction):
-        description = f'Build the docker image "{self.image}" for model {self.model}'
+    def add_subparser(self, model: str, parser: argparse._SubParsersAction):
+        description = f'Build a Docker image for model "{model}"'
         self.parser = parser.add_parser(
-            self.model, description=description, help=description
+            model, description=description, help=description
+        )
+        self.parser.add_argument(
+            "--image-name",
+            default=self.default_image,
+            help="The name of the image to build",
         )
         self.parser.add_argument(
             "--silent",
@@ -190,7 +189,7 @@ class BuildDockerImageSubcommand(SetupSubcommand):
     @overrides
     def run(self, args):
         prepare_global_logging(silent=args.silent)
-        build_image(self.root, self.image, silent=args.silent)
+        build_image(self.root, args.image_name, silent=args.silent)
 
 
 class DockerContainer(object):

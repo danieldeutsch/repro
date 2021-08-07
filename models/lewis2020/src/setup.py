@@ -10,13 +10,18 @@ from repro.common.docker import BuildDockerImageSubcommand, build_image
 @SetupSubcommand.register("lewis2020")
 class Lewis2020SetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
-        super().__init__("lewis2020", "lewis2020", f"{MODELS_ROOT}/lewis2020")
+        super().__init__(f"{MODELS_ROOT}/lewis2020", "lewis2020")
 
     @overrides
-    def add_subparser(self, parser: argparse._SubParsersAction):
-        description = f'Build the docker image "{self.image}"'
+    def add_subparser(self, model: str, parser: argparse._SubParsersAction):
+        description = f'Build a Docker image for model "{model}"'
         self.parser = parser.add_parser(
-            self.image, description=description, help=description
+            model, description=description, help=description
+        )
+        self.parser.add_argument(
+            "--image-name",
+            default="lewis2020",
+            help="The name of the image to build",
         )
         self.parser.add_argument(
             "--cnndm",
@@ -41,4 +46,6 @@ class Lewis2020SetupSubcommand(BuildDockerImageSubcommand):
             "CNNDM": "true" if args.cnndm else "false",
             "XSUM": "true" if args.xsum else "false",
         }
-        build_image(self.root, self.image, build_args=build_args, silent=args.silent)
+        build_image(
+            self.root, args.image_name, build_args=build_args, silent=args.silent
+        )
