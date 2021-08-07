@@ -148,6 +148,21 @@ def build_image(
     logger.info("Finished building image")
 
 
+def pull_image(image: str) -> None:
+    """
+    Pulls an image from Docker Hub.
+
+    Parameters
+    ----------
+    image : str
+        The name of the image to pull.
+    """
+    logger.info(f"Pulling image {image} from Docker Hub")
+    client = docker.from_env()
+    client.images.pull(image)
+    logger.info("Pulled image")
+
+
 class BuildDockerImageSubcommand(SetupSubcommand):
     def __init__(
         self,
