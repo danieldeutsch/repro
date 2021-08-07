@@ -6,11 +6,13 @@ from repro import MODELS_ROOT
 from repro.commands.subcommand import SetupSubcommand
 from repro.common.docker import BuildDockerImageSubcommand, build_image
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
 
-@SetupSubcommand.register("liu2019")
+
+@SetupSubcommand.register(MODEL_NAME)
 class Liu2019SetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
-        super().__init__(f"{MODELS_ROOT}/liu2019", "liu2019")
+        super().__init__(f"{MODELS_ROOT}/{MODEL_NAME}", DEFAULT_IMAGE)
 
     @overrides
     def add_subparser(self, model: str, parser: argparse._SubParsersAction):
@@ -20,28 +22,28 @@ class Liu2019SetupSubcommand(BuildDockerImageSubcommand):
         )
         self.parser.add_argument(
             "--image-name",
-            default="liu2019",
+            default=DEFAULT_IMAGE,
             help="The name of the image to build",
         )
         self.parser.add_argument(
-            "--transformerabs-cnndm",
+            "--not-transformerabs-cnndm",
             action="store_true",
-            help="Indicates the TransformerAbs-CNNDM model should be downloaded",
+            help="Indicates the TransformerAbs-CNNDM model should not be downloaded",
         )
         self.parser.add_argument(
-            "--bertsumext-cnndm",
+            "--not-bertsumext-cnndm",
             action="store_true",
-            help="Indicates the BertSumExt-CNNDM model should be downloaded",
+            help="Indicates the BertSumExt-CNNDM model should not be downloaded",
         )
         self.parser.add_argument(
-            "--bertsumextabs-cnndm",
+            "--not-bertsumextabs-cnndm",
             action="store_true",
-            help="Indicates the BertSumExtAbs-CNNDM model should be downloaded",
+            help="Indicates the BertSumExtAbs-CNNDM model should not be downloaded",
         )
         self.parser.add_argument(
-            "--bertsumextabs-xsum",
+            "--not-bertsumextabs-xsum",
             action="store_true",
-            help="Indicates the BertSumExtAbs-XSum model should be downloaded",
+            help="Indicates the BertSumExtAbs-XSum model should not be downloaded",
         )
         self.parser.add_argument(
             "--silent",
@@ -53,10 +55,12 @@ class Liu2019SetupSubcommand(BuildDockerImageSubcommand):
     @overrides
     def run(self, args):
         build_args = {
-            "TRANSFORMERABS_CNNDM": "true" if args.transformerabs_cnndm else "false",
-            "BERTSUMEXT_CNNDM": "true" if args.bertsumext_cnndm else "false",
-            "BERTSUMEXTABS_CNNDM": "true" if args.bertsumextabs_cnndm else "false",
-            "BERTSUMEXTABS_XSUM": "true" if args.bertsumextabs_xsum else "false",
+            "TRANSFORMERABS_CNNDM": "false"
+            if args.not_transformerabs_cnndm
+            else "true",
+            "BERTSUMEXT_CNNDM": "false" if args.not_bertsumext_cnndm else "true",
+            "BERTSUMEXTABS_CNNDM": "false" if args.not_bertsumextabs_cnndm else "true",
+            "BERTSUMEXTABS_XSUM": "false" if args.not_bertsumextabs_xsum else "true",
         }
         build_image(
             self.root, args.image_name, build_args=build_args, silent=args.silent
