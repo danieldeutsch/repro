@@ -18,7 +18,7 @@ class Zhang2020SetupSubcommand(BuildDockerImageSubcommand):
     def add_subparser(self, parser: argparse._SubParsersAction):
         description = f'Build the docker image "{self.image}"'
         self.parser = parser.add_parser(
-            self.image, description=description, help=description
+            self.model, description=description, help=description
         )
         self.parser.add_argument(
             "--models",
