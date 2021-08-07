@@ -46,4 +46,6 @@ class Lewis2020SetupSubcommand(BuildDockerImageSubcommand):
             "CNNDM": "true" if args.cnndm else "false",
             "XSUM": "true" if args.xsum else "false",
         }
-        build_image(self.root, args.image_name, build_args=build_args, silent=args.silent)
+        build_image(
+            self.root, args.image_name, build_args=build_args, silent=args.silent
+        )

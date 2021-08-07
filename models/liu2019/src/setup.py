@@ -58,4 +58,6 @@ class Liu2019SetupSubcommand(BuildDockerImageSubcommand):
             "BERTSUMEXTABS_CNNDM": "true" if args.bertsumextabs_cnndm else "false",
             "BERTSUMEXTABS_XSUM": "true" if args.bertsumextabs_xsum else "false",
         }
-        build_image(self.root, args.image_name, build_args=build_args, silent=args.silent)
+        build_image(
+            self.root, args.image_name, build_args=build_args, silent=args.silent
+        )

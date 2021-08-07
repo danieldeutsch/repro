@@ -76,4 +76,6 @@ class Sellam2020SetupSubcommand(BuildDockerImageSubcommand):
             "LARGE_128": "true" if args.large_128 else "false",
             "LARGE_512": "true" if args.large_512 else "false",
         }
-        build_image(self.root, args.image_name, build_args=build_args, silent=args.silent)
+        build_image(
+            self.root, args.image_name, build_args=build_args, silent=args.silent
+        )

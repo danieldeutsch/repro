@@ -43,4 +43,6 @@ class Zhang2020SetupSubcommand(BuildDockerImageSubcommand):
         build_args = {
             "MODELS": " ".join(args.models),
         }
-        build_image(self.root, args.image_name, build_args=build_args, silent=args.silent)
+        build_image(
+            self.root, args.image_name, build_args=build_args, silent=args.silent
+        )
