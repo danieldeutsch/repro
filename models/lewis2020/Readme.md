@@ -37,17 +37,17 @@ This implementation is based on the original code in the `fairseq` library, not 
 - Build command:
     ```
     repro setup lewis2020 \
-        [--cnndm] \
-        [--xsum] \
+        [--not-cnndm] \
+        [--not-xsum] \
         [--silent]
     ````
-  Each of the flags indicates whether the model trained on the corresponding dataset should be downloaded.
+  Each of the flags indicates whether the model trained on the corresponding dataset should not be downloaded (both are by default).
 - Requires network: Yes.
 Even with running a warmup query, [the inference sends a request to retrieve the etag of a file](https://github.com/pytorch/fairseq/blob/72323586aeae75e2b704c1c936784471bfa75019/fairseq/file_utils.py#L278), which fails if the network is disabled.
 
 ## Testing
 ```
-repro setup lewis2020 --cnndm --xsum
+repro setup lewis2020
 pytest models/lewis2020/tests
 ```
 
