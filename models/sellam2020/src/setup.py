@@ -10,7 +10,7 @@ from .metadata import DEFAULT_IMAGE, MODEL_NAME
 
 
 @SetupSubcommand.register(MODEL_NAME)
-class Sellam20SetupSubcommand(BuildDockerImageSubcommand):
+class Sellam2020SetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
         super().__init__(MODEL_NAME, DEFAULT_IMAGE, f"{MODELS_ROOT}/{MODEL_NAME}")
 
@@ -18,7 +18,7 @@ class Sellam20SetupSubcommand(BuildDockerImageSubcommand):
     def add_subparser(self, parser: argparse._SubParsersAction):
         description = f'Build the docker image "{self.image}"'
         self.parser = parser.add_parser(
-            self.image, description=description, help=description
+            self.model, description=description, help=description
         )
         # The default models
         self.parser.add_argument(
