@@ -5,7 +5,7 @@ from repro.common.docker import BuildDockerImageSubcommand
 from .metadata import DEFAULT_IMAGE, MODEL_NAME
 
 
-@SetupSubcommand.register("goyal2020")
+@SetupSubcommand.register(MODEL_NAME)
 class Goyal2020SetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
         super().__init__(MODEL_NAME, DEFAULT_IMAGE, f"{MODELS_ROOT}/{MODEL_NAME}")
