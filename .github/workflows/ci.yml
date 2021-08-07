@@ -30,7 +30,7 @@ jobs:
       run: |
         pytest tests
 
-    - name: Publish Docker Images
+    - name: Publish Docker Images Dry Run
       uses: ./.github/actions/publish-docker-images
       with:
         dryrun: "true"
