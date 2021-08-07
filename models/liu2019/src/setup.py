@@ -55,7 +55,9 @@ class Liu2019SetupSubcommand(BuildDockerImageSubcommand):
     @overrides
     def run(self, args):
         build_args = {
-            "TRANSFORMERABS_CNNDM": "false" if args.not_transformerabs_cnndm else "true",
+            "TRANSFORMERABS_CNNDM": "false"
+            if args.not_transformerabs_cnndm
+            else "true",
             "BERTSUMEXT_CNNDM": "false" if args.not_bertsumext_cnndm else "true",
             "BERTSUMEXTABS_CNNDM": "false" if args.not_bertsumextabs_cnndm else "true",
             "BERTSUMEXTABS_XSUM": "false" if args.not_bertsumextabs_xsum else "true",
