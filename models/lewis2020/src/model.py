@@ -10,10 +10,12 @@ from repro.common.io import write_to_text_file
 from repro.models import Model, SingleDocumentSummarizationModel
 from repro.models.model import DocumentType, SummaryType
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("lewis2020-bart")
+@Model.register(f"{MODEL_NAME}-bart")
 class BART(SingleDocumentSummarizationModel):
     """
     A wrapper around the BART model from `Lewis et al. (2020) <https://arxiv.org/abs/1910.13461>`.
@@ -24,7 +26,7 @@ class BART(SingleDocumentSummarizationModel):
         self,
         model: str = "bart.large.cnn",
         batch_size: int = None,
-        image: str = "lewis2020",
+        image: str = DEFAULT_IMAGE,
         device: int = 0,
     ) -> None:
         """
