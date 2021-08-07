@@ -61,23 +61,18 @@ Therefore, we tried to replicate their preprocessing steps as closely as we coul
 - Build command:
     ```
     repro setup liu2019 \
-        [--transformerabs-cnndm] \
-        [--bertsumext-cnndm] \
-        [--bertsumextabs-cnndm] \
-        [--bertsumextabs-xsum] \
+        [--not-transformerabs-cnndm] \
+        [--not-bertsumext-cnndm] \
+        [--not-bertsumextabs-cnndm] \
+        [--not-bertsumextabs-xsum] \
         [--silent]
     ````
-  Each of the flags indicates whether the corresponding model should be downloaded.
+  Each of the flags indicates whether the corresponding model should be not downloaded (all are by default).
 - Requires network: No
   
 ## Testing
 ```
-repro setup liu2019 \
-    --transformerabs-cnndm \
-    --bertsumext-cnndm \
-    --bertsumextabs-cnndm \
-    --bertsumextabs-xsum
-
+repro setup liu2019
 pytest -s models/liu2019/tests
 ```
 

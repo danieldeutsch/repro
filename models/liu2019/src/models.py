@@ -11,6 +11,8 @@ from repro.common.io import write_to_text_file
 from repro.models import Model, SingleDocumentSummarizationModel
 from repro.models.model import DocumentType, SummaryType
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
@@ -24,7 +26,7 @@ class _Liu2019Model(SingleDocumentSummarizationModel):
         self,
         model: str,
         task: str,
-        image: str = "liu2019",
+        image: str = DEFAULT_IMAGE,
         device: int = 0,
         min_length: int = None,
         max_length: int = None,
@@ -143,13 +145,13 @@ class _Liu2019Model(SingleDocumentSummarizationModel):
             return summaries
 
 
-@Model.register("liu2019-bertsumext")
+@Model.register(f"{MODEL_NAME}-bertsumext")
 class BertSumExt(_Liu2019Model):
     def __init__(self, **kwargs) -> None:
         super().__init__(model="bertsumext_cnndm.pt", task="ext", **kwargs)
 
 
-@Model.register("liu2019-bertsumextabs")
+@Model.register(f"{MODEL_NAME}-bertsumextabs")
 class BertSumExtAbs(_Liu2019Model):
     def __init__(self, model: str = "bertsumextabs_cnndm.pt", **kwargs) -> None:
         # Default values are taken from the Readme in the original repo
@@ -174,7 +176,7 @@ class BertSumExtAbs(_Liu2019Model):
         )
 
 
-@Model.register("liu2019-transformerabs")
+@Model.register(f"{MODEL_NAME}-transformerabs")
 class TransformerAbs(_Liu2019Model):
     def __init__(self, **kwargs) -> None:
         # Default values are taken from the Readme in the original repo
