@@ -6,14 +6,15 @@ from repro.models import Model, SingleDocumentSummarizationModel
 from repro.models.liu2019 import BertSumExt
 
 from .commands import get_oracle_sentences, generate_summaries, sentence_split
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
 
 logger = logging.getLogger(__name__)
 
 
-@Model.register("dou2021-oracle-sentence-gsum")
+@Model.register(f"{MODEL_NAME}-oracle-sentence-gsum")
 class OracleSentenceGSumModel(Model):
     def __init__(
-        self, image: str = "dou2021", device: int = 0, batch_size: int = 16
+        self, image: str = DEFAULT_IMAGE, device: int = 0, batch_size: int = 16
     ) -> None:
         self.model = "bart_sentence"
         self.image = image
@@ -92,10 +93,10 @@ class OracleSentenceGSumModel(Model):
         return summaries
 
 
-@Model.register("dou2021-sentence-gsum")
+@Model.register(f"{MODEL_NAME}-sentence-gsum")
 class SentenceGSumModel(SingleDocumentSummarizationModel):
     def __init__(
-        self, image: str = "dou2021", device: int = 0, batch_size: int = 16
+        self, image: str = DEFAULT_IMAGE, device: int = 0, batch_size: int = 16
     ) -> None:
         self.model = "bart_sentence"
         self.image = image

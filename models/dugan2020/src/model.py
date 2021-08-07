@@ -10,14 +10,16 @@ from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file
 from repro.models import Model, RecipeGenerationModel
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("dugan2020-roft-recipe")
+@Model.register(f"{MODEL_NAME}-roft-recipe")
 class RoFTRecipeGenerator(RecipeGenerationModel):
     def __init__(
         self,
-        image: str = "dugan2020",
+        image: str = DEFAULT_IMAGE,
         device: int = 0,
         top_p: float = 0.7,
         repetition_penalty: float = 1.2,

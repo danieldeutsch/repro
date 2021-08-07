@@ -10,13 +10,15 @@ from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file
 from repro.models import Model
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("chen2020-lerc")
+@Model.register(f"{MODEL_NAME}-lerc")
 class LERC(Model):
     def __init__(
-        self, image: str = "chen2020", device: int = 0, batch_size: int = 8
+        self, image: str = DEFAULT_IMAGE, device: int = 0, batch_size: int = 8
     ) -> None:
         self.image = image
         self.device = device
@@ -104,9 +106,9 @@ class LERC(Model):
             return scores
 
 
-@Model.register("chen2020-eval")
+@Model.register(f"{MODEL_NAME}-eval")
 class MOCHAEvaluationMetric(Model):
-    def __init__(self, image: str = "chen2020") -> None:
+    def __init__(self, image: str = DEFAULT_IMAGE) -> None:
         self.image = image
 
     @overrides
