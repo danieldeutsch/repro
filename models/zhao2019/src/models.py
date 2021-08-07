@@ -8,12 +8,14 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("zhao2019-moverscore")
+@Model.register(f"{MODEL_NAME}-moverscore")
 class MoverScore(Model):
-    def __init__(self, image: str = "zhao2019", device: int = 0):
+    def __init__(self, image: str = DEFAULT_IMAGE, device: int = 0):
         self.image = image
         self.device = device
 
@@ -89,7 +91,7 @@ class MoverScore(Model):
             return macro, micro
 
 
-@Model.register("zhao2019-moverscore-summarization")
+@Model.register(f"{MODEL_NAME}-moverscore-summarization")
 class MoverScoreForSummarization(MoverScore):
     def predict_batch(self, *args, **kwargs) -> Tuple[MetricsType, List[MetricsType]]:
         if "use_stopwords" in kwargs:

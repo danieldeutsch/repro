@@ -8,12 +8,14 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("scialom2021-questeval")
+@Model.register(f"{MODEL_NAME}-questeval")
 class QuestEval(Model):
-    def __init__(self, image: str = "scialom2021", device: int = 0):
+    def __init__(self, image: str = DEFAULT_IMAGE, device: int = 0):
         self.image = image
         self.device = device
 
@@ -119,7 +121,7 @@ class QuestEval(Model):
             return macro_metrics, micro_metrics
 
 
-@Model.register("scialom2021-questeval-summarization")
+@Model.register(f"{MODEL_NAME}-questeval-summarization")
 class QuestEvalForSummarization(QuestEval):
     @staticmethod
     def _check_and_update_kwargs(kwargs: Dict):
@@ -144,7 +146,7 @@ class QuestEvalForSummarization(QuestEval):
         return super().predict_batch(*args, **kwargs)
 
 
-@Model.register("scialom2021-questeval-simplification")
+@Model.register(f"{MODEL_NAME}-questeval-simplification")
 class QuestEvalForSimplification(QuestEval):
     @staticmethod
     def _check_and_update_kwargs(kwargs: Dict):

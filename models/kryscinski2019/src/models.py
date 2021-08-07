@@ -8,6 +8,8 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
@@ -15,7 +17,7 @@ class _Kryscinski2019Model(Model):
     def __init__(
         self,
         is_factccx: bool,
-        image: str = "kryscinski2019",
+        image: str = DEFAULT_IMAGE,
         device: int = 0,
         batch_size: int = 8,
     ):
@@ -128,13 +130,13 @@ class _Kryscinski2019Model(Model):
             return macro_metrics, micro_metrics
 
 
-@Model.register("kryscinski2019-factcc")
+@Model.register(f"{MODEL_NAME}-factcc")
 class FactCC(_Kryscinski2019Model):
     def __init__(self, **kwargs) -> None:
         super().__init__(is_factccx=False, **kwargs)
 
 
-@Model.register("kryscinski2019-factccx")
+@Model.register(f"{MODEL_NAME}-factccx")
 class FactCCX(_Kryscinski2019Model):
     def __init__(self, **kwargs) -> None:
         super().__init__(is_factccx=True, **kwargs)

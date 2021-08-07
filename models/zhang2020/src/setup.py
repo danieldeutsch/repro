@@ -6,11 +6,13 @@ from repro import MODELS_ROOT
 from repro.commands.subcommand import SetupSubcommand
 from repro.common.docker import BuildDockerImageSubcommand, build_image
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
 
-@SetupSubcommand.register("zhang2020")
+
+@SetupSubcommand.register(MODEL_NAME)
 class Zhang2020SetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
-        super().__init__("zhang2020", "zhang2020", f"{MODELS_ROOT}/zhang2020")
+        super().__init__(MODEL_NAME, DEFAULT_IMAGE, f"{MODELS_ROOT}/{MODEL_NAME}")
 
     @overrides
     def add_subparser(self, parser: argparse._SubParsersAction):

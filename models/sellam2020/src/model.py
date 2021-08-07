@@ -8,14 +8,16 @@ from repro.common.docker import DockerContainer
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("sellam2020-bleurt")
+@Model.register(f"{MODEL_NAME}-bleurt")
 class BLEURT(Model):
     def __init__(
         self,
-        image: str = "sellam2020",
+        image: str = DEFAULT_IMAGE,
         model: str = "bleurt-base-128",
         device: int = 0,
         batch_size: int = 16,
