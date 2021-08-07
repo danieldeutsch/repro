@@ -1,5 +1,12 @@
 name: "Publish Docker Images"
 description: "Publish updated Docker images to DockerHub"
+inputs:
+  dryrun:
+    description: |
+      Indicates that the images won't be published, but prints
+      what would happen if they were.
+    required: false
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -17,14 +24,18 @@ runs:
           else
             echo "Image ${repository}:${version} does not exist. Building and publishing."
 
-            # Build the image
-            repro setup ${model}
+            if [ "${{ inputs.dryrun }}" = "false" ]; then
+              # Build the image
+              repro setup ${model}
 
-            # Push the image to Docker Hub
-            docker push ${repository}:${version}
+              # Push the image to Docker Hub
+              docker push ${repository}:${version}
 
-            # Delete all images to save disk space in case we're publishing several
-            docker image prune --all --force
+              # Delete all images to save disk space in case we're publishing several
+              docker image prune --all --force
+            else
+              echo "Dryrun: Not building or publishing"
+            fi
           fi
         done < versions.txt
       shell: bash
