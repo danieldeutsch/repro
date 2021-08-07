@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added [DAE](models/goyal2020/Readme.md)
 - Adding [FactCC and FactCCX](models/kryscinski2019/Readme.md)
 - Added utilities to remove empty inputs and insert values at specific indices
+- Added automatically building and publishing model images
+- Added a command to pull default Docker images for each model
 
 ### Changed
 - BERTScore now returns 0 for its metrics if the input is empty. 
