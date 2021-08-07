@@ -24,14 +24,14 @@ class Lewis2020SetupSubcommand(BuildDockerImageSubcommand):
             help="The name of the image to build",
         )
         self.parser.add_argument(
-            "--cnndm",
+            "--not-cnndm",
             action="store_true",
-            help="Indicates the model trained on CNN/DM model should be downloaded",
+            help="Indicates the model trained on CNN/DM model should not be downloaded",
         )
         self.parser.add_argument(
-            "--xsum",
+            "--not-xsum",
             action="store_true",
-            help="Indicates the model trained on XSum should be downloaded",
+            help="Indicates the model trained on XSum should not be downloaded",
         )
         self.parser.add_argument(
             "--silent",
@@ -43,8 +43,8 @@ class Lewis2020SetupSubcommand(BuildDockerImageSubcommand):
     @overrides
     def run(self, args):
         build_args = {
-            "CNNDM": "true" if args.cnndm else "false",
-            "XSUM": "true" if args.xsum else "false",
+            "CNNDM": "false" if args.not_cnndm else "false",
+            "XSUM": "false" if args.not_xsum else "false",
         }
         build_image(
             self.root, args.image_name, build_args=build_args, silent=args.silent
