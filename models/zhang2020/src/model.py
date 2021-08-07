@@ -9,14 +9,16 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("zhang2020-bertscore")
+@Model.register(f"{MODEL_NAME}-bertscore")
 class BERTScore(Model):
     def __init__(
         self,
-        image: str = "zhang2020",
+        image: str = DEFAULT_IMAGE,
         model: str = None,
         device: int = 0,
         batch_size: int = 64,

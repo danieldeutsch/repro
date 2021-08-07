@@ -9,15 +9,14 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("papineni2002-sentbleu")
+@Model.register(f"{MODEL_NAME}-sentbleu")
 class SentBLEU(Model):
-    def __init__(
-        self,
-        image: str = "papineni2002",
-    ):
+    def __init__(self, image: str = DEFAULT_IMAGE):
         self.image = image
 
     def predict(
@@ -81,12 +80,9 @@ class SentBLEU(Model):
             return macro_metrics, micro_metrics
 
 
-@Model.register("papineni2002-bleu")
+@Model.register(f"{MODEL_NAME}-bleu")
 class BLEU(Model):
-    def __init__(
-        self,
-        image: str = "papineni2002",
-    ):
+    def __init__(self, image: str = DEFAULT_IMAGE):
         self.image = image
 
     def predict(

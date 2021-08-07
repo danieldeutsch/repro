@@ -8,16 +8,18 @@ from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 QAPairsType = List[List[Dict[str, Any]]]
 
 logger = logging.getLogger(__name__)
 
 
-@Model.register("goyal2020-dae")
+@Model.register(f"{MODEL_NAME}-dae")
 class DAE(Model):
     def __init__(
         self,
-        image: str = "goyal2020",
+        image: str = DEFAULT_IMAGE,
         model: str = "dae_w_syn",
         device: int = 0,
         sleep: int = 1,

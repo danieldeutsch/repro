@@ -2,10 +2,10 @@ from repro import MODELS_ROOT
 from repro.commands.subcommand import SetupSubcommand
 from repro.common.docker import BuildDockerImageSubcommand
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
 
-@SetupSubcommand.register("kryscinski2019")
+
+@SetupSubcommand.register(MODEL_NAME)
 class Kryscinski2019SetupSubcommand(BuildDockerImageSubcommand):
     def __init__(self) -> None:
-        super().__init__(
-            "kryscinski2019", "kryscinski2019", f"{MODELS_ROOT}/kryscinski2019"
-        )
+        super().__init__(MODEL_NAME, DEFAULT_IMAGE, f"{MODELS_ROOT}/{MODEL_NAME}")

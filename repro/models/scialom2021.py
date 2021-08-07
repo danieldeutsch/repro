@@ -1,3 +1,4 @@
+from ._models.scialom2021.src.metadata import *
 from ._models.scialom2021.src.models import (
     QuestEval,
     QuestEvalForSimplification,

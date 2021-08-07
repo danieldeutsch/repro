@@ -8,15 +8,17 @@ from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file, write_to_text_file
 from repro.models import Model, TruecasingModel
 
+from .metadata import DEFAULT_IMAGE, MODEL_NAME
+
 logger = logging.getLogger(__name__)
 
 
-@Model.register("susanto2016-truecaser")
+@Model.register(f"{MODEL_NAME}-truecaser")
 class RNNTruecaser(TruecasingModel):
     def __init__(
         self,
         model: str,
-        image: str = "susanto2016",
+        image: str = DEFAULT_IMAGE,
         device: int = 0,
     ) -> None:
         """
