@@ -45,8 +45,8 @@ class Lewis2020SetupSubcommand(BuildDockerImageSubcommand):
     @overrides
     def run(self, args):
         build_args = {
-            "CNNDM": "false" if args.not_cnndm else "false",
-            "XSUM": "false" if args.not_xsum else "false",
+            "CNNDM": "false" if args.not_cnndm else "true",
+            "XSUM": "false" if args.not_xsum else "true",
         }
         build_image(
             self.root, args.image_name, build_args=build_args, silent=args.silent
