@@ -33,16 +33,6 @@ class _Kryscinski2019Model(Model):
         self.device = device
         self.batch_size = batch_size
 
-    def _check_sources(self, sources_list: List[List[TextType]]) -> List[TextType]:
-        single_sources = []
-        for sources in sources_list:
-            if len(sources) != 1:
-                raise Exception(
-                    f"{self.name} only supports single source documents. Found: {len(sources)}"
-                )
-            single_sources.append(sources[0])
-        return single_sources
-
     def predict(
         self, candidate: TextType, sources: List[TextType], **kwargs
     ) -> MetricsType:
@@ -61,7 +51,7 @@ class _Kryscinski2019Model(Model):
         sources_list = [inp["sources"] for inp in inputs]
 
         # FactCC only accepts single source documents
-        sources = self._check_sources(sources_list)
+        sources = util.check_for_single_texts(sources_list)
 
         # Make sure all are type `str`
         candidates = [util.flatten(candidate) for candidate in candidates]
