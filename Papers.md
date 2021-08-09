@@ -22,6 +22,7 @@ This file contains a list of the papers with models wrapped by this library.
 |[Evaluating Factuality in Generation with Dependency-level Entailment](https://aclanthology.org/2020.findings-emnlp.322/)|Tanya Goyal and Greg Durrett|[Link](models/goyal2020/Readme.md)|
 |[Evaluating the Factual Consistency of Abstractive Text Summarization](https://arxiv.org/abs/1910.12840)|Wojciech Kryściński, Bryan McCann, Caiming Xiong, and Richard Socher|[Link](models/kryscinski2019/Readme.md)|
 |[Answers Unite! Unsupervised Metrics for Reinforced Summarization Models](https://arxiv.org/abs/1909.01610)|Thomas Scialom, Sylvain Lamprier, Benjamin Piwowarski, and Jacopo Staiano|[Link](models/scialom2019/Readme.md)|
+|[NUBIA: NeUral Based Interchangeability Assessor for Text Generation](https://arxiv.org/abs/2004.14667)|Hassan Kane, Muhammed Yusuf Kocyigit, Ali Abdalla, Pelkins Ajanoh, and Mohamed Coulibali|[Link](models/kane2020/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|

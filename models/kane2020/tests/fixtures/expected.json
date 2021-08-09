@@ -1,0 +1,173 @@
+{
+  "micro": [
+    {
+      "nubia": {
+        "nubia_score": 0.8362425246906156,
+        "features": {
+          "semantic_relation": 1.834525465965271,
+          "contradiction": 23.25747162103653,
+          "irrelevancy": 69.02123689651489,
+          "logical_agreement": 7.721292227506638,
+          "grammar_ref": 3.589066743850708,
+          "grammar_hyp": 3.5940451622009277
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.8330425429752182,
+        "features": {
+          "semantic_relation": 2.1746551990509033,
+          "contradiction": 1.7925720661878586,
+          "irrelevancy": 96.54356837272644,
+          "logical_agreement": 1.6638683155179024,
+          "grammar_ref": 3.589066743850708,
+          "grammar_hyp": 3.3652567863464355
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.812721300091133,
+        "features": {
+          "semantic_relation": 1.6262471675872803,
+          "contradiction": 2.4343838915228844,
+          "irrelevancy": 91.42789244651794,
+          "logical_agreement": 6.137727573513985,
+          "grammar_ref": 3.4789164066314697,
+          "grammar_hyp": 3.589066743850708
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.7592316501898223,
+        "features": {
+          "semantic_relation": 1.5276437997817993,
+          "contradiction": 1.9278071820735931,
+          "irrelevancy": 97.29415774345398,
+          "logical_agreement": 0.7780299987643957,
+          "grammar_ref": 3.589066743850708,
+          "grammar_hyp": 3.4789164066314697
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.8304308386603171,
+        "features": {
+          "semantic_relation": 1.927513599395752,
+          "contradiction": 3.1364284455776215,
+          "irrelevancy": 96.23062014579773,
+          "logical_agreement": 0.6329579278826714,
+          "grammar_ref": 3.027155876159668,
+          "grammar_hyp": 2.902362823486328
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.8266357163375604,
+        "features": {
+          "semantic_relation": 1.9217243194580078,
+          "contradiction": 2.5166934356093407,
+          "irrelevancy": 95.94206213951111,
+          "logical_agreement": 1.5412455424666405,
+          "grammar_ref": 3.027155876159668,
+          "grammar_hyp": 3.141193151473999
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.9434621332502781,
+        "features": {
+          "semantic_relation": 2.3584160804748535,
+          "contradiction": 8.55812057852745,
+          "irrelevancy": 57.922106981277466,
+          "logical_agreement": 33.519768714904785,
+          "grammar_ref": 3.6481850147247314,
+          "grammar_hyp": 3.027155876159668
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.8094102880866242,
+        "features": {
+          "semantic_relation": 2.1026859283447266,
+          "contradiction": 8.991502225399017,
+          "irrelevancy": 90.4256522655487,
+          "logical_agreement": 0.582838011905551,
+          "grammar_ref": 3.027155876159668,
+          "grammar_hyp": 3.6481850147247314
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.46858093496844044,
+        "features": {
+          "semantic_relation": 2.7342190742492676,
+          "contradiction": 10.918314754962921,
+          "irrelevancy": 74.87136125564575,
+          "logical_agreement": 14.210322499275208,
+          "grammar_ref": 3.4027631282806396,
+          "grammar_hyp": 2.7186262607574463
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.916443564592161,
+        "features": {
+          "semantic_relation": 2.567542791366577,
+          "contradiction": 6.6802941262722015,
+          "irrelevancy": 92.45033860206604,
+          "logical_agreement": 0.8693681098520756,
+          "grammar_ref": 3.4027631282806396,
+          "grammar_hyp": 3.44720721244812
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.9227516553048133,
+        "features": {
+          "semantic_relation": 1.9365479946136475,
+          "contradiction": 10.025026649236679,
+          "irrelevancy": 87.28737235069275,
+          "logical_agreement": 2.6875995099544525,
+          "grammar_ref": 3.9755702018737793,
+          "grammar_hyp": 3.4027631282806396
+        }
+      }
+    },
+    {
+      "nubia": {
+        "nubia_score": 0.741852070404409,
+        "features": {
+          "semantic_relation": 2.0257017612457275,
+          "contradiction": 7.68343061208725,
+          "irrelevancy": 70.01294493675232,
+          "logical_agreement": 22.30362445116043,
+          "grammar_ref": 3.4027631282806396,
+          "grammar_hyp": 3.9755702018737793
+        }
+      }
+    }
+  ],
+  "macro": {
+    "nubia": {
+      "nubia_score": 0.808400434962616,
+      "features": {
+        "semantic_relation": 2.0614519317944846,
+        "contradiction": 7.326837132374446,
+        "irrelevancy": 84.95244284470876,
+        "logical_agreement": 7.720720240225394,
+        "grammar_ref": 3.429969072341919,
+        "grammar_hyp": 3.3575290640195212
+      }
+    }
+  }
+}
