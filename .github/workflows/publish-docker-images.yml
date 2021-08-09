@@ -1,5 +1,10 @@
 name: Publish Docker Images
 
+# Prevents multiple publishing workflows from running at once
+concurrency:
+  group: publish-docker-images
+  cancel-in-progress: false
+
 on:
   push:
     branches: [ master ]
