@@ -305,3 +305,22 @@ class TestUtil(unittest.TestCase):
         default = 0
         default_dict = util.get_default_dict(d, default)
         assert default_dict == {"A": 0, "B": {"C": 0}}
+
+    def test_check_for_single_texts(self):
+        assert util.check_for_single_texts([]) == []
+
+        texts_list = [
+            ["A"],
+            [["B"]],
+            [["C", "D"]]
+        ]
+        assert util.check_for_single_texts(texts_list) == ["A", ["B"], ["C", "D"]]
+
+        with self.assertRaises(Exception):
+            util.check_for_single_texts([[]])
+        with self.assertRaises(Exception):
+            util.check_for_single_texts([["A"], []])
+        with self.assertRaises(Exception):
+            util.check_for_single_texts([["A"], ["B", "C"]])
+        with self.assertRaises(Exception):
+            util.check_for_single_texts([["A"], [["B", "C"], "E"]])
