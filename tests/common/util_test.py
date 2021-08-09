@@ -309,11 +309,7 @@ class TestUtil(unittest.TestCase):
     def test_check_for_single_texts(self):
         assert util.check_for_single_texts([]) == []
 
-        texts_list = [
-            ["A"],
-            [["B"]],
-            [["C", "D"]]
-        ]
+        texts_list = [["A"], [["B"]], [["C", "D"]]]
         assert util.check_for_single_texts(texts_list) == ["A", ["B"], ["C", "D"]]
 
         with self.assertRaises(Exception):
