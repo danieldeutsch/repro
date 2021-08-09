@@ -45,7 +45,7 @@ class TestKane2020(unittest.TestCase):
         expected_micro = self.expected["micro"]
         actual_macro, actual_micro = model.predict_batch(inputs)
 
-        assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
+        assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-3)
         assert len(expected_micro) == len(actual_micro)
         for expected, actual in zip(expected_micro, actual_micro):
-            assert_dicts_approx_equal(expected, actual, abs=1e-4)
+            assert_dicts_approx_equal(expected, actual, abs=1e-3)
