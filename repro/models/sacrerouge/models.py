@@ -8,6 +8,7 @@ from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file, write_to_jsonl_file
 from repro.data.types import MetricsType, SummaryType
 from repro.models import Model
+from repro.models.sacrerouge import DEFAULT_IMAGE, MODEL_NAME
 
 logger = logging.getLogger(__name__)
 
@@ -51,9 +52,9 @@ def sentence_split(image: str, inputs: List[str]) -> List[List[str]]:
         return sentences
 
 
-@Model.register("sacrerouge-rouge")
+@Model.register(f"{MODEL_NAME}-rouge")
 class SRROUGE(Model):
-    def __init__(self, image: str = "sacrerouge"):
+    def __init__(self, image: str = DEFAULT_IMAGE):
         self.image = image
 
     def _maybe_sentence_split(self, summaries: List[SummaryType]) -> List[List[str]]:

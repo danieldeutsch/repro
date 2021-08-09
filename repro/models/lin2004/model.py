@@ -7,9 +7,8 @@ from repro.common.docker import make_volume_map, run_command
 from repro.common.io import write_to_text_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
-
-from .commands import sentence_split
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.lin2004 import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.lin2004.commands import sentence_split
 
 logger = logging.getLogger(__name__)
 

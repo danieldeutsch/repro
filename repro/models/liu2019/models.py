@@ -10,8 +10,7 @@ from repro.common.docker import make_volume_map, run_command
 from repro.common.io import write_to_text_file
 from repro.models import Model, SingleDocumentSummarizationModel
 from repro.models.model import DocumentType, SummaryType
-
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.liu2019 import DEFAULT_IMAGE, MODEL_NAME
 
 logger = logging.getLogger(__name__)
 

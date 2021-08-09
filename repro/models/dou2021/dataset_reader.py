@@ -3,9 +3,10 @@ from typing import List
 
 from repro.data.dataset_readers import DatasetReader
 from repro.data.types import InstanceDict
+from repro.models.dou2021 import MODEL_NAME
 
 
-@DatasetReader.register("dou2021")
+@DatasetReader.register(MODEL_NAME)
 class Dou2021DatasetReader(DatasetReader):
     @overrides
     def _read(
