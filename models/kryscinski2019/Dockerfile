@@ -13,6 +13,11 @@ RUN wget https://storage.googleapis.com/sfr-factcc-data-research/factccx-checkpo
 RUN tar -xvzf factccx-checkpoint.tar.gz --no-same-owner
 RUN rm factccx-checkpoint.tar.gz
 
+# The default version of cryptacular, 1.6.0, which is installed as a dependency of
+# a package in requirements.txt, gave us errors installing:
+# ERROR: Could not build wheels for cryptacular which use PEP 517 and cannot be installed directly
+RUN pip install --no-cache-dir cryptacular==1.5.1
+
 # Clone the code and install the dependencies
 RUN git clone https://github.com/salesforce/factCC && \
     cd factCC && \
