@@ -1,0 +1,25 @@
+{
+  "inputs": [
+    {
+      "candidate": "The dinner did not taste good.",
+      "references": [
+        "The dinner was delicious."
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "nubia": {
+        "nubia_score": 0.6012546696676498,
+        "features": {
+          "semantic_relation": 1.4594805240631104,
+          "contradiction": 99.90345239639282,
+          "irrelevancy": 0.06429857457987964,
+          "logical_agreement": 0.03225347027182579,
+          "grammar_ref": 5.172481536865234,
+          "grammar_hyp": 4.905447483062744
+        }
+      }
+    }
+  ]
+}
