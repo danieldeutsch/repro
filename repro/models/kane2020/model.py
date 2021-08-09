@@ -17,20 +17,6 @@ class NUBIA(Model):
     def __init__(self, image: str = DEFAULT_IMAGE):
         self.image = image
 
-    @staticmethod
-    def _check_single_text(texts_list: List[List[TextType]]) -> List[TextType]:
-        single_texts = []
-        for texts in texts_list:
-            if texts is None:
-                single_texts.append(None)
-            else:
-                if len(texts) != 1:
-                    raise Exception(
-                        f"Nubia only supports single sources. Found: {len(texts)}"
-                    )
-                single_texts.append(texts[0])
-        return single_texts
-
     def predict(
         self,
         candidate: TextType,
@@ -55,7 +41,7 @@ class NUBIA(Model):
         references_list = [inp["references"] for inp in inputs]
 
         # Nubia only supports single references
-        references = self._check_single_text(references_list)
+        references = util.check_for_single_texts(references_list)
 
         # Ensure all are strings
         candidates = [util.flatten(candidate) for candidate in candidates]
