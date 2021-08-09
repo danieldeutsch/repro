@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added utilities to remove empty inputs and insert values at specific indices
 - Added automatically building and publishing model images
 - Added a command to pull default Docker images for each model
+- Added [SummaQA](models/scialom2019/Readme.md)
 
 ### Changed
 - BERTScore now returns 0 for its metrics if the input is empty. 
