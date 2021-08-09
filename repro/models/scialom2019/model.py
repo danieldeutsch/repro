@@ -17,20 +17,6 @@ class SummaQA(Model):
     def __init__(self, image: str = DEFAULT_IMAGE):
         self.image = image
 
-    @staticmethod
-    def _check_single_text(texts_list: List[List[TextType]]) -> List[TextType]:
-        single_texts = []
-        for texts in texts_list:
-            if texts is None:
-                single_texts.append(None)
-            else:
-                if len(texts) != 1:
-                    raise Exception(
-                        f"SummaQA only supports single sources. Found: {len(texts)}"
-                    )
-                single_texts.append(texts[0])
-        return single_texts
-
     def predict(
         self,
         candidate: TextType,
@@ -50,10 +36,10 @@ class SummaQA(Model):
         candidates = [inp["candidate"] for inp in inputs]
         sources_list = [inp["sources"] for inp in inputs]
 
-        # SummaQA only supports single sources and references
-        sources = self._check_single_text(sources_list)
+        # SummaQA only supports single sources
+        sources = util.check_for_single_texts(sources_list)
 
-        # Ensure all are strings or None
+        # Ensure all are strings
         candidates = [util.flatten(candidate) for candidate in candidates]
         sources = [util.flatten(source) for source in sources]
 

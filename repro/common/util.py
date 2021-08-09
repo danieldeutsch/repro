@@ -246,3 +246,12 @@ def get_default_dict(d: NestedDict, default: float) -> NestedDict:
     flat_default_dict = {key: default for key in flat_dict.keys()}
     default_dict = unflatten_dict(flat_default_dict)
     return default_dict
+
+
+def check_for_single_texts(texts_list: List[List[TextType]]) -> List[TextType]:
+    single_texts = []
+    for texts in texts_list:
+        if len(texts) != 1:
+            raise Exception(f"Found {len(texts)} texts. Expected 1.")
+        single_texts.append(texts[0])
+    return single_texts
