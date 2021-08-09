@@ -7,8 +7,7 @@ from repro.common import TemporaryDirectory
 from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file
 from repro.models import Model, QuestionAnsweringModel
-
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.gupta2020 import DEFAULT_IMAGE, MODEL_NAME
 
 
 @Model.register(f"{MODEL_NAME}-nmn")

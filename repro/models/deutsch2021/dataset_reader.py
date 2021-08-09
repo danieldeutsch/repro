@@ -4,9 +4,10 @@ from typing import List
 from repro.common.io import read_jsonl_file
 from repro.data.dataset_readers import DatasetReader
 from repro.data.types import InstanceDict
+from repro.models.deutsch2021 import MODEL_NAME
 
 
-@DatasetReader.register("deutsch2021-question-answering-eval")
+@DatasetReader.register(f"{MODEL_NAME}-question-answering-eval")
 class Deutsch2021QuestionAnsweringEvaluationDatasetReader(DatasetReader):
     @overrides
     def _read(self, *input_files: str) -> List[InstanceDict]:

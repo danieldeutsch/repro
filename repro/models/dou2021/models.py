@@ -4,9 +4,12 @@ from typing import Dict, List, Union
 from repro.data.types import DocumentType, SummaryType
 from repro.models import Model, SingleDocumentSummarizationModel
 from repro.models.liu2019 import BertSumExt
-
-from .commands import get_oracle_sentences, generate_summaries, sentence_split
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.dou2021 import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.dou2021.commands import (
+    get_oracle_sentences,
+    generate_summaries,
+    sentence_split,
+)
 
 logger = logging.getLogger(__name__)
 

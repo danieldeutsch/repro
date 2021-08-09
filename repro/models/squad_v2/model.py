@@ -7,13 +7,14 @@ from repro.common import TemporaryDirectory
 from repro.common.docker import make_volume_map, run_command
 from repro.data.types import MetricsType
 from repro.models import Model
+from repro.models.squad_v2 import DEFAULT_IMAGE, MODEL_NAME
 
 logger = logging.getLogger(__name__)
 
 
-@Model.register("squad-v2")
+@Model.register(MODEL_NAME)
 class SQuADv2Evaluation(Model):
-    def __init__(self, image: str = "squad-v2"):
+    def __init__(self, image: str = DEFAULT_IMAGE):
         self.image = image
 
     def predict(

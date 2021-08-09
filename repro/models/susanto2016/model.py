@@ -5,10 +5,9 @@ from typing import Dict, List
 
 from repro.common import TemporaryDirectory
 from repro.common.docker import make_volume_map, run_command
-from repro.common.io import read_jsonl_file, write_to_text_file
+from repro.common.io import write_to_text_file
 from repro.models import Model, TruecasingModel
-
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.susanto2016 import DEFAULT_IMAGE, MODEL_NAME
 
 logger = logging.getLogger(__name__)
 

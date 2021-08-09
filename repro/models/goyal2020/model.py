@@ -7,8 +7,7 @@ from repro.common.docker import DockerContainer
 from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
-
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.goyal2020 import DEFAULT_IMAGE, MODEL_NAME
 
 QAPairsType = List[List[Dict[str, Any]]]
 

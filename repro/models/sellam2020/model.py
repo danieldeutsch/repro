@@ -7,8 +7,7 @@ from repro.common import util
 from repro.common.docker import DockerContainer
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
-
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.sellam2020 import DEFAULT_IMAGE, MODEL_NAME
 
 logger = logging.getLogger(__name__)
 

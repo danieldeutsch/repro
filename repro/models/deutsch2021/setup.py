@@ -1,8 +1,7 @@
 from repro import MODELS_ROOT
 from repro.commands.subcommand import SetupSubcommand
 from repro.common.docker import BuildDockerImageSubcommand
-
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.deutsch2021 import DEFAULT_IMAGE, MODEL_NAME
 
 
 @SetupSubcommand.register(MODEL_NAME)

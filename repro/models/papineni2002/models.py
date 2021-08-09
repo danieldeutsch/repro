@@ -8,8 +8,7 @@ from repro.common.docker import make_volume_map, run_command
 from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
-
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.papineni2002 import DEFAULT_IMAGE, MODEL_NAME
 
 logger = logging.getLogger(__name__)
 

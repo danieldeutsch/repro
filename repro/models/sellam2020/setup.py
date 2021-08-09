@@ -5,8 +5,7 @@ from overrides import overrides
 from repro import MODELS_ROOT
 from repro.commands.subcommand import SetupSubcommand
 from repro.common.docker import BuildDockerImageSubcommand, build_image
-
-from .metadata import DEFAULT_IMAGE, MODEL_NAME
+from repro.models.sellam2020 import DEFAULT_IMAGE, MODEL_NAME
 
 
 @SetupSubcommand.register(MODEL_NAME)
