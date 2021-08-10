@@ -32,7 +32,7 @@ def main(args):
             out.write(json.dumps({"prism": float(score)}) + "\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     argp = argparse.ArgumentParser()
     argp.add_argument("--input-file", required=True)
     argp.add_argument("--language", required=True)

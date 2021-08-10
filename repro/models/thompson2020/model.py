@@ -14,7 +14,9 @@ logger = logging.getLogger(__name__)
 
 @Model.register(f"{MODEL_NAME}-prism")
 class Prism(Model):
-    def __init__(self, image: str = DEFAULT_IMAGE, device: int = 0, language: str = "en"):
+    def __init__(
+        self, image: str = DEFAULT_IMAGE, device: int = 0, language: str = "en"
+    ):
         self.image = image
         self.device = device
         self.language = language
@@ -74,7 +76,9 @@ class Prism(Model):
         has_references = all(reference is not None for reference in references)
         has_sources = all(source is not None for source in sources)
         if has_references and has_sources or (not has_references and not has_sources):
-            raise Exception(f"Prism supports having either input references xor sources, not both or neither.")
+            raise Exception(
+                f"Prism supports having either input references xor sources, not both or neither."
+            )
 
         with DockerContainer(self.image) as backend:
             host_input_file = f"{backend.host_dir}/input.jsonl"
