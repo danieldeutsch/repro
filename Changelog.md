@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a command to pull default Docker images for each model
 - Added [SummaQA](models/scialom2019/Readme.md)
 - Added [NUBIA](models/kane2020/Readme.md)
+- Added [Prism](models/thompson2020/Readme.md)
 
 ### Changed
 - BERTScore now returns 0 for its metrics if the input is empty. 
