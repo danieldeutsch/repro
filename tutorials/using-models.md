@@ -25,6 +25,11 @@ class MyModel(Model):
 ```
 Optional parameters to `predict()` should be handled accordingly by `predict_batch()`.
 
+## GPU Access
+Some models use a GPU.
+To restrict a model to use a particular GPU, you have to pass that device ID to the model's `device` parameter.
+Setting the `CUDA_VISIBLE_DEVICES` environment variable does not work.
+
 ## Downloading the Docker Image
 Each model has a Docker Image published on Docker Hub.
 The images are versioned to ensure that the code and the Docker images are always compatible.
