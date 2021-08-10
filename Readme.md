@@ -108,7 +108,7 @@ Behind the scenes, Repro is running each model and metric in its own Docker cont
 All of the complex logic and environment details are taken care of by the Docker container, so all you have to do is call `predict()`.
 It's that simple!
 
-More details on how to use the models implemented in Repro can be found here (TODO).
+More details on how to use the models implemented in Repro can be found [here](tutorials/using-models.md).
 
 ## Models Implemented in Repro
 See the [`models`](models) directory or [this file](Papers.md) to see the list of papers with models currently supported by Repro.
