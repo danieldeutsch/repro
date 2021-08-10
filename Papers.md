@@ -23,6 +23,7 @@ This file contains a list of the papers with models wrapped by this library.
 |[Evaluating the Factual Consistency of Abstractive Text Summarization](https://arxiv.org/abs/1910.12840)|Wojciech Kryściński, Bryan McCann, Caiming Xiong, and Richard Socher|[Link](models/kryscinski2019/Readme.md)|
 |[Answers Unite! Unsupervised Metrics for Reinforced Summarization Models](https://arxiv.org/abs/1909.01610)|Thomas Scialom, Sylvain Lamprier, Benjamin Piwowarski, and Jacopo Staiano|[Link](models/scialom2019/Readme.md)|
 |[NUBIA: NeUral Based Interchangeability Assessor for Text Generation](https://arxiv.org/abs/2004.14667)|Hassan Kane, Muhammed Yusuf Kocyigit, Ali Abdalla, Pelkins Ajanoh, and Mohamed Coulibali|[Link](models/kane2020/Readme.md)|
+|[Automatic Machine Translation Evaluation in Many Languages via Zero-Shot Paraphrasing](https://arxiv.org/abs/2004.14564)|Brian Thompson and Matt Post|[Link](models/thompson2020/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|
