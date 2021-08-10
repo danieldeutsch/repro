@@ -37,19 +37,19 @@ pip install --editable .
 
 ## Example Usage
 Here is an example of how Repro can be used, highlighting how simple it is to run a complex model pipeline.
-We will focus on generating summaries of a document with three different models: Liu & Lapata (2019) ([paper](https://arxiv.org/abs/1908.08345), [docs](models/liu2019/Readme.md)); Lewis et al. (2020) ([paper](https://arxiv.org/abs/1910.13461), [docs](models/lewis2020/Readme.md)); and Dou et al. (2021) ([paper](https://arxiv.org/abs/2010.08014), [docs](models/dou2021/Readme.md)).
+We will demonstrate how to generate summaries of a document with three different models
 
-First, you have to build the Docker images for each of the models, which is done through the `repro setup` command (run `repro setup <model-name> --help` to see more details).
-Each command optionally marks which pre-trained models from the original papers are included in the Docker image.
-This example only includes those trained on CNN/DailyMail:
-```shell script
-repro setup liu2019 --bertsumext-cnndm --bertsumextabs-cnndm
-repro setup lewis2020 --cnndm
-repro setup dou2021
-```
-Each command will take a few minutes to download and install all of the necessary dependencies in the Docker image, but you only have to do it once.
+- BertSumExtAbs from [Liu & Lapata (2019)](https://arxiv.org/abs/1908.08345) ([docs](models/liu2019/Readme.md))
+- BART from [Lewis et al. (2020)](https://arxiv.org/abs/1910.13461) ([docs](models/lewis2020/Readme.md))
+- GSum from [Dou et al. (2021)](https://arxiv.org/abs/2010.08014) ([docs](models/dou2021/Readme.md))
 
-Now, all you have to do is instantiate the classes and run `predict`:
+and then evaluate those summaries with three different text generation evaluation metrics
+
+- ROUGE from [Lin (2004)](https://aclanthology.org/W04-1013/) ([docs](models/lin2004/Readme.md))
+- BLEURT from [Sellam et al. (2020)](https://arxiv.org/abs/2004.04696) ([docs](models/sellam2020/Readme.md))
+- QAEval from [Deutsch et al. (2021)](https://arxiv.org/abs/2010.00490) ([docs](models/deutsch2021/Readme.md))
+
+Once you have Docker and Repro installed, all you have to do is instantiate the classes and run `predict`:
 
 ```python
 from repro.models.liu2019 import BertSumExtAbs
@@ -75,16 +75,45 @@ document = (
 summary1 = liu2019.predict(document)
 summary2 = lewis2020.predict(document)
 summary3 = dou2021.predict(document)
+
+# Import the evaluation metrics. We call them "models" even though
+# they are metrics
+from repro.models.lin2004 import ROUGE
+from repro.models.sellam2020 import BLEURT
+from repro.models.deutsch2021 import QAEval
+
+# Like the summarization models, each of these classes take parameters,
+# but we just use the defaults
+rouge = ROUGE()
+bleurt = BLEURT()
+qaeval = QAEval()
+
+# Here is the reference summary we will use
+reference = (
+    "Joe Biden was elected president of the United States after defeating Donald Trump."
+)
+
+# Then evaluate the summaries
+for summary in [summary1, summary2, summary3]:
+    metrics1 = rouge.predict(summary, [reference])
+    metrics2 = bleurt.predict(summary, [reference])
+    metrics3 = qaeval.predict(summary, [reference])
 ```
 
-Behind the scenes, Repro is running each model in its own Docker container.
-The Liu & Lapata (2019) model is tokenizing and sentence splitting the input document with Stanford CoreNLP, then running BERT with `torch==1.1.0` and `transformers==1.2.0`.
-The Lewis et al. (2020) is running the original BART code in `fairseq` with `torch==1.9.0`, and the Dou et al. (2021) model is running its own fork of the BART code with `torch==1.4.0` and calling a model from Liu & Lapata (2019) as a subroutine.
+Behind the scenes, Repro is running each model and metric in its own Docker container.
+`BertSumExtAbs`  is tokenizing and sentence splitting the input document with Stanford CoreNLP, then running BERT with `torch==1.1.0` and `transformers==1.2.0`.
+`BLEURT` is running `tensorflow==2.2.2` to score the summary with a learned metric.
+`QAEval` is chaining together pretrained question generation and question answering models with `torch==1.6.0` to evaluate the model outputs.
 **But you don't need to know about any of that to run the models!**
 All of the complex logic and environment details are taken care of by the Docker container, so all you have to do is call `predict()`.
 It's that simple!
+
+More details on how to use the models implemented in Repro can be found here (TODO).
 
 ## Models Implemented in Repro
 See the [`models`](models) directory or [this file](Papers.md) to see the list of papers with models currently supported by Repro.
 Each model contains information in its Readme about how to use it as well as whether or not it currently reproduces the results reported in its respective paper or if it hasn't been tested yet.
 If it has been tested, the code to reproduce the results is also included.
+
+## Contributing a Model
+See the tutorial [here](tutorials/adding-a-model.md) for instructions on how to add a new model.
