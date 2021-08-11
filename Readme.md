@@ -108,6 +108,45 @@ Behind the scenes, Repro is running each model and metric in its own Docker cont
 All of the complex logic and environment details are taken care of by the Docker container, so all you have to do is call `predict()`.
 It's that simple!
 
+Abstracting the implementation details away in a Docker image is really useful for chaining together a complex NLP pipeline.
+In this example, we summarize a document, ask a question, then evaluate how likely the QA prediction and expected answer mean the same thing.
+The models used are:
+
+- BART from [Lewis et al. (2020)](https://arxiv.org/abs/1910.13461) ([docs](models/lewis2020/Readme.md))
+- A neural module network QA model from [Gupta et al. (2020)](https://arxiv.org/abs/1912.04971) ([docs](models/gupta2020/Readme.md))
+- LERC from [Chen et al. (2020)](https://arxiv.org/abs/2010.03636) ([docs](models/chen2020/Readme.md))
+
+```python
+from repro.models.chen2020 import LERC
+from repro.models.gupta2020 import NeuralModuleNetwork
+from repro.models.lewis2020 import BART
+
+document = (
+    "Roger Federer is a Swiss professional tennis player. He is ranked "
+    "No. 9 in the world by the Association of Tennis Professionals (ATP). "
+    "He has won 20 Grand Slam men's singles titles, an all-time record "
+    "shared with Rafael Nadal and Novak Djokovic. Federer has been world "
+    "No. 1 in the ATP rankings a total of 310 weeks – including a record "
+    "237 consecutive weeks – and has finished as the year-end No. 1 five times."
+)
+
+# First, summarize the document
+bart = BART()
+summary = bart.predict(document)
+
+# Now, ask a question using the summary
+question = "How many grand slam titles has Roger Federer won?"
+answer = "twenty"
+
+nmn = NeuralModuleNetwork()
+prediction = nmn.predict(summary, question)
+
+# Check to see if the expected answer ("twenty") and prediction ("20") mean the
+# same thing in the summary
+lerc = LERC()
+score = lerc.predict(summary, question, answer, prediction)
+```
+
 More details on how to use the models implemented in Repro can be found [here](tutorials/using-models.md).
 
 ## Models Implemented in Repro
