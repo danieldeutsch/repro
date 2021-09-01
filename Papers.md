@@ -36,6 +36,11 @@ This file contains a list of the papers with models wrapped by this library.
 |-|-|-|
 |[Towards Question-Answering as an Automatic Metric for Evaluating the Content Quality of a Summary](https://arxiv.org/abs/2010.00490)|Daniel Deutsch, Tania Bedrax-Weiss, and Dan Roth|[Link](models/deutsch2021/Readme.md)|
 
+### Parsing
+|Paper|Authors|Link|
+|-|-|-|
+|[Multilingual Constituency Parsing with Self-Attention and Pre-Training](https://arxiv.org/abs/1812.11760)|Nikita Kitaev, Steven Cao, and Dan Klein|[Link](models/kitaev2019/Readme.md)|
+
 ### Others
 |Paper|Authors|Link|
 |-|-|-|
