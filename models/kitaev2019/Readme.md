@@ -45,6 +45,7 @@ pytest models/kitaev2019/tests
 - [x] Regression unit tests pass   
 - [x] Correctness unit tests pass  
 We verify the parser returns the example from the Github repo.
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1190222222).
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  
