@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added [Benepar](models/kitaev2019/Readme.md)
 
+### Changed
+- Fixed silly variable name typo: `DOCKERHUB_REPRO` to `DOCKERHUB_REPO`
+
 ## [v0.1.0](https://github.com/danieldeutsch/repro/releases/tag/v0.1.0) - 2021-08-10
 ### Added
 - Added [DAE](models/goyal2020/Readme.md)
