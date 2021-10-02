@@ -12,10 +12,10 @@ def main(args):
 
         try:
             version = module.VERSION
-            repository = module.DOCKERHUB_REPRO
+            repository = module.DOCKERHUB_REPO
         except AttributeError:
             print(
-                f"{module_name} does not have `VERSION` and/or `DOCKERHUB_REPRO` attributes. Will not publish"
+                f"{module_name} does not have `VERSION` and/or `DOCKERHUB_REPO` attributes. Will not publish"
             )
             continue
 
