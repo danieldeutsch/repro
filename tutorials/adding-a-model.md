@@ -27,12 +27,12 @@ The first step is to set up the plumbing for building a simple Dockerfile throug
 
    VERSION = "1.0"
    MODEL_NAME = os.path.basename(os.path.dirname(__file__))
-   DOCKERHUB_REPRO = f"danieldeutsch/{MODEL_NAME}"
-   DEFAULT_IMAGE = f"{DOCKERHUB_REPRO}:{VERSION}"
+   DOCKERHUB_REPO = f"danieldeutsch/{MODEL_NAME}"
+   DEFAULT_IMAGE = f"{DOCKERHUB_REPO}:{VERSION}"
    AUTOMATICALLY_PUBLISH = False
    ```
    This defines some metadata for your model automatically.
-   `MODEL_NAME` will be equal to `tutorial` (the name of the `__init__.py` file's directory), `DOCKERHUB_REPRO` points to the Docker Hub repository where your model's image will eventually be published, and `DEFAULT_IMAGE` specifies the name of that Docker image.
+   `MODEL_NAME` will be equal to `tutorial` (the name of the `__init__.py` file's directory), `DOCKERHUB_REPO` points to the Docker Hub repository where your model's image will eventually be published, and `DEFAULT_IMAGE` specifies the name of that Docker image.
    `danieldeutsch` should remain the same (it is the Docker Hub account name we are using for now).
    `AUTOMATICALLY_PUBLISH` indicates whether your Docker image should be published to Docker Hub when it is merged into the master branch.
    For now, we leave it as `False`.

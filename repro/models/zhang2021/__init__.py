@@ -6,5 +6,5 @@ DOCKERHUB_REPO = f"danieldeutsch/{MODEL_NAME}"
 DEFAULT_IMAGE = f"{DOCKERHUB_REPO}:{VERSION}"
 AUTOMATICALLY_PUBLISH = True
 
-from repro.models.susanto2016.model import RNNTruecaser
-from repro.models.susanto2016.setup import Susanto2016SetupSubcommand
+from repro.models.zhang2021.model import Lite3Pyramid
+from repro.models.zhang2021.setup import Zhang2021SetupSubcommand
