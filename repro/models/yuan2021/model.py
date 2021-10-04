@@ -3,8 +3,8 @@ import logging
 import os
 from typing import Dict, List, Tuple, Union
 
-from repro.common import TemporaryDirectory, util
-from repro.common.docker import make_volume_map, run_command
+from repro.common import util
+from repro.common.docker import DockerContainer
 from repro.common.io import read_jsonl_file
 from repro.data.types import MetricsType, TextType
 from repro.models import Model
@@ -55,16 +55,10 @@ class BARTScore(Model):
             for references in references_list
         ]
 
-        with TemporaryDirectory() as temp:
-            host_input_dir = f"{temp}/input"
-            host_output_dir = f"{temp}/output"
-            volume_map = make_volume_map(host_input_dir, host_output_dir)
-            container_input_dir = volume_map[host_input_dir]
-            container_output_dir = volume_map[host_output_dir]
+        with DockerContainer(self.image) as backend:
+            host_input_file = f"{backend.host_dir}/input.jsonl"
+            container_input_file = f"{backend.container_dir}/input.jsonl"
 
-            host_input_file = f"{host_input_dir}/input.jsonl"
-            container_input_file = f"{container_input_dir}/input.jsonl"
-            os.makedirs(host_input_dir)
             with open(host_input_file, "w") as out:
                 for candidate, references in zip(candidates, references_list):
                     out.write(
@@ -77,8 +71,8 @@ class BARTScore(Model):
                         + "\n"
                     )
 
-            host_output_file = f"{host_output_dir}/output.jsonl"
-            container_output_file = f"{container_output_dir}/output.jsonl"
+            host_output_file = f"{backend.host_dir}/output.jsonl"
+            container_output_file = f"{backend.container_dir}/output.jsonl"
 
             cuda = self.device != -1
             commands = []
@@ -102,11 +96,8 @@ class BARTScore(Model):
             commands.append(score_command)
 
             command = " && ".join(commands)
-            os.makedirs(host_output_dir)
-            run_command(
-                self.image,
-                command,
-                volume_map=volume_map,
+            backend.run_command(
+                command=command,
                 cuda=cuda,
                 network_disabled=False,
             )
