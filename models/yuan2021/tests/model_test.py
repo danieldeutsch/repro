@@ -21,9 +21,11 @@ class TestYuan2021Model(unittest.TestCase):
     def test_bartscore_examples(self, device: int):
         # Tests the examples from their Github Repo
         model = BARTScore(device=device)
-        expected = -2.510652780532837
-        actual = model.predict('This is interesting.', ['This is fun.'])
-        assert actual == pytest.approx(expected, abs=1e-4)
+        expected = {"bartscore": -2.510652780532837}
+        actual = model.predict("This is interesting.", ["This is fun."])
+        assert_dicts_approx_equal(actual, expected)
 
-# Test empty input
-# Test switching source target
+        model = BARTScore(device=device, model="parabank")
+        expected = {"bartscore": -2.336203098297119}
+        actual = model.predict("This is interesting.", ["This is fun."])
+        assert_dicts_approx_equal(actual, expected)

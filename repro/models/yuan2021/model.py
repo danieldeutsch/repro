@@ -39,7 +39,7 @@ class BARTScore(Model):
         self,
         inputs: List[Dict[str, Union[TextType, List[TextType]]]],
         batch_size: int = 4,
-        **kwargs
+        **kwargs,
     ) -> Tuple[MetricsType, List[MetricsType]]:
         logger.info(
             f"Calculating BARTScore with image {self.image} on {len(inputs)} inputs."
@@ -88,6 +88,8 @@ class BARTScore(Model):
             else:
                 predict_device = -1
 
+            commands.append("cd BARTScore")
+
             parabank = "true" if self.model == "parabank" else "false"
             score_command = (
                 f"python score.py"
@@ -106,6 +108,7 @@ class BARTScore(Model):
                 command,
                 volume_map=volume_map,
                 cuda=cuda,
+                network_disabled=False,
             )
 
             micro_metrics = read_jsonl_file(host_output_file)

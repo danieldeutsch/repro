@@ -14,7 +14,7 @@ def main(args):
     sources = []
     targets = []
     for instance in instances:
-        candidate = instance["candidates"]
+        candidate = instance["candidate"]
         for reference in instance["references"]:
             sources.append(candidate)
             targets.append(reference)
