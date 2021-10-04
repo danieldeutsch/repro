@@ -13,17 +13,19 @@ https://github.com/neulab/BARTScore
   - Usage:
     ```python
     from repro.models.yuan2021 import BARTScore
-    model = BARTScore()
+    model = BARTScore(model="cnn")
     inputs = [
         {"candidate": "The candidate text", "references": ["The references"]}
     ]
     macro, micro = model.predict_batch(inputs)
     ```
     `macro` and `micro` are the average and per-input BARTScores.
-    You can pass `model="parabank"` to use the Parabank trained model.
+    There are three supported models: `"default"`, `"cnn"`, and `"parabank"`.
+    `"default"` will use the `facebook/bart-large` checkpoint.
+    `"cnn"` will use the `facebook/bart-large-cnn` checkpoint.
+    `"parabank"` will use the `facebook/bart-large-cnn` and load the weights trained on Parabank.
     
 ## Implementation Notes
-Currently only the base model `facebook/bart-large-cnn` is supported.
     
 ## Docker Information
 - Image name: `danieldeutsch/yuan2021:1.0`
@@ -44,7 +46,7 @@ pytest models/yuan2021/tests
 - [x] Regression unit tests pass   
 - [x] Correctness unit tests pass  
 We verify the outputs on their Github Readme.
-See [here](https://github.com/danieldeutsch/repro/actions/runs/1305084111).
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1305087059).
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  

@@ -24,9 +24,15 @@ def main(args):
     else:
         device = f"cuda:{args.device}"
 
-    metric = BARTScorer(device=device)
-    if args.use_parabank.lower() == "true":
+    if args.model == "default":
+        metric = BARTScorer(device=device, checkpoint="facebook/bart-large")
+    elif args.model == "cnn":
+        metric = BARTScorer(device=device, checkpoint="facebook/bart-large-cnn")
+    elif args.model == "parabank":
+        metric = BARTScorer(device=device, checkpoint="facebook/bart-large-cnn")
         metric.load(path="bart.pth")
+    else:
+        raise Exception(f"Unknown model: {args.model}")
 
     scores = metric.score(sources, targets, batch_size=args.batch_size)
 
@@ -47,7 +53,7 @@ if __name__ == "__main__":
     argp.add_argument("--input-file", required=True)
     argp.add_argument("--device", required=True, type=int)
     argp.add_argument("--batch-size", required=True, type=int)
-    argp.add_argument("--use-parabank", required=True)
+    argp.add_argument("--model", required=True)
     argp.add_argument("--output-file", required=True)
     args = argp.parse_args()
     main(args)

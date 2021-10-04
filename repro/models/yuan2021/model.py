@@ -20,6 +20,7 @@ class BARTScore(Model):
         model: str = "default",
         device: int = 0,
     ):
+        assert model in ["default", "cnn", "parabank"]
         self.image = image
         self.model = model
         self.device = device
@@ -83,13 +84,12 @@ class BARTScore(Model):
 
             commands.append("cd BARTScore")
 
-            parabank = "true" if self.model == "parabank" else "false"
             score_command = (
                 f"python score.py"
                 f"  --input-file {container_input_file}"
                 f"  --device {predict_device}"
                 f"  --batch-size {batch_size}"
-                f"  --use-parabank {parabank}"
+                f"  --model {self.model}"
                 f"  --output-file {container_output_file}"
             )
             commands.append(score_command)
