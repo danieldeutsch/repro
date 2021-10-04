@@ -25,6 +25,7 @@ This file contains a list of the papers with models wrapped by this library.
 |[NUBIA: NeUral Based Interchangeability Assessor for Text Generation](https://arxiv.org/abs/2004.14667)|Hassan Kane, Muhammed Yusuf Kocyigit, Ali Abdalla, Pelkins Ajanoh, and Mohamed Coulibali|[Link](models/kane2020/Readme.md)|
 |[Automatic Machine Translation Evaluation in Many Languages via Zero-Shot Paraphrasing](https://arxiv.org/abs/2004.14564)|Brian Thompson and Matt Post|[Link](models/thompson2020/Readme.md)|
 |[Finding a Balanced Degree of Automation for Summary Evaluation](https://arxiv.org/abs/2109.11503)|Shiyue Zhang and Mohit Bansal|[Link](models/zhang2021/Readme.md)|
+|[BARTScore: Evaluating Generated Text as Text Generation](https://arxiv.org/abs/2106.11520)|Weizhe Yuan, Graham Neubig, and Pengfei Liu|[Link](models/yuan2021/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|
