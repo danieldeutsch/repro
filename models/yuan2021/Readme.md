@@ -44,7 +44,7 @@ pytest models/yuan2021/tests
 - [x] Regression unit tests pass   
 - [x] Correctness unit tests pass  
 We verify the outputs on their Github Readme.
-See [here]().
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1305084111).
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  

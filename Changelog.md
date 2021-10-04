@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added [Benepar](models/kitaev2019/Readme.md)
 - Added [Lite3Pyramid](models/zhang2021/Readme.md)
+- Added [BARTScore](models/yuan2021/Readme.md)
 
 ### Changed
 - Fixed silly variable name typo: `DOCKERHUB_REPRO` to `DOCKERHUB_REPO`
