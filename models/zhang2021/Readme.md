@@ -31,8 +31,8 @@ https://github.com/ZhangShiyue/Lite2-3Pyramid
 
     
 ## Docker Information
-- Image name: `danieldeutsch/zhang2021:1.0`
-- Docker Hub: 
+- Image name: `danieldeutsch/zhang2021:1.1`
+- Docker Hub: https://hub.docker.com/repository/docker/danieldeutsch/zhang2021
 - Build command:
   ```shell script
   repro setup zhang2021 [--models <model-name>+]
@@ -60,3 +60,5 @@ Not tested
 - [ ] Predictions exactly replicate results reported in the paper  
 
 ## Changelog
+### v1.1
+- Changed to our fork of the repo, which adds support for using the GPU for coref and SRL and saving the results to a file 

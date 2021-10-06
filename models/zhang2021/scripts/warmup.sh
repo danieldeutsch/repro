@@ -3,7 +3,7 @@ echo "This is the reference summary" > references.txt
 echo "This is the candidate summary" > summaries.txt
 echo "1" > ids.txt
 mkdir output
-python score.py \
+python Lite2-3Pyramid.py \
   --extract_stus \
   --reference references.txt \
   --doc_id ids.txt \
@@ -13,7 +13,7 @@ python score.py \
 # Score the summary using each of the models which
 # will pre-cache them
 for model_name in ${MODELS}; do
-  python score.py \
+  python Lite2-3Pyramid.py \
     --unit output/STUs.txt \
     --summary summaries.txt \
     --model ${model_name} \

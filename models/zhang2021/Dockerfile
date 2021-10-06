@@ -5,9 +5,9 @@ ARG MODELS
 WORKDIR /app
 
 # Clone the repository
-RUN git clone https://github.com/ZhangShiyue/Lite2-3Pyramid && \
+RUN git clone https://github.com/danieldeutsch/Lite2-3Pyramid && \
     cd Lite2-3Pyramid && \
-    git checkout ede30c52fa80a6d80dc2fb32f549ba1f3159860b
+    git checkout c2a60ff4b42df879ee9be8f0fad1b5ae8160943e
 
 ## Install the python dependencies. The Github repo requires torch==1.7.1+cu110, but
 ## we use torch==1.7.1 with cuda 10.0 instead
@@ -22,9 +22,6 @@ RUN pip install --no-cache-dir \
 
 # Install nltk dependencies
 RUN python -c "import nltk; nltk.download('wordnet'); nltk.download('wordnet_ic'); nltk.download('sentiwordnet')"
-
-# Copy over the scoring code
-COPY src/score.py Lite2-3Pyramid/score.py
 
 # Run the warmup code
 COPY scripts/warmup.sh warmup.sh
