@@ -55,12 +55,16 @@ class Lite3Pyramid(Model):
             cuda = self.device != -1
             if cuda:
                 commands.append(f"export CUDA_VISIBLE_DEVICES={self.device}")
+                predict_device = 0
+            else:
+                predict_device = -1
 
             extract_command = (
-                f"python score.py"
+                f"python Lite2-3Pyramid.py"
                 f"  --extract_stus"
                 f"  --reference {container_summaries_file}"
                 f"  --doc_id {container_ids_file}"
+                f"  --device {predict_device}"
                 f"  --output_dir {container_output_dir}"
             )
             if use_coref:
@@ -187,12 +191,16 @@ class Lite3Pyramid(Model):
             cuda = self.device != -1
             if cuda:
                 commands.append(f"export CUDA_VISIBLE_DEVICES={self.device}")
+                predict_device = 0
+            else:
+                predict_device = -1
 
             score_command = (
-                f"python score.py"
+                f"python Lite2-3Pyramid.py"
                 f"  --summary {container_candidates_file}"
                 f"  --unit {container_units_file}"
                 f"  --detail"
+                f"  --device {predict_device}"
                 f"  --output_file {container_output_file}"
             )
             if self.model is not None:
