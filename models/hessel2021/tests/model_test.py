@@ -27,8 +27,12 @@ class TestHessel2021Models(unittest.TestCase):
             for i in range(len(self.good_examples["candidates"]))
         ]
 
-        expected_macro = self.good_examples["metrics"]["referenceless"][device_str]["macro"]
-        expected_micro = self.good_examples["metrics"]["referenceless"][device_str]["micro"]
+        expected_macro = self.good_examples["metrics"]["referenceless"][device_str][
+            "macro"
+        ]
+        expected_micro = self.good_examples["metrics"]["referenceless"][device_str][
+            "micro"
+        ]
         actual_macro, actual_micro = model.predict_batch(inputs)
 
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
@@ -50,8 +54,12 @@ class TestHessel2021Models(unittest.TestCase):
             for i in range(len(self.good_examples["candidates"]))
         ]
 
-        expected_macro = self.good_examples["metrics"]["reference_based"][device_str]["macro"]
-        expected_micro = self.good_examples["metrics"]["reference_based"][device_str]["micro"]
+        expected_macro = self.good_examples["metrics"]["reference_based"][device_str][
+            "macro"
+        ]
+        expected_micro = self.good_examples["metrics"]["reference_based"][device_str][
+            "micro"
+        ]
         actual_macro, actual_micro = model.predict_batch(inputs)
 
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
@@ -73,8 +81,12 @@ class TestHessel2021Models(unittest.TestCase):
             for i in range(len(self.bad_examples["candidates"]))
         ]
 
-        expected_macro = self.bad_examples["metrics"]["reference_based"][device_str]["macro"]
-        expected_micro = self.bad_examples["metrics"]["reference_based"][device_str]["micro"]
+        expected_macro = self.bad_examples["metrics"]["reference_based"][device_str][
+            "macro"
+        ]
+        expected_micro = self.bad_examples["metrics"]["reference_based"][device_str][
+            "micro"
+        ]
         actual_macro, actual_micro = model.predict_batch(inputs)
 
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
