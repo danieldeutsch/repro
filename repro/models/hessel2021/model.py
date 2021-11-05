@@ -2,7 +2,6 @@ import json
 import logging
 import os
 import shutil
-import warnings
 from typing import Dict, List, Optional, Tuple, Union
 
 from repro.common import util
@@ -19,12 +18,6 @@ class CLIPScore(Model):
     def __init__(self, image: str = DEFAULT_IMAGE, device: int = 0) -> None:
         self.image = image
         self.device = device
-
-        if self.device != -1:
-            warnings.warn(
-                "The GPU version of CLIPScore may not give the correct results. "
-                "Please see the Readme for this metric for more details."
-            )
 
     @staticmethod
     def _verify_all_or_no_references(references_list: List[List[str]]) -> bool:

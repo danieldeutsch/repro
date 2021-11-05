@@ -27,10 +27,8 @@ https://github.com/jmhessel/clipscore
     `macro` and `micro` are the average and input-level scores of CLIPScore.
     
 ## Implementation Notes
-**Currently, the CPU and GPU versions give very different scores.**
-The CPU score is correct.
-I suspect that the GPU version does not work because CLIP uses float16 training, and this error may be specific to the GPU that we tested it on.
-Before using the GPU version, you should make sure the unit tests pass (see below).
+Running the metric on CPU versus GPU may give slightly different results.
+See the [original code's Readme](https://github.com/jmhessel/clipscore/blob/main/README.md#reproducibility-notes) for more info.
     
 ## Docker Information
 - Image name: `danieldeutsch/hessel2021:1.0`
@@ -41,23 +39,14 @@ Before using the GPU version, you should make sure the unit tests pass (see belo
 - Requires network: No
   
 ## Testing
-Explain how to run the unittests for this model
 ```shell script
 repro setup hessel2021
 pytest models/hessel2021/tests
 ```
 
-To run the unit tests on the GPU, run:
-```shell script
-TEST_DEVICES=0 pytest models/hessel2021/tests
-```
-where `0` is the GPU device ID you want to run the tests on.
-
 ## Status
-- [ ] Regression unit tests pass  
-See note above about GPU.
-- [ ] Correctness unit tests pass  
-See note above about GPU.
+- [x] Regression unit tests pass  
+- [x] Correctness unit tests pass  
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  

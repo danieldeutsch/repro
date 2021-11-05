@@ -21,33 +21,66 @@
   ],
   "metrics": {
     "referenceless": {
-      "macro": {
-        "CLIPScore": 0.8585
-      },
-      "micro": [
-        {
-          "CLIPScore": 0.7732070684432983
+      "cpu": {
+        "macro": {
+          "CLIPScore": 0.8585
         },
-        {
-          "CLIPScore": 0.9438338875770569
-        }
-      ]
+        "micro": [
+          {
+            "CLIPScore": 0.7732070684432983
+          },
+          {
+            "CLIPScore": 0.9438338875770569
+          }
+        ]
+      },
+      "gpu": {
+        "macro": {
+          "CLIPScore": 0.8583984375
+        },
+        "micro": [
+          {
+            "CLIPScore": 0.7724609375
+          },
+          {
+            "CLIPScore": 0.9443359375
+          }
+        ]
+      }
     },
     "reference_based": {
-      "macro": {
-        "CLIPScore": 0.8585,
-        "RefCLIPScore": 0.8452
-      },
-      "micro": [
-        {
-          "CLIPScore": 0.7732070684432983,
-          "RefCLIPScore": 0.8052057027816772
+      "cpu": {
+        "macro": {
+          "CLIPScore": 0.8585,
+          "RefCLIPScore": 0.8452
         },
-        {
-          "CLIPScore": 0.9438337087631226,
-          "RefCLIPScore": 0.8850293755531311
-        }
-      ]
+        "micro": [
+          {
+            "CLIPScore": 0.7732070684432983,
+            "RefCLIPScore": 0.8052057027816772
+          },
+          {
+            "CLIPScore": 0.9438337087631226,
+            "RefCLIPScore": 0.8850293755531311
+          }
+        ]
+      },
+      "gpu": {
+        "macro": {
+          "CLIPScore": 0.8583984375,
+          "RefCLIPScore": 0.845458984375
+        },
+        "micro": [
+          {
+            "CLIPScore": 0.7724609375,
+            "RefCLIPScore": 0.80517578125
+          },
+          {
+            "CLIPScore": 0.9443359375,
+            "RefCLIPScore": 0.8857421875
+          }
+        ]
+      }
     }
   }
 }

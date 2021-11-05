@@ -21,20 +21,38 @@
   ],
   "metrics": {
     "reference_based": {
-      "macro": {
-        "CLIPScore": 0.7152,
-        "RefCLIPScore": 0.7254
-      },
-      "micro": [
-        {
-          "CLIPScore": 0.6451884508132935,
-          "RefCLIPScore": 0.6879217028617859
+      "cpu": {
+        "macro": {
+          "CLIPScore": 0.7152,
+          "RefCLIPScore": 0.7254
         },
-        {
-          "CLIPScore": 0.7851358652114868,
-          "RefCLIPScore": 0.7628390192985535
-        }
-      ]
+        "micro": [
+          {
+            "CLIPScore": 0.6451884508132935,
+            "RefCLIPScore": 0.6879217028617859
+          },
+          {
+            "CLIPScore": 0.7851358652114868,
+            "RefCLIPScore": 0.7628390192985535
+          }
+        ]
+      },
+      "gpu": {
+        "macro": {
+          "CLIPScore": 0.71533203125,
+          "RefCLIPScore": 0.7255859375
+        },
+        "micro": [
+          {
+            "CLIPScore": 0.64501953125,
+            "RefCLIPScore": 0.68798828125
+          },
+          {
+            "CLIPScore": 0.78564453125,
+            "RefCLIPScore": 0.76318359375
+          }
+        ]
+      }
     }
   }
 }
