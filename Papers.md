@@ -50,4 +50,4 @@ This file contains a list of the papers with models wrapped by this library.
 |[RoFT: A Tool for Evaluating Human Detection of Machine-Generated Text](https://arxiv.org/abs/2010.03070)|Liam Dugan, Daphne Ippolito, Arun Kirubarajan, and Chris Callison-Burch|[Link](models/dugan2020/Readme.md)|
 |[Learning to Capitalize with Character-Level Recurrent Neural Networks: An Empirical Study](https://aclanthology.org/D16-1225/)|Raymond Hendy Susanto, Hai Leong Chieu, and Wei Lu|[Link](models/susanto2016/Readme.md)|
 |[MOCHA: A Dataset for Training and Evaluating Generative Reading Comprehension Metrics](https://arxiv.org/abs/2010.03636)|Anthony Chen, Gabriel Stanovsky, Sameer Singh, and Matt Gardner|[Link](models/chen2020/Readme.md)|
-
+|[Large-Scale QA-SRL Parsing](https://arxiv.org/abs/1805.05377)|Nicholas FitzGerald, Julian Michael, Luheng He, and Luke Zettlemoyer|[Link](models/fitzgerald2018/Readme.md)|
