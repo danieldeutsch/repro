@@ -5,8 +5,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install curl -y
 
 # Install Python packages. The original code requires only
-# torch==0.4.0 and allennlp==0.5.0. I could not find how to
-# install torch==0.4.0, only 0.4.1. The rest of the packages
+# torch==0.4.0 and allennlp==0.5.0. The rest of the packages
 # were found based on trial and error
 RUN pip install \
     https://download.pytorch.org/whl/cu90/torch-0.4.0-cp36-cp36m-linux_x86_64.whl \
