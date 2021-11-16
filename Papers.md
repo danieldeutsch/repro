@@ -28,6 +28,7 @@ This file contains a list of the papers with models wrapped by this library.
 |[BARTScore: Evaluating Generated Text as Text Generation](https://arxiv.org/abs/2106.11520)|Weizhe Yuan, Graham Neubig, and Pengfei Liu|[Link](models/yuan2021/Readme.md)|
 |[CLIPScore: A Reference-free Evaluation Metric for Image Captioning](https://arxiv.org/abs/2104.08718)|Jack Hessel, Ari Holtzman, Maxwell Forbes, Ronan Le Bras, and Yejin Choi|[Link](models/hessel2021/Readme.md)|
 |[SUPERT: Towards New Frontiers in Unsupervised Evaluation Metrics for Multi-Document Summarization](https://arxiv.org/abs/2005.03724)|Yang Gao, Wei Zhao, and Steffen Eger|[Link](models/gao2020/Readme.md)|
+|[Fill in the BLANC: Human-free quality estimation of document summaries](https://aclanthology.org/2020.eval4nlp-1.2/)|Oleg Vasilyev, Vedant Dharnidharka, and John Bohannon|[Link](models/vasilyev2020/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|
