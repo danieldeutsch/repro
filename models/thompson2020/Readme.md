@@ -17,12 +17,12 @@ https://github.com/thompsonb/prism
     inputs = [
         {"candidate": "The candidate", "references": ["The reference"]}
     ]
-    macro, micro = model.predict(inputs)
+    macro, micro = model.predict_batch(inputs)
     
     inputs = [
         {"candidate": "The candidate", "sources": ["The source"]}
     ]
-    macro, micro = model.predict(inputs)
+    macro, micro = model.predict_batch(inputs)
     ```
     `macro` is the average Prism score across inputs, and `micro` is the score per input.
     

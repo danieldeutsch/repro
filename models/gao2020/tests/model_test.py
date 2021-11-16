@@ -8,7 +8,7 @@ from repro.testing import assert_dicts_approx_equal
 from . import FIXTURES_ROOT
 
 
-class TestDeutsch2021Models(unittest.TestCase):
+class TestGao2020Models(unittest.TestCase):
     def setUp(self) -> None:
         # These examples were taken from the SUPERT repository
         self.topic1 = json.load(open(f"{FIXTURES_ROOT}/topic_1.json", "r"))
