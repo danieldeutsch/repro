@@ -58,7 +58,7 @@ pytest models/vasilyev2020/tests
 
 ## Status
 - [x] Regression unit tests pass  
-See [here]().
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1467631310).
 - [ ] Correctness unit tests pass  
 See explanation in "Implementation Notes"
 - [ ] Model runs on full test dataset  
