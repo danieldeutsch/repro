@@ -39,6 +39,7 @@ pytest models/denkowski2014/tests
 
 ## Status
 - [x] Regression unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1468357287)
 - [ ] Correctness unit tests pass  
 - [ ] Model runs on full test dataset  
 - [ ] Predictions approximately replicate results reported in the paper  

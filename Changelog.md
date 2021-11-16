@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a [QA SRL Parser](models/fitzgerald2018/Readme.md)
 - Added [SUPERT](models/gao2020/Readme.md)
 - Added [BLANC](models/vasilyev2020/Readme.md)
+- Added [METEOR](models/denkowski2014/Readme.md)
 
 ## [v0.1.2](https://github.com/danieldeutsch/repro/releases/tag/v0.1.1) - 2021-10-07
 ### Changed
