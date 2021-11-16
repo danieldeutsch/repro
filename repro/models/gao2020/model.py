@@ -49,10 +49,6 @@ class SUPERT(Model):
 
         # Group the candidates by the sources for more efficient processing.
         # This method groups by "references," but it will do the same thing
-        # ROUGE can be quite slow, so we deduplicate processing by grouping all of
-        # the sources by identical targets. There could be duplicate references if you are scoring multiple
-        # systems outputs at once. We then process the data grouped, and ungroup it at the end
-        # so the output scores are parallel to the inputs.
         (
             grouped_candidates_list,
             grouped_sources_list,
