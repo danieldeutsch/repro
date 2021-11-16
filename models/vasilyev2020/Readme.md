@@ -9,7 +9,7 @@ https://github.com/PrimerAI/blanc
 ## Available Models
 - BLANCHelp
   - Description: A reference-free summarization evaluation metric
-  - Name: `vasilyev-blanc-help`
+  - Name: `vasilyev2020-blanc-help`
   - Usage:
     ```python
     from repro.models.vasilyev2020 import BLANCHelp
@@ -24,7 +24,7 @@ https://github.com/PrimerAI/blanc
     
 - BLANCTune
   - Description: A reference-free summarization evaluation metric
-  - Name: `vasilyev-blanc-tune`
+  - Name: `vasilyev2020-blanc-tune`
   - Usage:
     ```python
     from repro.models.vasilyev2020 import BLANCTune
