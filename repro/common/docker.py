@@ -86,6 +86,17 @@ def run_command(
             f"The `docker` package requires either `stdout` or `stderr` is `True`"
         )
 
+    client = docker.from_env()
+
+    # Check to see if the image already exists locally. If it doesn't,
+    # pull it from Dockerhub. The `client.containers.run` function already
+    # does this automatically, but it is silent. We pull it out here
+    # so that we can add logging around it
+    if not image_exists(image):
+        logger.info(f"Image {image} does not exist locally. Pulling")
+        client.images.pull(image)
+        logger.info(f"Finished pulling {image}")
+
     volume_map = volume_map or {}
     volumes = {
         host_path: {"bind": container_path, "mode": "rw"}
@@ -100,7 +111,6 @@ def run_command(
     docker_command = f"/bin/sh -c '{command}'"
     logger.info(f'Running command in Docker image {image}: "{docker_command}"')
 
-    client = docker.from_env()
     container = client.containers.run(
         image,
         docker_command,
