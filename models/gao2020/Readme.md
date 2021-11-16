@@ -39,6 +39,7 @@ pytest models/gao2020/tests
 
 ## Status
 - [x] Regression unit tests pass   
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1467093505)
 - [ ] Correctness unit tests pass  
 No expected outputs given in the original repository
 - [ ] Model runs on full test dataset  

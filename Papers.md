@@ -27,6 +27,7 @@ This file contains a list of the papers with models wrapped by this library.
 |[Finding a Balanced Degree of Automation for Summary Evaluation](https://arxiv.org/abs/2109.11503)|Shiyue Zhang and Mohit Bansal|[Link](models/zhang2021/Readme.md)|
 |[BARTScore: Evaluating Generated Text as Text Generation](https://arxiv.org/abs/2106.11520)|Weizhe Yuan, Graham Neubig, and Pengfei Liu|[Link](models/yuan2021/Readme.md)|
 |[CLIPScore: A Reference-free Evaluation Metric for Image Captioning](https://arxiv.org/abs/2104.08718)|Jack Hessel, Ari Holtzman, Maxwell Forbes, Ronan Le Bras, and Yejin Choi|[Link](models/hessel2021/Readme.md)|
+|[SUPERT: Towards New Frontiers in Unsupervised Evaluation Metrics for Multi-Document Summarization](https://arxiv.org/abs/2005.03724)|Yang Gao, Wei Zhao, and Steffen Eger|[Link](models/gao2020/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|
