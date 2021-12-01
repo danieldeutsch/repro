@@ -1,0 +1,33 @@
+{
+  "inputs": [
+    {
+      "sentence": "Tom brings the dog to the park.",
+      "token_index": 1,
+      "lemma": "bring",
+      "pos": "v",
+      "sense": 1
+    },
+    {
+      "sentence": "Jane bought the book from Tom for 5 dollars.",
+      "token_index": 1,
+      "lemma": "buy",
+      "pos": "v",
+      "sense": 1
+    },
+    {
+      "sentence": "We will fly to the Carribean.",
+      "token_index": 2,
+      "lemma": "fly",
+      "pos": "v",
+      "sense": 1
+    },
+    {
+      "sentence": "The pasta was eaten by the guests.",
+      "token_index": 3,
+      "lemma": "eat",
+      "pos": "v",
+      "sense": 1
+    }
+  ],
+  "outputs": []
+}
