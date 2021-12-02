@@ -5,9 +5,9 @@ ARG MODELS
 WORKDIR /app
 
 # Clone the repository
-RUN git clone https://github.com/danieldeutsch/Lite2-3Pyramid && \
+RUN git clone https://github.com/ZhangShiyue/Lite2-3Pyramid && \
     cd Lite2-3Pyramid && \
-    git checkout c2a60ff4b42df879ee9be8f0fad1b5ae8160943e
+    git checkout 6d15d64e3dce5eee584cead5836ecf6a556b3d42
 
 ## Install the python dependencies. The Github repo requires torch==1.7.1+cu110, but
 ## we use torch==1.7.1 with cuda 10.0 instead
