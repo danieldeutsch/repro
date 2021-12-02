@@ -29,12 +29,12 @@ class TestZhang2021Models(unittest.TestCase):
         self.summaries = open(f"{FIXTURES_ROOT}/summaries.txt", "r").read().splitlines()
 
     @parameterized.expand(get_testing_device_parameters())
-    def test_extract_stus(self, device: int):
+    def test_extract_stus_regression(self, device: int):
         # Ensures the example STUs from the repo are the ones extracted. We only
-        # test the first 10 for time. We did notice slight differences on all 100.
+        # test the first 8 for time. We did notice slight differences on all 100.
         metric = Lite3Pyramid(device=device)
 
-        num_inputs = 10
+        num_inputs = 8
         input_references = self.references[:num_inputs]
         expected_stus = self.stus[:num_inputs]
         actual_stus = metric.extract_stus(input_references, True)
@@ -80,10 +80,10 @@ class TestZhang2021Models(unittest.TestCase):
         actual_macro, _ = metric.predict_batch(inputs)
 
         expected_macro = {
-            "p2c": 0.41426592423623565,
-            "l2c": 0.4375990120990121,
-            "p3c": 0.35243034715254057,
-            "l3c": 0.41764121989121983,
+            "p2c": 0.4151777145874357,
+            "l2c": 0.43821509046509044,
+            "p3c": 0.35296707861818133,
+            "l3c": 0.4181815406815407,
         }
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
 
