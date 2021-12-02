@@ -31,7 +31,7 @@ https://github.com/ZhangShiyue/Lite2-3Pyramid
 
     
 ## Docker Information
-- Image name: `danieldeutsch/zhang2021:1.1`
+- Image name: `danieldeutsch/zhang2021:1.2`
 - Docker Hub: https://hub.docker.com/repository/docker/danieldeutsch/zhang2021
 - Build command:
   ```shell script
@@ -60,5 +60,8 @@ Not tested
 - [ ] Predictions exactly replicate results reported in the paper  
 
 ## Changelog
+### v1.2
+- Switched back to the original repo, which has merged our changes from v1.1 and fixed [the SRL tagging error](https://github.com/ZhangShiyue/Lite2-3Pyramid/issues/2).
+
 ### v1.1
 - Changed to our fork of the repo, which adds support for using the GPU for coref and SRL and saving the results to a file 
