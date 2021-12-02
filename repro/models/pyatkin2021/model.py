@@ -80,7 +80,7 @@ class RoleQuestionGenerator(Model):
                 f"  --outfile {container_output_file}"
                 f"  --transformation_model_path ../question_transformation_grammar_corrected_who"
                 f"  --device_number {process_device}"
-                f"  --with_adjuncts"
+                f"  --with_adjuncts true"
             )
 
             command = " && ".join(commands)
