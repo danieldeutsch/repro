@@ -125,3 +125,13 @@ class TestZhang2021Models(unittest.TestCase):
         assert len(expected_micro) == len(actual_micro)
         for expected, actual in zip(expected_micro, actual_micro):
             assert_dicts_approx_equal(expected, actual, abs=1e-4)
+
+    @parameterized.expand(get_testing_device_parameters())
+    def test_srl_error(self, device: int):
+        # Tests a sentence that causes an error due to an invalid SRL tagging. This
+        # test crashes with v1.1 but passes with v1.2.
+        # See https://github.com/ZhangShiyue/Lite2-3Pyramid/issues/2#issuecomment-984898285
+        model = Lite3Pyramid(device=device)
+        model.extract_stus(
+            "Why was a volunteer cop witha gun in a violent crimes unit?", False
+        )
