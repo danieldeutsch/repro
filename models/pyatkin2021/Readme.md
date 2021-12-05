@@ -48,7 +48,7 @@ pytest models/pyatkin2021/tests
 ```
 
 ## Status
-- [ ] Regression unit tests pass  
+- [x] Regression unit tests pass  
 - [ ] Correctness unit tests pass  
 - [ ] Model runs on full test dataset  
 - [ ] Predictions approximately replicate results reported in the paper  
