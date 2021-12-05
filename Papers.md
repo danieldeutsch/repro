@@ -41,6 +41,7 @@ This file contains a list of the papers with models wrapped by this library.
 |Paper|Authors|Link|
 |-|-|-|
 |[Towards Question-Answering as an Automatic Metric for Evaluating the Content Quality of a Summary](https://arxiv.org/abs/2010.00490)|Daniel Deutsch, Tania Bedrax-Weiss, and Dan Roth|[Link](models/deutsch2021/Readme.md)|
+|[Asking It All: Generating Contextualized Questions for any Semantic Role](https://arxiv.org/abs/2109.04832)|Valentina Pyatkin, Paul Roit, Julian Michael, Reut Tsarfaty, Yoav Goldberg, and Ido Dagan|[Link](models/pyatkin2021/Readme.md)|
 
 ### Parsing
 |Paper|Authors|Link|

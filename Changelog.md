@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added [SUPERT](models/gao2020/Readme.md)
 - Added [BLANC](models/vasilyev2020/Readme.md)
 - Added [METEOR](models/denkowski2014/Readme.md)
+- Added a role question generator from [Pyatkin et al. (2021)](models/pyatkin2021/Readme.md)
 
 ### Fixed
 - Fixed an error in [Lite3Pyramid](models/zhang2021/Readme.md) by updating to a newer version of the code.

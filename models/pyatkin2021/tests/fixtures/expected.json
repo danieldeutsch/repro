@@ -1,0 +1,117 @@
+{
+  "inputs": [
+    {
+      "sentence": "Tom brings the dog to the park.",
+      "token_index": 1,
+      "lemma": "bring",
+      "pos": "v",
+      "sense": 1
+    },
+    {
+      "sentence": "Jane bought the book from Tom for 5 dollars.",
+      "token_index": 1,
+      "lemma": "buy",
+      "pos": "v",
+      "sense": 1
+    },
+    {
+      "sentence": "We will fly to the Carribean.",
+      "token_index": 2,
+      "lemma": "fly",
+      "pos": "v",
+      "sense": 1
+    },
+    {
+      "sentence": "The pasta was eaten by the guests.",
+      "token_index": 3,
+      "lemma": "eat",
+      "pos": "v",
+      "sense": 1
+    }
+  ],
+  "outputs": [
+    {
+      "id": 0,
+      "sentence": "Tom brings the dog to the park.",
+      "target_idx": 1,
+      "target_lemma": "bring",
+      "target_pos": "v",
+      "predicate_sense": "1",
+      "questions": {
+        "A0_bringer": "Who brings the dog?",
+        "A1_thing brought": "What does Tom bring to the park?",
+        "A2_benefactive or destination brought-for, brought-to,": "What is the dog brought to?",
+        "A3_attribute, state after bringing": "What is the dog brought to?",
+        "A4_ablative, brought-from": "What is the dog brought from?"
+      },
+      "adjunct_questions": {
+        "AM-LOC_Location": "Where is the dog being brought?",
+        "AM-MNR_Manner": "How is the dog brought by Tom?",
+        "AM-CAU_Causal": "Why does Tom bring the dog to the park?",
+        "AM-EXT_Extent": "How much does Tom bring?",
+        "AM-GOL_Goal": "Who does Tom bring something to?"
+      }
+    },
+    {
+      "id": 1,
+      "sentence": "Jane bought the book from Tom for 5 dollars.",
+      "target_idx": 1,
+      "target_lemma": "buy",
+      "target_pos": "v",
+      "predicate_sense": "1",
+      "questions": {
+        "A0_buyer": "Who bought the book from Tom?",
+        "A1_thing bought": "What did Jane buy?",
+        "A2_seller": "What was the book bought from?",
+        "A3_price paid": "How much was the book bought for?",
+        "A4_benefactive": "Who did Jane buy something for?"
+      },
+      "adjunct_questions": {
+        "AM-LOC_Location": "Where was Jane buying?",
+        "AM-MNR_Manner": "How was the book bought by Jane?",
+        "AM-CAU_Causal": "Why did Jane buy the book from Tom?",
+        "AM-EXT_Extent": "How much did Jane buy?",
+        "AM-GOL_Goal": "Who did Jane buy something to?"
+      }
+    },
+    {
+      "id": 2,
+      "sentence": "We will fly to the Carribean.",
+      "target_idx": 2,
+      "target_lemma": "fly",
+      "target_pos": "v",
+      "predicate_sense": "1",
+      "questions": {
+        "A2_benefactive": "No Prototype",
+        "A0_causal agent": "Who will fly Carribean?",
+        "A1_thing actually doing the flying": "Who will fly around?"
+      },
+      "adjunct_questions": {
+        "AM-LOC_Location": "Where will we fly?",
+        "AM-MNR_Manner": "How will we fly by the Carribean?",
+        "AM-CAU_Causal": "Why will we fly something something?",
+        "AM-EXT_Extent": "How much will we fly?",
+        "AM-GOL_Goal": "Who will we fly something to?"
+      }
+    },
+    {
+      "id": 3,
+      "sentence": "The pasta was eaten by the guests.",
+      "target_idx": 3,
+      "target_lemma": "eat",
+      "target_pos": "v",
+      "predicate_sense": "1",
+      "questions": {
+        "A0_consumer, eater": "Who ate the pasta?",
+        "A1_meal": "What did the guests eat?"
+      },
+      "adjunct_questions": {
+        "AM-LOC_Location": "Where was the pasta eaten?",
+        "AM-MNR_Manner": "How was the pasta eaten by the guests?",
+        "AM-CAU_Causal": "Why did the guests eat the pasta?",
+        "AM-EXT_Extent": "How much was the pasta eaten?",
+        "AM-GOL_Goal": "Who did the guests eat something to?"
+      }
+    }
+  ]
+}
