@@ -6,6 +6,9 @@
 ## Repositories
 https://github.com/ValentinaPy/RoleQGeneration
 
+This implementation uses our fork with some additional code modifications:
+https://github.com/danieldeutsch/RoleQGeneration
+
 ## Available Models
 - RoleQuestionGenerator
   - Description: A model which generates role questions.

@@ -80,14 +80,14 @@ class RoleQuestionGenerator(Model):
                 f"  --outfile {container_output_file}"
                 f"  --transformation_model_path ../question_transformation_grammar_corrected_who"
                 f"  --device_number {process_device}"
-                f"  --with_adjuncts true"
+                f"  --with_adjuncts"
             )
 
             command = " && ".join(commands)
             backend.run_command(
                 command=command,
                 cuda=cuda,
-                network_disabled=True,
+                network_disabled=False,
             )
 
             outputs = read_jsonl_file(host_output_file)

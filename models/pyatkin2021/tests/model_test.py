@@ -13,7 +13,8 @@ class TestPyatkin2021Model(unittest.TestCase):
         self.expected = json.load(open(f"{FIXTURES_ROOT}/expected.json", "r"))
 
     @parameterized.expand(get_testing_device_parameters())
-    def test_role_question_generator(self, device: int):
+    def test_role_question_generator_regression(self, device: int):
+        # Tests some debug examples from the original repository
         model = RoleQuestionGenerator(device=device)
 
         inputs = self.expected["inputs"]

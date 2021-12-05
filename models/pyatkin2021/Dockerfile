@@ -7,11 +7,6 @@ RUN wget https://nlp.biu.ac.il/~pyatkiv/roleqsmodels/question_transformation.tar
     tar -zxf question_transformation.tar.gz && \
     rm question_transformation.tar.gz
 
-# Download the code
-RUN git clone https://github.com/ValentinaPy/RoleQGeneration && \
-    cd RoleQGeneration && \
-    git checkout 32a8d31709511a2334d43f0001cbed5a8b88e380
-
 # Install the Python dependencies
 # These were specified in the repository's Readme
 RUN pip install --no-cache-dir \
@@ -24,11 +19,16 @@ RUN pip install --no-cache-dir \
 # nltk was set to 3.4.5 because the default installed version made changes
 # which broke this code.
 RUN pip install --no-cache-dir \
-    qanom==0.0.3 \
+    qanom==0.0.6 \
     jsonlines==2.0.0 \
     pattern==3.6 \
     nltk==3.4.5 \
     unidecode==1.3.2 \
     pytorch_lightning==1.5.4
 
-RUN python -c 'import nltk; nltk.download("verbnet"); nltk.download("wordnet"); nltk.download("wordnet_ic"); nltk.download("sentiwordnet");'
+# Download the code
+RUN git clone https://github.com/danieldeutsch/RoleQGeneration && \
+    cd RoleQGeneration && \
+    git checkout 34a03b2c054bdf0361a0ba3b70482261cb89cf57
+
+RUN python -c 'import nltk; nltk.download("verbnet"); nltk.download("wordnet"); nltk.download("wordnet_ic"); nltk.download("sentiwordnet"); nltk.download("averaged_perceptron_tagger");'
