@@ -39,7 +39,7 @@ https://github.com/danieldeutsch/RoleQGeneration
   ```shell script
   repro setup pyatkin2021
   ```
-- Requires network:
+- Requires network: Yes, the code does a network call related to ensuring NLTK libraries are installed.
   
 ## Testing
 ```shell script
