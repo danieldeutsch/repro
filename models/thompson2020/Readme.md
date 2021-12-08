@@ -7,7 +7,7 @@
 https://github.com/thompsonb/prism
 
 ## Available Models
-- Prism
+- Prism as a metric
   - Description: A machine translation metric based on paraphrasing
   - Name: `thompson2020-prism`
   - Usage:
@@ -26,12 +26,26 @@ https://github.com/thompsonb/prism
     ```
     `macro` is the average Prism score across inputs, and `micro` is the score per input.
     
+- Prism as an MT model
+  - Description: Uses Prism as a machine translation model
+  - Name: `thompson2020-prism`
+  - Usage:
+    ```python
+    from repro.models.thompson2020 import Prism
+    model = Prism()
+    inputs = [
+        {"source": "The source text."}
+    ]
+    outputs = model.translate_batch("fr", inputs)
+    ```
+    `"fr"` is the language code for the target language and `outputs` is the list of translations.
+
 ## Implementation Notes
 - The metric requires all inputs to have sources xor references, not both or neither.
 - The metric only supports single references and/or sources, so the length of `references` and `sources` must be 1.
 
 ## Docker Information
-- Image name: `danieldeutsch/thompson2020:1.0`
+- Image name: `danieldeutsch/thompson2020:1.1`
 - Build command:
   ```shell script
   repro setup thompson2020 [--silent]
@@ -57,3 +71,5 @@ Not tested
 Not tested
 
 ## Changelog
+### v1.1
+- Added using Prism as an MT model
