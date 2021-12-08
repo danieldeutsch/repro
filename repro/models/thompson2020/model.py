@@ -119,3 +119,37 @@ class Prism(Model):
             micro_metrics = read_jsonl_file(host_output_file)
             macro_metrics = util.average_dicts(micro_metrics)
             return macro_metrics, micro_metrics
+
+    def translate(self, language: str, source: str) -> str:
+        return self.translate_batch(language, [{"source": source}])[0]
+
+    def translate_batch(self, language: str, inputs: List[Dict[str, str]]) -> List[str]:
+        logger.info(f"Translating {len(inputs)} inputs into {language}")
+
+        sources = [inp["source"] for inp in inputs]
+        with DockerContainer(self.image) as backend:
+            host_input_file = f"{backend.host_dir}/input.src"
+            container_input_file = f"{backend.container_dir}/input.src"
+            with open(host_input_file, "w") as out:
+                for source in sources:
+                    if "\n" in source:
+                        raise Exception(f"Input sources must not contain '\\n'")
+                    out.write(source + "\n")
+
+            host_output_file = f"{backend.host_dir}/output.tgt"
+            container_output_file = f"{backend.container_dir}/output.tgt"
+
+            cuda = self.device != -1
+            commands = []
+            if cuda:
+                commands.append(f"export CUDA_VISIBLE_DEVICES={self.device}")
+
+            commands.append(
+                f"sh translate.sh {container_input_file} {language} {container_output_file}"
+            )
+
+            command = " && ".join(commands)
+            backend.run_command(command=command, cuda=cuda, network_disabled=True)
+
+            outputs = open(host_output_file, "r").read().splitlines()
+            return outputs
