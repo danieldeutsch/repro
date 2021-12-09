@@ -120,11 +120,17 @@ class Prism(Model):
             macro_metrics = util.average_dicts(micro_metrics)
             return macro_metrics, micro_metrics
 
-    def translate(self, language: str, source: str) -> str:
-        return self.translate_batch(language, [{"source": source}])[0]
+    def translate(self, language: str, source: str, batch_size: int = None) -> str:
+        return self.translate_batch(
+            language, [{"source": source}], batch_size=batch_size
+        )[0]
 
-    def translate_batch(self, language: str, inputs: List[Dict[str, str]]) -> List[str]:
+    def translate_batch(
+        self, language: str, inputs: List[Dict[str, str]], batch_size: int = None
+    ) -> List[str]:
         logger.info(f"Translating {len(inputs)} inputs into {language}")
+
+        batch_size = batch_size or 32
 
         sources = [inp["source"] for inp in inputs]
         with DockerContainer(self.image) as backend:
@@ -145,7 +151,7 @@ class Prism(Model):
                 commands.append(f"export CUDA_VISIBLE_DEVICES={self.device}")
 
             commands.append(
-                f"sh translate.sh {container_input_file} {language} {container_output_file}"
+                f"sh translate.sh {container_input_file} {language} {batch_size} {container_output_file}"
             )
 
             command = " && ".join(commands)
