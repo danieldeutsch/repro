@@ -45,7 +45,7 @@ https://github.com/thompsonb/prism
 - The metric only supports single references and/or sources, so the length of `references` and `sources` must be 1.
 
 ## Docker Information
-- Image name: `danieldeutsch/thompson2020:1.1`
+- Image name: `danieldeutsch/thompson2020:1.2`
 - Build command:
   ```shell script
   repro setup thompson2020 [--silent]
@@ -71,5 +71,8 @@ Not tested
 Not tested
 
 ## Changelog
+### v1.2
+- Added a `batch_size` argument to the translation functions
+
 ### v1.1
 - Added using Prism as an MT model
