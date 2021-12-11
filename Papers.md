@@ -30,6 +30,7 @@ This file contains a list of the papers with models wrapped by this library.
 |[SUPERT: Towards New Frontiers in Unsupervised Evaluation Metrics for Multi-Document Summarization](https://arxiv.org/abs/2005.03724)|Yang Gao, Wei Zhao, and Steffen Eger|[Link](models/gao2020/Readme.md)|
 |[Fill in the BLANC: Human-free quality estimation of document summaries](https://aclanthology.org/2020.eval4nlp-1.2/)|Oleg Vasilyev, Vedant Dharnidharka, and John Bohannon|[Link](models/vasilyev2020/Readme.md)|
 |[Meteor Universal: Language Specific Translation Evaluation for Any Target Language](https://aclanthology.org/W14-3348/)|Michael Denkowski and Alon Lavie|[Link](models/denkowski2014/Readme.md)|
+|[COMET: A Neural Framework for MT Evaluation](https://aclanthology.org/2020.emnlp-main.213/)|Ricardo Rei, Craig Stewart, Ana C Farinha, and Alon Lavie|[Link](models/rei2020/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|
