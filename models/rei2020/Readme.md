@@ -50,7 +50,7 @@ pytest models/rei2020/tests
 
 ## Status
 - [x] Regression unit tests pass  
-See [here]() 
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1567865901) 
 - [ ] Correctness unit tests pass  
 - [ ] Model runs on full test dataset  
 - [ ] Predictions approximately replicate results reported in the paper  
