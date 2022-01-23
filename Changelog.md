@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+## [v0.1.3](https://github.com/danieldeutsch/repro/releases/tag/v0.1.3) - 2022-01-22
 ### Added
 - Added [CLIPScore](models/hessel2021/Readme.md)
 - Added a [QA SRL Parser](models/fitzgerald2018/Readme.md)
@@ -18,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed an error in [Lite3Pyramid](models/zhang2021/Readme.md) by updating to a newer version of the code.
 
-## [v0.1.2](https://github.com/danieldeutsch/repro/releases/tag/v0.1.1) - 2021-10-07
+## [v0.1.2](https://github.com/danieldeutsch/repro/releases/tag/v0.1.2) - 2021-10-07
 ### Changed
 - Changed backend of Lite3Pyramid to use our own fork of the official repo with some modifications.
 
