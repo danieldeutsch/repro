@@ -33,6 +33,7 @@ For developers:
 git clone https://github.com/danieldeutsch/repro
 cd repro
 pip install --editable .
+pip install -r dev-requirements.txt
 ```                                       
 
 ## Example Usage

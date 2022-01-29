@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Relaxed the `datasets` version requirement to match the GEM Metrics library
+- Moved some dependencies into `dev-requirements.txt`
 
 ### Fixed
 - Removed warnings that may happen if the Docker clients are not closed.
