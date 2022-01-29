@@ -29,16 +29,20 @@ def image_exists(image: str) -> bool:
         logger.error("Could not connect to the Docker client. Is the Daemon running?")
         logger.exception(e)
         return False
+
+    found = True
     try:
         client.images.get(image)
     except docker.errors.ImageNotFound:
-        return False
-    return True
+        found = False
+    client.close()
+    return found
 
 
 def remove_image(image: str, force: bool = False) -> None:
     client = docker.from_env()
     client.images.remove(image, force)
+    client.close()
 
 
 def run_command(
@@ -130,6 +134,8 @@ def run_command(
             print(item, end="")
     logger.info("Command finished")
 
+    client.close()
+
     output = "".join(output)
     return output
 
@@ -156,6 +162,7 @@ def build_image(
         logger.exception(e)
 
     logger.info("Finished building image")
+    client.close()
 
 
 def pull_image(image: str) -> None:
@@ -171,6 +178,7 @@ def pull_image(image: str) -> None:
     client = docker.from_env()
     client.images.pull(image)
     logger.info("Pulled image")
+    client.close()
 
 
 class BuildDockerImageSubcommand(SetupSubcommand):
