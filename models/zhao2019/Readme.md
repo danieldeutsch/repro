@@ -69,3 +69,7 @@ Not tested
 Not tested
 - [ ] Predictions exactly replicate results reported in the paper  
 Not tested
+
+## Changelog
+### v1.1
+- Added GPU support
