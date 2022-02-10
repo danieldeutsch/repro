@@ -14,7 +14,12 @@ logger = logging.getLogger(__name__)
 
 @Model.register(f"{MODEL_NAME}-moverscore")
 class MoverScore(Model):
-    def __init__(self, image: str = DEFAULT_IMAGE, model: str = 'distilbert-base-uncased', device: int = 0):
+    def __init__(
+        self,
+        image: str = DEFAULT_IMAGE,
+        model: str = "distilbert-base-uncased",
+        device: int = 0,
+    ):
         self.image = image
         self.device = device
         self.model = model
