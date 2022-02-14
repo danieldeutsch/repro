@@ -5,7 +5,7 @@ WORKDIR /app
 # Get the code
 RUN git clone https://github.com/PierreColombo/nlg_eval_via_simi_measures && \
     cd nlg_eval_via_simi_measures && \
-    git checkout 70769ebac063fae4a3eac219a7701ce85451c8b2
+    git checkout 44d33f34833193a34407cbe6086418c1374ebce6
 
 # Install dependencies
 RUN pip install --no-cache-dir \

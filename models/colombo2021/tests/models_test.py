@@ -1,49 +1,35 @@
+import json
 import unittest
 from parameterized import parameterized
 
 from repro.models.colombo2021 import BaryScore, DepthScore, InfoLM
 from repro.testing import assert_dicts_approx_equal, get_testing_device_parameters
 
+from . import FIXTURES_ROOT
+
 
 class TestColombo2021Models(unittest.TestCase):
+    def setUp(self) -> None:
+        # Load the inputs
+        self.inputs = []
+        with open(f"{FIXTURES_ROOT}/refs.txt", "r") as f_refs:
+            with open(f"{FIXTURES_ROOT}/hyps.txt", "r") as f_hyps:
+                for reference, hyp in zip(f_refs, f_hyps):
+                    self.inputs.append({
+                        "candidate": hyp.strip(),
+                        "references": [reference.strip()]
+                    })
+
+        # Load the expected outputs
+        with open(f"{FIXTURES_ROOT}/expected.json", "r") as f:
+            self.expected = json.load(f)
+
     @parameterized.expand(get_testing_device_parameters())
     def test_infolm(self, device: int):
-        model = InfoLM(device=device, idf=True)
-        inputs = [
-            {
-                "candidate": "I like my cakes very much",
-                "references": ["I like my cakes very much"],
-            },
-            {
-                "candidate": "I like my cakes very much",
-                "references": ["I hate these cakes!"],
-            },
-        ]
-
-        actual_macro, actual_micro = model.predict_batch(inputs)
-        expected_macro = {
-            "infolm": {
-                "fisher_rao": 1.1136181355,
-                "r_fisher_rao": 1.1136181355,
-                "sim_fisher_rao": 1.1136181355,
-            }
-        }
-        expected_micro = [
-            {
-                "infolm": {
-                    "fisher_rao": 0.0,
-                    "r_fisher_rao": 0.0,
-                    "sim_fisher_rao": 0.0,
-                }
-            },
-            {
-                "infolm": {
-                    "fisher_rao": 2.227236270904541,
-                    "r_fisher_rao": 2.227236270904541,
-                    "sim_fisher_rao": 2.227236270904541,
-                }
-            },
-        ]
+        model = InfoLM(device=device)
+        expected_macro = self.expected["infolm"]["macro"]
+        expected_micro = self.expected["infolm"]["micro"]
+        actual_macro, actual_micro = model.predict_batch(self.inputs)
 
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
         assert len(expected_micro) == len(actual_micro)
@@ -52,39 +38,11 @@ class TestColombo2021Models(unittest.TestCase):
 
     @parameterized.expand(get_testing_device_parameters())
     def test_baryscore(self, device: int):
-        model = BaryScore(device=device, idf=True)
-        inputs = [
-            {
-                "candidate": "I like my cakes very much",
-                "references": ["I like my cakes very much"],
-            },
-            {
-                "candidate": "I like my cakes very much",
-                "references": ["I hate these cakes!"],
-            },
-        ]
-
-        actual_macro, actual_micro = model.predict_batch(inputs)
-        expected_macro = {
-            "baryscore": {
-                "baryscore_W": 1.1136181355,
-                "baryscore_SD": 1.1136181355,
-            }
-        }
-        expected_micro = [
-            {
-                "baryscore": {
-                    "baryscore_W": 0.0,
-                    "baryscore_SD": 0.0,
-                }
-            },
-            {
-                "baryscore": {
-                    "baryscore_W": 0.004107567128949505,
-                    "baryscore_SD": 0.09756940805019898,
-                }
-            },
-        ]
+        model = BaryScore(device=device)
+        device = "cpu" if device == -1 else "gpu"
+        expected_macro = self.expected["baryscore"][device]["macro"]
+        expected_micro = self.expected["baryscore"][device]["micro"]
+        actual_macro, actual_micro = model.predict_batch(self.inputs)
 
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
         assert len(expected_micro) == len(actual_micro)
@@ -94,35 +52,10 @@ class TestColombo2021Models(unittest.TestCase):
     @parameterized.expand(get_testing_device_parameters())
     def test_depthscore(self, device: int):
         model = DepthScore(device=device)
-        inputs = [
-            {
-                "candidate": "I like my cakes very much",
-                "references": ["I like my cakes very much"],
-            },
-            {
-                "candidate": "I like my cakes very much",
-                "references": ["I hate these cakes!"],
-            },
-        ]
-
-        actual_macro, actual_micro = model.predict_batch(inputs)
-        expected_macro = {
-            "depthscore": {
-                "depth_score": 0.05552341937,
-            }
-        }
-        expected_micro = [
-            {
-                "depthscore": {
-                    "depth_score": 0.0,
-                }
-            },
-            {
-                "depthscore": {
-                    "depth_score": 0.11104683874186258,
-                }
-            },
-        ]
+        device = "cpu" if device == -1 else "gpu"
+        expected_macro = self.expected["depthscore"][device]["macro"]
+        expected_micro = self.expected["depthscore"][device]["micro"]
+        actual_macro, actual_micro = model.predict_batch(self.inputs)
 
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
         assert len(expected_micro) == len(actual_micro)
