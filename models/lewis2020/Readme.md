@@ -82,5 +82,8 @@ The CNN/DailyMail results are very close to those in the paper:
 No, see above.
 
 ## Changelog
+### v1.2
+- Added ability to override beam size and added an `nbest` option.
+
 ### v1.1
 - Fixed an issue with changing file ownership when the pre-trained model files were extracted.
