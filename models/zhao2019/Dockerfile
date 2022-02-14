@@ -1,6 +1,8 @@
-FROM pure/python:3.7-cuda10.0-base
+FROM pure/python:3.8-cuda10.0-base
 
 WORKDIR /app
+
+RUN pip install Cython
 
 # Install the Python dependencies
 RUN git clone https://github.com/AIPHES/emnlp19-moverscore && \
