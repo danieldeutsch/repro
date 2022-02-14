@@ -57,3 +57,14 @@ class TestZhao2019Models(unittest.TestCase):
 
         with self.assertRaises(Exception):
             model.predict_batch([], use_stopwords=False)
+
+    @parameterized.expand(get_testing_device_parameters())
+    def test_moverscore_idf_example_fix(self, device: int):
+        # Test specific examples to ensure a fix to the code worked properly. In one
+        # version of this metric, passing in 1 example to score always resulted in
+        # a score of 1.0 because it used an IDF dictionary and each word appeared
+        # in exactly one input (the only one). With the change, the IDF dict is no
+        # longer used
+        model = MoverScore(device=device)
+        actual = model.predict("Hello World", ["How are you?"])
+        assert_dicts_approx_equal({"moverscore": 0.5770540645865062}, actual, abs=1e-4)

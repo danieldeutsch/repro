@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Added
 - Added [BaryScore, InfoLM, and DepthScore](models/colombo2021/Readme.md)
 
+### Changed
+- Changed the backend implementation of MoverScore to use a non-IDF dict based version.
+
 ## [v0.1.4](https://github.com/danieldeutsch/repro/releases/tag/v0.1.4) - 2022-01-29
 ### Changed
 - Relaxed the `datasets` version requirement to match the GEM Metrics library

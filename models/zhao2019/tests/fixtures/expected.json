@@ -2,87 +2,87 @@
   "default": {
     "micro": [
       {
-        "moverscore": 0.5374585438614209
+        "moverscore": 0.5519537643700062
       },
       {
-        "moverscore": 0.5528654291683849
+        "moverscore": 0.5702658240517838
       },
       {
-        "moverscore": 0.5584310585149199
+        "moverscore": 0.5747977302204582
       },
       {
-        "moverscore": 0.5483838328947854
+        "moverscore": 0.5662361359209
       },
       {
-        "moverscore": 0.5401417051028986
+        "moverscore": 0.5613683115463678
       },
       {
-        "moverscore": 0.5396808726640311
+        "moverscore": 0.5614178359164702
       },
       {
-        "moverscore": 0.56281337305529
+        "moverscore": 0.5888811007295938
       },
       {
-        "moverscore": 0.5653760958979458
+        "moverscore": 0.5906006260606307
       },
       {
-        "moverscore": 0.5578759611994967
+        "moverscore": 0.5725977614540374
       },
       {
-        "moverscore": 0.5694264983227191
+        "moverscore": 0.5927708989337149
       },
       {
-        "moverscore": 0.5646481847786998
+        "moverscore": 0.5861854483292473
       },
       {
-        "moverscore": 0.5528510075354691
+        "moverscore": 0.5734556930584522
       }
     ],
     "macro": {
-      "moverscore": 0.5541627135830051
+      "moverscore": 0.5742109275493053
     }
   },
   "summarization": {
     "micro": [
       {
-        "moverscore": 0.5363679808125065
+        "moverscore": 0.5432705823571925
       },
       {
-        "moverscore": 0.553204695560149
+        "moverscore": 0.5627943245205925
       },
       {
-        "moverscore": 0.5594086145883774
+        "moverscore": 0.5681693286222553
       },
       {
-        "moverscore": 0.5478360937605564
+        "moverscore": 0.5579426600181681
       },
       {
-        "moverscore": 0.540025446393662
+        "moverscore": 0.5514187327632644
       },
       {
-        "moverscore": 0.5400406779008134
+        "moverscore": 0.5511429472168278
       },
       {
-        "moverscore": 0.5630475426798369
+        "moverscore": 0.5796158551811643
       },
       {
-        "moverscore": 0.5661348139567364
+        "moverscore": 0.5816084474147277
       },
       {
-        "moverscore": 0.5565022067471125
+        "moverscore": 0.5658549198353692
       },
       {
-        "moverscore": 0.5688220284325299
+        "moverscore": 0.5838097156474874
       },
       {
-        "moverscore": 0.5642806008389394
+        "moverscore": 0.5775403162582613
       },
       {
-        "moverscore": 0.5521844453777212
+        "moverscore": 0.5657160758438957
       }
     ],
     "macro": {
-      "moverscore": 0.5539879289207451
+      "moverscore": 0.5657403254732672
     }
   }
 }
