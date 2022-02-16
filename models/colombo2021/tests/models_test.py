@@ -15,10 +15,9 @@ class TestColombo2021Models(unittest.TestCase):
         with open(f"{FIXTURES_ROOT}/refs.txt", "r") as f_refs:
             with open(f"{FIXTURES_ROOT}/hyps.txt", "r") as f_hyps:
                 for reference, hyp in zip(f_refs, f_hyps):
-                    self.inputs.append({
-                        "candidate": hyp.strip(),
-                        "references": [reference.strip()]
-                    })
+                    self.inputs.append(
+                        {"candidate": hyp.strip(), "references": [reference.strip()]}
+                    )
 
         # Load the expected outputs
         with open(f"{FIXTURES_ROOT}/expected.json", "r") as f:
