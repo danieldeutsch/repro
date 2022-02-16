@@ -50,6 +50,11 @@ All three metrics are implemented in https://github.com/PierreColombo/nlg_eval_v
     `micro` contains the per-input scores and `macro` contains the averaged scores.
     
 ## Implementation Notes
+- For some reason, the unit tests pass on some machines and not on others.
+On one of our dev machines, the CPU and GPU tests pass.
+On another, the CPU pass but the GPU do not.
+On GitHub Actions, the CPU tests do not pass.
+Since they are being run in Docker, I assume there is some difference in hardware causing this, but I do not know what the issue is.
     
 ## Docker Information
 - Image name: `danieldeutsch/colombo2021:1.0`
@@ -67,6 +72,7 @@ pytest models/colombo2021/tests
 
 ## Status
 - [ ] Regression unit tests pass  
+See the implementation notes; https://github.com/danieldeutsch/repro/runs/5210482796
 - [ ] Correctness unit tests pass  
 - [ ] Model runs on full test dataset  
 - [ ] Predictions approximately replicate results reported in the paper  
