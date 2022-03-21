@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+## [v0.1.5](https://github.com/danieldeutsch/repro/releases/tag/v0.1.5) - 2022-03-21
 ## Added
 - Added [BaryScore, InfoLM, and DepthScore](models/colombo2021/Readme.md)
 - Added ability to set `beam_size` and `nbest` parameters for BART.
