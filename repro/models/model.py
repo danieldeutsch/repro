@@ -1,4 +1,6 @@
-from typing import Any, Dict, List, Union
+import math
+from joblib import Parallel, delayed
+from typing import Any, Dict, List, Type, Union
 
 from repro.common import Registrable
 from repro.data.types import DocumentType, SummaryType
@@ -22,6 +24,38 @@ class Model(Registrable):
         Then each item in `inputs` should be a dictionary with keys `"input1"` and `"input2"`.
         """
         raise NotImplementedError
+
+
+class ParallelModel(Model):
+    def __init__(self, model_cls: Type, model_kwargs_list: List[Dict[str, Any]]) -> None:
+        self.model_cls = model_cls
+        self.model_kwargs_list = model_kwargs_list
+
+    @staticmethod
+    def _divide_into_batches(inputs: List[Any], num_batches: int) -> List[List[Any]]:
+        batch_size = int(math.ceil(len(inputs) / num_batches))
+        batches = []
+        for i in range(0, len(inputs), batch_size):
+            batches.append(inputs[i:i + batch_size])
+        return batches
+
+    def _process(self, model_kwargs: Dict[str, Any], inputs: List[Dict[str, Any]], **kwargs) -> Any:
+        model = self.model_cls(**model_kwargs)
+        return model.predict_batch(inputs, **kwargs)
+
+    def predict_batch(self, inputs: List[Dict[str, Any]], **kwargs) -> List[Any]:
+        # Divide all of the inputs into batches, maintaining the order
+        num_jobs = len(self.model_kwargs_list)
+        batches = self._divide_into_batches(inputs, num_jobs)
+
+        # Create the jobs which will be run in parallel
+        jobs = []
+        for model_kwargs, batch in zip(self.model_kwargs_list, batches):
+            jobs.append(delayed(self._process)(model_kwargs, batch))
+
+        # Run the jobs
+        results = Parallel(n_jobs=num_jobs)(jobs)
+        return results
 
 
 class QuestionAnsweringModel(Model):
