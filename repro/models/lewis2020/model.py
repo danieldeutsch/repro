@@ -1,6 +1,7 @@
+import json
 import logging
 import os
-from typing import Dict, List
+from typing import Dict, List, Union
 
 from overrides import overrides
 
@@ -26,6 +27,8 @@ class BART(SingleDocumentSummarizationModel):
         model: str = "bart.large.cnn",
         batch_size: int = None,
         image: str = DEFAULT_IMAGE,
+        nbest: int = 1,
+        beam_size: int = None,
         device: int = 0,
     ) -> None:
         """
@@ -37,6 +40,10 @@ class BART(SingleDocumentSummarizationModel):
             The batch size for prediction. If `None`, defaults to the BART code's default.
         image : str, default="lewis2020"
             The name of the Docker image to run prediction in
+        nbest : int, default=1
+            The number of outputs to return
+        beam_size : int, default=None
+            The inference beam size, defaults to the BART code's default.
         device : int, default=0
             The ID of the GPU to use, -1 if CPU
         """
@@ -45,12 +52,14 @@ class BART(SingleDocumentSummarizationModel):
         self.model = model
         self.batch_size = batch_size
         self.image = image
+        self.nbest = nbest
+        self.beam_size = beam_size
         self.device = device
 
     @overrides
     def predict_batch(
         self, inputs: List[Dict[str, DocumentType]], *args, **kwargs
-    ) -> List[SummaryType]:
+    ) -> Union[List[SummaryType], List[List[SummaryType]]]:
         documents = [inp["document"] for inp in inputs]
         logger.info(
             f"Predicting summaries for {len(documents)} documents with Docker image {self.image}"
@@ -78,6 +87,7 @@ class BART(SingleDocumentSummarizationModel):
                 f"  --model-file model.pt"
                 f"  --src {container_input_file}"
                 f"  --out {container_output_file}"
+                f"  --nbest {self.nbest}"
             )
 
             if self.batch_size is not None:
@@ -86,9 +96,19 @@ class BART(SingleDocumentSummarizationModel):
             if self.model == "bart.large.xsum":
                 command += " --xsum-kwargs"
 
+            if self.beam_size is not None:
+                command += f" --beam-size {self.beam_size}"
+
             cuda = self.device != -1
             run_command(self.image, command, volume_map=volume_map, cuda=cuda)
 
             # Load the output summaries
-            summaries = open(host_output_file, "r").read().splitlines()
+            summaries = []
+            with open(host_output_file, "r") as f:
+                for line in f:
+                    data = json.loads(line)
+                    if len(data) == 1:
+                        summaries.append(data[0])
+                    else:
+                        summaries.append(data)
             return summaries

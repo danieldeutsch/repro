@@ -53,7 +53,7 @@ pytest models/lewis2020/tests
 
 ## Status
 - [x] Regression unit tests pass  
-See latest run [here](https://github.com/danieldeutsch/repro/actions/runs/1054130606).
+See latest run [here](https://github.com/danieldeutsch/repro/actions/runs/2016739726).
 - [ ] Correctness unit tests pass  
 None are provided in the original repo
 - [x] Model runs on full test dataset  
@@ -82,5 +82,8 @@ The CNN/DailyMail results are very close to those in the paper:
 No, see above.
 
 ## Changelog
+### v1.2
+- Added ability to override beam size and added an `nbest` option.
+
 ### v1.1
 - Fixed an issue with changing file ownership when the pre-trained model files were extracted.
