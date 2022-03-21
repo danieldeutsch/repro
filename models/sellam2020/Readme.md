@@ -60,7 +60,7 @@ pytest models/sellam2020/tests
 - [x] Regression unit tests pass  
 - [x] Correctness unit tests pass  
 The unit tests are based on examples in the official repository.
-See [here](https://github.com/danieldeutsch/repro/actions/runs/1102526377).
+See [here](https://github.com/danieldeutsch/repro/actions/runs/2016646079).
 - [ ] Model runs on full test dataset  
 Not tested
 - [ ] Predictions approximately replicate results reported in the paper  
