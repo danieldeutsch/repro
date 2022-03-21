@@ -17,14 +17,18 @@ class BLEURT(Model):
     def __init__(
         self,
         image: str = DEFAULT_IMAGE,
-        model: str = "bleurt-base-128",
+        model: str = "BLEURT-20",
         device: int = 0,
-        batch_size: int = 16,
+        batch_size: int = 100,
     ):
         self.image = image
         self.model = model
         self.device = device
         self.batch_size = batch_size
+
+        # I believe only the BLEURT-20 models support length-based batching.
+        # The originals, like "bleurt-base-128", do not
+        self.length_based_batching = self.model.startswith("BLEURT-20")
 
     def predict(
         self,
@@ -82,13 +86,17 @@ class BLEURT(Model):
             if cuda:
                 commands.append(f"export CUDA_VISIBLE_DEVICES={self.device}")
             commands.append("cd bleurt")
-            commands.append(
+
+            score_command = (
                 f"python -m bleurt.score_files"
                 f"  -sentence_pairs_file {container_input_file}"
                 f"  -bleurt_checkpoint ../{self.model}"
                 f"  -scores_file {container_output_file}"
                 f"  -bleurt_batch_size {self.batch_size}"
             )
+            if self.length_based_batching:
+                score_command += " -batch_same_length=True"
+            commands.append(score_command)
 
             command = " && ".join(commands)
             backend.run_command(

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Changed the backend implementation of MoverScore to use a non-IDF dict based version.
+- Changed the default BLEURT version to use `"BLEURT-20"` instead of `"bleurt-base-128"` and using length-batched optimization. 
 
 ## [v0.1.4](https://github.com/danieldeutsch/repro/releases/tag/v0.1.4) - 2022-01-29
 ### Changed
