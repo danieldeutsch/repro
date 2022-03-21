@@ -57,7 +57,6 @@ class TestSellam2020Models(unittest.TestCase):
     @parameterized.expand(get_testing_device_parameters())
     def test_bleurt_unittest_examples(self, device: int):
         # Tests the examples from the BLEURT repository unit tests
-        # This model does not support length-based batching
         model = BLEURT(model="bleurt/bleurt/test_checkpoint", device=device)
         inputs = self.bleurt_examples["inputs"]
         expected_macro = self.bleurt_examples["output"]["macro"]
