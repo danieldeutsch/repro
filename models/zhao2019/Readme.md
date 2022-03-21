@@ -60,7 +60,7 @@ pytest models/zhao2019/tests
 
 ## Status
 - [x] Regression unit tests pass  
-See [here](https://github.com/danieldeutsch/repro/actions/runs/1091879442)
+See [here](https://github.com/danieldeutsch/repro/actions/runs/1843517578)
 - [ ] Correctness unit tests pass  
 None provided in the original repo.
 - [ ] Model runs on full test dataset  
@@ -69,3 +69,9 @@ Not tested
 Not tested
 - [ ] Predictions exactly replicate results reported in the paper  
 Not tested
+
+## Changelog
+### v1.1
+- Switched the implementation to use the `sentence_score` function instead of the `word_mover_score` function directly.
+This now means that the IDF functionality is not implemented.
+This was changed because if you only passed 1 candidate to be scored, the IDF dict caused that to always receive a score of 1.0, and the score of one sentence depended on which other sentences were being scored at the same time.

@@ -31,6 +31,9 @@ This file contains a list of the papers with models wrapped by this library.
 |[Fill in the BLANC: Human-free quality estimation of document summaries](https://aclanthology.org/2020.eval4nlp-1.2/)|Oleg Vasilyev, Vedant Dharnidharka, and John Bohannon|[Link](models/vasilyev2020/Readme.md)|
 |[Meteor Universal: Language Specific Translation Evaluation for Any Target Language](https://aclanthology.org/W14-3348/)|Michael Denkowski and Alon Lavie|[Link](models/denkowski2014/Readme.md)|
 |[COMET: A Neural Framework for MT Evaluation](https://aclanthology.org/2020.emnlp-main.213/)|Ricardo Rei, Craig Stewart, Ana C Farinha, and Alon Lavie|[Link](models/rei2020/Readme.md)|
+|[Automatic Text Evaluation through the Lens of Wasserstein Barycenters](https://arxiv.org/abs/2108.12463)|Pierre Colombo, Guillaume Staerman, Chloe Clavel, and Pablo Piantanida|[Link](models/colombo2021/Readme.md)|
+|[InfoLM: A New Metric to Evaluate Summarization & Data2Text Generation](https://arxiv.org/abs/2112.01589)|Pierre Colombo, Chloe Clavel, and Pablo Piantanida|[Link](models/colombo2021/Readme.md)|
+|[A Pseudo-Metric between Probability Distributions based on Depth-Trimmed Regions](https://arxiv.org/abs/2103.12711)|Guillaume Staerman, Pavlo Mozharovskyi, Pierre Colombo, Stéphan Clémençon, and Florence d'Alché-Buc|[Link](models/colombo2021/Readme.md)|
 
 ### Question Answering
 |Paper|Authors|Link|
