@@ -1,0 +1,477 @@
+{
+  "infolm": {
+    "micro": [
+      {
+        "infolm": {
+          "fisher_rao": 0.474699467420578,
+          "r_fisher_rao": 0.474699467420578,
+          "sim_fisher_rao": 0.474699467420578
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 1.2616801261901855,
+          "r_fisher_rao": 1.2616801261901855,
+          "sim_fisher_rao": 1.2616801261901855
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 1.63699471950531,
+          "r_fisher_rao": 1.63699471950531,
+          "sim_fisher_rao": 1.63699471950531
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 1.277878761291504,
+          "r_fisher_rao": 1.277878761291504,
+          "sim_fisher_rao": 1.277878761291504
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 1.4103935956954956,
+          "r_fisher_rao": 1.4103935956954956,
+          "sim_fisher_rao": 1.4103935956954956
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 0.9920828938484192,
+          "r_fisher_rao": 0.9920828938484192,
+          "sim_fisher_rao": 0.9920828938484192
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 1.0333880186080933,
+          "r_fisher_rao": 1.0333880186080933,
+          "sim_fisher_rao": 1.0333880186080933
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 1.671626329421997,
+          "r_fisher_rao": 1.671626329421997,
+          "sim_fisher_rao": 1.671626329421997
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 1.1372259855270386,
+          "r_fisher_rao": 1.1372259855270386,
+          "sim_fisher_rao": 1.1372259855270386
+        }
+      },
+      {
+        "infolm": {
+          "fisher_rao": 1.757234811782837,
+          "r_fisher_rao": 1.757234811782837,
+          "sim_fisher_rao": 1.757234811782837
+        }
+      }
+    ],
+    "macro": {
+      "infolm": {
+        "fisher_rao": 1.265320470929146,
+        "r_fisher_rao": 1.265320470929146,
+        "sim_fisher_rao": 1.265320470929146
+      }
+    }
+  },
+  "baryscore": {
+    "cpu": {
+      "micro": [
+        {
+          "baryscore": {
+            "baryscore_W": 0.07766812629000892,
+            "baryscore_SD_10": 0.9435403681657479,
+            "baryscore_SD_1": 0.8237248949876972,
+            "baryscore_SD_5": 0.9332710059064289,
+            "baryscore_SD_0.1": 0.09276958362410065,
+            "baryscore_SD_0.5": 0.6270019753138825,
+            "baryscore_SD_0.01": 0.07766849194363867,
+            "baryscore_SD_0.001": 0.07766812629000894
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.2016408689766467,
+            "baryscore_SD_10": 1.0591088887064064,
+            "baryscore_SD_1": 0.9799351483290417,
+            "baryscore_SD_5": 1.0524333510333723,
+            "baryscore_SD_0.1": 0.22141259239333858,
+            "baryscore_SD_0.5": 0.8336105840234236,
+            "baryscore_SD_0.01": 0.20170697594422057,
+            "baryscore_SD_0.001": 1.1883514124962701e-08
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.4381551871071647,
+            "baryscore_SD_10": 1.1192929858806018,
+            "baryscore_SD_1": 1.0693602276847844,
+            "baryscore_SD_5": 1.1149198520955448,
+            "baryscore_SD_0.1": 0.4743048008538526,
+            "baryscore_SD_0.5": 0.9800173130079961,
+            "baryscore_SD_0.01": 0.43832700367555966,
+            "baryscore_SD_0.001": 2.003924421958562e-12
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.2813255022151478,
+            "baryscore_SD_10": 1.0921581506454847,
+            "baryscore_SD_1": 1.0245605381619027,
+            "baryscore_SD_5": 1.0864293581822326,
+            "baryscore_SD_0.1": 0.3166094331337496,
+            "baryscore_SD_0.5": 0.8984449871719464,
+            "baryscore_SD_0.01": 0.2816519305649153,
+            "baryscore_SD_0.001": 2.3780101876663813e-19
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.25661290069938414,
+            "baryscore_SD_10": 1.0060048355610243,
+            "baryscore_SD_1": 0.9225334388167529,
+            "baryscore_SD_5": 0.9988347132027401,
+            "baryscore_SD_0.1": 0.27878960598645464,
+            "baryscore_SD_0.5": 0.7820144826807429,
+            "baryscore_SD_0.01": 0.25674670283613166,
+            "baryscore_SD_0.001": 3.87883155091673e-08
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.19959869602343916,
+            "baryscore_SD_10": 1.1525759996527434,
+            "baryscore_SD_1": 1.0868140244157845,
+            "baryscore_SD_5": 1.147125809727812,
+            "baryscore_SD_0.1": 0.22824258350671353,
+            "baryscore_SD_0.5": 0.9515331204768216,
+            "baryscore_SD_0.01": 0.19977983870139987,
+            "baryscore_SD_0.001": 1.7292058031932015e-07
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.26009874077101536,
+            "baryscore_SD_10": 1.0367049951001042,
+            "baryscore_SD_1": 0.9588764818298308,
+            "baryscore_SD_5": 1.0301041528806354,
+            "baryscore_SD_0.1": 0.2766781812518756,
+            "baryscore_SD_0.5": 0.817987110152457,
+            "baryscore_SD_0.01": 0.2602404284508689,
+            "baryscore_SD_0.001": 1.4347898612872798e-07
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.2550332619106726,
+            "baryscore_SD_10": 1.065608880382261,
+            "baryscore_SD_1": 1.0006220943602468,
+            "baryscore_SD_5": 1.0599375339512176,
+            "baryscore_SD_0.1": 0.28563784324455255,
+            "baryscore_SD_0.5": 0.8836851217094949,
+            "baryscore_SD_0.01": 0.255260254523738,
+            "baryscore_SD_0.001": 5.846539613350077e-08
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.20474150785150907,
+            "baryscore_SD_10": 0.9650287608276645,
+            "baryscore_SD_1": 0.8984869955528119,
+            "baryscore_SD_5": 0.9592218051251002,
+            "baryscore_SD_0.1": 0.22987039940927342,
+            "baryscore_SD_0.5": 0.7836020365106011,
+            "baryscore_SD_0.01": 0.20480956050818433,
+            "baryscore_SD_0.001": 2.827539284869416e-10
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.26533017086138944,
+            "baryscore_SD_10": 1.0612055514689438,
+            "baryscore_SD_1": 0.9929246078512761,
+            "baryscore_SD_5": 1.0555271743239576,
+            "baryscore_SD_0.1": 0.2960996122238252,
+            "baryscore_SD_0.5": 0.8630305814055836,
+            "baryscore_SD_0.01": 0.2656434728981158,
+            "baryscore_SD_0.001": 1.1167973430084266e-07
+          }
+        }
+      ],
+      "macro": {
+        "baryscore": {
+          "baryscore_W": 0.24402049627063777,
+          "baryscore_SD_10": 1.0501229416390983,
+          "baryscore_SD_1": 0.9757838451990128,
+          "baryscore_SD_5": 1.043780475642904,
+          "baryscore_SD_0.1": 0.2700414635627736,
+          "baryscore_SD_0.5": 0.8420927312452949,
+          "baryscore_SD_0.01": 0.24418346600467725,
+          "baryscore_SD_0.001": 0.007766866379129331
+        }
+      }
+    },
+    "gpu": {
+      "micro": [
+        {
+          "baryscore": {
+            "baryscore_W": 0.06075610698482854,
+            "baryscore_SD_10": 0.9566665736645789,
+            "baryscore_SD_1": 0.8327053257686587,
+            "baryscore_SD_5": 0.946014206384727,
+            "baryscore_SD_0.1": 0.07140092714229203,
+            "baryscore_SD_0.5": 0.6274778099202816,
+            "baryscore_SD_0.01": 0.06075610791970633,
+            "baryscore_SD_0.001": 0.060756106984828556
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.21522683242677945,
+            "baryscore_SD_10": 1.0465138976455104,
+            "baryscore_SD_1": 0.9702112685044612,
+            "baryscore_SD_5": 1.0400339952735052,
+            "baryscore_SD_0.1": 0.23922258231524435,
+            "baryscore_SD_0.5": 0.8306662580717632,
+            "baryscore_SD_0.01": 0.21527512761808326,
+            "baryscore_SD_0.001": 4.697930593586469e-13
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.4358260942352773,
+            "baryscore_SD_10": 1.1271078926712006,
+            "baryscore_SD_1": 1.0761172779654367,
+            "baryscore_SD_5": 1.122654562880904,
+            "baryscore_SD_0.1": 0.4730193878365072,
+            "baryscore_SD_0.5": 0.9839934620075355,
+            "baryscore_SD_0.01": 0.4360028677359103,
+            "baryscore_SD_0.001": 2.003970287549622e-12
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.2773132631248679,
+            "baryscore_SD_10": 1.1206847017919714,
+            "baryscore_SD_1": 1.0499791258417068,
+            "baryscore_SD_5": 1.1147019711645716,
+            "baryscore_SD_0.1": 0.3097034053680021,
+            "baryscore_SD_0.5": 0.9174894115604608,
+            "baryscore_SD_0.01": 0.27750219368002466,
+            "baryscore_SD_0.001": 5.894813472187973e-13
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.23976404256396663,
+            "baryscore_SD_10": 1.0222037579173389,
+            "baryscore_SD_1": 0.932632833371444,
+            "baryscore_SD_5": 1.0145535512722,
+            "baryscore_SD_0.1": 0.2595290888664649,
+            "baryscore_SD_0.5": 0.781003330061966,
+            "baryscore_SD_0.01": 0.2398996197805371,
+            "baryscore_SD_0.001": 3.878808957566489e-08
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.18466722724632056,
+            "baryscore_SD_10": 1.1692663047686125,
+            "baryscore_SD_1": 1.10046281690413,
+            "baryscore_SD_5": 1.1636181494427986,
+            "baryscore_SD_0.1": 0.21104931914058828,
+            "baryscore_SD_0.5": 0.9563417360657935,
+            "baryscore_SD_0.01": 0.18483496360530424,
+            "baryscore_SD_0.001": 2.2912007134129803e-07
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.260098833186975,
+            "baryscore_SD_10": 1.0367048778399321,
+            "baryscore_SD_1": 0.9588764225832606,
+            "baryscore_SD_5": 1.0301040402865476,
+            "baryscore_SD_0.1": 0.27667827809668555,
+            "baryscore_SD_0.5": 0.8179871491341018,
+            "baryscore_SD_0.01": 0.26024052060411407,
+            "baryscore_SD_0.001": 1.434770945173599e-07
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.24392037893244028,
+            "baryscore_SD_10": 1.0794176280809022,
+            "baryscore_SD_1": 1.0082520965314263,
+            "baryscore_SD_5": 1.0733175064441536,
+            "baryscore_SD_0.1": 0.27297927108576264,
+            "baryscore_SD_0.5": 0.8799754860772669,
+            "baryscore_SD_0.01": 0.24414780158226812,
+            "baryscore_SD_0.001": 7.052933189447465e-16
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.2558515650915149,
+            "baryscore_SD_10": 0.9045964972939674,
+            "baryscore_SD_1": 0.8474374396964925,
+            "baryscore_SD_5": 0.8994996276376147,
+            "baryscore_SD_0.1": 0.29707305102287407,
+            "baryscore_SD_0.5": 0.7536742602641777,
+            "baryscore_SD_0.01": 0.2559697377459444,
+            "baryscore_SD_0.001": 2.8274128311732745e-10
+          }
+        },
+        {
+          "baryscore": {
+            "baryscore_W": 0.25074680525621296,
+            "baryscore_SD_10": 1.0804328930900553,
+            "baryscore_SD_1": 1.007575565847855,
+            "baryscore_SD_5": 1.0744064713965558,
+            "baryscore_SD_0.1": 0.27964187479247266,
+            "baryscore_SD_0.5": 0.8683185889200877,
+            "baryscore_SD_0.01": 0.2509156656384637,
+            "baryscore_SD_0.001": 1.1167937726480772e-07
+          }
+        }
+      ],
+      "macro": {
+        "baryscore": {
+          "baryscore_W": 0.2424171149049183,
+          "baryscore_SD_10": 1.054359502476407,
+          "baryscore_SD_1": 0.9784250173014872,
+          "baryscore_SD_5": 1.0478904082183578,
+          "baryscore_SD_0.1": 0.26902971856668934,
+          "baryscore_SD_0.5": 0.8416927492083435,
+          "baryscore_SD_0.01": 0.2425544605910356,
+          "baryscore_SD_0.001": 0.006075663033526649
+        }
+      }
+    }
+  },
+  "depthscore": {
+    "cpu": {
+      "micro": [
+        {
+          "depthscore": {
+            "depth_score": 0.12355822859867578
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.12650006476121495
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.14299116280021706
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.11250987366375828
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.12416236482321114
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.1359616455787239
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.11549112226711965
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.14264698824569153
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.1233971438754036
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.10464791475910355
+          }
+        }
+      ],
+      "macro": {
+        "depthscore": {
+          "depth_score": 0.12518665093731193
+        }
+      }
+    },
+    "gpu": {
+      "micro": [
+        {
+          "depthscore": {
+            "depth_score": 0.140606228957553
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.13433283716956418
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.1340547153905349
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.1266320350135981
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.12889825472303892
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.10919916321393738
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.12030093329042388
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.13452170360274043
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.12487044901944663
+          }
+        },
+        {
+          "depthscore": {
+            "depth_score": 0.12478174501633163
+          }
+        }
+      ],
+      "macro": {
+        "depthscore": {
+          "depth_score": 0.1278198065397169
+        }
+      }
+    }
+  }
+}
