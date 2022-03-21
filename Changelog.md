@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Added
 - Added [BaryScore, InfoLM, and DepthScore](models/colombo2021/Readme.md)
 - Added ability to set `beam_size` and `nbest` parameters for BART.
+- Added GPU support for MoverScore
 
 ### Changed
 - Changed the backend implementation of MoverScore to use a non-IDF dict based version.
