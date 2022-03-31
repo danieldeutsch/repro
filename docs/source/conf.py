@@ -154,6 +154,8 @@ def generate_model_files(_):
     This function copies over all of the model's individual Readmes
     into the `source/models` directory and creates `source/models/index.md`.
     """
+    print("Generating model files")
+
     import shutil
     from glob import glob
 
@@ -164,6 +166,7 @@ def generate_model_files(_):
 
     models = []
     for readme_path in glob(f"../../repro/models/*/Readme.md"):
+        print("Processing " + readme_path)
         model = os.path.basename(os.path.dirname(readme_path))
         dst = f"{target_dir}/{model}.md"
         shutil.copyfile(readme_path, dst)
