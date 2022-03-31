@@ -154,7 +154,9 @@ def generate_apidocs():
         # Generate a file for this package
         _process_package(children, prefix)
 
-    starting_path = "../../../repro/repro" if is_readthedocs_build else "../../repro/repro"
+    starting_path = (
+        "../../../repro/repro" if is_readthedocs_build else "../../repro/repro"
+    )
     _generate(starting_path, ["repro"])
 
 
@@ -173,7 +175,9 @@ def generate_model_files():
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
 
-    model_dir = "../../../repro/models" if is_readthedocs_build else "../../repro/models"
+    model_dir = (
+        "../../../repro/models" if is_readthedocs_build else "../../repro/models"
+    )
     models = []
     for readme_path in glob(f"{model_dir}/*/Readme.md"):
         print("Processing " + readme_path)
