@@ -4,7 +4,7 @@ This tutorial will cover how to (1) add a new model to the Repro package, (2) te
 The model name in this tutorial will be called `tutorial`.
 When you implement an actual model, your should instead use a name based on the paper that published the model (e.g., `gupta2020`, `deutsch2021`).
 
-# Setup the Dockerfile Plumbing
+## Setup the Dockerfile Plumbing
 The first step is to set up the plumbing for building a simple Dockerfile through `repro`.
 
 1. Create a new directory under `models` called `tutorial`.
