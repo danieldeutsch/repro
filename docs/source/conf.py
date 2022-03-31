@@ -188,3 +188,6 @@ def generate_model_files(_):
 def setup(app):
     app.connect("builder-inited", generate_apidocs)
     app.connect("builder-inited", generate_model_files)
+
+    print("CWD", os.getcwd())
+    
