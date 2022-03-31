@@ -70,7 +70,7 @@ html_title = f"Repro v{release}"
 html_static_path = ["_static"]
 
 
-def generate_apidocs(_):
+def generate_apidocs():
     """
     Walk the source code and create rst files for each module. We don't use
     sphinx-apidoc because we want additional customization that was difficult
@@ -150,7 +150,7 @@ def generate_apidocs(_):
     _generate("../../repro/repro", ["repro"])
 
 
-def generate_model_files(_):
+def generate_model_files():
     """
     This function copies over all of the model's individual Readmes
     into the `source/models` directory and creates `source/models/index.md`.
@@ -186,8 +186,5 @@ def generate_model_files(_):
 
 
 def setup(app):
-    app.connect("builder-inited", generate_apidocs)
-    app.connect("builder-inited", generate_model_files)
-
-    print("CWD", os.getcwd())
-    
+    generate_apidocs()
+    generate_model_files()
