@@ -74,8 +74,9 @@ html_static_path = ["_static"]
 # relative directory names that we use to automatically generate the
 # documentation. This hack checks to see what directory we are in so
 # we can adjust the paths accordingly
-is_readthedocs_build = os.getcwd().endswith("docs/source")
-print("is_readthedocs_build", is_readthedocs_build)
+# is_readthedocs_build = os.getcwd().endswith("docs/source")
+is_readthedocs_build = "IS_RTD_BUILD" in os.environ
+# print("is_readthedocs_build", is_readthedocs_build)
 
 
 def generate_apidocs():
@@ -88,7 +89,7 @@ def generate_apidocs():
     import shutil
     from typing import List
 
-    target_dir = "api" if is_readthedocs_build else "source/api"
+    target_dir = "source/api"
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
@@ -154,9 +155,7 @@ def generate_apidocs():
         # Generate a file for this package
         _process_package(children, prefix)
 
-    starting_path = (
-        "../../../repro/repro" if is_readthedocs_build else "../../repro/repro"
-    )
+    starting_path = "../../repro" if is_readthedocs_build else "../../repro/repro"
     _generate(starting_path, ["repro"])
 
 
@@ -166,22 +165,15 @@ def generate_model_files():
     into the `source/models` directory and creates `source/models/index.md`.
     """
     print(f"Generating model files from {os.getcwd()}")
-    from glob import glob
-    print(list(glob("../*")))
-    print(list(glob("../../*")))
-    print(list(glob("../../../*")))
-
     import shutil
     from glob import glob
 
-    target_dir = "models" if is_readthedocs_build else "source/models"
+    target_dir = "source/models"
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
 
-    model_dir = (
-        "../../../repro/models" if is_readthedocs_build else "../../repro/models"
-    )
+    model_dir = "../../models" if is_readthedocs_build else "../../repro/models"
 
     models = []
     for readme_path in glob(f"{model_dir}/*/Readme.md"):
