@@ -69,6 +69,14 @@ html_title = f"Repro v{release}"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
+# When we build the docs locally, we do so from the "docs" directory, but
+# readthedocs does from the "docs/source" directory, which messes up the
+# relative directory names that we use to automatically generate the
+# documentation. This hack checks to see what directory we are in so
+# we can adjust the paths accordingly
+print("CWD", os.getcwd())
+is_readthedocs_build = os.getcwd().endswith("docs/source")
+
 
 def generate_apidocs():
     """
@@ -80,7 +88,7 @@ def generate_apidocs():
     import shutil
     from typing import List
 
-    target_dir = "api"
+    target_dir = "api" if is_readthedocs_build else "source/api"
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
@@ -146,7 +154,8 @@ def generate_apidocs():
         # Generate a file for this package
         _process_package(children, prefix)
 
-    _generate("../../repro/repro", ["repro"])
+    starting_path = "../../../repro/repro" if is_readthedocs_build else "../../repro/repro"
+    _generate(starting_path, ["repro"])
 
 
 def generate_model_files():
@@ -164,8 +173,9 @@ def generate_model_files():
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
 
+    model_dir = "../../../repro/models" if is_readthedocs_build else "../../repro/models"
     models = []
-    for readme_path in glob(f"../../repro/models/*/Readme.md"):
+    for readme_path in glob(f"{model_dir}/*/Readme.md"):
         print("Processing " + readme_path)
         model = os.path.basename(os.path.dirname(readme_path))
         dst = f"{target_dir}/{model}.md"
