@@ -74,8 +74,8 @@ html_static_path = ["_static"]
 # relative directory names that we use to automatically generate the
 # documentation. This hack checks to see what directory we are in so
 # we can adjust the paths accordingly
-print("CWD", os.getcwd())
 is_readthedocs_build = os.getcwd().endswith("docs/source")
+print("is_readthedocs_build", is_readthedocs_build)
 
 
 def generate_apidocs():
@@ -166,11 +166,15 @@ def generate_model_files():
     into the `source/models` directory and creates `source/models/index.md`.
     """
     print(f"Generating model files from {os.getcwd()}")
+    from glob import glob
+    print(list(glob("../*")))
+    print(list(glob("../../*")))
+    print(list(glob("../../../*")))
 
     import shutil
     from glob import glob
 
-    target_dir = "models"
+    target_dir = "models" if is_readthedocs_build else "source/models"
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
@@ -178,6 +182,7 @@ def generate_model_files():
     model_dir = (
         "../../../repro/models" if is_readthedocs_build else "../../repro/models"
     )
+
     models = []
     for readme_path in glob(f"{model_dir}/*/Readme.md"):
         print("Processing " + readme_path)
