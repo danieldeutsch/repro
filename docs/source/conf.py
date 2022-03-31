@@ -80,7 +80,7 @@ def generate_apidocs():
     import shutil
     from typing import List
 
-    target_dir = "source/api"
+    target_dir = "api"
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
@@ -126,7 +126,6 @@ def generate_apidocs():
             out.write(f"```\n")
 
     def _generate(path: str, prefix: List[str]):
-        print("generating", path, prefix)
         qualified_name = ".".join(prefix)
 
         children = []
@@ -155,12 +154,12 @@ def generate_model_files():
     This function copies over all of the model's individual Readmes
     into the `source/models` directory and creates `source/models/index.md`.
     """
-    print("Generating model files")
+    print(f"Generating model files from {os.getcwd()}")
 
     import shutil
     from glob import glob
 
-    target_dir = "source/models"
+    target_dir = "models"
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
