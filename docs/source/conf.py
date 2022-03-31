@@ -126,6 +126,7 @@ def generate_apidocs(_):
             out.write(f"```\n")
 
     def _generate(path: str, prefix: List[str]):
+        print("generating", path, prefix)
         qualified_name = ".".join(prefix)
 
         children = []
