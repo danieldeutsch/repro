@@ -1,4 +1,4 @@
 sphinx
 numpydoc
 furo
-myst-parser
+myst-parser>=0.17.0

@@ -73,6 +73,7 @@ html_static_path = ["_static"]
 # have to detect this and change file paths accordingly. This environment
 # variable is set on the readthedocs build.
 is_readthedocs_build = "IS_RTD_BUILD" in os.environ
+base_dir = "" if is_readthedocs_build else "source/"
 
 
 def generate_apidocs():
@@ -85,7 +86,7 @@ def generate_apidocs():
     import shutil
     from typing import List
 
-    target_dir = "api" if is_readthedocs_build else "source/api"
+    target_dir = os.path.join(base_dir, "api")
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
@@ -160,11 +161,10 @@ def generate_model_files():
     This function copies over all of the model's individual Readmes
     into the `source/models` directory and creates `source/models/index.md`.
     """
-    print(f"Generating model files from {os.getcwd()}")
     import shutil
     from glob import glob
 
-    target_dir = "models" if is_readthedocs_build else "source/models"
+    target_dir = os.path.join(base_dir, "models")
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir)
@@ -173,7 +173,6 @@ def generate_model_files():
 
     models = []
     for readme_path in glob(f"{model_dir}/*/Readme.md"):
-        print("Processing " + readme_path)
         model = os.path.basename(os.path.dirname(readme_path))
         dst = f"{target_dir}/{model}.md"
         shutil.copyfile(readme_path, dst)
@@ -188,6 +187,11 @@ def generate_model_files():
         out.write("\n")
         for model in models:
             out.write(f"\t{model}\n")
+        out.write("```\n")
+
+        out.write("```{eval-rst}\n")
+        out.write(".. include:: ../papers.md\n")
+        out.write("   :parser: myst_parser.sphinx_\n")
         out.write("```\n")
 
 
