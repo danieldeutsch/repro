@@ -1,5 +1,6 @@
 # Repro
 ![Master](https://github.com/danieldeutsch/repro/workflows/Master/badge.svg?branch=master&event=push)
+![Documentation](https://readthedocs.org/projects/repro/badge/?version=latest)
 
 Repro is a library for reproducing results from research papers.
 For now, it is focused on making predictions with pre-trained models as easy as possible.

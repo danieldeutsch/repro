@@ -20,14 +20,33 @@ class TestSellam2020Models(unittest.TestCase):
         self.expected = json.load(open(f"{FIXTURES_ROOT}/expected.json", "r"))
 
     @parameterized.expand(get_testing_device_parameters())
-    def test_bleurt_regression(self, device: int):
+    def test_bleurt_base_128_regression(self, device: int):
+        name = "bleurt-base-128"
+        model = BLEURT(device=device, model=name)
+        inputs = [
+            {"candidate": example["candidate"], "references": example["references"]}
+            for example in self.multiling2011_examples
+        ]
+        expected_macro = self.expected[name]["macro"]
+        expected_micro = self.expected[name]["micro"]
+        actual_macro, actual_micro = model.predict_batch(inputs)
+
+        assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)
+        assert len(expected_micro) == len(actual_micro)
+        for expected, actual in zip(expected_micro, actual_micro):
+            assert_dicts_approx_equal(expected, actual, abs=1e-4)
+
+    @parameterized.expand(get_testing_device_parameters())
+    def test_bleurt_20_regression(self, device: int):
+        # BLEURT-20 is by default
+        name = "BLEURT-20"
         model = BLEURT(device=device)
         inputs = [
             {"candidate": example["candidate"], "references": example["references"]}
             for example in self.multiling2011_examples
         ]
-        expected_macro = self.expected["macro"]
-        expected_micro = self.expected["micro"]
+        expected_macro = self.expected[name]["macro"]
+        expected_micro = self.expected[name]["micro"]
         actual_macro, actual_micro = model.predict_batch(inputs)
 
         assert_dicts_approx_equal(expected_macro, actual_macro, abs=1e-4)

@@ -7,8 +7,11 @@ RUN pip install Cython
 # Install the Python dependencies
 RUN git clone https://github.com/AIPHES/emnlp19-moverscore && \
     cd emnlp19-moverscore && \
-    git checkout 8ba2bfd10a58bf2a0f19fe1c2cf2edcb16957391 && \
-    pip install --no-cache-dir .
+    git checkout 8ba2bfd10a58bf2a0f19fe1c2cf2edcb16957391
+
+COPY src/moverscore_v2.py emnlp19-moverscore/
+
+RUN cd emnlp19-moverscore && pip install --no-cache-dir .
 
 # The setup.py does not contain all of the dependenices, so we manually install them.
 # We fix specific versions to prevent future breaking changes

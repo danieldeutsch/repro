@@ -28,3 +28,11 @@ class TestLewis2020Models(unittest.TestCase):
         expected_summary = self.expected_output["XSum"]["summary"]
         summary = model.predict(document)
         assert summary == expected_summary
+
+    @parameterized.expand(get_testing_device_parameters())
+    def test_bart_cnn_nbest(self, device: int):
+        model = BART(device=device, beam_size=8, nbest=4)
+        document = self.expected_output["nbest"]["document"]
+        expected_summaries = self.expected_output["nbest"]["summaries"]
+        summaries = model.predict(document)
+        assert expected_summaries == summaries

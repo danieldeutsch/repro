@@ -17,3 +17,6 @@ RUN git clone https://github.com/pytorch/fairseq && \
 
 # Install additional libraries that are required
 RUN pip install --no-cache-dir requests
+
+# Copy over the inference file with our modifications
+COPY src/summarize.py fairseq/examples/bart/summarize.py
