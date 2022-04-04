@@ -58,7 +58,7 @@ See [here](https://github.com/danieldeutsch/repro/actions/runs/1071762824)
 - [ ] Correctness unit tests pass  
 No expected outputs provided in the original repo
 - [x] Model runs on full test dataset  
-See [here](experiments/reproduce-results/Readme.md)
+See [here](https://github.com/danieldeutsch/repro/tree/master/models/chen2020/experiments/reproduce-results)
 - [x] Predictions approximately replicate results reported in the paper    
-Yes, see [here](experiments/reproduce-results/Readme.md)
+Yes, see [here](https://github.com/danieldeutsch/repro/tree/master/models/chen2020/experiments/reproduce-results)
 - [ ] Predictions exactly replicate results reported in the paper  

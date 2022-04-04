@@ -57,9 +57,9 @@ See latest run [here](https://github.com/danieldeutsch/repro/actions/runs/201673
 - [ ] Correctness unit tests pass  
 None are provided in the original repo
 - [x] Model runs on full test dataset  
-Successfully run on both CNN/DailyMail and XSum (see [here](experiments/reproduce-results/Readme.md))
+Successfully run on both CNN/DailyMail and XSum (see [here](https://github.com/danieldeutsch/repro/tree/master/models/lewis2020/experiments/reproduce-results))
 - [ ] Predictions approximately replicate results reported in the paper  
-We reran the models on the CNN/DailyMail and XSum datasets (see [here](experiments/reproduce-results/Readme.md)) and calculated the ROUGE score.
+We reran the models on the CNN/DailyMail and XSum datasets (see [here](https://github.com/danieldeutsch/repro/tree/master/models/lewis2020/experiments/reproduce-results)) and calculated the ROUGE score.
 The CNN/DailyMail results are very close to those in the paper:
 
   ||R1|R2|RL|

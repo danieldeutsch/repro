@@ -41,7 +41,7 @@ The score is the probability of the returned label (for binary classification) w
     
 ## Implementation Notes
 - We modified the script to run prediction because it did not save the scores of the model, just the overall labels.
-The modified script can be found [here](src/run_test.py).
+The modified script can be found [here](https://github.com/danieldeutsch/repro/blob/master/models/kryscinski2019/src/run_test.py).
     
 ## Docker Information
 - Image name: `kryscinski2019`
@@ -63,8 +63,8 @@ See [here](https://github.com/danieldeutsch/repro/actions/runs/1099154015)
 - [ ] Correctness unit tests pass  
 No examples provided in the original repo
 - [x] Model runs on full test dataset  
-See our reproducibility experiment [here](experiments/reproduce-results/Readme.md)
+See our reproducibility experiment [here](https://github.com/danieldeutsch/repro/tree/master/models/kryscinski2019/experiments/reproduce-results)
 - [x] Predictions approximately replicate results reported in the paper  
-See our reproducibility experiment [here](experiments/reproduce-results/Readme.md)
+See our reproducibility experiment [here](https://github.com/danieldeutsch/repro/tree/master/models/kryscinski2019/experiments/reproduce-results)
 - [ ] Predictions exactly replicate results reported in the paper  
 Not tested
