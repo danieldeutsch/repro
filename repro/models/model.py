@@ -27,19 +27,71 @@ class Model(Registrable):
 
 
 class ParallelModel(Model):
-    def __init__(self, model_cls: Type, model_kwargs_list: List[Dict[str, Any]]) -> None:
+    """
+    Parameters
+    ----------
+    model_cls : Type
+        The model class which will be run in parallel
+    model_kwargs_list : List
+    num_models : int
+        The number of models to run in parallel. Ignored if `model_kwargs_list`
+        is provided. If `model_kwargs_list` is None, then passing `num_models`
+        is equivalent to
+
+    Examples
+    --------
+    First, we define a simple model to run in parallel. This model simply adds
+    a specific value to all of its inputs.
+    >>> from repro.models import Model, ParallelModel
+    >>> class AddX(Model):
+    ...     def __init__(self, add: int = 0):
+    ...         self.add = add
+    ...
+    ...     def predict_batch(self, inputs: List[Dict[str, int]]):
+    ...         return [inp["value"] + self.add for inp in inputs]
+
+    Define some inputs:
+    >>> inputs = [{"value": 0}, {"value": 1}, {"value": 2}, {"value": 3}]
+    """
+
+    def __init__(
+        self,
+        model_cls: Type,
+        model_kwargs_list: List[Dict[str, Any]] = None,
+        num_models: int = None,
+    ) -> None:
+        """
+        Hey this is here
+
+        Parameters
+        ----------
+        model_cls
+        model_kwargs_list
+        num_models
+        """
+
         self.model_cls = model_cls
-        self.model_kwargs_list = model_kwargs_list
+
+        if model_kwargs_list is None and num_models is None:
+            raise ValueError(
+                f"Either `model_kwargs_list` or `num_models` must not be `None`"
+            )
+        if model_kwargs_list:
+            self.model_kwargs_list = model_kwargs_list
+        else:
+            self.model_kwargs_list = [{} for _ in range(num_models)]
 
     @staticmethod
     def _divide_into_batches(inputs: List[Any], num_batches: int) -> List[List[Any]]:
         batch_size = int(math.ceil(len(inputs) / num_batches))
         batches = []
         for i in range(0, len(inputs), batch_size):
-            batches.append(inputs[i:i + batch_size])
+            batches.append(inputs[i : i + batch_size])
         return batches
 
-    def _process(self, model_kwargs: Dict[str, Any], inputs: List[Dict[str, Any]], **kwargs) -> Any:
+    def _process(
+        self, model_kwargs: Dict[str, Any], inputs: List[Dict[str, Any]], **kwargs
+    ) -> Any:
         model = self.model_cls(**model_kwargs)
         return model.predict_batch(inputs, **kwargs)
 
