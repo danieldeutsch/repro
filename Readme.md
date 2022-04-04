@@ -153,7 +153,7 @@ More details on how to use the models implemented in Repro can be found [here](h
 
 ## Models Implemented in Repro
 See [this page](https://repro.readthedocs.io/en/latest/models/index.html) to see the list of papers with models currently supported by Repro.
-Each model contains information in its Readme about how to use it as well as whether or not it currently reproduces the results reported in its respective paper or if it hasn't been tested yet.
+Each model's documentation contains information about how to use it as well as whether or not it currently reproduces the results reported in its respective paper or if it hasn't been tested yet.
 If it has been tested, the code to reproduce the results is also included.
 
 ## Contributing a Model
