@@ -83,10 +83,10 @@ See the latest successful tests on Github [here](https://github.com/danieldeutsc
 The authors provide their model outputs and instructions for processing the data from scratch.
 We did not attempt to perfectly reproduce their summaries.   
 - [x] Model runs on full test dataset  
-See [here](experiments/reproduce-results/Readme.md)
+See [here](https://github.com/danieldeutsch/repro/tree/master/models/liu2019/experiments/reproduce-results)
 - [ ] Predictions approximately replicate results reported in the paper  
 The results for the abstractive models approximately replicate the reported in the paper, but the extractive model does not.
-See [this experiment](experiments/reproduce-results/Readme.md) for details.
+See [this experiment](https://github.com/danieldeutsch/repro/tree/master/models/liu2019/experiments/reproduce-results) for details.
 Calculating the ROUGE scores against the original references compared to the references which were preprocessed in the same way as in training did not seem to make a significant difference.
 
   `TransformerAbs` on CNN/DailyMail

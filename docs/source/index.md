@@ -10,6 +10,7 @@
    tutorials/index
    API<api/repro>
    Models<models/index>
+   GitHub<https://github.com/danieldeutsch/repro>
    changelog
    License<https://raw.githubusercontent.com/danieldeutsch/repro/master/LICENSE>
 ```

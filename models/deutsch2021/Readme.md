@@ -83,7 +83,7 @@ See [here](https://github.com/danieldeutsch/repro/actions/runs/1063451340) (thes
 - [ ] Model runs on full test dataset  
 Not tested
 - [x] Predictions approximately replicate results reported in the paper  
-The question-answering model replicates the expected results (see [here](experiments/reproduce-results/Readme.md)).
+The question-answering model replicates the expected results (see [here](https://github.com/danieldeutsch/repro/tree/master/models/deutsch2021/experiments/reproduce-results)).
 The question-generation model was not quantitatively evaluated in the paper.
 We did not test QAEval on the full dataset, but the scores match the examples from the `qaeval` and `sacrerouge` repos.
 - [ ] Predictions exactly replicate results reported in the paper  

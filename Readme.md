@@ -16,7 +16,7 @@ It should "just work" (at least that is the goal).
 
 ## Installation Instructions
 First, you need to have a working Docker installation.
-See [here](tutorials/docker.md) for installation instructions as well as scripts to verify your setup is working.
+See [here](https://repro.readthedocs.io/en/latest/tutorials/docker.html) for installation instructions as well as scripts to verify your setup is working.
 
 Then, we recommend creating a conda environment specific to repro before installing the library:
 ```shell script
@@ -41,15 +41,15 @@ pip install -r dev-requirements.txt
 Here is an example of how Repro can be used, highlighting how simple it is to run a complex model pipeline.
 We will demonstrate how to generate summaries of a document with three different models
 
-- BertSumExtAbs from [Liu & Lapata (2019)](https://arxiv.org/abs/1908.08345) ([docs](models/liu2019/Readme.md))
-- BART from [Lewis et al. (2020)](https://arxiv.org/abs/1910.13461) ([docs](models/lewis2020/Readme.md))
-- GSum from [Dou et al. (2021)](https://arxiv.org/abs/2010.08014) ([docs](models/dou2021/Readme.md))
+- BertSumExtAbs from [Liu & Lapata (2019)](https://arxiv.org/abs/1908.08345) ([docs](https://repro.readthedocs.io/en/latest/models/liu2019.html))
+- BART from [Lewis et al. (2020)](https://arxiv.org/abs/1910.13461) ([docs](https://repro.readthedocs.io/en/latest/models/lewis2020.html))
+- GSum from [Dou et al. (2021)](https://arxiv.org/abs/2010.08014) ([docs](https://repro.readthedocs.io/en/latest/models/dou2021.html))
 
 and then evaluate those summaries with three different text generation evaluation metrics
 
-- ROUGE from [Lin (2004)](https://aclanthology.org/W04-1013/) ([docs](models/lin2004/Readme.md))
-- BLEURT from [Sellam et al. (2020)](https://arxiv.org/abs/2004.04696) ([docs](models/sellam2020/Readme.md))
-- QAEval from [Deutsch et al. (2021)](https://arxiv.org/abs/2010.00490) ([docs](models/deutsch2021/Readme.md))
+- ROUGE from [Lin (2004)](https://aclanthology.org/W04-1013/) ([docs](https://repro.readthedocs.io/en/latest/models/lin2004.html))
+- BLEURT from [Sellam et al. (2020)](https://arxiv.org/abs/2004.04696) ([docs](https://repro.readthedocs.io/en/latest/models/sellam2020.html))
+- QAEval from [Deutsch et al. (2021)](https://arxiv.org/abs/2010.00490) ([docs](https://repro.readthedocs.io/en/latest/models/deutsch2021.html))
 
 Once you have Docker and Repro installed, all you have to do is instantiate the classes and run `predict`:
 
@@ -114,9 +114,9 @@ Abstracting the implementation details away in a Docker image is really useful f
 In this example, we summarize a document, ask a question, then evaluate how likely the QA prediction and expected answer mean the same thing.
 The models used are:
 
-- BART from [Lewis et al. (2020)](https://arxiv.org/abs/1910.13461) ([docs](models/lewis2020/Readme.md))
-- A neural module network QA model from [Gupta et al. (2020)](https://arxiv.org/abs/1912.04971) ([docs](models/gupta2020/Readme.md))
-- LERC from [Chen et al. (2020)](https://arxiv.org/abs/2010.03636) ([docs](models/chen2020/Readme.md))
+- BART from [Lewis et al. (2020)](https://arxiv.org/abs/1910.13461) ([docs](https://repro.readthedocs.io/en/latest/models/lewis2020.html))
+- A neural module network QA model from [Gupta et al. (2020)](https://arxiv.org/abs/1912.04971) ([docs](https://repro.readthedocs.io/en/latest/models/gupta2020.html))
+- LERC from [Chen et al. (2020)](https://arxiv.org/abs/2010.03636) ([docs](https://repro.readthedocs.io/en/latest/models/chen2020.html))
 
 ```python
 from repro.models.chen2020 import LERC
@@ -149,12 +149,12 @@ lerc = LERC()
 score = lerc.predict(summary, question, answer, prediction)
 ```
 
-More details on how to use the models implemented in Repro can be found [here](tutorials/using-models.md).
+More details on how to use the models implemented in Repro can be found [here](https://repro.readthedocs.io/en/latest/tutorials/using-models.html).
 
 ## Models Implemented in Repro
-See the [`models`](models) directory or [this file](Papers.md) to see the list of papers with models currently supported by Repro.
+See [this page](https://repro.readthedocs.io/en/latest/models/index.html) to see the list of papers with models currently supported by Repro.
 Each model contains information in its Readme about how to use it as well as whether or not it currently reproduces the results reported in its respective paper or if it hasn't been tested yet.
 If it has been tested, the code to reproduce the results is also included.
 
 ## Contributing a Model
-See the tutorial [here](tutorials/adding-a-model.md) for instructions on how to add a new model.
+See the tutorial [here](https://repro.readthedocs.io/en/latest/tutorials/adding-a-model.html) for instructions on how to add a new model.

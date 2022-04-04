@@ -49,7 +49,7 @@ The regression tests for "dae_basic" and "dae_w_syn" are not very strong since t
 - [ ] Correctness unit tests pass  
 No example outputs provided by the original repo.
 - [X] Model runs on full test dataset  
-See [here](experiments/reproduce-results/Readme.md)
+See [here](https://github.com/danieldeutsch/repro/tree/master/models/goyal2020/experiments/reproduce-results)
 - [x] Predictions approximately replicate results reported in the paper  
 - [x] Predictions exactly replicate results reported in the paper  
-See [here](experiments/reproduce-results/Readme.md)
+See [here](https://github.com/danieldeutsch/repro/tree/master/models/goyal2020/experiments/reproduce-results)
