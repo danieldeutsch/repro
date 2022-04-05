@@ -64,3 +64,23 @@ class TestParallelModel(unittest.TestCase):
                 assert_dicts_approx_equal(serial_outputs[index], value)
                 index += 1
         assert index == len(serial_outputs)
+
+    def test_input_validation(self):
+        class _DummyModel(Model):
+            pass
+
+        # Must pass kwargs or number of models
+        with self.assertRaises(ValueError):
+            ParallelModel(_DummyModel)
+
+        # Must not be empty
+        with self.assertRaises(ValueError):
+            ParallelModel(_DummyModel, [])
+
+        # Must be positive
+        with self.assertRaises(ValueError):
+            ParallelModel(_DummyModel, num_models=0)
+
+        # Only one is allowed
+        with self.assertRaises(ValueError):
+            ParallelModel(_DummyModel, [{}, {}], num_models=2)

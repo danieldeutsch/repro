@@ -62,12 +62,13 @@ class ParallelModel(Model):
         type :code:`model_cls`. The length of the list is the
         number of parallel processes to use. If all of the :code:`kwargs`
         are equal to :code:`{}`, you may use the :code:`num_models`
-        parameter instead.
+        parameter instead. Only one of :code:`model_kwargs_list` and
+        :code:`num_models` may be set.
     num_models : int
-        The number of models to run in parallel. Ignored if :code:`model_kwargs_list`
-        is provided. If `model_kwargs_list` is None, then passing :code:`num_models`
-        is equivalent to passing a list of :code:`num_models` empty
-        :code:`kwargs` (i.e., :code:`{}`).
+        The number of models to run in parallel. This is equivalent to
+        passing a list of :code:`num_models` empty :code:`kwargs`
+        (i.e., :code:`{}`). Only one of :code:`model_kwargs_list` and
+        :code:`num_models` may be set.
 
     Examples
     --------
@@ -149,13 +150,20 @@ class ParallelModel(Model):
     ) -> None:
         self.model_cls = model_cls
 
-        if model_kwargs_list is None and num_models is None:
+        if not model_kwargs_list and not num_models:
             raise ValueError(
                 f"Either `model_kwargs_list` or `num_models` must not be `None`"
             )
+        if model_kwargs_list and num_models:
+            raise ValueError(
+                f"Exactly one of `model_kwargs_list` and `num_models` must not be `None`"
+            )
+        if num_models and num_models <= 0:
+            raise ValueError(f"`num_models` must be positive")
+
         if model_kwargs_list:
             self.model_kwargs_list = model_kwargs_list
-        else:
+        elif num_models is not None:
             self.model_kwargs_list = [{} for _ in range(num_models)]
 
     @staticmethod
