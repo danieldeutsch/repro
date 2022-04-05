@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## Added
+- Added the [`ParallelModel`](https://repro.readthedocs.io/en/latest/api/repro.models.model.html#repro.models.model.ParallelModel) class as an easy abstraction over the `joblib` library for parallel computation.
+
 ## [v0.1.5](https://github.com/danieldeutsch/repro/releases/tag/v0.1.5) - 2022-03-21
 ## Added
 - Added [BaryScore, InfoLM, and DepthScore](models/colombo2021/Readme.md)
