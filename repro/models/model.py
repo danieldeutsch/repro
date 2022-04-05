@@ -147,15 +147,6 @@ class ParallelModel(Model):
         model_kwargs_list: List[Dict[str, Any]] = None,
         num_models: int = None,
     ) -> None:
-        """
-        Hey this is here
-
-        Parameters
-        ----------
-        model_cls
-        model_kwargs_list
-        num_models
-        """
         self.model_cls = model_cls
 
         if model_kwargs_list is None and num_models is None:
