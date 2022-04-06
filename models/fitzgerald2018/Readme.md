@@ -50,3 +50,6 @@ Not tested
 Not tested
 
 ## Changelog
+## v1.1
+- The original script to download the model stopped working.
+The Dockerfile has been updated to directly download the model.
