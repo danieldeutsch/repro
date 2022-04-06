@@ -20,8 +20,14 @@ RUN git clone https://github.com/nafitzgerald/nrl-qasrl && \
     cd nrl-qasrl && \
     git checkout 9369e53adb22dcd5ae8310d31334d9f16bcfcdc9
 
+
 # Download pretrained models
-RUN cd nrl-qasrl/scripts && ./download_pretrained.sh
+RUN pip install --no-cache-dir gdown && \
+    cd nrl-qasrl && \
+    gdown 1FvMpjTfumVaSfwTOdWbJfEYFgGSAs0CS && \
+    mkdir data/qasrl_parser_elmo && \
+    tar -zxvf qasrl_parser_elmo.tar.gz -C data/qasrl_parser_elmo && \
+    rm qasrl_parser_elmo.tar.gz 
 
 # Download other dependencies
 RUN wget https://nlp.stanford.edu/data/glove.6B.zip && \
