@@ -1,6 +1,7 @@
 import unittest
 
 from repro.common import util
+from repro.testing import assert_dicts_approx_equal
 
 
 class TestUtil(unittest.TestCase):
@@ -320,3 +321,23 @@ class TestUtil(unittest.TestCase):
             util.check_for_single_texts([["A"], ["B", "C"]])
         with self.assertRaises(Exception):
             util.check_for_single_texts([["A"], [["B", "C"], "E"]])
+
+    def test_aggregate_parallel_metrics(self):
+        outputs_list = [
+            ({"score": 2}, [{"score": 1}, {"score": 3}]),
+            ({"score": 4}, [{"score": 4}]),
+            ({"score": 6}, [{"score": 5}, {"score": 7}]),
+        ]
+        expected_macro = {"score": 4}
+        expected_micro = [
+            {"score": 1},
+            {"score": 3},
+            {"score": 4},
+            {"score": 5},
+            {"score": 7},
+        ]
+
+        macro, micro = util.aggregate_parallel_metrics(outputs_list)
+        assert_dicts_approx_equal(macro, expected_macro)
+        for expected, actual in zip(expected_micro, micro):
+            assert_dicts_approx_equal(expected, actual)
