@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Set, T, Tuple, Union
 
-from repro.data.types import TextType
+from repro.data.types import MetricsType, TextType
 
 # `Indexable` is something which maps from an int to a value.
 Indexable = Union[List[T], Dict[int, T]]
@@ -255,3 +255,68 @@ def check_for_single_texts(texts_list: List[List[TextType]]) -> List[TextType]:
             raise Exception(f"Found {len(texts)} texts. Expected 1.")
         single_texts.append(texts[0])
     return single_texts
+
+
+def aggregate_parallel_metrics(
+    outputs_list: List[Tuple[MetricsType, List[MetricsType]]]
+) -> Tuple[MetricsType, List[MetricsType]]:
+    """
+    Aggregates the result of parallel metrics computations performed
+    with a :code:`ParallelModel`. It assumes that the metric returns
+    a tuple consisting of the macro results of type :code:`MetricsType`
+    and a list of micro results, one per input, of type :code:`MetricsType`.
+
+    This function creates a single list of all of the micro results
+    across all of the parallel results and averages them to get a new
+    macro result. If the metric's macro score is not an average over
+    the input-level results, this function will not correctly compute
+    the metric's macro score.
+
+    Parameters
+    ----------
+    outputs_list : List[Tuple[MetricsType, List[MetricsType]]]
+        The outputs from the :code:`ParallelModel` computation of a metric. Each
+        item in the list contains the macro and micro results on the batch
+        given to the parallel process.
+
+    Returns
+    -------
+    MetricsType
+        The metric's score averaged over all of the inputs
+    List[MetricsType]
+        The per-input scores, in the same order as they were
+        passed as input.
+
+    Examples
+    --------
+    Here is an example of how this could be used in combination with ROUGE
+    to evaluate texts in parallel:
+
+    .. code-block:: python
+
+        from repro.common.util import aggregate_parallel_metrics
+        from repro.models import ParallelModel
+        from repro.models.lin2004 import ROUGE
+
+        # The inputs that will be scored. Here we only have one
+        # input for demonstration purposes
+        inputs = [{"candidate": "Candidate text", "references": ["list of references"]}]
+
+        # First we show the serial computation
+        serial_model = ROUGE()
+        serial_macro, serial_micro = serial_model.predict_batch(inputs)
+
+        # The above is equivalent to the following parallel computation
+        parallel_model = ParallelModel(ROUGE, num_models=10)
+        outputs_list = parallel_model.predict_batch(inputs)
+        parallel_macro, parallel_micro = aggregate_parallel_metrics(outputs_list)
+
+    :code:`serial_macro` and :code:`parallel_macro` dicts will have the same result,
+    as well as :code:`serial_micro` and :code:`parallel_micro`.
+    """
+
+    micro = []
+    for _, this_micro in outputs_list:
+        micro.extend(this_micro)
+    macro = average_dicts(micro)
+    return macro, micro

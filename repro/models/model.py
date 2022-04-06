@@ -50,6 +50,9 @@ class ParallelModel(Model):
     all of the items in the :code:`inputs` passed to :code:`predict_batch()`, the
     :code:`ParallelModel` will not compute the right result.
 
+    If you are evaluating inputs with a metric, also see
+    :py:meth:`repro.common.util.aggregate_parallel_metrics`.
+
     **Note: Please make sure you understand how ParallelModel is implemented
     before you use it to ensure the behavior is expected for your use case.**
 

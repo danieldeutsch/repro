@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Added
 - Added the [`ParallelModel`](https://repro.readthedocs.io/en/latest/api/repro.models.model.html#repro.models.model.ParallelModel) class as an easy abstraction over the `joblib` library for parallel computation.
+- Added an [`aggregate_parallel_metrics`](https://repro.readthedocs.io/en/latest/api/repro.common.util.html#repro.common.util.aggregate_parallel_metrics) function to make using metrics in parallel easier.
 
 ## [v0.1.5](https://github.com/danieldeutsch/repro/releases/tag/v0.1.5) - 2022-03-21
 ## Added
