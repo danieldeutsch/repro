@@ -33,6 +33,7 @@ The following papers have models implemented in Repro.
 |[Automatic Text Evaluation through the Lens of Wasserstein Barycenters](https://arxiv.org/abs/2108.12463)|Pierre Colombo, Guillaume Staerman, Chloe Clavel, and Pablo Piantanida|[Link](colombo2021.md)|
 |[InfoLM: A New Metric to Evaluate Summarization & Data2Text Generation](https://arxiv.org/abs/2112.01589)|Pierre Colombo, Chloe Clavel, and Pablo Piantanida|[Link](colombo2021.md)|
 |[A Pseudo-Metric between Probability Distributions based on Depth-Trimmed Regions](https://arxiv.org/abs/2103.12711)|Guillaume Staerman, Pavlo Mozharovskyi, Pierre Colombo, Stéphan Clémençon, and Florence d'Alché-Buc|[Link](colombo2021.md)|
+|[Just Ask! Evaluating Machine Translation by Asking and Answering Questions](https://www.statmt.org/wmt21/pdf/2021.wmt-1.58.pdf)|Mateusz Krubinski, Erfan Ghadery, Marie-Francine Moens, Pavel Pecina|[Link](krubinski2021.md)|
 
 ## Question Answering
 |Paper|Authors|Docs|
