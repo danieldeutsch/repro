@@ -38,7 +38,8 @@ pytest models/krubinski2021/tests
 ```
 
 ## Status
-- [x] Regression unit tests pass   
+- [x] Regression unit tests pass  
+See [here](https://github.com/danieldeutsch/repro/actions/runs/2276486888) 
 - [ ] Correctness unit tests pass  
 None provided or tested
 - [ ] Model runs on full test dataset  
