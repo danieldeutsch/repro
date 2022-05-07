@@ -70,7 +70,7 @@ pytest models/thompson2020/tests
 ## Status
 - [x] Regression unit tests pass   
 - [x] Correctness unit tests pass  
-See [here](https://github.com/danieldeutsch/repro/actions/runs/1552009837).
+See [here](https://github.com/danieldeutsch/repro/actions/runs/2287250116).
 We replicate the output provided in their Github repository.
 - [ ] Model runs on full test dataset  
 Not tested
