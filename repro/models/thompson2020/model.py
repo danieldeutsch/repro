@@ -12,8 +12,7 @@ from repro.models.thompson2020 import DEFAULT_IMAGE, MODEL_NAME
 logger = logging.getLogger(__name__)
 
 
-@Model.register(f"{MODEL_NAME}-prism")
-class Prism(Model):
+class _Prism(Model):
     def __init__(
         self, image: str = DEFAULT_IMAGE, device: int = 0, language: str = "en"
     ):
@@ -34,18 +33,6 @@ class Prism(Model):
                     )
                 single_texts.append(texts[0])
         return single_texts
-
-    def predict(
-        self,
-        candidate: TextType,
-        sources: List[TextType] = None,
-        references: List[TextType] = None,
-        **kwargs,
-    ) -> MetricsType:
-        return self.predict_batch(
-            [{"candidate": candidate, "sources": sources, "references": references}],
-            **kwargs,
-        )[0]
 
     def predict_batch(
         self, inputs: List[Dict[str, Union[TextType, List[TextType]]]], **kwargs
@@ -159,3 +146,83 @@ class Prism(Model):
 
             outputs = open(host_output_file, "r").read().splitlines()
             return outputs
+
+
+@Model.register(f"{MODEL_NAME}-prism")
+class Prism(_Prism):
+    def predict(
+        self,
+        candidate: TextType,
+        references: List[TextType] = None,
+        **kwargs,
+    ) -> MetricsType:
+        return self.predict_batch(
+            [{"candidate": candidate, "references": references}],
+            **kwargs,
+        )[0]
+
+    def predict_batch(
+        self, inputs: List[Dict[str, Union[TextType, List[TextType]]]], **kwargs
+    ) -> Tuple[MetricsType, List[MetricsType]]:
+        logger.info(f"Calculating Prism for {len(inputs)} inputs")
+
+        candidates = [inp["candidate"] for inp in inputs]
+        references_list = [inp["references"] for inp in inputs]
+
+        # Create an input for each reference
+        indices = []
+        unrolled_inputs = []
+        for i, (candidate, references) in enumerate(zip(candidates, references_list)):
+            for reference in references:
+                indices.append(i)
+                unrolled_inputs.append(
+                    {"candidate": candidate, "references": [reference]}
+                )
+
+        # Score using the base class
+        _, unrolled_micro = super().predict_batch(unrolled_inputs)
+
+        # Re-aggregate based on reference group
+        micro = util.aggregate_metrics_by_group(indices, unrolled_micro)
+        macro = util.average_dicts(micro)
+
+        return macro, micro
+
+
+@Model.register(f"{MODEL_NAME}-prism-src")
+class PrismSrc(_Prism):
+    def predict(
+        self,
+        candidate: TextType,
+        sources: List[TextType] = None,
+        **kwargs,
+    ) -> MetricsType:
+        return self.predict_batch(
+            [{"candidate": candidate, "sources": sources}],
+            **kwargs,
+        )[0]
+
+    def predict_batch(
+        self, inputs: List[Dict[str, Union[TextType, List[TextType]]]], **kwargs
+    ) -> Tuple[MetricsType, List[MetricsType]]:
+        logger.info(f"Calculating Prism for {len(inputs)} inputs")
+
+        candidates = [inp["candidate"] for inp in inputs]
+        sources_list = [inp["sources"] for inp in inputs]
+
+        # Create an input for each reference
+        indices = []
+        unrolled_inputs = []
+        for i, (candidate, sources) in enumerate(zip(candidates, sources_list)):
+            for source in sources:
+                indices.append(i)
+                unrolled_inputs.append({"candidate": candidate, "sources": [source]})
+
+        # Score using the base class
+        _, unrolled_micro = super().predict_batch(unrolled_inputs)
+
+        # Re-aggregate based on source group
+        micro = util.aggregate_metrics_by_group(indices, unrolled_micro)
+        macro = util.average_dicts(micro)
+
+        return macro, micro

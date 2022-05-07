@@ -7,7 +7,7 @@
 https://github.com/thompsonb/prism
 
 ## Available Models
-- Prism as a metric
+- Prism
   - Description: A machine translation metric based on paraphrasing
   - Name: `thompson2020-prism`
   - Usage:
@@ -18,13 +18,22 @@ https://github.com/thompsonb/prism
         {"candidate": "The candidate", "references": ["The reference"]}
     ]
     macro, micro = model.predict_batch(inputs)
+    ```
+    `macro` is the average Prism score across inputs, and `micro` is the score per input.
     
+- Prism-src
+    - Description: A reference-free machine translation metric based on paraphrasing
+  - Name: `thompson2020-prism-src`
+  - Usage:
+    ```python
+    from repro.models.thompson2020 import PrismSrc
+    model = PrismSrc()
     inputs = [
         {"candidate": "The candidate", "sources": ["The source"]}
     ]
     macro, micro = model.predict_batch(inputs)
     ```
-    `macro` is the average Prism score across inputs, and `micro` is the score per input.
+    `macro` is the average Prism-src score across inputs, and `micro` is the score per input.
     
 - Prism as an MT model
   - Description: Uses Prism as a machine translation model
@@ -71,6 +80,10 @@ Not tested
 Not tested
 
 ## Changelog
+### v1.3
+- Separated Prism and PrismSrc.
+The output metric name for PrismSrc is now "prism-src"
+
 ### v1.2
 - Added a `batch_size` argument to the translation functions
 

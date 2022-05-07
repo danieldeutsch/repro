@@ -27,9 +27,10 @@ def main(args):
         # Assume all have sources
         scores = metric.score(cand=candidates, src=sources, segment_scores=True)
 
+    name = "prism" if has_references else "prism-src"
     with open(args.output_file, "w") as out:
         for score in scores:
-            out.write(json.dumps({"prism": float(score)}) + "\n")
+            out.write(json.dumps({name: float(score)}) + "\n")
 
 
 if __name__ == "__main__":
