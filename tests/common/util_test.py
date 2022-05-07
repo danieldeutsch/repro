@@ -341,3 +341,33 @@ class TestUtil(unittest.TestCase):
         assert_dicts_approx_equal(macro, expected_macro)
         for expected, actual in zip(expected_micro, micro):
             assert_dicts_approx_equal(expected, actual)
+
+    def test_aggregate_metrics_by_group(self):
+        metrics_list = [{"a": 0}, {"a": 1}, {"a": 2}, {"a": 3}, {"a": 4}, {"a": 5}]
+
+        groups = [0, 1, 2, 3, 4, 5]
+        actual = util.aggregate_metrics_by_group(groups, metrics_list)
+        assert actual == metrics_list
+
+        groups = [0, 0, 0, 1, 1, 1]
+        expected = [{"a": 1.0}, {"a": 4.0}]
+        actual = util.aggregate_metrics_by_group(groups, metrics_list)
+        assert actual == expected
+
+        # different lengths
+        with self.assertRaises(ValueError):
+            groups = [0, 1, 2, 3, 4, 5, 6]
+            util.aggregate_metrics_by_group(groups, metrics_list)
+
+        # invalid minimum group
+        with self.assertRaises(ValueError):
+            groups = [-1, 1, 2, 3, 4, 5]
+            util.aggregate_metrics_by_group(groups, metrics_list)
+
+        # missing groups
+        with self.assertRaises(ValueError):
+            groups = [0, 1, 2, 3, 4, 6]
+            util.aggregate_metrics_by_group(groups, metrics_list)
+        with self.assertRaises(ValueError):
+            groups = [0, 1, 2, 2, 4, 5]
+            util.aggregate_metrics_by_group(groups, metrics_list)

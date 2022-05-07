@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added an [`aggregate_parallel_metrics`](https://repro.readthedocs.io/en/latest/api/repro.common.util.html#repro.common.util.aggregate_parallel_metrics) function to make using metrics in parallel easier.
 - Added [MTEQE](https://repro.readthedocs.io/en/latest/models/krubinski2021.html)
 
+## Changed
+- Split `Prism` into reference-based `Prism` and reference-free `PrismSrc`.
+They now support multi-reference and multi-source via averaging over the references/sources.
+
 ## [v0.1.5](https://github.com/danieldeutsch/repro/releases/tag/v0.1.5) - 2022-03-21
 ## Added
 - Added [BaryScore, InfoLM, and DepthScore](https://repro.readthedocs.io/en/latest/models/colombo2021.html)

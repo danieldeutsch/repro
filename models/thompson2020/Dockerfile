@@ -1,4 +1,4 @@
-FROM pure/python:3.7-cuda10.0-base
+FROM danieldeutsch/python:3.7-cuda10.0-base-v2
 
 WORKDIR /app
 

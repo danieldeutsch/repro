@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import Any, Dict, List, Set, T, Tuple, Union
 
 from repro.data.types import MetricsType, TextType
@@ -320,3 +321,49 @@ def aggregate_parallel_metrics(
         micro.extend(this_micro)
     macro = average_dicts(micro)
     return macro, micro
+
+
+def aggregate_metrics_by_group(
+    groups: List[int], metrics_list: List[MetricsType]
+) -> List[MetricsType]:
+    """
+    Averages metrics based on groups. This is useful for when a metric only supports single
+    references and you want to generalize it to a multi-reference metric by averaging over
+    the references.
+
+    Parameters
+    ----------
+    groups : List[int]
+        The group which corresponds to each item in `metrics_list`. The smallest group
+        value must be 0 and must increase by 1. That is, if n is max(groups), then groups
+        0, 1, ..., n-1 must also exist.
+    metrics_list : List[MetricsType]
+        The metrics to aggregate via averaging.
+
+    Returns
+    -------
+    List[MetricsType]
+        A list of length max(groups) + 1 with the average metric values for each group.
+    """
+    if len(groups) != len(metrics_list):
+        raise ValueError(
+            f"`groups` and `metrics_list` must be the same length. Found {len(groups)} and {len(metrics_list)}"
+        )
+
+    min_group = min(groups)
+    if min_group != 0:
+        raise ValueError(f"The minimum group value must be 0. Found: {min_group}")
+    max_group = max(groups)
+
+    group_to_metrics_list = defaultdict(list)
+    for group, metrics in zip(groups, metrics_list):
+        group_to_metrics_list[group].append(metrics)
+
+    aggregated = []
+    for i in range(min_group, max_group + 1):
+        if i not in group_to_metrics_list:
+            raise ValueError(
+                f"`groups` must have all values 0, 1, ..., max_group groups. Missing group {i}"
+            )
+        aggregated.append(average_dicts(group_to_metrics_list[i]))
+    return aggregated
