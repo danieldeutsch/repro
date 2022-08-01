@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [v0.1.6](https://github.com/danieldeutsch/repro/releases/tag/v0.1.6) - 2022-07-31
 ## Added
 - Added the [`ParallelModel`](https://repro.readthedocs.io/en/latest/api/repro.models.model.html#repro.models.model.ParallelModel) class as an easy abstraction over the `joblib` library for parallel computation.
 - Added an [`aggregate_parallel_metrics`](https://repro.readthedocs.io/en/latest/api/repro.common.util.html#repro.common.util.aggregate_parallel_metrics) function to make using metrics in parallel easier.
@@ -14,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 - Split `Prism` into reference-based `Prism` and reference-free `PrismSrc`.
 They now support multi-reference and multi-source via averaging over the references/sources.
+- Relaxed the dependency on `pytest` so it does not require a specific version
 
 ## [v0.1.5](https://github.com/danieldeutsch/repro/releases/tag/v0.1.5) - 2022-03-21
 ## Added
