@@ -23,7 +23,7 @@ setuptools.setup(
         "docker==5.0.0",
         "joblib",
         "overrides==3.1.0",
-        "pytest==6.2.4",
+        "pytest",
         "six==1.16.0",
     ],
 )
