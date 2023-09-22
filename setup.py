@@ -19,7 +19,7 @@ setuptools.setup(
     python_requires=">=3.6",
     include_package_data=True,
     install_requires=[
-        "datasets>=1.2.1",
+        "datasets>=1.16.1",
         "docker==5.0.0",
         "joblib",
         "overrides==3.1.0",
